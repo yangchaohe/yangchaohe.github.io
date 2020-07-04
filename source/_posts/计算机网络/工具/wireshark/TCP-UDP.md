@@ -60,7 +60,7 @@ wireshark将SEQ设置为相对，为了方便观察，也就是从0开始，不�
 
 我的数据包最后还有这样一段英文
 
-```t
+```
 [TCP segment of a reassembled PDU]
 ```
 

@@ -110,7 +110,7 @@ module.exports = class extends Component {
                             <div class="level-start">
                                 <div class="level-item">
                                     <a class="article-more button is-small size-small link-muted"
-                                        href={`${url_for(page.path)}#more`}><i class="fas fa-book-reader has-text-grey">&nbsp;</i>{__('article.more')}>></a>
+                                        href={`${url_for(page.path)}#more`}><i class="fas fa-book-reader has-text-grey">&nbsp;</i>{__('article.more')}</a>
                                 </div>
                             </div>
                             {hasLatestTime && page.updated && page.updated > page.date ?

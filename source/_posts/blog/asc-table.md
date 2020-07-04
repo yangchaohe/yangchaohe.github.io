@@ -69,7 +69,7 @@ yaourt -S perl-graph-easy
 +-------+     +-------+
 ```
 
-- 复杂语法
+- 复杂语法mer
 
 ```
 [ Client ]{rows:8;} -- (A) Authorizatoin Request --> [ 1.Resource Owner ]{rows:2;}
@@ -109,7 +109,7 @@ yaourt -S perl-graph-easy
 >
 > [部分翻译](https://github.com/tiann/graph-easy-cn/blob/master/SUMMARY.md)
 
-## mermaid
+## mermaidmer
 
 mermaid把一些流程图片等简单图片简化成代码，我以前都是用工具制作成图片在上传图床使用，使用mermaid很明显是一个高效率的方法，但需要学习一点它的语法，typorta支持渲染，如果需要在博客上渲染的化需要安装hexo-filter-mermaid-diagrams插件，我的博客还不能渲染，但typora可以导出html
 

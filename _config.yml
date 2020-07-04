@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: shepherdev'bolg
+title: shepherdev的学习笔记
 subtitle: Hello World
 description: Codeing & Life
 keywords:
@@ -99,7 +99,7 @@ theme: amazing
 deploy:
   type: git
   repo: 
-    github: git@github.com:shepherdev/shepherdev.github.io.git
+    github: git@github.com:yangchaohe/yangchaohe.github.io.git
     # coding: git@e.coding.net:ych2n/yangchaohe.git
   branch: master
   # message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})"
@@ -165,7 +165,7 @@ sitemap:
 
 # # 自动初始化评论
 # owner: shepnerdev
-# comment_repo: shepherdev.github.io # 对应于repo配置
+# comment_repo: yangchaohe.github.io # 对应于repo配置
 # labels: ["Gitalk"]
 encrypt:
   enable: true

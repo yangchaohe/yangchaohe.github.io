@@ -12,9 +12,9 @@ script:
 after_script:
   - cd ./public
   - git init
-  - git config user.name "shepherdev"
-  - git config user.email "shepherd2001@163.com"
+  - git config user.name "yangchaohe"
+  - git config user.email "2633650083@qq.com"
   - git add .
   - git commit -m "Travis CI Auto Builder at $(date +'%Y-%m-%d')"
-  - git push --force --quiet "https://${ACCESS_TOKEN}@github.com/shepherdev/shepherdev.github.io.git" master:master
+  - git push --force --quiet "https://${ACCESS_TOKEN}@github.com/yangchaohe/yangchaohe.github.io.git" master:master
 

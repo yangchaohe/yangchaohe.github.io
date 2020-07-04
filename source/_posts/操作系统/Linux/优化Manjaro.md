@@ -483,3 +483,6 @@ zsh 5.8-1
 
 制作脑图的工具
 
+## Packet tracer用户登录闪退问题
+
+安装`ttf-ms-fonts`解决

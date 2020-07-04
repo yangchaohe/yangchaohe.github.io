@@ -85,7 +85,8 @@ module.exports = class extends Component {
                                 'is-8-tablet is-8-desktop is-8-widescreen': columnCount === 2,
                                 'is-8-tablet is-8-desktop is-6-widescreen': (page.layout != 'post' && page.layout != 'page') && columnCount === 3,
                                 'is-8-tablet is-8-desktop is-9-widescreen': page.layout == 'page' || page.layout == 'post'
-                            })} dangerouslySetInnerHTML={{ __html: hotRecommendStr + body }}></div>
+                            })} dangerouslySetInnerHTML={{ __html: hotRecommendStr + body }}>
+                            </div>
                             <Widgets site={site} config={config} helper={helper} page={page} position={'left'} />
                             {page.layout == 'page' || page.layout == 'post' ? null : <Widgets site={site} config={config} helper={helper} page={page} position={'right'} />}
                         </div>
