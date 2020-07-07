@@ -1,7 +1,7 @@
 ---
 date: 2020-04-12 
 comments: false
-thumbnail: https://cdn.jsdelivr.net/gh/shepherdev/blog_image/blog/mito2.jpg
+thumbnail: https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/blog/mito2.jpg
 ---
 
 **<u>本博客属于学习笔记类型，技术性输出文章很少，勿喷</u>**

@@ -131,7 +131,7 @@ thread.interrupt();
 
 ### 线程的生命周期
 
-![threadStat](https://cdn.jsdelivr.net/gh/shepherdev/blog_image/article/2020/threadStat.png)
+![threadStat](https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/article/2020/threadStat.png)
 
 ### 特点
 

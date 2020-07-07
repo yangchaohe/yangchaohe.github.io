@@ -27,7 +27,7 @@ tags:
   - 如果没有，则说明安装失败
 - 安装完成后，在桌面右键打开`Git Bash`或者去菜单里找到`Git Bash`并打开它
 
-![](https://cdn.jsdelivr.net/gh/shepherdev/blog_image/article/2019/1.png)
+![](https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/article/2019/1.png)
 
 - 输入下面的配置信息
 
