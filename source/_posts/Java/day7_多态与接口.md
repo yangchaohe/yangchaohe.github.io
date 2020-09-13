@@ -44,7 +44,7 @@ tag: [多态,接口]
 abstract class Employee{
 	private String name;
     /* 虽然是抽象类，构造方法也是可以继承的，
-     * 这个构造方法啊是给子类的
+     * 这个构造方法是给子类的
      */
     public Employee(String name){
         this.name = name;
