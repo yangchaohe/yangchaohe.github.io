@@ -20,15 +20,15 @@ tags: [服务器]
 - 端口和网络服务对应在`/etc/services`
 - DNS服务器IP在`/etc/resolv.conf`
 - 主机地址全为0是Network, 全为1是Broadcast(通过IP/Netmask计算得出)
-- 将数据发往非同一网络内的主机需要Gateway
+- 将数据发往非同一网络内的主机需要`Gateway`
 - ARP table负责记录MAC与对应IP
-- LoopBack网段在127.0.0.0/8
+- LoopBack网段在`127.0.0.0/8`
 - 每个主机都有路由表, 使用命令`route`可以查询, 其中最重要的就是默认网关
 - ICMP负责汇报网络情况
 - 只有root才能使用小于1024的端口
 - 以太网传输数据的技术是CSMA/CD
 
-- MTU标准定义为1500Bytes, 可以更改MTU的值, 但需要考虑整个网络, 在支持Jumbo frame的设备上一般将MTU设置成9000Bytes.
+- MTU标准定义为1500Bytes, 可以更改MTU的值, 但需要考虑整个网络. 在支持Jumbo frame的设备上一般将MTU设置成9000Bytes.
 
 ## 3.局域网架构简介
 
@@ -39,10 +39,32 @@ tags: [服务器]
 
 ## 4.连接到Internet
 
--  NIC(网卡)需要内核的支持, 如果内核不支持则需要重新编译内核与网卡的内核模块(需要厂商开放源码), 或者换一张Linux支持的NIC
+- NIC(网卡)需要内核的支持, 如果内核不支持则需要重新编译内核与网卡的内核模块(需要厂商开放源码), 或者换一张Linux支持的NIC
 - `dmesg`会显示`kernel ring buffer`的内容, 引导系统会将硬件及驱动信息写到这个缓冲区内
 - `lspci`可以查询设备芯片数据
 - `lsmod`可以显示已加载的模块
+- `lsusb`显示usb设备
 - `modinfo`可以显示模块信息
 - `modprobe`用于加载模块
 - 可以在`/etc/modprobe.d/`下配置模块与设备的联系, 一般在内核捕捉不到网卡时使用
+
+| 修改的参数 | 配置文件和启动脚本                        |
+| ---------- | ----------------------------------------- |
+| IP相关     | /etc/sysconfig/network-scripts/ifcfg-eth0 |
+|            | /etc/init.d/network restart               |
+| DNS        | /etc/resolv.conf                          |
+| hosts      | /etc/sysconfig/network                    |
+|            | /etc/hosts                                |
+
+-  修改主机名后查看是否能ping通, 否则某些服务会启动得很慢(在查找hosts)
+-  DHCP会主动修改网络配置文件
+-  查询主机名和IP顺序: `/etc/hosts-->/etc/resolv.conf`
+-  ping得到IP但网址无法进入, 大概率域名解析错误
+-  网关不能重复设置, 比如网卡的配置文件与拨号上网的配置文件重复设置网关
+
+## 5.Linux常用的网络命令
+
+- 通过`ifconfig`可以查询、配置网卡和IP网络等参数, 重启后消失
+- 由于`ifdown` 会分析当前网络参数是否与配置文件相同, 所以使用`ifconfig`修改参数后不能使用`ifdown`
+- 一个`网络接口`就是一个路由, 数据包会根据路由表顺序发送数据(`route`)
+
