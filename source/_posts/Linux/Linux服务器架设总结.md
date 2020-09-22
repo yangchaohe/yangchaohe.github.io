@@ -1,11 +1,9 @@
----
-title: Linux服务器架设总结
+title: Linux服务器架设总结 
 date: 2020-9-11 00:00
 author: shepherd
 toc: ture
 categories: [Linux]
-tags: [服务器]
----
+tags: [服务器]  
 
 学好如何搭建服务器及后期维护, 本文参考CentOS进行学习
 
@@ -48,13 +46,13 @@ tags: [服务器]
 - `modprobe`用于加载模块
 - 可以在`/etc/modprobe.d/`下配置模块与设备的联系, 一般在内核捕捉不到网卡时使用
 
-| 修改的参数 | 配置文件和启动脚本                        |
-| ---------- | ----------------------------------------- |
-| IP相关     | /etc/sysconfig/network-scripts/ifcfg-eth0 |
-|            | /etc/init.d/network restart               |
-| DNS        | /etc/resolv.conf                          |
-| hosts      | /etc/sysconfig/network                    |
-|            | /etc/hosts                                |
+| 修改的参数 | 配置文件和启动脚本                                       |
+| ---------- | -------------------------------------------------------- |
+| IP相关     | /etc/sysconnjaro搜狗输入法fig/network-scripts/ifcfg-eth0 |
+|            | /etc/init.d/network restart                              |
+| DNS        | /etc/resolv.conf                                         |
+| hosts      | /etc/sysconfig/network                                   |
+|            | /etc/hosts                                               |
 
 -  修改主机名后查看是否能ping通, 否则某些服务会启动得很慢(在查找hosts)
 -  DHCP会主动修改网络配置文件
@@ -64,7 +62,37 @@ tags: [服务器]
 
 ## 5.Linux常用的网络命令
 
-- 通过`ifconfig`可以查询、配置网卡和IP网络等参数, 重启后消失
+- 通过`ifconfig`可以查询、配f置网卡和IP网络等参数, 重启后消失
 - 由于`ifdown` 会分析当前网络参数是否与配置文件相同, 所以使用`ifconfig`修改参数后不能使用`ifdown`
 - 一个`网络接口`就是一个路由, 数据包会根据路由表顺序发送数据(`route`)
+- `ping`&`traceroute` 是可以使用ICMP协议的网络程序 
+- `telnet`传递明文数据, 非常危险
+- `ping`可以向网络中强制发送不可拆解的大数据包来侦测MTU大小
+- `nc`有的系统称为`netcat`
+
+## 6.网络的安全与主机基本防护
+
+### 常见攻击手段
+
+- 弱密码
+- 利用程序漏洞
+- 社会工程学
+- 被动攻击(浏览恶意网站)
+- 蠕虫和木马ROOKIT(会伪装)
+
+> 在CentOS里可以使用`rpm -Va`查询被修改的文件
+>
+> 此外可以使用`RKHunter`来检测后门
+
+- DDOS(如SYN泛洪)
+
+### 防护手段
+
+- 使用强密码(大小写字母、数字和符号的组合. 密码越长越强)
+- 设定用户密码规则
+- 关闭不必要的网络服务, 并随时保持最新
+- 不要在网络上透露帐号密码等信息
+- 不要连接不明主机
+- 完善防火墙
+- 监控日志
 
