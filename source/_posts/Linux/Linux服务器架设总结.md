@@ -46,13 +46,13 @@ tags: [服务器]
 - `modprobe`用于加载模块
 - 可以在`/etc/modprobe.d/`下配置模块与设备的联系, 一般在内核捕捉不到网卡时使用
 
-| 修改的参数 | 配置文件和启动脚本                                       |
-| ---------- | -------------------------------------------------------- |
-| IP相关     | /etc/sysconnjaro搜狗输入法fig/network-scripts/ifcfg-eth0 |
-|            | /etc/init.d/network restart                              |
-| DNS        | /etc/resolv.conf                                         |
-| hosts      | /etc/sysconfig/network                                   |
-|            | /etc/hosts                                               |
+| 修改的参数 | 配置文件和启动脚本                             |
+| ---------- | ---------------------------------------------- |
+| IP相关     | /etc/sysconnjarofig/network-scripts/ifcfg-eth0 |
+|            | /etc/init.d/network restart                    |
+| DNS        | /etc/resolv.conf                               |
+| hosts      | /etc/sysconfig/network                         |
+|            | /etc/hosts                                     |
 
 -  修改主机名后查看是否能ping通, 否则某些服务会启动得很慢(在查找hosts)
 -  DHCP会主动修改网络配置文件
@@ -62,7 +62,7 @@ tags: [服务器]
 
 ## 5.Linux常用的网络命令
 
-- 通过`ifconfig`可以查询、配f置网卡和IP网络等参数, 重启后消失
+- 通过`ifconfig`可以查询、配置网卡和IP网络等参数, 重启后消失
 - 由于`ifdown` 会分析当前网络参数是否与配置文件相同, 所以使用`ifconfig`修改参数后不能使用`ifdown`
 - 一个`网络接口`就是一个路由, 数据包会根据路由表顺序发送数据(`route`)
 - `ping`&`traceroute` 是可以使用ICMP协议的网络程序 
