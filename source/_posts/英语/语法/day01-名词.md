@@ -36,23 +36,20 @@ tags: [英语,名词]
 
 **省略修饰词**
 
-1.a good boy.
-
-2. a boy.
+- a good boy.
+- a boy.
 
 **省略限定词**
 
-3.Cs(Countable noun,s表示复数)情况下:
+- Cs(Countable noun,s表示复数)情况下
+  - boys.
+  - good boys.
 
-- boys.
-- good boys.
+- U(Uncountable noun)
+  - good news
+  - news
 
-4.U(Uncountable noun)
-
-- good news
-- news
-
-5.专有名词
+**专有名词(省略限定词,修饰词)**
 
 - china
 - Tom
@@ -185,7 +182,7 @@ those指代`可数复数`
 
 ## 数词
 
-### 1.基数词
+### 1. 基数词
 
 one,two,three...
 
@@ -196,7 +193,7 @@ one,two,three...
 - 分子用基数
 - 分母用序数(当分子>1时分母变复数),
 
-### 2.序数词
+### 2. 序数词
 
 first,second,third...
 

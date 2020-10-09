@@ -1,9 +1,11 @@
+---
 title: Linux服务器架设总结 
 date: 2020-9-11 00:00
 author: shepherd
 toc: ture
 categories: [Linux]
 tags: [服务器]  
+---
 
 学好如何搭建服务器及后期维护, 本文参考CentOS进行学习
 
@@ -46,13 +48,13 @@ tags: [服务器]
 - `modprobe`用于加载模块
 - 可以在`/etc/modprobe.d/`下配置模块与设备的联系, 一般在内核捕捉不到网卡时使用
 
-| 修改的参数 | 配置文件和启动脚本                             |
-| ---------- | ---------------------------------------------- |
-| IP相关     | /etc/sysconnjarofig/network-scripts/ifcfg-eth0 |
-|            | /etc/init.d/network restart                    |
-| DNS        | /etc/resolv.conf                               |
-| hosts      | /etc/sysconfig/network                         |
-|            | /etc/hosts                                     |
+| 修改的参数 | 配置文件和启动脚本                        |
+| ---------- | ----------------------------------------- |
+| IP相关     | /etc/sysconfig/network-scripts/ifcfg-eth0 |
+|            | /etc/init.d/network restart               |
+| DNS        | /etc/resolv.conf                          |
+| hosts      | /etc/sysconfig/network                    |
+|            | /etc/hosts                                |
 
 -  修改主机名后查看是否能ping通, 否则某些服务会启动得很慢(在查找hosts)
 -  DHCP会主动修改网络配置文件
