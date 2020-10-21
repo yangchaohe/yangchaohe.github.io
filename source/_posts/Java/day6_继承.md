@@ -136,9 +136,9 @@ tag: [方法重载,方法重写,内部类]
 - 习惯上以域名开头
   - com.xx.xx
 
-### 编译
+### 终端编译
 
-`javac -d . .java`
+`javac -d dstdir src.java`
 
 ## 访问权限修饰符
 
