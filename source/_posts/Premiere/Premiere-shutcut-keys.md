@@ -21,6 +21,16 @@ Record some common shotcut keys of PR
 | <--j/k/l-->           | 倒放/暂停/播放             |
 | +/-                   | 伸缩时间条                 |
 | M/ctrl+M/ctrl+shift+M | 添加标签/跳转标签          |
+| top/down              | 切换上/下一剪切点          |
+| Ctrl+D                | 插入默认转场               |
+| Shift+D               | 给当前选中添加转场         |
+|                       |                            |
+|                       |                            |
+|                       |                            |
+|                       |                            |
+|                       |                            |
+|                       |                            |
+|                       |                            |
 |                       |                            |
 
 

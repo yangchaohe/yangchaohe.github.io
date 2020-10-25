@@ -29,6 +29,8 @@ git config --global user.email "email@example.com"
 - 直接输入git commit会进入vim让你写提交信息
 - 使用单引号输入多行信息
 
+`git commit amend`修改上一个提交
+
 `git status`显示工作区状态
 
 `git diff filename`如果有文件被修改过，可以使用diff查看修改的内容
