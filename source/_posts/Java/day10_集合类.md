@@ -149,7 +149,7 @@ public class HashMapDemo {
     public static void main(String[] args) {
         //HashMap里面存储的是键值对，可指定key和value的类型
         HashMap m = new HashMap();
-        //HashMap<String, Integer> = new HashMap<String, Integer>();
+        //HashMap<String, Integer> m = new HashMap<String, Integer>();
         m.put("shepherd", 2001);
         m.put("hello", 102);
         //键不能相同，相同会覆盖前面的值
@@ -249,4 +249,4 @@ try{
 
 - catch可以写无数个
 
-- 如果想包含所有的错误可以把错误类型写成Exception
+- 如果想包含所有的错误可以把错误类型写成Exception 
