@@ -78,4 +78,11 @@ tags: [life]
 
 - wol(wake up on lan)
 - ethtool
+- English Grammer
+
+## Thu Nov 19 CST 2020
+
+- 在b站上看到炬峰整蛊劝退学Linux(在桌面上弹出窗口), 我决定复习下X window
+- LVM, RAID
 - 
+
