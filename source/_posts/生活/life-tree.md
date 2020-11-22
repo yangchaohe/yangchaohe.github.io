@@ -29,7 +29,7 @@ tags: [life]
 * daemon started successfully *
 ```
 
-​		因为手机打开USB调试, 所以Termux会自动连接到模拟器, 从而实现无需电脑, 无需root, 手机自己就可完成adb指令. so, adb可以做哪些有趣的事呢?	
+    因为手机打开USB调试, 所以Termux会自动连接到模拟器, 从而实现无需电脑, 无需root, 手机自己就可完成adb指令. so, adb可以做哪些有趣的事呢?	
 
 - adb可以做什么?
 
@@ -84,5 +84,16 @@ tags: [life]
 
 - 在b站上看到炬峰整蛊劝退学Linux(在桌面上弹出窗口), 我决定复习下X window
 - LVM, RAID
-- 
+
+## Fri Nov 20 CST 2020
+
+- 纠结了大白菜的md5加密格式, 未果
+- 手动给win7, win10装adb驱动, 未果(还是linux好用)
+
+- startx是一个脚本, 提供给xinit参数的脚本
+
+## Sat Nov 21 CST 2020
+
+- 通过添加c:\Documents and Settings\user\adb_usb.ini(content:0xVID)解决了adb驱动问题
+
 
