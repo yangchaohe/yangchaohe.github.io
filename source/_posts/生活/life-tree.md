@@ -94,6 +94,6 @@ tags: [life]
 
 ## Sat Nov 21 CST 2020
 
-- 通过添加c:\Documents and Settings\user\adb_usb.ini(content:0xVID)解决了adb驱动问题
+- 通过修改android_winusb.inf, 添加c:\Documents and Settings\user\adb_usb.ini(content:0xVID)解决了adb驱动问题
 
 
