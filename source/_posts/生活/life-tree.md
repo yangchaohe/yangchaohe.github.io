@@ -29,7 +29,7 @@ tags: [life]
 * daemon started successfully *
 ```
 
-    因为手机打开USB调试, 所以Termux会自动连接到模拟器, 从而实现无需电脑, 无需root, 手机自己就可完成adb指令. so, adb可以做哪些有趣的事呢?	
+​		因为手机打开USB调试, 所以Termux会自动连接到模拟器, 从而实现无需电脑, 无需root, 手机自己就可完成adb指令. so, adb可以做哪些有趣的事呢?	
 
 - adb可以做什么?
 
@@ -94,6 +94,7 @@ tags: [life]
 
 ## Sat Nov 21 CST 2020
 
-- 通过修改android_winusb.inf, 添加c:\Documents and Settings\user\adb_usb.ini(content:0xVID)解决了adb驱动问题
+- 通过修改android_winusb.inf, 添加c:\Documents and Settings\user\adb_usb.ini(content:0xVID)解决了adb驱动问题, 但是termux出现了无法授权的问题, 原因是手机无法授权两个adb客户端同时连接, 且手机重新安装了一遍adb才会出现RSA密钥
+- 
 
 
