@@ -2,7 +2,7 @@
 title: Termux+adb
 date: 2020-11-22 21:37:26
 author: shepherd
-categories: [个人技术心得]
+categories: [个人技术心得,Android]
 tags: [Termux,adb]
 ---
 

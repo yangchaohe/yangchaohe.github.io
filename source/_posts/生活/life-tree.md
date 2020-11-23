@@ -65,3 +65,6 @@ tags: [life]
 
 - 摆弄了virtualbox并立下了学汇编的flag(为了逆向, 系统)
 - 海岛升级16本
+
+## Mon Nov 23 CST 2020
+
