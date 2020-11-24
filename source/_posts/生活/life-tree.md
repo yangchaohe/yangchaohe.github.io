@@ -68,3 +68,10 @@ tags: [life]
 
 ## Mon Nov 23 CST 2020
 
+- 学逆向中
+
+## Tru Nov 24 CST 2020
+
+- Perhaps one day, we'll all be computers.
+- C的typedef(封装)和#define(替换)的区别
+
