@@ -2,7 +2,7 @@
 title: 免费的CDN+Picgo
 date: 2020-4-13 21:37:26
 author: shepherd
-categories: [博客,工具]
+categories: [个人技术心得,博客,工具]
 tags: [CDN,jsDeliver,Github]
 ---
 
@@ -30,6 +30,8 @@ tags: [CDN,jsDeliver,Github]
 <img src="https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/article/2020/943a485d76fbbcc50c15a49f5644cbb1.png" style="zoom:33%;" />
 
 再配合PicGo，typora，简直不要太爽
+
+> 注意picgo和本机环境变量是冲突的
 
 参考文章
 
