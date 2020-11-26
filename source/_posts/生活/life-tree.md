@@ -78,4 +78,12 @@ tags: [life]
 
 ## Wed Nov 25 CST 2020
 
-- 整理picgo和笔记
+- 修复picgo和笔记
+- 学逆向
+
+## Thu Nov 26 CST 2020
+
+- 开始尝试破解增霸卡(失败)
+- CM01
+- 学习windows逆向
+
