@@ -16,7 +16,7 @@ tags: [life]
 
 ## Sat Nov 14 CST 2020
 
-- Android+Termux+adb实现手机上使用adb控制手机([跳转文章](../个人技术心得/Termux+adb.md))
+- Android+Termux+adb实现手机上使用adb控制手机([跳转文章](../个人技术心得/Android/Termux+adb.md))
 
 
 ## Sun Nov 15 CST 2020
@@ -59,7 +59,7 @@ tags: [life]
 
 ## Sat Nov 21 CST 2020
 
-- 通过修改android_winusb.inf, 添加c:\Documents and Settings\user\adb_usb.ini(content:0xVID)解决了adb驱动问题, 但是termux出现了无法授权的问题, 原因是手机无法授权两个adb客户端同时连接, 且手机重新安装了一遍adb才会出现RSA密钥
+- 通过修改android_winusb.inf, 添加c:\Documents and Settings\user\adb_usb.ini(content:0xVID)解决了adb驱动问题, 但是termux出现了无法授权的问题, 原因是手机无法授权两个adb客户端同时连接, 且手机重新安装了一遍adb才会出现RSA密钥授权框
 
 ## Sun Nov 22 CST 2020
 
@@ -80,10 +80,12 @@ tags: [life]
 
 - 修复picgo和笔记
 - 学逆向
+- windows异性框(XOR+黑白遮罩+OR+XOR)
 
 ## Thu Nov 26 CST 2020
 
 - 开始尝试破解增霸卡(失败)
 - CM01
 - 学习windows逆向
+- 什么是字节序? why?[大端模式和小端模式](https://zhuanlan.zhihu.com/p/97821726)
 
