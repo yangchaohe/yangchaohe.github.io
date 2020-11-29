@@ -89,3 +89,13 @@ tags: [life]
 - 学习windows逆向
 - 什么是字节序? why?[大端模式和小端模式](https://zhuanlan.zhihu.com/p/97821726)
 
+## Fri Nov 27 CST 2020
+
+- 知识不硬, 不要乱搞.
+- Game
+
+## Sat Nov 28 CST 2020
+
+- none
+
+## 
