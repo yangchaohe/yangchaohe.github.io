@@ -29,8 +29,6 @@ Nag窗口就是软件的提示注册信息
 - 使窗口父句柄不存在
 -  改入口地址(PE头的AddressOfEntryPoint)
 
-![](/home/shepherdev/LearnSource/VirtualBox VMs/win7 for crace/Snapshots/VirtualBox_win7 for crace_29_11_2020_15_32_39.png)
-
 ## 技巧
 
 - call的返回值会赋值给EAX
