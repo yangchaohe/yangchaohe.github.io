@@ -40,4 +40,5 @@ Nag窗口就是软件的提示注册信息
 -  `VA(VirtualAdress)`
 -  `RVA(RelativeVirtualAddress)`
 - ``EP(EntryPoint)``
+- `SEH(Structured Exception Handling)`
 

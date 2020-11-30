@@ -98,3 +98,12 @@ tags: [life]
 
 - none
 
+## Sun Nov 29 SCT 2020
+
+- ProtbaleExecutable
+- OD-调用推栈
+
+## Mon Nov 30 CST 2020
+
+- OD-软件断点和硬件断点
+- 忽略异常
