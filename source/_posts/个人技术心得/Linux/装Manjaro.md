@@ -1,3 +1,4 @@
+---
 thumbnail: https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/article/thumbnail/manjaro/block-font-logo3.jpg
 title: 安装Manjaro
 date: 2020-2-19 22:37:26
@@ -5,10 +6,10 @@ author: shepherd
 categories: [操作系统,Linux]
 toc: true
 tags:
-
   - Linux
   - 装系统
   - 系统优化
+---
 
 装Manjaro时遇到的一些问题
 

@@ -3,7 +3,7 @@ thumbnail: https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/stat
 title: 配置amazing主题
 date: 2020-4-13 21:37:26
 author: shepherd
-categories: [个人技术新得,博客,主题]
+categories: [个人技术心得,博客,主题]
 tags: [icraus,amazing]
 ---
 

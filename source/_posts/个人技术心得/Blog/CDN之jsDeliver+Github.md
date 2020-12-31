@@ -31,7 +31,7 @@ tags: [CDN,jsDeliver,Github]
 
 再配合PicGo，typora，简直不要太爽
 
-> 注意picgo和本机环境变量是冲突的
+> 注意picgo的代理和本机环境变量代理是冲突的
 
 参考文章
 

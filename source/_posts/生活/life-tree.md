@@ -107,3 +107,32 @@ tags: [life]
 
 - OD-软件断点和硬件断点
 - 忽略异常
+
+## Tue Dec 1 CST 2020
+
+- QQ机器人([mirai](https://github.com/mamoe/mirai))
+- c+4
+
+## Wed Dec 2 CST 2020
+
+- 使用[graia-application-mirai](https://github.com/GraiaProject/Application)(基于[mirai-http-api](https://github.com/project-mirai/mirai-api-http)的python SDK)
+
+    注意mirai-http-api支持的mirai版本, 目前使用mirai-console-1.0-M4.jar(后端),mirai-console-pure-1.0-M4.jar(前端),mirai-core-qqandroid-1.2.3.jar工作正常
+
+## Fri Dec 4 CST 2020
+
+- none
+
+## Sat Dec 5 CST 2020
+
+- none
+
+## Sun Dec 6 CST 2020
+
+- 今天强迫症发作, 移除有关shepherd, shepherdev的所有信息, manu, manu2x, runtmanu, yangchaohe成为我的虚拟昵称(包括邮箱地址)
+- c+5
+
+## Tue Dec 8 CST 2020
+
+- 动态路由(clock rate与dce,dte的关系, rip_v1和rip_v2关于summary的细节)
+
