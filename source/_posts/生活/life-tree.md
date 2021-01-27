@@ -111,13 +111,18 @@ tags: [life]
 ## Tue Dec 1 CST 2020
 
 - QQ机器人([mirai](https://github.com/mamoe/mirai))
-- c+4
+- c+
 
 ## Wed Dec 2 CST 2020
 
 - 使用[graia-application-mirai](https://github.com/GraiaProject/Application)(基于[mirai-http-api](https://github.com/project-mirai/mirai-api-http)的python SDK)
 
     注意mirai-http-api支持的mirai版本, 目前使用mirai-console-1.0-M4.jar(后端),mirai-console-pure-1.0-M4.jar(前端),mirai-core-qqandroid-1.2.3.jar工作正常
+
+## Thu Dec 3 CST 2020
+
+-  重温py准备写一个QQbot-COC插件
+- 顺带爬pixiv
 
 ## Fri Dec 4 CST 2020
 
@@ -135,4 +140,8 @@ tags: [life]
 ## Tue Dec 8 CST 2020
 
 - 动态路由(clock rate与dce,dte的关系, rip_v1和rip_v2关于summary的细节)
+- vc+1
 
+## Wed Jan 11 CST 2021
+
+- 考过科二

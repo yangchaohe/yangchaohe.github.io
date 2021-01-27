@@ -3,7 +3,7 @@ thumbnail: https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/stat
 title: linux误删ESP分区?开机无法引导进linux?pacman -Syu后无法进入系统?
 date: 2020-08-07 22:00
 author: shepherd
-categories: [操作系统,Linux]
+categories: [个人技术心得,Linux]
 toc: true
 tags: [manjaro,esp,boot,双系统]
 ---

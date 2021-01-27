@@ -3,7 +3,7 @@ thumbnail: https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/stat
 title: 安装Manjaro
 date: 2020-2-19 22:37:26
 author: shepherd
-categories: [操作系统,Linux]
+categories: [个人技术心得,Linux]
 toc: true
 tags:
   - Linux

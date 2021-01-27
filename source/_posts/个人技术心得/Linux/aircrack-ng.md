@@ -4,7 +4,7 @@ title: aircrack-ng破解wifi
 date: 2020-5-4
 author: shepherd
 toc: ture
-categories: [操作系统,Linux]
+categories: [个人技术心得,Linux]
 tags: [aircrack-ng]
 ---
 

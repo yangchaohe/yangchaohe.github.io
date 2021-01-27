@@ -238,7 +238,7 @@ public class RTD {
             output = new FileOutputStream("Test/test1.txt",true);
 //            output.write(97);
             String str = new String("abcd");
-            output.write(str.g etBytes());
+            output.write(str.getBytes());
             //截取字串添加
             output.write(str.getBytes(), 1, 3);
         }catch (IOException e) {
