@@ -219,12 +219,15 @@ class InnerClass{
                     System.out.println("test");
                 }   
             }   
-        );  
+        );
+        test( () -> 
+                	System.out.println("test")    
+            );
     }   
 }
 
-abstract class Vehicle{
-    public abstract void transit(); 
+interface Vehicle{
+    public void transit(); 
 }
 ```
 

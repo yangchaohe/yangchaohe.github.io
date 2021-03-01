@@ -145,3 +145,24 @@ tags: [life]
 ## Wed Jan 11 CST 2021
 
 - 考过科二
+
+## Thu Jan 28 CST 2021
+
+- (看不懂[NPE问题])[如果调用方一定要根据null判断，比如返回null表示文件不存在，那么考虑返回`Optional`](https://www.liaoxuefeng.com/wiki/1252599548343744/1337645544243233)：
+
+    ```java
+    public Optional<String> readFromFile(String file) {
+        if (!fileExist(file)) {
+            return Optional.empty();
+        }
+        ...
+    }
+    ```
+
+    这样调用方必须通过`Optional.isPresent()`判断是否有结果
+
+## Fri Jan 29 CST 2021
+
+- Commons Logging+Log4j; SLF4j +logback
+- 动态代理+注解
+- 

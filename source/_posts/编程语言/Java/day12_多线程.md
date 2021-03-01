@@ -133,7 +133,7 @@ thread.interrupt();
 
 ![threadStat](https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/article/2020/threadStat.png)
 
-### 特点
+### 缺点
 
 - 因为单继承，所以他无法继承别的类了
 
@@ -393,7 +393,7 @@ public synchronized void test(){
 
   `lock.unlock`
 
-为了防止加锁的代码异常无法解锁，通常要使用try finally
+为了防止加锁的代码异常无法解锁，通常要使用`try finally`
 
 > 当有两个线程类访问同一数据时，可以在构造时传递一把锁，这样不同的类就能使用同一把锁了
 
