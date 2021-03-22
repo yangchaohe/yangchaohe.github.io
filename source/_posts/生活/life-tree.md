@@ -165,4 +165,8 @@ tags: [life]
 
 - Commons Logging+Log4j; SLF4j +logback
 - 动态代理+注解
-- 
+
+## Fri Mar 12 CST 2021
+
+1. 想学的东西太多了, 一步一步来, 不要浮躁, 先把当前该学的学了(比如网络, 和后端, 前端)
+

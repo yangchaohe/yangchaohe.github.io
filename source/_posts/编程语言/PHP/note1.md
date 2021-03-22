@@ -1,5 +1,5 @@
 ---
-title: php-note1
+title: php-基础笔记
 date: 2021-3.9 15:00
 author: manu
 toc: true
@@ -10,7 +10,7 @@ tags: PHP
 ## PHP的超全局变量
 
 - [$_SERVER](https://www.php.net/manual/zh/reserved.variables.server.php)是PHP里面的超全局变量, 包含了web服务器提供的所有信息.可通过`phpinfo()`查看
-
+  - `$_SERVER['PHP_SELF']`得到自身文件名
 - [$GLOBALS](https://www.php.net/manual/zh/reserved.variables.globals.php)
 - [$_GET](https://www.php.net/manual/zh/reserved.variables.get.php)
 - [$_POST](https://www.php.net/manual/zh/reserved.variables.post.php)
@@ -151,13 +151,178 @@ $array = [
 
 null不区分大小写
 
-## 语法
+> PHP8.0.0新增了一个类型[mixed](https://www.php.net/manual/zh/language.types.declarations.php#language.types.declarations.mixed), 代表任意类型
+>
+> [`namespace`](https://www.php.net/manual/zh/userlandnaming.tips.php)可以避免与其它用户空间代码出现命名空间冲突
 
-### 变量
+## 变量
 
+- **PHP变量区分大小写**
 - 变量名规则`^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$`	
+- PHP变量名可以使用中文
+- `&`[引用赋值(只有有名字的变量才可以引用赋值)](https://www.php.net/manual/zh/language.references.php)
 
 
+- PHP 提供了大量的预定义变量, [超全局变量列表](https://www.php.net/manual/zh/language.variables.superglobals.php)
+- PHP 中全局变量在函数中使用时必须声明为 `global`或者使用[$GLOBALS](https://www.php.net/manual/zh/reserved.variables.globals.php)数组
+
+```php
+# global
+<?php
+$a = 1;
+$b = 2;
+
+function Sum() {
+    global $a, $b;
+
+    $b = $a + $b;
+}
+
+Sum();
+echo $b;
+
+# GLOBALS
+$a = 1;
+$b = 2;
+
+function Sum()
+{
+    $GLOBALS['b'] = $GLOBALS['a'] + $GLOBALS['b'];
+}
+
+Sum();
+echo $b;
+?>
+```
+
+- 静态变量在离开函数后不会被销毁, 声明`static $var`
+- 可变变量使用`$$`
+
+> 要将可变变量用于数组，必须解决一个模棱两可的问题。这就是当写下 `$$a[1]` 时，解析器需要知道是想要 `$a[1]` 作为一个变量呢，还是想要 `$$a` 作为一个变量并取出该变量中索引为 [1] 的值。解决此问题的语法是，对第一种情况用 `${$a[1]}`，对第二种情况用 `${$a}[1]`
+>
+> 对于对象, `$foo->$bar`将bar解析后作为foo的属性
+>
+> **注意**: 在 PHP 的函数和类的方法中，[超全局变量](https://www.php.net/manual/zh/language.variables.superglobals.php)不能用作可变变量。`$this` 变量也是一个特殊变量，不能被动态引用
+
+## 常量
+
+- 定义规则`^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$`
+- 使用[define(name, value)](https://www.php.net/manual/zh/function.define.php) 和const定义一个常量
+
+> const打小写敏感
+
+- [PHP预定义常量](https://www.php.net/manual/zh/language.constants.predefined.php)
+
+## 表达式
+
+- 三元表达式
+
+```php
+$first ? $second : $third
+```
+
+### 运算符
+
+- 除了基本的比较运算符外, PHP还支持`===(值与类型相等)`和`!==`
+- PHP支持递增和递减运算符和`**`运算符
+- PHP 支持引用赋值，使用`$var = &$othervar;`语法。引用赋值意味着两个变量指向了同一个数据(类型linux硬链接)
+
+> [对象复制](https://www.php.net/manual/zh/language.oop5.cloning.php)
+
+- [new](https://www.php.net/manual/zh/language.oop5.basic.php#language.oop5.basic.new) 运算符自动返回一个引用，因此对 [new](https://www.php.net/manual/zh/language.oop5.basic.php#language.oop5.basic.new) 的结果进行引用赋值是错误的
+- [NULL 合并运算符`??`](https://www.php.net/manual/zh/language.operators.comparison.php#language.operators.comparison.coalesce)
+- `<=>`返回-1 0 1
+- PHP 支持一个错误控制运算符：@。当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉。
+
+> @ 运算符只对[表达式](https://www.php.net/manual/zh/language.expressions.php)有效。对新手来说一个简单的规则就是：如果能从某处得到值，就能在它前面加上 @ 运算符
+
+- `(``)`命令执行运算符
+
+```php
+<?php
+$output = `ls -al`;#输出当前目录所有文件及详细信息
+echo "<pre>$output</pre>";
+?>
+```
+
+> 在windows上, 如果输出是二进制文件, 需要使用[popen()](https://www.php.net/manual/zh/function.popen.php), 因为windows的管道是以文件形式打开的
+
+- `&&,||,`比`and,or`运算优先级高. 
+- [数组运算符](https://www.php.net/manual/zh/language.operators.array.php)
+- `instanceof` 用于确定一个 PHP 变量是否属于某一类 [class](https://www.php.net/manual/zh/language.oop5.basic.php#language.oop5.basic.class),确定一个变量是不是继承自某一父类的子类
+
+## 流程控制
+
+- `elseif`与`else if`语义一样, 区别在于前者可以使用冒号, 后者不行
+
+```php
+<?php
+
+/* 不正确的使用方法： */
+if ($a > $b):
+    echo $a." is greater than ".$b;
+else if ($a == $b): // 将无法编译
+    echo "The above line causes a parse error.";
+endif;
+
+
+/* 正确的使用方法： */
+if ($a > $b):
+    echo $a." is greater than ".$b;
+elseif ($a == $b): // 注意使用了一个单词的 elseif
+    echo $a." equals ".$b;
+else:
+    echo $a." is neither greater than or equal to ".$b;
+endif;
+
+?>
+```
+
+- PHP 提供了一些流程控制的替代语法，包括 `if`，`while`，`for`，`foreach` 和 `switch`。替代语法的基本形式是把左花括号（{）换成冒号（:），把右花括号（}）分别换成 `endif;`，`endwhile;`，`endfor;`，`endforeach;` 以及 `endswitch;`
+
+```php+HTML
+<?php if ($a == 5): ?>
+A is equal to 5
+<?php endif; ?>
+
+<?php
+if ($a == 5):
+    echo "a equals 5";
+    echo "...";
+elseif ($a == 6):
+    echo "a equals 6";
+    echo "!!!";
+else:
+    echo "a is neither 5 nor 6";
+endif;
+?>
+```
+
+> 注意如果不是`^<?php`这样写的话会输出空格
+
+- foreach不支持使用@来抑制错误信息
+
+## 函数
+
+- 使用默认参数时，任何默认参数必须放在任何非默认参数的右侧
+- `...`指定可变参数, 也可用于传递array作为函数参数
+- `:`命名参数允许传入乱序的参数, 需要指定参数名
+- 命名参数也可以与位置参数相结合使用。此种情况下，命名参数必须在位置参数之后
+- PHP支持可变函数, 函数名和方法名都可以使用变量指定
+- 箭头函数支持与 [匿名函数](https://www.php.net/manual/zh/functions.anonymous.php) 相同的功能，只是其父作用域的变量总是自动的
+  - 会参考参数去父作用域中寻找是否有该值
+- 匿名函数需要使用`use`继承父作用域的变量
+
+```php
+$message = 'hello';
+
+// 继承 $message
+$example = function () use ($message) {
+    var_dump($message);
+};
+```
+
+- 匿名函数会自动绑定当前实例`this`, 可以使用静态匿名函数阻止绑定
 
 ## 常用函数
 
@@ -168,10 +333,25 @@ round ( float $val , int $precision = 0 , int $mode = PHP_ROUND_HALF_UP ) : floa
 intdiv ( int $dividend , int $divisor ) : int
 ```
 
-[substr](https://www.php.net/manual/zh/function.substr.php)
+- [isset()](https://www.php.net/manual/zh/function.isset.php)
+- [substr()](https://www.php.net/manual/zh/function.substr.php)
+- [substr_replace()](https://www.php.net/manual/zh/function.substr-replace.php)
+- [字符串函数](https://www.php.net/manual/zh/ref.strings.php)
+- [数组函数](https://www.php.net/manual/zh/ref.array.php)
+- [变量函数](https://www.php.net/manual/zh/ref.var.php)
+- [数学函数](https://www.php.net/manual/zh/ref.math.php)
+- [error_get_last()](https://www.php.net/manual/zh/function.error-get-last.php)
+- [shell_exec()](https://www.php.net/manual/zh/function.shell-exec.php)
+- [get_class()](https://www.php.net/manual/zh/function.get-class.php)
+- [is_a()](https://www.php.net/manual/zh/function.is-a.php)
 
-[substr_replace](https://www.php.net/manual/zh/function.substr-replace.php)
+## 语言结构
 
-[字符串函数](https://www.php.net/manual/zh/ref.strings.php)
+> 语言结构就是PHP本身支持的语句, 比如`echo, print`等.
+>
+> 与函数的区别在于语句的运行速度快, 但缺少了函数的一些特性, 比如函数可以接受其他函数返回的参数等
 
-[数组函数](https://www.php.net/manual/zh/ref.array.php)
+- [list()](https://www.php.net/manual/zh/function.list.php): 解构赋值?
+- [array()](https://www.php.net/manual/zh/function.array.php)
+- [echo](https://www.php.net/manual/zh/function.echo.php)
+- [eval()](https://www.php.net/manual/zh/function.eval.php)
