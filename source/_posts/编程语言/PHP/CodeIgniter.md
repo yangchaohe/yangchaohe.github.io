@@ -25,7 +25,7 @@ tags: PHP
 
 ## 踩的坑
 
-在CI4.11里面, request的getVar等方法需要添加下面的代码
+在CodeIgniterI4.11里面, request的getVar等方法需要添加下面的代码
 
 ```php
 /**

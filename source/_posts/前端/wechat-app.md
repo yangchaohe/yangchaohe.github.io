@@ -4,6 +4,9 @@
 - wxss建议采用flex布局
 - 老老实实使用回调，但需要避免代码被割裂
 - 考虑SPA
-- banner表字段：id url
 - 得到查询语句+建立数据库banner表
+- [wx.createSelectorQuery()](https://developers.weixin.qq.com/miniprogram/dev/api/wxml/wx.createSelectorQuery.html)类DOM
+- [注意target和currentTarget](https://blog.csdn.net/Syleapn/article/details/81289337)
+- 浏览器调试后端接口没问题, 开发工具调试出问题, 不要慌, 这种大概率是请求头不对, 比如Get请求有参数是需要对参数进行编码, 浏览器一般默认采用`application/x-www-form-urlencoded`, 开发工具需要自己设置下
+- `wx.switchTab`才能跳转tarbar界面
 

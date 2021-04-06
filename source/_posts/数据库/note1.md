@@ -1,4 +1,4 @@
-- `slug`: 对用户和SEO友好
+- `slug`列: 对用户和SEO友好
   - 避免使用中文
   - 避免使用 `for` 、`and`、`if` 、`or` 等 停用词（会被搜索引擎过滤）
   - 保证最终的 `url` 尽量简短，`slug` 的长度保持在 3-5 个单词之间
@@ -9,4 +9,5 @@
   - UNIQUE: UNI
   - PRIMARY KEY: PRI
 - `truncate tablename`:会清空表的所有记录，并且使自增的id重置。
-- 
+- `num = 'num+1'` 会报错 必须要`num=num+1`才行, 编程一定要小心
+
