@@ -247,3 +247,17 @@ git config --global core.quotepath false
 ```
 
 > 参考[解决git-status不能显示中文](https://blog.csdn.net/u012145252/article/details/81775362#解决git-status不能显示中文)
+
+### git 修改本地和远程分支名称
+
+`git branch -a` #查看所有分支
+`git branch -r` #查看远程分支
+`git branch -vv` #查看本地分支所关联的远程分支
+`git branch -m old_branch new_branch` # Rename branch locally
+`git push origin :old_branch` # Delete the old branch
+`git push --set-upstream origin new_branch` 
+或者
+`git push -u origin new_branch`# Push the new branch, set local branch to track the new remote
+
+> 当远程分支显示不全时，使用`git fetch`可以抓取远程分支
+

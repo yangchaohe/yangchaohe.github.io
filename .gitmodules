@@ -1,0 +1,3 @@
+[submodule "themes/hexo-theme-amazing"]
+	path = themes/hexo-theme-amazing
+	url = https://github.com/removeif/hexo-theme-amazing
