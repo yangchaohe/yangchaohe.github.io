@@ -216,7 +216,7 @@ class StaticDemo{
 
 ### 解释原理图
 
-<img src="https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/article/2020/static原理.png" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/static原理.png" style="zoom:50%;" />
 
 ### 结论
 

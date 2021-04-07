@@ -21,13 +21,13 @@ tags: [CDN,jsDeliver,Github]
 如下：
 
 ```html
-<img src="https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/article/20203f67c6b831ace4d1fe4d068600c2cfd6.jpg" style="zoom:20%;" />
-<img src="https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/article/2020/943a485d76fbbcc50c15a49f5644cbb1.png" style="zoom:33%;" />
+<img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/20203f67c6b831ace4d1fe4d068600c2cfd6.jpg" style="zoom:20%;" />
+<img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/943a485d76fbbcc50c15a49f5644cbb1.png" style="zoom:33%;" />
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/article/20203f67c6b831ace4d1fe4d068600c2cfd6.jpg" style="zoom:20%;" />
+<img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/20203f67c6b831ace4d1fe4d068600c2cfd6.jpg" style="zoom:20%;" />
 
-<img src="https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/article/2020/943a485d76fbbcc50c15a49f5644cbb1.png" style="zoom:33%;" />
+<img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/943a485d76fbbcc50c15a49f5644cbb1.png" style="zoom:33%;" />
 
 再配合PicGo，typora，简直不要太爽
 

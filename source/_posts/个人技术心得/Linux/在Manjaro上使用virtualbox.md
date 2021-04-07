@@ -1,5 +1,5 @@
 ---
-thumbnail: https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/article/thumbnail/manjaro/school-project.jpg
+thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/thumbnail/manjaro/school-project.jpg
 title: 在Manjaro上使用virtualbox
 date: 2020-5-2
 author: shepherd
@@ -42,7 +42,7 @@ Loading modules: vboxnetadp vboxnetflt vboxdrv
 
 然后重新打开virtualbox，运行正常
 
-![virtualbox](https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@hexo/static/article/2020/vm-virtualbox.png)
+![virtualbox](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/vm-virtualbox.png)
 
 ## 代理问题
 

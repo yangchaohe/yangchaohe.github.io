@@ -1,10 +1,10 @@
 ## 界面功能
 
-![od1](https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@picgo/static/article/od01.png)
+![od1](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/od01.png)
 
 ## 快捷键
 
-![od02](https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@picgo/static/article/od02.png)
+![od02](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/od02.png)
 
 ## 破解方向(无壳)
 
@@ -15,7 +15,7 @@
 
 > 不建议不断使用断点进行调试, 大概率陷入死循环(windows使用消息队列将各种操作分配给应用程序, 如果没有从窗口执行操作, 那会导致消息队列为空, 导致循环)
 >
-> ![](https://cdn.jsdelivr.net/gh/shepherdev/shepherdev.github.io@picgo/static/article/od03.png)
+> ![](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/od03.png)
 
 ## 去除NAG窗口
 
