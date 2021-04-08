@@ -1,8 +1,8 @@
 ---
 title: 多态与接口
 date: 2020-3-3
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Java]
 tag: [多态,接口]
 ---

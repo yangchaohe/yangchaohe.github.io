@@ -1,7 +1,7 @@
 ---
 title: 使用zeal查看官方文档
 date: 2020-3-15
-author: shepherd
+author: manu
 categories: [前端]
 tags: [zeal,文档]
 ---

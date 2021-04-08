@@ -1,9 +1,17 @@
 ---
 title: git指令
 date: 2020-3-31
-author: shepherd
+author: manu
 toc: true
 categories: [开发工具,git]
+thumbnail:
+tags:
+categories: 
+toc: true
+recommend: 1
+keywords: 
+uniqueId: 开发工具/git.html
+mathJax: false
 ---
 
 记录一些日常常用指令，参考
@@ -85,7 +93,7 @@ git config --global user.email "email@example.com"
   提示：一个仓库已向该引用进行了推送。再次推送前，您可能需要先整合远程变更
   提示：（如 'git pull ...'）。
   提示：详见 'git push --help' 中的 'Note about fast-forwards' 小节。
-  # shepherd @ MY in ~/learngit on git:dev o [20:26:31] C:1
+  # manu @ MY in ~/learngit on git:dev o [20:26:31] C:1
   $ git pull 
   remote: Enumerating objects: 5, done.
   remote: Counting objects: 100% (5/5), done.

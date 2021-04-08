@@ -1,9 +1,9 @@
 ---
 title: 简单使用Eclipse
 date: 2020-3-3
-author: shepherd 
+author: manu 
 password:
-toc: ture
+toc: true
 categories: [Java]
 tag: eclipse
 ---

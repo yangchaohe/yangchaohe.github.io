@@ -1,8 +1,8 @@
 ---
 title: 条件判断和字符串
 date: 2020-2-24
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Java]
 ---
 

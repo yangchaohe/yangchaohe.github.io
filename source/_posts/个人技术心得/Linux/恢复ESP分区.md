@@ -1,8 +1,8 @@
 ---
-thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/thumbnail/manjaro/manjaro-cat.jpg
+thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/manjaro/manjaro-cat.jpg
 title: linux误删ESP分区?开机无法引导进linux?pacman -Syu后无法进入系统?
 date: 2020-08-07 22:00
-author: shepherd
+author: manu
 categories: [个人技术心得,Linux]
 toc: true
 tags: [manjaro,esp,boot,双系统]

@@ -1,9 +1,10 @@
 ---
 title: life-tree
 date: 2020-11-14 21:37:26
-author: shepherd
+author: manu
 categories: [生活]
 tags: [life]
+toc: true
 ---
 
 > 积累的人生树, 记录我生活的日志.
@@ -134,7 +135,7 @@ tags: [life]
 
 ## Sun Dec 6 CST 2020
 
-- 今天强迫症发作, 移除有关shepherd, shepherdev的所有信息, manu, manu2x, runtmanu, yangchaohe成为我的虚拟昵称(包括邮箱地址)
+- 今天强迫症发作, 移除有关manu, manuev的所有信息, manu, manu2x, runtmanu, yangchaohe成为我的虚拟昵称(包括邮箱地址)
 - c+5
 
 ## Tue Dec 8 CST 2020

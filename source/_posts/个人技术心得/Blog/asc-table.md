@@ -1,10 +1,10 @@
 ---
 title: asc字符图表、流程图，渲染代码图
 date: 2020-5-26 12:00
-author: shepherd
+author: manu
 toc: true
 categories: [个人技术心得,博客,工具]
-thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/thumbnail/water/water.jpg
+thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/water/water.jpg
 ---
 
 在绘制流程图等简单图形上面，打开图形绘制工具，画完保存，上传图床，复制链接（虽然typora简化了这些），但在看到某博客上面的一些使用asc，unicode字符做的图后，觉得很~~牛逼~~方便，于是便开始找工具制作。

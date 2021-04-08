@@ -1,8 +1,8 @@
 ---
 title: 数组
 date: 2020-2-27
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Java]
 tag: [数组]
 ---

@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: shepherdev的学习笔记
+title: 码奴的后花园
 subtitle: Hello World
 description: Codeing & Life
 keywords:
-author: shepherd
+author: manu
 language: zh-CN
 timezone: Asia/shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://shepherdev.github.io
+url: http://yangchaohe.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -124,12 +124,12 @@ deploy:
 #   separator: '-' # default: '-'
 
 #emoji
-# githubEmojis:
-#   enable: false
-#   className: github-emoji
-#   inject: true
-#   styles:
-#   customEmojis:
+githubEmojis:
+  enable: true
+  className: github-emoji
+  inject: true
+  styles:
+  customEmojis:
 
 #plugins:
 # - hexo-qiniu-sync

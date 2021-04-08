@@ -1,8 +1,8 @@
 ---
 title: 工具类
 date: 2020-3-4
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Java]
 tag: [随机数,包装类]
 ---
@@ -81,7 +81,7 @@ System.out.println((int）((Math.random()*4)+5));//5,6,7,8的随机数
 举个例子
 
 ```java
-package com.shepherd3.bigdecimal;
+package com.manu3.bigdecimal;
 
 import java.math.BigDecimal;
 
@@ -117,7 +117,7 @@ public class BigDecimalTest {
 举个例子
 
 ```java
-package com.shepherd3.date;
+package com.manu3.date;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -163,7 +163,7 @@ public class DateCalenderTest {
 举个例子吧
 
 ```java
-package com.shepherd4.packageclasss;
+package com.manu4.packageclasss;
 
 public class PackagingClass {
     public static void main(String[] args) {

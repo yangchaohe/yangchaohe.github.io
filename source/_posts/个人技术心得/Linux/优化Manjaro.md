@@ -1,9 +1,9 @@
 ---
 
-thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/thumbnail/manjaro/manjaro-dog.jpg
+thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/manjaro/manjaro-dog.jpg
 title: 优化Manjaro
 date: 2020-5-17 18:00
-author: shepherd
+author: manu
 categories: [个人技术心得,Linux]
 toc: true
 tags: [Linux,美化,系统优化]

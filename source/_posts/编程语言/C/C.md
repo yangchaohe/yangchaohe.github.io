@@ -1,8 +1,8 @@
 ---
 title: C语言基础
 date: 2019-11-1 22:37:26
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [C]
 ---
 

@@ -1,3 +1,18 @@
+---
+thumbnail:
+title: 微信小程序笔记
+date: 2021-3-3
+tags:
+categories: [前端] 
+toc: true
+recommend: 1
+mathJax: false
+---
+
+微信小程序的学习记录和坑
+
+<!-- more -->
+
 - app.json控制着全局静态数据，比如title，backgroundcolor，tabbar..以及首页page（第一个）
 - 注册页面有个behaviours，可以将某个页面的属性，字段，方法与当前页面合并（区分组件），需要使用`module.exports = Behaviour(...)`将数据暴露(区分模块)，`require()`引用，不支持绝对路径
 - Page注册普通页面，Component可以注册组件，类似标签

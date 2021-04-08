@@ -1,7 +1,7 @@
 ---
 title: pythonic
 date: 2020-4-4 6:00
-author: shepherd
+author: manu
 toc: true
 categories: Python
 tags: pythonic

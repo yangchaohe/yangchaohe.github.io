@@ -1,11 +1,15 @@
 ---
-title: php-基础笔记
+title: PHP基础学习笔记
 date: 2021-3.9 15:00
 author: manu
 toc: true
 categories: [编程语言,PHP]
 tags: PHP
 ---
+
+> **PHP**（全称：**P**HP：**H**ypertext **P**reprocessor，即“PHP：超文本预处理器”）是一种[开源](https://zh.wikipedia.org/wiki/开源)的通用[计算机](https://zh.wikipedia.org/wiki/计算机)[脚本语言](https://zh.wikipedia.org/wiki/脚本语言)，尤其适用于[网络开发](https://zh.wikipedia.org/wiki/网络开发)并可嵌入[HTML](https://zh.wikipedia.org/wiki/HTML)中使用
+
+<!-- more -->
 
 ## PHP的超全局变量
 
@@ -130,12 +134,12 @@ $array = [
 - 使用`print_r`或者`var_dump`函数来输出array
 - 要删除某键值对，对其调用 [unset()](https://www.php.net/manual/zh/function.unset.php) 函数。
 - [unset()](https://www.php.net/manual/zh/function.unset.php) 函数允许删除数组中的某个键。但要注意数组将*不会*重建索引。如果需要删除后重建索引，可以用 [array_values()](https://www.php.net/manual/zh/function.array-values.php) 函数
-- [foreach](https://www.php.net/manual/zh/control-structures.foreach.php) 控制结构是专门用于数组的。它提供了一个简单的方法来遍历数组。
+- [foreach](https://www.php.net/manual/zh/control-structrues.foreach.php) 控制结构是专门用于数组的。它提供了一个简单的方法来遍历数组。
 - 数组最后一个元素的 `$value` 引用在 `foreach` 循环之后仍会保留。建议使用 [unset()](https://www.php.net/manual/zh/function.unset.php) 来将其销毁。
 
 ### Iterable
 
-> [Iterable](https://www.php.net/manual/zh/language.types.iterable.php)是 PHP 7.1 中引入的一个伪类型。它接受任何 array 或实现了 **Traversable** 接口的对象。这些类型都能用 [foreach](https://www.php.net/manual/zh/control-structures.foreach.php) 迭代， 也可以和 [生成器](https://www.php.net/manual/zh/language.generators.php) 里的 **yield from** 一起使用
+> [Iterable](https://www.php.net/manual/zh/language.types.iterable.php)是 PHP 7.1 中引入的一个伪类型。它接受任何 array 或实现了 **Traversable** 接口的对象。这些类型都能用 [foreach](https://www.php.net/manual/zh/control-structrues.foreach.php) 迭代， 也可以和 [生成器](https://www.php.net/manual/zh/language.generators.php) 里的 **yield from** 一起使用
 
 - 类在扩展/实现（extending/implementing）的时候， 可以将参数类型从 array 或 **Traversable** 放宽到 [iterable](https://www.php.net/manual/zh/language.types.iterable.php)， 也可以将返回类型 [iterable](https://www.php.net/manual/zh/language.types.iterable.php) 的范围缩小到 array 或 **Traversable**
 
@@ -145,7 +149,7 @@ $array = [
 
 > 参见 [get_resource_type()](https://www.php.net/manual/zh/function.get-resource-type.php)
 >
-> 持久数据库连接比较特殊，它们*不会*被垃圾回收系统销毁。参见[数据库永久连接](https://www.php.net/manual/zh/features.persistent-connections.php)一章
+> 持久数据库连接比较特殊，它们*不会*被垃圾回收系统销毁。参见[数据库永久连接](https://www.php.net/manual/zh/featrues.persistent-connections.php)一章
 
 ### NULL
 
@@ -355,3 +359,7 @@ intdiv ( int $dividend , int $divisor ) : int
 - [array()](https://www.php.net/manual/zh/function.array.php)
 - [echo](https://www.php.net/manual/zh/function.echo.php)
 - [eval()](https://www.php.net/manual/zh/function.eval.php)
+
+## 文本处理
+
+[RCRE](https://www.php.net/manual/zh/regexp.reference.delimiters.php)

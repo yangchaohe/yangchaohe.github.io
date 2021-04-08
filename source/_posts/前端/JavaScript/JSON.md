@@ -2,7 +2,7 @@
 title: 了解JSON
 date: 2020-04-20
 toc: true
-author: shepherd
+author: manu
 categories: [前端,JavaScript]
 tag: [JSON]
 ---
@@ -117,13 +117,13 @@ superHeroes["members"][1]["powers"][2]
 
 ```js
 var person = {
-  	name: 'shepherdev',
+  	name: 'manuev',
     age:19,
     height:1.60,
 }
 var myStirng = JSON.stringify(person);
 /*
-{"name": "shepherdev","age": 19,"height": 1.6}
+{"name": "manuev","age": 19,"height": 1.6}
 */
 ```
 
@@ -133,7 +133,7 @@ var myStirng = JSON.stringify(person);
 JSON.stringify(person,['name','age'],'    ')
 /*
 "{
-    "name": "shepherdev",
+    "name": "manuev",
     "age": 19
 }"
 */
@@ -161,7 +161,7 @@ JSON.stringify(person,
 
 ```js
 var person = {
-    name: 'shepherdev',
+    name: 'manuev',
     age:19,
     height:1.60,
     // 注意不能用箭头函数
@@ -172,7 +172,7 @@ var person = {
         };
     }
 };
-//"{"Name":"shepherdev","Age":19}"
+//"{"Name":"manuev","Age":19}"
 ```
 
 ## 反序列化
@@ -180,7 +180,7 @@ var person = {
 `parse()`: 以文本字符串形式接受JSON作为参数，并返回相应的JS对象。
 
 ```js
-var myText = '{ "name" : "shepherdev", "age" : "19" }';
+var myText = '{ "name" : "manuev", "age" : "19" }';
 var myJSON = JSON.parse(myText);
 ```
 
@@ -193,6 +193,6 @@ JSON.parse(myText,(k,v)=>{
 	}
     return v;
 })
-// Object { name: "hello shepherdev", age: "19" }
+// Object { name: "hello manuev", age: "19" }
 ```
 

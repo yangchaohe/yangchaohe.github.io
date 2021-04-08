@@ -1,8 +1,8 @@
 ---
 title: 理解类和对象
 date: 2020-2-29
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Java]
 tag: [构造方法,封装]
 ---
@@ -209,7 +209,7 @@ class StaticDemo{
 运行结果
 
 ```bash
-[shepherd@MY day5 07:33 下午]$ java StaticDemo 
+[manu@MY day5 07:33 下午]$ java StaticDemo 
 13-America
 15-America
 ```

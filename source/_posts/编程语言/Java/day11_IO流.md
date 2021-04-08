@@ -1,8 +1,8 @@
 ---
 title: 理解IO流
 date: 2020-3-6
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Java]
 ---
 
@@ -35,14 +35,14 @@ categories: [Java]
 File可以指向一个文件，也可以指向目录
 
 ```java
-package com.shepherd3.file;
+package com.manu3.file;
 
 import java.io.File;
 
 public class FileDemo {
     public static void main(String[] args) {
-        File f1 = new File("/home/shepherd");
-        File f2 = new File("/home/shepherd/Java/src/day1/Math.java");
+        File f1 = new File("/home/manu");
+        File f2 = new File("/home/manu/Java/src/day1/Math.java");
         //构造方法有很多，就不一一列举了
         System.out.println(f1.isDirectory());
         System.out.println(f1.isFile());
@@ -60,13 +60,13 @@ public class FileDemo {
 ```java
 public class FileDemo {
     public static void main(String[] args) throws IOException {
-        File f1 = new File("/home/shepherd/Java/Test.md");
-        File f2 = new File("/home/shepherd/Java/Test");
+        File f1 = new File("/home/manu/Java/Test.md");
+        File f2 = new File("/home/manu/Java/Test");
         f1.createNewFile();
         f2.mkdir();
         f2.mkdirs();//创建多级目录
 //        f1.delete();
-        f1.renameTo(new File("/home/shepherd/Java/Test2.md"));
+        f1.renameTo(new File("/home/manu/Java/Test2.md"));
         //这个renameTo还可以移动文件，和linux的mv指令是真的像
         f2.delete();
     }
@@ -78,7 +78,7 @@ public class FileDemo {
 ```java
 public class FileDemo {
     public static void main(String[] args) throws IOException {
-        File f1 = new File("/home/shepherd/Java/Test2.md");
+        File f1 = new File("/home/manu/Java/Test2.md");
         File f2 = new File("Test");
 //        f2.createNewFile();
         System.out.println(f1.getAbsolutePath());//绝对路径
@@ -99,7 +99,7 @@ import java.io.IOException;
 
 public class FileDemo {
     public static void main(String[] args) throws IOException {
-        File dir = new File("/home/shepherd/Java_learn_workspace/Learn02");
+        File dir = new File("/home/manu/Java_learn_workspace/Learn02");
         String[] s = dir.list();
         for(String i : s) {
             System.out.println(i);
@@ -116,7 +116,7 @@ public class FileDemo {
 1.复制文件
 
 ```java
-package com.shepherd4.practice;
+package com.manu4.practice;
 
 import java.io.File;
 import java.io.IOException;
@@ -124,8 +124,8 @@ import java.nio.file.Files;
 
 public class CopyFiles {
     public static void main(String[] args) throws IOException {
-        File source = new File("/home/shepherd/Java/Test2.md");
-        File target = new File("/home/shepherd/Java/Test2");
+        File source = new File("/home/manu/Java/Test2.md");
+        File target = new File("/home/manu/Java/Test2");
         
         Files.copy(source.toPath(), target.toPath());
     }
@@ -135,7 +135,7 @@ public class CopyFiles {
 2.递归查找文件
 
 ```java
-package com.shepherd4.practice;
+package com.manu4.practice;
 
 import java.io.File;
 
@@ -262,7 +262,7 @@ public class RTD {
 - 后面有对比单字节和字节数组效率的数据
 
 ```java
-package com.shepherd.iostream;
+package com.manu.iostream;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -340,7 +340,7 @@ public void testCopy() {
 3. 调用close
 
 ```java 
-package com.shepherd5.buffer;
+package com.manu5.buffer;
 
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
@@ -413,7 +413,7 @@ public class BufferedIOStream {
 - 构造OutputStreamWriter对象时，可以指定编码，默认系统编码
 
 ```java
-package com.shepherd.iostream;
+package com.manu.iostream;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -489,7 +489,7 @@ public void testFileWriter() {
     try {
         writer = new FileWriter("Test/test1.txt");
 
-        writer.write("hello,我是shepherd!");
+        writer.write("hello,我是manu!");
 
     } catch (IOException e) {
         // TODO Auto-generated catch block

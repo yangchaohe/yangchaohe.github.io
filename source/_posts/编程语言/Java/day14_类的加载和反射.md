@@ -1,7 +1,7 @@
 ---
 title: 类的加载和反射
 date: 2020-3-11
-author: shepherd
+author: manu
 toc: true
 categories: [Java]
 ---
@@ -29,7 +29,7 @@ ok，介绍完毕，代码部分
 测试的类
 
 ```java
-package com.shepherd;
+package com.manu;
 
 public class Student {
     
@@ -73,7 +73,7 @@ public class Student {
 每个类只有与之对应的唯一的Class对象
 
 ```java
-package com.shepherd;
+package com.manu;
 
 public class GetClass {
     public static void main(String[] args) throws Exception {
@@ -85,7 +85,7 @@ public class GetClass {
         //2.通过类获得（不常用）
         Class c2 = Student.class;
         //3.Class的静态方法
-        Class.forName("com.shepherd.Student");
+        Class.forName("com.manu.Student");
     }
 }
 ```
@@ -93,14 +93,14 @@ public class GetClass {
 ### 获取构造方法
 
 ```java
-package com.shepherd;
+package com.manu;
 
 import java.lang.reflect.Constructor;
 
 public class GetConstructor {
     public static void main(String[] args) throws Exception {
         
-        Class c = Class.forName("com.shepherd.Student");
+        Class c = Class.forName("com.manu.Student");
         
         //获得所有public构造方法
         Constructor[] cs = c.getConstructors();
@@ -110,7 +110,7 @@ public class GetConstructor {
         Constructor cs2 = c.getConstructor(String.class,int.class,int.class);
         
         //调用构造方法
-        Object o = cs2.newInstance("shepherd",100,19);
+        Object o = cs2.newInstance("manu",100,19);
         Student s = (Student)o;
         s.show();
         
@@ -131,15 +131,15 @@ public class GetConstructor {
 ### 获取字段
 
 ```java
-package com.shepherd;
+package com.manu;
 
 import java.lang.reflect.Field;
 
 public class GetField {
     public static void main(String[] args) throws Exception {
         //因为获取字段需要对象，这里new一个对象
-        Student stu = new Student("shepherd",9001,19);
-        Class c = Class.forName("com.shepherd.Student");
+        Student stu = new Student("manu",9001,19);
+        Class c = Class.forName("com.manu.Student");
         
         //得到所有public字段（成员变量）
         Field[] fields = c.getFields();
@@ -165,15 +165,15 @@ public class GetField {
 ### 获取成员方法
 
 ```java
-package com.shepherd;
+package com.manu;
 
 import java.lang.reflect.Method;
 
 public class GetMethod {
     public static void main(String[] args) throws Exception {
         
-        Student stu = new Student("shepherd",9001,19);
-        Class c = Class.forName("com.shepherd.Student");
+        Student stu = new Student("manu",9001,19);
+        Class c = Class.forName("com.manu.Student");
         
         //得到所有public方法，包括继承父类
         Method[] method = c.getMethods();

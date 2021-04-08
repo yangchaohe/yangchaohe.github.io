@@ -1,8 +1,8 @@
 ---
 title: Premiere-shutcut-keys
 date: 2020-10-9 00:00:00
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [adobe,pr]
 tags: [剪辑]
 ---

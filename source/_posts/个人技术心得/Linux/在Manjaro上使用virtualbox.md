@@ -1,9 +1,9 @@
 ---
-thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/thumbnail/manjaro/school-project.jpg
+thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/manjaro/school-project.jpg
 title: 在Manjaro上使用virtualbox
 date: 2020-5-2
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [个人技术心得,Linux]
 tags: [manjaro,virtualbox,虚拟机]
 ---
@@ -34,7 +34,7 @@ WARNING: The vboxdrv kernel module is not loaded. Either there is no module
 查看模块加载情况
 
 ```bash
-# shepherd @ MY in ~ [14:04:17] C:1
+# manu @ MY in ~ [14:04:17] C:1
 $ sudo vboxreload                  
 Unloading modules: 
 Loading modules: vboxnetadp vboxnetflt vboxdrv 

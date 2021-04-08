@@ -1,8 +1,8 @@
 ---
 title: 理解继承
 date: 2020-3-2
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Java]
 tag: [方法重载,方法重写,内部类]
 ---

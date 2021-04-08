@@ -1,3 +1,20 @@
+---
+thumbnail:
+title: 动态调试-OD
+date: 2021-04-07 12:00
+tags:
+categories: 
+toc: true
+recommend: 1
+keywords: 
+uniqueId: 逆向破解/动态调试-OD.html
+mathJax: false
+---
+
+> **OllyDbg**（以其作者Oleh Yuschuk的名字命名）是一个[x86](https://en.wikipedia.org/wiki/X86) [调试器](https://en.wikipedia.org/wiki/Debugger)，它着重于二进制代码分析。可以跟踪[寄存器](https://en.wikipedia.org/wiki/Processor_register)，识别[过程](https://en.wikipedia.org/wiki/Function_(computer_science))，[API](https://en.wikipedia.org/wiki/Application_programming_interface)调用，[开关](https://en.wikipedia.org/wiki/Switch_statement)，[表](https://en.wikipedia.org/wiki/Table_(information))，[常量](https://en.wikipedia.org/wiki/Constant_(computer_science))和[字符串](https://en.wikipedia.org/wiki/String_(computer_science))
+
+<!-- more -->
+
 ## 界面功能
 
 ![od1](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/od01.png)
@@ -40,5 +57,5 @@ Nag窗口就是软件的提示注册信息
 -  `VA(VirtualAdress)`
 -  `RVA(RelativeVirtualAddress)`
 - ``EP(EntryPoint)``
-- `SEH(Structured Exception Handling)`
+- `SEH(Structrued Exception Handling)`
 

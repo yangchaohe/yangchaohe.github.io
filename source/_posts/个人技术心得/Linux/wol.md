@@ -2,12 +2,12 @@
 title: Manjaro+微星B365M主板设置wol
 date: 2020-12-29 12:00
 toc: true
-author: shepherd
+author: manu
 categories: [个人技术心得,Linux]
 tag: [wol,manjaro,archlinux]
 ---
 
- wol(wake on Lan)
+ wol(wake on Lan), 局域唤醒主机
 
 <!-- more -->
 

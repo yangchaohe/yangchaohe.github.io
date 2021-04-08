@@ -1,8 +1,8 @@
 ---
-thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/thumbnail/manjaro/block-font-logo3.jpg
-title: 安装Manjaro
+thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/manjaro/block-font-logo3.jpg
+title: 安装Manjaro疑难杂症
 date: 2020-2-19 22:37:26
-author: shepherd
+author: manu
 categories: [个人技术心得,Linux]
 toc: true
 tags:

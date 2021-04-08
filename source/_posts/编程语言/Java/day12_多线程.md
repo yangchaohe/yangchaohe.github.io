@@ -1,8 +1,8 @@
 ---
 title: 理解多线程
 date: 2020-3-9
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Java]
 ---
 
@@ -34,7 +34,7 @@ categories: [Java]
 - 调用start方法运行
 
 ```java
-package com.shepherd.student01;
+package com.manu.student01;
 
 public class MyThread extends Thread {
     
@@ -50,7 +50,7 @@ public class MyThread extends Thread {
 运行
 
 ```java
-package com.shepherd.student01;
+package com.manu.student01;
 
 public class CreateThread {
     public static void main(String[] args) {
@@ -142,7 +142,7 @@ thread.interrupt();
 这个接口里面只有一个抽象方法run，继承它必须实现这个方法
 
 ```java
-package com.shepherd.student01;
+package com.manu.student01;
 
 import org.junit.Test;
 
@@ -218,7 +218,7 @@ new Thread(r,"InnerClassThrad").start();
 - 继承重写run方法类
 
 ```java
-package com.shepherd.student01;
+package com.manu.student01;
 
 import org.junit.Test;
 
@@ -251,7 +251,7 @@ public class TicketThread extends Thread {
 创建四个线程
 
 ```java
-package com.shepherd.student01;
+package com.manu.student01;
 
 import org.junit.Test;
 
@@ -290,7 +290,7 @@ public class Prctice {
 继承Thread
 
 ```java
-package com.shepherd.student01;
+package com.manu.student01;
 
 import org.junit.Test;
 
@@ -333,7 +333,7 @@ public class TicketThread extends Thread {
 实现Runnable
 
 ```java
-package com.shepherd.student01;
+package com.manu.student01;
 
 public class TicketRunnable implements Runnable {
     
@@ -408,7 +408,7 @@ public synchronized void test(){
 如
 
 ```java
-package com.shepherd.student01;
+package com.manu.student01;
 
 public class MyThreadGroup {
     public static void main(String[] args) {
@@ -429,7 +429,7 @@ public class MyThreadGroup {
 # 定时器
 
 ```java
-package com.shepherd.student01;
+package com.manu.student01;
 
 import java.util.Timer;
 import java.util.TimerTask;

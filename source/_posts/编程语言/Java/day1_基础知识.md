@@ -1,8 +1,8 @@
 ---
 title: Java基础
 date: 2020-2-23
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Java]
 tags: [JDk]
 ---

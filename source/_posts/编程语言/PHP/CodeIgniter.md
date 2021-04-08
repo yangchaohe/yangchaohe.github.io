@@ -1,11 +1,15 @@
 ---
-title: php-CI框架
+title: CI框架
 date: 2021-3.20 12:00
 author: manu
 toc: true
 categories: [编程语言,PHP]
 tags: PHP
 ---
+
+> CodeIgniter 是一个小巧但功能强大的 PHP 框架，作为一个简单而“优雅”的工具包，它可以为开发者们建立功能完善的 Web 应用程序。
+
+<!-- more -->
 
 ## Controller
 

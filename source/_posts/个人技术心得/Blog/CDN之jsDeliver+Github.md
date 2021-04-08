@@ -1,7 +1,7 @@
 ---
 title: 免费的CDN+Picgo
 date: 2020-4-13 21:37:26
-author: shepherd
+author: manu
 categories: [个人技术心得,博客,工具]
 tags: [CDN,jsDeliver,Github]
 ---
@@ -16,7 +16,7 @@ tags: [CDN,jsDeliver,Github]
 
 2.通过jsDeliver引用资源
 
-`https://cdn.jsdelivr.net/gh/你的用户名/你的仓库名@发布的版本号/文件路径`
+`https://cdn.jsdelivr.net/gh/你的用户名/你的仓库名@发布的版本号或者分支名/文件路径`
 
 如下：
 

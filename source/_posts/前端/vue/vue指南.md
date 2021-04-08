@@ -1,3 +1,14 @@
+---
+thumbnail:
+title: vue指南
+date: 2021-4-2
+tags:
+categories: [前端,VUE]
+toc: true
+recommend: 1
+keywords: 
+mathJax: false
+---
 
 > Custom Elements 标准
 > "自定义元素的名字必须包含一个破折号（-）所以<x-tags>、<my-element>和<my-awesome-app>都是正确的名字，而<tabs>和<foo_bar>是不正确的。这样的限制使得 HTML 解析器可以分辨那些是标准元素，哪些是自定义元素。"

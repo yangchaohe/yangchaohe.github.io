@@ -1,8 +1,8 @@
 ---
 title: 集合类
 date: 2020-3-5
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Java]
 tag: 集合
 ---
@@ -21,7 +21,7 @@ tag: 集合
 举个例子
 
 ```java
-package com.shepherd1.arraylist;
+package com.manu1.arraylist;
 
 import java.util.ArrayList;
 
@@ -117,7 +117,7 @@ System.out.println(a.get(0)+a.get(1));
 ## 存储自定义的类
 
 ```java
-package com.shepherd2;
+package com.manu2;
 
 import java.util.ArrayList;
 
@@ -141,7 +141,7 @@ public class Test {
 举个例子
 
 ```java
-package com.shepherd2;
+package com.manu2;
 
 import java.util.HashMap;
 
@@ -150,7 +150,7 @@ public class HashMapDemo {
         //HashMap里面存储的是键值对，可指定key和value的类型
         HashMap m = new HashMap();
         //HashMap<String, Integer> m = new HashMap<String, Integer>();
-        m.put("shepherd", 2001);
+        m.put("manu", 2001);
         m.put("hello", 102);
         //键不能相同，相同会覆盖前面的值
     
@@ -201,7 +201,7 @@ public class HashMapDemo {
 当然功能很简陋
 
 ```java
-package com.shepherd1;
+package com.manu1;
 
 public class MyArrayList<T> {
     private T[] dataArray = (T[])new Object[100];

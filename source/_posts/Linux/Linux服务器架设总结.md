@@ -1,8 +1,8 @@
 ---
 title: Linux服务器架设总结 
 date: 2020-9-11 00:00
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Linux]
 tags: [服务器]  
 ---

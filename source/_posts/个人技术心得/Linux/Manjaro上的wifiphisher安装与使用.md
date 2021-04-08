@@ -1,9 +1,9 @@
 ---
-thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/thumbnail/network.jpg
+thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/network.jpg
 title: wifiphisher安装与使用
 date: 2020-4-30
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [个人技术心得,Linux]
 tags: [钓鱼,wifi,manjaro,wifiphisher]
 ---

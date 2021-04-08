@@ -1,8 +1,8 @@
 ---
 title: 网络编程
 date: 2020-3-10
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Java]
 ---
 
@@ -47,7 +47,7 @@ socket分为接受端（服务器）和发送端（客户）
 ## 发送端
 
 ```java
-package com.shepherd.student02;
+package com.manu.student02;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -76,7 +76,7 @@ public class UDP_Send {
 ## 接受端
 
 ```java
-package com.shepherd.student02;
+package com.manu.student02;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -106,7 +106,7 @@ public class UDP_Receive {
 ## 循环接受
 
 ```java
-package com.shepherd.student02;
+package com.manu.student02;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -138,7 +138,7 @@ public class UDP_Receive {
 ## 循环发送
 
 ```java
-package com.shepherd.student02;
+package com.manu.student02;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -175,7 +175,7 @@ public class UDP_Send {
 ## 发送端（client） 
 
 ```java
-package com.shepherd.student02;
+package com.manu.student02;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -221,7 +221,7 @@ public class TCP_Send {
 ## 接收端（server）
 
 ```java
-package com.shepherd.student02;
+package com.manu.student02;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,8 +1,8 @@
 ---
 title: 方法
 date: 2020-2-28
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [Java]
 tag: [方法,函数]
 ---
@@ -34,7 +34,7 @@ tag: [方法,函数]
 ### 可变参数
 
 ```java
-package com.shepherd.parameter;
+package com.manu.parameter;
 
 public class KeBian {
     public static void main(String[] args) {
@@ -54,7 +54,7 @@ public class KeBian {
 ### 数组参数
 
 ```java
-package com.shepherd.parameter;
+package com.manu.parameter;
 
 public class Arrays {
     public static void main(String[] args) {
@@ -121,7 +121,7 @@ public static void Method(int a,int b){
 ### 示例
 
 ```java
-package com.shepherd.student03;
+package com.manu.student03;
 
 public class TestEnum {
     public static void main(String[] args) {
@@ -145,7 +145,7 @@ class Season {
 相当与上面的简化
 
 ```java
-package com.shepherd.student03;
+package com.manu.student03;
 
 public enum Season {
     SPRING,SUMMER,AUTUMN,WINTER
@@ -153,7 +153,7 @@ public enum Season {
 ```
 
 ```java
-package com.shepherd.student03;
+package com.manu.student03;
 
 public class Demo_Enum {
     public static void main(String[] args) {

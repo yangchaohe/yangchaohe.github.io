@@ -1,8 +1,8 @@
 ---
 title: 使用wireshark分析TCP、UDP
 date: 2020-05-29 20:00
-thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/thumbnail/logo/wireshark.jpg
-author: shepherd
+thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/logo/wireshark.jpg
+author: manu
 toc: true
 mathJax: true
 categories: [个人技术心得,网络]
@@ -15,7 +15,7 @@ tags: [TCP,UDP,wireshark]
 
 ## 安装
 
-我的是Manjaro系统，安装指令
+Manjaro/Archlinux系统，安装指令
 
 ```bash
 pacman -Ss wireshark

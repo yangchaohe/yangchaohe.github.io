@@ -1,8 +1,8 @@
 ---
 title: 学习PR
 date: 2020-10-22 12:00:00
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [adobe,pr]
 tags: [剪辑]
 ---

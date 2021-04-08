@@ -1,9 +1,9 @@
 ---
-thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/thumbnail/st.jpg
+thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/st.jpg
 title: aircrack-ng破解wifi
 date: 2020-5-4
-author: shepherd
-toc: ture
+author: manu
+toc: true
 categories: [个人技术心得,Linux]
 tags: [aircrack-ng]
 ---
