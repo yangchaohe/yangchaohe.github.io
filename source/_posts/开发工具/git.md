@@ -35,7 +35,7 @@ git config --global user.email "email@example.com"
 `git commit -m "commit-mes"`提交到本地库，会得到40位的哈希值id，类似快照
 
 - 直接输入git commit会进入vim让你写提交信息
-- 使用单引号输入多行信息
+- **使用单引号输入多行信息**
 
 `git commit amend`修改上一个提交
 
