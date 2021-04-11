@@ -3,13 +3,15 @@ thumbnail:
 title: 数据库SQL语法
 date: 2021-3-15
 tags:
-categories: 
+categories: [数据库]
 toc: true
 recommend: 1
-mathJax: fals
+mathJax: false
 ---
 
-## 
+> ..
+
+<!-- more -->
 
 ## 修改
 

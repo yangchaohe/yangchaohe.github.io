@@ -50,3 +50,12 @@ encrypt:
 ```
 
 也可以在文章开头单独设置
+
+## SEO优化
+
+打开_config.yml配置文件，找到permalink
+
+```yaml
+# 改为下面这样
+permalink: :title.html  
+```
