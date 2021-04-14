@@ -220,9 +220,9 @@ IPv4长度32位, 约有43亿个IPv4地址, 通常表示为十进制, 每字节�
 >
 > ICANN非盈利性组织负责分配IP和管理DNS根服务器等工作
 
-#### 得到主机地址之DHCP(动态主机配置协议)
+#### DHCP
 
-当组织获取到IP地址块后, 可以手动将IP分配给路由器和主机, 也可以通过`DHCP`(`Dynamic Host Configuration Protocol`)自动配置(可以固定IP或者临时IP), 主机通过`DHCP`还可以获得子网掩码, 默认网关(第一跳路由器地址), 本地DNS服务器地址等.
+当组织获取到IP地址块后, 可以手动将IP分配给路由器和主机, 也可以通过`DHCP`(`Dynamic Host Configuration Protocol`,动态主机配置协议)自动配置(可以固定IP或者临时IP), 主机通过`DHCP`还可以获得子网掩码, 默认网关(第一跳路由器地址), 本地DNS服务器地址等.
 
 `DHCP`是基于`CS`的协议, 每个子网都至少有一个`DHCP服务器`, 或者知道DHCP服务器地址的DHCP的代理(路由器)
 
@@ -236,7 +236,7 @@ IPv4长度32位, 约有43亿个IPv4地址, 通常表示为十进制, 每字节�
 
    <u>**但我并不信服这个理由, 就算是单播也能让客户端进行选择啊**</u>.
 
-   **上网查了下, 可以在DHCP Discovery / Request报文里设置BROADCAST flag = 0来代表单播**.
+   **上网查了下, 可以在DHCP Discovery / Request报文里设置`BROADCAST flag = 0`来代表单播**.
 
    > 抓包得到Bootp flags: 0x0000 (Unicast)表示单播
 
