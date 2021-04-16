@@ -123,8 +123,9 @@ v
 ## 单臂路由
 
 - 与路由器连接的交换机需要开启trunk
-- 路由器使用 `intface g0/1[.id]`创建子接口
+  - 路由器使用 `intface g0/1[.id]`创建子接口
 - 给子接口分配 **ip**
+- **encapsulation dot1q** *vlan_id* 
 - 开启父接口
 
 > 路由器查看指令:

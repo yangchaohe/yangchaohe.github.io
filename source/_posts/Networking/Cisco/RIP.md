@@ -61,7 +61,7 @@ no auto-summary
 
 ```shell
 # config
-ip route 0.0.0.0 0.0.0.0
+ip route 0.0.0.0 0.0.0.0 <gw>
 # RIP配置模式下
 default-information originate 
 ```

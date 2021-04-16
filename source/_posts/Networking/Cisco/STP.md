@@ -2,7 +2,7 @@
 thumbnail:
 title: STP及变体
 date: 2021-4-14 00:00
-tags: [STP]
+tags: [STP,RSTP]
 categories: [计算机网络,Cisco]
 toc: true
 recommend: 1
