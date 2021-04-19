@@ -19,13 +19,11 @@ mathJax: false
 
 # STP
 
-## 端口角色
-
-### BPDU
+## BPDU
 
 是所有参与STP交换机的交流信息帧, 里面就有BID
 
-### BID
+## BID
 
 包含 **优先级值(16个值, 默认32768, 步进4096)**, **源MAC**, **扩展系统ID(STP是VLAN_id)**.
 
@@ -35,11 +33,15 @@ mathJax: false
 >
 > `spanning-tree vlan vlan_id priority`
 
-### ROOT Bridge
+## ROOT Bridge
 
-BID最小的为根网桥
+- BID最小的为根网桥
+- 每个生成树实例（交换 LAN 或广播域）都有一台交换机指定为根网桥
+- 为生成树实例选择根网桥后，STA 便开始确定从广播域内所有目的地到根网桥的最佳路径
 
 > 相同优先级, MAC最小的是根网桥
+
+## 端口角色
 
 ### 根端口
 
@@ -55,17 +57,11 @@ BID最小的为根网桥
 
 > RSTP(快速STP), 定义了代替端口 备用端口 禁用端口
 
-### 根路径开销
+## 根路径开销
 
 STA默认通过网速确认开销, 也可通过 `spanning-tree vlan vlan_id cost cost_value`手动修改(思科交换机默认的协议是 `pvst+` )
 
 开销值决定了哪个接口处于转发(小的就转发)
-
-## 根网桥
-
-- 每个生成树实例（交换 LAN 或广播域）都有一台交换机指定为根网桥
-
-- 为生成树实例选择根网桥后，STA 便开始确定从广播域内所有目的地到根网桥的最佳路径
 
 # PVST+
 
@@ -89,14 +85,12 @@ STA默认通过网速确认开销, 也可通过 `spanning-tree vlan vlan_id cost
 
 也就是说, 交换机上的一个中继端口可以阻止某个 VLAN, 同时转发其他 VLAN
 
-### 指令
-
 ```powershell
 spanning-tree vlan vlan_id root {primary|secondary}
 # vlan_id可以有两种写法[1,2,3..|1-99]
 ```
 
-### portfast
+## portfast
 
 将交换机的某个端口直接设置为转发状态
 
@@ -107,7 +101,7 @@ spanning-tree portfast
 spanning-tree portfast default 
 ```
 
-### BPDUGUARD
+## BPDUGUARD
 
 ```powershell
 # 进入某接口
@@ -133,6 +127,8 @@ spanning-tree portfast bpduguard default
 - `spanning-tree portfast` 命令来执行边缘端口配置
 
 > 建议不要将边缘端口配置为连接其他交换机
+>
+> 边缘端口一般与用户终端设备连接
 
 ## 链路类型
 
