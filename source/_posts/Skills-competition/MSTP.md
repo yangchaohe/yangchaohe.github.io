@@ -86,6 +86,8 @@ keywords:
 
 ## 端口角色
 
+> STP需要做两件事情：选举根桥、确定端口角色。
+
 ### 外部与内部路径开销ExtRPC＆IntRPC
 
 **外部路径开销**是相对于CIST而言的，同一个域内外部路径开销是相同的；**内部路径开销**是域内相对于某个实例而言的，同一端口对于不同实例对应不同的内部路径开销。
@@ -108,7 +110,7 @@ Alternate端口是根端口的**备份端口**，如果根端口被阻塞后，A
 
 Master端口是MST域和总根相连的所有路径中**最短路径**上的端口，它是交换机上连接MST域到总根的端口。Master端口是域中的报文去往总根的必经之路。
 
-Master端口是特殊域边缘端口，Master端口在IST/CIST上的角色是Root Port，在其它各实例上的角色都是Master。
+*Master端口是特殊域边缘端口，Master端口在IST/CIST上的角色是Root Port，在其它各实例上的角色都是Master。*
 
 ## 配置
 
@@ -207,7 +209,6 @@ Ethernet1/0/2 Ethernet1/0/4 (Total 2)
 -------------- -------- --------- --------- ---  ---- ------------------ --------
  Ethernet1/0/2 128.002          0         0 FWD  ROOT 28672.00030f91052f 128.002
  Ethernet1/0/4 128.004          0     20000 FWD  DSGN 32768.00030f90ce0d 128.004
-
 ```
 
 - `Current port list in Instance 0:  `默认所有vlan都映射到intance 0
@@ -226,9 +227,62 @@ Ethernet1/0/2 Ethernet1/0/4 (Total 2)
 # 更改优先级
 S3(config)#spanning-tree priority ?
   <0-61440>  Priority value <0-61440>
+
+# 更改在实例里的优先级
+spanning-tree mst <instance-id> priority <bridge-priority>
 ```
 
-### 选举端口角色
+> 根桥选出后，其他交换机都可以叫指定桥。指定桥不再主动发出BPDU，只会转发根桥的BPDU。根桥每间隔Hello Time（默认2秒）时间周期性发出BPDU。
+
+### **根端口**
+
+> PID共占2个字节，其中，优先级与端口索引号各占1字节。但为了避免端口索引号不够用，把优先级中的低4位保留用于端口索引号，一般取值为0000。高4位优先级默认二进制取值为1000，所以端口优先级默认为128, 低4位无意义, step为16
+
+对比哪个离根桥最近, 也就是对比RPC(root path cost)
+
+如果RPC相同, 还有几个参数提供选择: **指定BID**>**指定Port ID**>**自身端口PID(优先级>端口编号)**
+
+```powershell
+# 端口下
+# 更改优先级
+spanning-tree mst <instance-id> port-priority <port-priority>
+```
+
+### 指定端口
+
+cost小的就是指定端口
+
+```powershell
+# 端口模式下
+# 更改cost
+spanning-tree mst <instance-id> port-priority <port-priority>
+```
+
+### 配置MSTP域
+
+```powershell
+# config
+# 进入MSTP域配置模式
+spanning-tree mst configuration
+# 域名
+name <name>
+# 创建实例+配置vlan与实例的映射关系
+instance <instance-id> vlan <vlan-list>
+# 修订级别
+revision-level <level>
+# 退出不保存
+abort
+# 退出保存
+exit
+```
+
+### PORTFAST
+
+```powershell
+# 端口模式下
+# postfast与bpdugurad
+spanning-tree portfast [bpdufilter | bpduguard] [recovery <30-3600>]
+```
 
 
 
@@ -237,3 +291,5 @@ S3(config)#spanning-tree priority ?
 > [mstp](https://cshihong.github.io/2017/11/29/MSTP%E5%A4%9A%E5%8C%BA%E5%9F%9F%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AE/)
 >
 > [这篇MSTP是真的爱了！](https://bbs.huaweicloud.com/blogs/220510)(图解易懂)
+>
+> [网络工程师（21）：STP怎么选根桥和根端口(图解易懂)](https://zhuanlan.zhihu.com/p/139844708)

@@ -43,7 +43,7 @@ Supports Wake-on: pumbg
    1. 安装`xf86-video-dummy`
    
    ```bash
-   ❯ sudo pacman -S dummy           
+   ❯ sudo pacman -S dummy
    ```
    
    2. 添加配置文件

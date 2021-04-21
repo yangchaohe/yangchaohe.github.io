@@ -10,7 +10,7 @@ tags:
 categories: [2021职业技能大赛-信息安全管理与评估]
 keywords:
 ---
-> ..
+> VLSM CIDR picocom 
 
 <!-- more -->
 

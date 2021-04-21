@@ -61,9 +61,9 @@ show running-config
 
 ```powershell
 access-list 100-199
-{permit|deny|remark} protocol_type 
-[host] source_ip [wildcard] {lt|gt|eq..} {server_name|port} 
-[host] destnation_ip [wildcard] {lt|gt|eq..} {server_name|port} 
+{permit|deny|remark} protocol_type
+[host] source_ip [wildcard] {lt|gt|eq..} {server_name|port}
+[host] destnation_ip [wildcard] {lt|gt|eq..} {server_name|port}
 [dscp|established|precedence]
 ```
 
