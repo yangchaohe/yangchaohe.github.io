@@ -6,8 +6,8 @@ uniqueId: '2021-04-13 03:21:30/skills_competition.html'
 mathJax: false
 date: 2021-04-13 11:21:30
 thumbnail:
-tags:
-categories: [2021职业技能大赛-信息安全管理与评估]
+tags: [2021职业技能大赛-信息安全管理与评估,CS6200-28X-EI]
+categories: [网络设备配置,神州]
 keywords:
 ---
 > VLSM CIDR picocom 
@@ -31,13 +31,5 @@ keywords:
 `ctrl-a` 进入转义模式
 
 `ctrl-h` 帮助
-
-## cisco三层交换机
-
-- `no switchport`启用路由端口
-- `ip routing`启用路由功能
-- 路由端口不支持子接口
-- 路由端口不支持二层协议(并不是全部, STP)
-- 创建SVI要保证VLAN在VLAN数据库内
 
 

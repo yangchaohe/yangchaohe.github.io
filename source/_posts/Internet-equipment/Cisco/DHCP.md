@@ -7,7 +7,7 @@ mathJax: false
 date: 2021-04-13 18:44:56
 thumbnail:
 tags: [DHCP]
-categories: [计算机网络,Cisco]
+categories: [网络设备配置,Cisco]
 keywords:
 ---
 > 分配IP的方式有两种: 

@@ -7,7 +7,7 @@ mathJax: false
 date: 2021-04-15 11:29:17
 thumbnail:
 tags:
-categories: [计算机网络,Cisco]
+categories: [网络设备配置,Cisco]
 keywords:
 ---
 > 摘要

@@ -8,7 +8,7 @@ mathJax: false
 date: 2021-04-09 20:13:08
 thumbnail:
 tags:
-categories: [计算机网络,Cisco]
+categories: [网络设备配置,Cisco]
 ---
 >  本文收集了学习中的一些疑问而在网络上查询的一些文章
 
@@ -51,6 +51,14 @@ Switch(config-if)#switchport port-security mac-address mac_address #绑定mac
 - 使用MAC地址ACL表与ip地址ACL表组合
 
 > 思科2950、3550、4500、6500系列交换机上可以实现，但是需要注意的是2950、3550需要交换机运行增强的软件镜像（Enhanced Image）
+
+## cisco三层交换机
+
+- `no switchport`启用路由端口
+- `ip routing`启用路由功能
+- 路由端口不支持子接口
+- 路由端口不支持二层协议(并不是全部, STP)
+- 创建SVI要保证VLAN在VLAN数据库内
 
 ## 指令
 

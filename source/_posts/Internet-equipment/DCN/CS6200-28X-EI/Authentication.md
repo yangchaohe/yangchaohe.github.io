@@ -6,8 +6,8 @@ uniqueId: '2021-04-21 01:38:57/Authentication.html'
 mathJax: false
 date: 2021-04-21 09:38:57
 thumbnail:
-tags: [CS6200]
-categories:　[2021职业技能大赛-信息安全管理与评估]
+tags: [2021职业技能大赛-信息安全管理与评估,CS6200-28X-EI]
+categories: [网络设备配置,神州]
 keywords:
 ---
 >  关于802.1x, radius, aaa等
@@ -80,5 +80,5 @@ Switch(config)#aaa-accounting enable
 
 > AAA(*Authentication,Authorization and Accounting*认证、授权和计费), 它提供了网络安全管理的一致性框架,该框架通过认证、授权和计费三大功能满足了安全网络的访问控制需求: 哪些用户可以访问网络设备,访问用户拥有哪些访问权限以及用户使用网络资源的统计计费。
 
-RADIUS(*Remote Authentication Dial-In User Service*,远程认证拨号用户服务)是一种分布式的、客户端/服务器结构的信息交互协议。RADIUS客户端一般在网络设备上启用,与802.1x协议结合实现认证、授权和计费的所有主要功能,而RADIUS服务器负责维护用户认证、授权和计费信息数据库,通过RADIUS协议与客户端进行通信,完成用户认证和授权信息的下发以及计费信息的统计。RADIUS协议是实现AAA框架的一种协议。
+RADIUS(*Remote Authentication Dial-In User Service* 远程认证拨号用户服务)是一种分布式的、客户端/服务器结构的信息交互协议。RADIUS客户端一般在网络设备上启用,与802.1x协议结合实现认证、授权和计费的所有主要功能,而RADIUS服务器负责维护用户认证、授权和计费信息数据库,通过RADIUS协议与客户端进行通信,完成用户认证和授权信息的下发以及计费信息的统计。RADIUS协议是实现AAA框架的一种协议。
 

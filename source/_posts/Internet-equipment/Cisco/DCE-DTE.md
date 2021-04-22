@@ -7,7 +7,7 @@ mathJax: false
 date: 2021-04-11 14:31:57
 thumbnail: 
 tags: [DCE,DTE]
-categories: [计算机网络,Cisco]
+categories: [网络设备配置,Cisco]
 keywords:
 ---
 > [**data circuit-terminating equipment**](https://en.wikipedia.org/wiki/Data_circuit-terminating_equipment#cite_note-TIA_1997_232F-1) (**DCE**) 

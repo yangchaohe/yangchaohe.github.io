@@ -7,7 +7,7 @@ mathJax: false
 date: 2021-04-13 12:26:55
 thumbnail:
 tags: 
-categories: [计算机网络,Cisco]
+categories: [网络设备配置,Cisco]
 keywords:
 ---
 > ACL(访问控制列表) 是一系列被称为访问控制条目 (ACE) 的 permit 或 deny 语句组成的顺序列表。ACE 通常也称为 ACL 语句

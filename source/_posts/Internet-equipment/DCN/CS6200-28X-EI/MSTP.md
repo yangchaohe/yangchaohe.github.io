@@ -6,8 +6,8 @@ uniqueId: '2021-04-18 11:51:40/MSTP.html'
 mathJax: false
 date: 2021-04-18 19:51:40
 thumbnail:
-tags:
-categories: [2021职业技能大赛-信息安全管理与评估]
+tags: [2021职业技能大赛-信息安全管理与评估,CS6200-28X-EI]
+categories: [网络设备配置,神州]
 keywords:
 ---
 >  了解MSTP, 在CS6200上进行配置

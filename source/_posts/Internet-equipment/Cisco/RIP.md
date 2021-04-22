@@ -7,7 +7,7 @@ mathJax: false
 date: 2021-04-11 21:27:57
 thumbnail:
 tags: [RIP]
-categories: [计算机网络,Cisco]
+categories: [网络设备配置,Cisco]
 keywords: 
 ---
 >  **路由信息协议**（英语：**R**outing **I**nformation **P**rotocol，缩写：**RIP**）是一种[内部网关协议](https://zh.wikipedia.org/wiki/内部网关协议)（IGP），为最早出现的[距离向量路由协议](https://zh.wikipedia.org/wiki/距離向量路由協定)。属于[网络层](https://zh.wikipedia.org/wiki/網絡層)，其主要应用于规模较小的、可靠性要求较低的网络，可以通过不断的交换信息让[路由器](https://zh.wikipedia.org/wiki/路由器)动态的适应网络连接的变化，这些信息包括每个路由器可以到达哪些网络，这些网络有多远等。

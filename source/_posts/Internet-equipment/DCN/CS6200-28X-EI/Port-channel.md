@@ -6,8 +6,8 @@ uniqueId: '2021-04-19 16:06:26/Port_channel.html'
 mathJax: false
 date: 2021-04-20 00:06:26
 thumbnail:
-tags:
-categories: [2021职业技能大赛-信息安全管理与评估]
+tags: [2021职业技能大赛-信息安全管理与评估,CS6200-28X-EI]
+categories: [网络设备配置,神州]
 keywords:
 ---
 > Port Channel是一组物理端口的集合体，在逻辑上被当作一个物理端口。对用户来讲，完全可以将这个Port Channel当作一个端口使用，因此不仅能增加网络的带宽，还能提供链路的备份功能。

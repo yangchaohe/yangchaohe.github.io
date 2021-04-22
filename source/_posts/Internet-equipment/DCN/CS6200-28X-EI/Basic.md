@@ -1,16 +1,16 @@
 ---
-title: CS6200
+title: 交换机基础配置
 toc: true
 recommend: 1
-uniqueId: '2021-04-17 12:41:07/CS6200.html'
+uniqueId: '2021-04-17 12:41:07/CS6200-28X-EI.html'
 mathJax: false
 date: 2021-04-17 20:41:07
 thumbnail:
-tags:
-categories: [2021职业技能大赛-信息安全管理与评估]
+tags: [2021职业技能大赛-信息安全管理与评估,CS6200-28X-EI]
+categories: [网络设备配置,神州]
 keywords:
 ---
-> 记录一些实用的用法
+> 记录一些实用的用法, 我的环境是Version 7.5.3.2(R0004.0030)
 
 <!-- more -->
 

@@ -6,8 +6,8 @@ uniqueId: '2021-04-22 02:05:56/dynamic-vlan.html'
 mathJax: false
 date: 2021-04-22 10:05:56
 thumbnail:
-tags:
-categories: [2021职业技能大赛-信息安全管理与评估]
+tags: [2021职业技能大赛-信息安全管理与评估,CS6200-28X-EI]
+categories: [网络设备配置,神州]
 keywords:
 ---
 >  动态VLAN可以根据用户的MAC, IP, 网络层协议进行划分

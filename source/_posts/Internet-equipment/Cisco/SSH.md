@@ -7,7 +7,7 @@ mathJax: false
 date: 2021-04-12 00:16:32
 thumbnail:
 tags:
-categories: [计算机网络,Cisco]
+categories: [网络设备配置,Cisco]
 keywords:
 ---
 > 安全外壳 (SSH) 是一种提供远程设备的安全（加密）管理连接的协议

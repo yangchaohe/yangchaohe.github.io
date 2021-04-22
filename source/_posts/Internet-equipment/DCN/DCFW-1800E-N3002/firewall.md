@@ -1,13 +1,13 @@
 ---
-title: DCFW-1800
+title: 防火墙基础配置
 toc: true
 recommend: 1
 uniqueId: '2021-04-17 12:40:53/DCFW-1800.html'
 mathJax: false
 date: 2021-04-17 20:40:53
 thumbnail:
-tags:
-categories: [2021职业技能大赛-信息安全管理与评估]
+tags: [2021职业技能大赛-信息安全管理与评估,DCFW-1800E-N3002]
+categories: [网络设备配置,神州]
 keywords:
 ---
 >  使用UI进行配置

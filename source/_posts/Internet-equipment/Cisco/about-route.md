@@ -7,7 +7,7 @@ mathJax: false
 date: 2021-04-11 14:59:00
 thumbnail:
 tags:
-categories: [计算机网络,Cisco]
+categories: [网络设备配置,Cisco]
 keywords:
 ---
 > **当两个不同得网段需要通信时, 就会需要路由器**.
