@@ -129,7 +129,7 @@ show spanning-tree
 
 ### 拓扑
 
-
+<暂时未画..>
 
 各交换机参数如下(改过S1的优先级):
 
@@ -283,8 +283,6 @@ exit
 # postfast与bpdugurad
 spanning-tree portfast [bpdufilter | bpduguard] [recovery <30-3600>]
 ```
-
-
 
 > 参考
 >

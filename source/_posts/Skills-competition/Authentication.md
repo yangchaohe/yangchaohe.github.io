@@ -60,8 +60,8 @@ EAP终结方式与EAP中继方式的认证流程相比，不同之处在于用�
 | 端口模式                                                     | 作用                     |
 | ------------------------------------------------------------ | ------------------------ |
 | `dot1x guest-vlan <vlanID>`                                  | 设置guest vlan           |
-| `dot1x port-method {macbased | portbased | userbased [standard | advanced]}` | 设置端口的认证方式       |
-| `dot1x port-control {auto | force-authorized | force-unauthorized }` | 设置端口的802.1x授权状态 |
+| `dot1x port-method {macbased|portbased|userbased [standard|advanced]}` | 设置端口的认证方式       |
+| `dot1x port-control {auto|force-authorized|force-unauthorized =}` | 设置端口的802.1x授权状态 |
 
 ### 配置RADIUS服务器
 
@@ -78,7 +78,7 @@ Switch(config)#aaa-accounting enable
 
 ## AAA与radius
 
-> AAA是Authentication,Authorization and Accounting(认证、授权和计费)的简称,它提供了网络安全管理的一致性框架,该框架通过认证、授权和计费三大功能满足了安全网络的访问控制需求:哪些用户可以访问网络设备,访问用户拥有哪些访问权限以及用户使用网络资源的统计计费。
+> AAA(*Authentication,Authorization and Accounting*认证、授权和计费), 它提供了网络安全管理的一致性框架,该框架通过认证、授权和计费三大功能满足了安全网络的访问控制需求: 哪些用户可以访问网络设备,访问用户拥有哪些访问权限以及用户使用网络资源的统计计费。
 
-RADIUS(Remote Authentication Dial-In User Service,远程认证拨号用户服务)是一种分布式的、客户端/服务器结构的信息交互协议。RADIUS客户端一般在网络设备上启用,与802.1x协议结合实现认证、授权和计费的所有主要功能,而RADIUS服务器负责维护用户认证、授权和计费信息数据库,通过RADIUS协议与客户端进行通信,完成用户认证和授权信息的下发以及计费信息的统计。RADIUS协议是实现AAA框架最常用的一种协议。
+RADIUS(*Remote Authentication Dial-In User Service*,远程认证拨号用户服务)是一种分布式的、客户端/服务器结构的信息交互协议。RADIUS客户端一般在网络设备上启用,与802.1x协议结合实现认证、授权和计费的所有主要功能,而RADIUS服务器负责维护用户认证、授权和计费信息数据库,通过RADIUS协议与客户端进行通信,完成用户认证和授权信息的下发以及计费信息的统计。RADIUS协议是实现AAA框架的一种协议。
 
