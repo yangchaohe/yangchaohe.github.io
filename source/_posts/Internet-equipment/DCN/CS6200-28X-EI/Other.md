@@ -6,7 +6,7 @@ uniqueId: '2021-04-13 03:21:30/skills_competition.html'
 mathJax: false
 date: 2021-04-13 11:21:30
 thumbnail:
-tags: [2021职业技能大赛-信息安全管理与评估,CS6200-28X-EI]
+tags: [技能大赛-信息安全,CS6200-28X-EI]
 categories: [网络设备配置,神州]
 keywords:
 ---

@@ -6,15 +6,47 @@ uniqueId: '2021-04-21 12:17:38/Security.html'
 mathJax: false
 date: 2021-04-21 20:17:38
 thumbnail:
-tags: [2021职业技能大赛-信息安全管理与评估,CS6200-28X-EI]
+tags: [技能大赛-信息安全,CS6200-28X-EI]
 categories: [网络设备配置,神州]
 keywords:
 ---
->   交换机端口安全可以分为基于MAC, 基于MAC+IP
+>   交换机端口安全和ARP, ACL, URPF等配置
 
 <!-- more -->
 
-## 绑定MAC
+## ACL
+
+> 建议使用命名ACL
+
+神州交换机的ACL设置语句语法与CISCO [ACL.md](../Networking/Cisco/ACL.md) 的基本一样, 使用有以下区别
+
+```powershell
+# 如果要启用ACL, 必须使用以下指令
+Sw(config)#firewall enable 
+# 可以将ACL应用于Telnet/ssh/web, test是我配置的命名ACL
+Sw(config)#authentication ip access-class test in telnet 
+# access-group可以显示一条access-list与特定端口的绑定关系
+Sw(config)#show access-group interface ethernet 1/0/1
+interface name:Ethernet1/0/1
+    IP Ingress access-list used is test, traffic-statistics Disable.
+Sw(config)#show access-lists 
+ip access-list standard test(used 1 time(s)) 2 rule(s)
+   rule ID 1: deny 192.168.1.0 0.0.0.255
+   rule ID 3: deny 10.1.128.0 0.0.0.255
+   
+S3(config)#access-list ?
+  <1-99>       IP 标准访问列表 <1-99>
+  <100-199>    扩展访问列表规则 <100-199>
+  <1100-1199>  MAC扩展访问列表规则 <1100-1199>
+  <200-299>    扩展访问列表规则(支持非连续IP地址掩码) <200-299>
+  <3100-3199>  MAC-IP扩展访问列表规则 <3100-3199>
+  <3200-3299>  MAC-IP扩展访问列表规则(支持非连续IP地址掩码) <3200-3299>
+  <5000-5099>  组播源控制访问列表规则 <5000-5099>
+  <6000-7999>  组播目的控制访问列表规则 <6000-7999>
+  <700-799>    MAC标准访问列表规则 <700-799>
+```
+
+## 端口绑定MAC
 
 > 绑定后如果连接的不是绑定的MAC, 或者数量超出限制, 都会触发交换机的保护机制
 >
@@ -74,7 +106,19 @@ Interface Ethernet1/0/1
 - **strict:** 不但要求路由器转发表中，存在去往报文源地址的路由；而且还要求报文的入接口与转发表中去往源地址路由的出接口一致
 - **loose:** 仅要求路由器的转发表中，存在去往报文的源地址路由即可
 
-## 防ARP攻击
+## ARP
+
+| 全局          | 作用               |
+| ------------- | ------------------ |
+| `arp timeout` | arp表项老化时间(s) |
+
+| vlan接口下                                                   | 作用        |
+| ------------------------------------------------------------ | ----------- |
+| `arp <ip_address> <mac_address> {interface [ethernet] <portName> }` | 指定静态arp |
+
+> 静态arp只能在vlan下且参数必须有物理接口才能添加成功
+
+## 防ARP扫描攻击
 
 > ARP攻击会在局域网内大量的广播ARP报文, 消耗网络带宽
 >
@@ -82,7 +126,7 @@ Interface Ethernet1/0/1
 >
 > 这些攻击极度的威胁着网络的安全
 
-防止ARP攻击有两种方式
+防止ARP扫描攻击有两种方式
 
 1. **基于端口**
 
@@ -90,7 +134,7 @@ Interface Ethernet1/0/1
 
 2. **基于IP**
 
-   记录某个IP的报文, 可以设置限速和隔离两个阈值, 超过阈值都会产生警告并处理
+   记录某个IP的报文, 可以设置限速和隔离两个阈值, 超过隔离阈值则禁止来自此IP的任何流量
 
 *两者可同时存在*
 
@@ -114,7 +158,7 @@ anti-arpscan port-based threshold <threshold-value>
 anti-arpscan ip-based level1|level2 threshold <threshold-value>
 ```
 
-> 注意: CS6200-28X-EI SoftWare Package Version 7.5.3.2(R0004.0030)不支持一二级阈值
+> 注意: CS6200-28X-EI SoftWare Package Version 7.5.3.2(R0004.0030)不支持一二级阈值, 超过设置阈值则禁止来自此IP的任何流量
 >
 
 ### 其他配置
@@ -132,4 +176,32 @@ anti-arpscan ip-based level1|level2 threshold <threshold-value>
 # 端口模式下
 anti-arpscan trust <port | supertrust-port| iptrust-port >
 ```
+
+## ARP绑定
+
+> 在IPv4里, 为了防止ARP中间人攻击, ARP绑定也是一种防御手段
+>
+> IPv6使用的是ND协议, 这是一个类ARP的协议, ND绑定命令同ARP
+
+ARP绑定有两种方法
+
+### 关闭交换机ARP更新
+
+即交换机的MAC-PORT表存在后就不允许再改变
+
+指令[全局配置]: `ip arp-security updateprotect`
+
+### 关闭自动学习功能
+
+只能设置静态ARP, 如果先前有动态也可以手动转化为静态
+
+指令[全局配置]: `ip arp-security learnprotect`
+
+动态转为静态[全局配置]: `ip arp-security convert`
+
+## ARP guard
+
+> 对于ARP中间人攻击, arp guard则采用了保护ip的方法, 如果arp报文的源IP与保护IP一致则丢弃该报文, 通常用来保护网关, 不应该用来保护大量的IP地址, 会影响性能
+
+指令[全局]: `arp-guard ip <addr>`
 

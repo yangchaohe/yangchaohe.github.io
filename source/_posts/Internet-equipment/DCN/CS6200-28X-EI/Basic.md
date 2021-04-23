@@ -6,7 +6,7 @@ uniqueId: '2021-04-17 12:41:07/CS6200-28X-EI.html'
 mathJax: false
 date: 2021-04-17 20:41:07
 thumbnail:
-tags: [2021职业技能大赛-信息安全管理与评估,CS6200-28X-EI]
+tags: [技能大赛-信息安全,CS6200-28X-EI]
 categories: [网络设备配置,神州]
 keywords:
 ---
@@ -56,39 +56,6 @@ ssh-server enable
 > 神州交换机的ssh版本有点老, 自带的ssh客户端可能连不上, 需要加一些参数
 >
 > [ssh 登录旧设备的问题解决](https://www.zhihu.com/column/p/30840210)
-
-
-## ACL
-
-> 建议使用命名ACL
-
-神州交换机的ACL设置语句语法与CISCO [ACL.md](../Networking/Cisco/ACL.md) 的基本一样, 使用有以下区别
-
-```powershell
-# 如果要启用ACL, 必须使用以下指令
-Sw(config)#firewall enable 
-# 可以将ACL应用于Telnet/ssh/web, test是我配置的命名ACL
-Sw(config)#authentication ip access-class test in telnet 
-# access-group可以显示一条access-list与特定端口的绑定关系
-Sw(config)#show access-group interface ethernet 1/0/1
-interface name:Ethernet1/0/1
-    IP Ingress access-list used is test, traffic-statistics Disable.
-Sw(config)#show access-lists 
-ip access-list standard test(used 1 time(s)) 2 rule(s)
-   rule ID 1: deny 192.168.1.0 0.0.0.255
-   rule ID 3: deny 10.1.128.0 0.0.0.255
-   
-S3(config)#access-list ?
-  <1-99>       IP 标准访问列表 <1-99>
-  <100-199>    扩展访问列表规则 <100-199>
-  <1100-1199>  MAC扩展访问列表规则 <1100-1199>
-  <200-299>    扩展访问列表规则(支持非连续IP地址掩码) <200-299>
-  <3100-3199>  MAC-IP扩展访问列表规则 <3100-3199>
-  <3200-3299>  MAC-IP扩展访问列表规则(支持非连续IP地址掩码) <3200-3299>
-  <5000-5099>  组播源控制访问列表规则 <5000-5099>
-  <6000-7999>  组播目的控制访问列表规则 <6000-7999>
-  <700-799>    MAC标准访问列表规则 <700-799>
-```
 
 ##  SVI
 
@@ -226,6 +193,10 @@ ip helper-address dhcp_server_ip
 ```
 
 > 若设置多个pool时, 如不指定中继, 则会获得同一网段的pool的支持
+>
+> DHCPv6需要在接口指定IP pool
+>
+> `ipv6 dhcp server <poolname> [preference<value>] [rapid-commit] [allow-hint]`
 
 ## DHCP侦听
 
