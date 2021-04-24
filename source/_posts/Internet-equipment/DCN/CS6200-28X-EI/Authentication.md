@@ -72,7 +72,9 @@ Switch(config)#radius-server authentication host 10.1.1.3
 Switch(config)#radius-server accounting host 10.1.1.3
 # Configure authentication and encryption key
 Switch(config)#radius-server key <0|7> key
+# 配置认证服务器需要
 Switch(config)#aaa enable
+# 配置计费服务器需要
 Switch(config)#aaa-accounting enable 
 ```
 

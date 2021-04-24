@@ -10,7 +10,7 @@ tags: [技能大赛-信息安全,CS6200-28X-EI]
 categories: [网络设备配置,神州]
 keywords:
 ---
->   交换机端口安全和ARP, ACL, URPF等配置
+>   交换机端口安全和ARP, ACL, URPF, DOS等配置
 
 <!-- more -->
 
@@ -75,12 +75,18 @@ Total Addresses:1
 | `switchport port-security violation {protect|recovery|restrict|shutdown}` | 当MAC不正确或超过规定数量时执行的操作 |
 | `clear port-security {all|configured|dynamic}[[address <mac-addr>| interface <interface-id>] [vlan<vlan-id> ]]` | 清除绑定                              |
 
-## MAC与IP绑定
+## 端口的IP和MAC-IP绑定[AM]
+
+AM(*Access Management*)可以配置只转发某IP或者MAC-IP
 
 ```powershell
 Sw(config)#am enable               
 Sw(config)#interface ethernet 1/0/1 
+# 端口启用AM, 默认禁止所有的IP报文与ARP报文转发
 Sw(config-if-ethernet1/0/1)#am port 
+# ip, 最后一个参数可以理解为192.168.1.1-10, 是一个范围值
+Sw(config-if-ethernet1/0/1)#am ip-pool 192.168.1.1 10
+# MAC-IP
 Sw(config-if-ethernet1/0/1)#am mac-ip-pool 00:90:9e:9a:a0:60 10.1.128.24
 Sw(config)# show am interface ethernet 1/0/1
 AM is enabled
@@ -205,3 +211,86 @@ ARP绑定有两种方法
 
 指令[全局]: `arp-guard ip <addr>`
 
+## 端口&vlan的MAC和IP数量限制
+
+交换机默认对MAC和IP表项的数量都没有限制, 直到将硬件填满为止.
+
+这样在遭受DOS攻击时(如ARP, MAC欺骗), 很容易将表项填满, 进行数量限制可以预防DOS攻击
+
+对于动态学习的现存表项, 都满足大于限制数量则停止学习, 小于则可以继续学习的原则
+
+### 端口限制
+
+| 端口模式                                                     | 作用                            |
+| ------------------------------------------------------------ | ------------------------------- |
+| `switchport mac-address dynamic maximum <value>`             | 启用限制MAC功能                 |
+| `switchport <arp|nd> dynamic maximum <value>`                | 启用限制ARP/ND功能              |
+| `switchport mac-address violation {protect | shutdown} [recovery <5-3600>]` | 配置端口违背方案, 默认`protect` |
+
+### VLAN限制
+
+| `vlan vlan_id`模式                         | 作用            |
+| ------------------------------------------ | --------------- |
+| `vlan mac-address dynamic maximum <value>` | 开启限制MAC功能 |
+
+| vlan接口模式                              | 作用               |
+| ----------------------------------------- | ------------------ |
+| `ip[v6] <arp|nd> dynamic maximum <value>` | 启用限制ARP/ND功能 |
+
+## Gratuitous(免费) ARP
+
+也是一种可以防止ARP欺骗的方法, 交换机主动通过向局域网广播ARP报文
+
+- 减少ARP请求次数
+- 防止ARP欺骗网关
+
+### 配置
+
+指令[全局/接口]: `ip gratuitous-arp <5-1200s>`
+
+## SSL
+
+```powershell
+# 启用服务
+Switch(config)#ip http secure-server
+# 绑定端口
+Switch(config)#ip http secure-port 1025
+# 加密套件
+Switch(config)#ip http secure-ciphersuite rc4-128-sha
+```
+
+## 防DOS攻击
+
+> DoS 是 *Denial of Service* 的缩写,意为拒绝服务。DoS 攻击是网络上一种简单但很有效的破坏性攻击手段,服务器会由于不停顿地处理攻击者的数据包,从而正常用户发送的数据包会被丢弃,得不到处理,从而造成了服务器的拒绝服务,更严重的会导致服务器敏感数据泄漏。
+
+### IP Spoofing
+
+IP欺骗简述: hacker发送修改过源IP数据包给服务器, 服务器错误的将数据回复给修改过的IP客户端, 利用该原理可义进行DOS和DDOS攻击, 并且有一定**隐匿性**
+
+解决方案: 在网络边缘设备检查源IP与其来源是否匹配
+
+指令[全局]: ` dosattack-check srcip-equal-dstip`
+
+### TCP非法标志攻击
+
+简述:   hacker利用TCP报文的6个标志位进行攻击, 如SYN泛洪, ACK和FIN/RST泛洪等
+
+指令[全局]: `dosattack-check tcp-flags enable`
+
+### ICMP碎片攻击
+
+简述: IP支持2^16字节, MTU一般都是1500字节, hacker发送>2^16字节的数据包, 导致系统出错
+
+指令[全局]:  `dosattack-check icmp-attacking`
+
+## VLAN hopping
+
+原理简述: 交换机开启了DTP(动态中继协议)后, hacker如果和交换机间建立了一条中继链路, 然后就能获取该**交换机所有VLAN中的信息**.
+
+解决方法: 关闭DTP, 手动中继
+
+## 参考
+
+> [什么是 IP 欺骗？](https://www.cloudflare.com/zh-cn/learning/ddos/glossary/ip-spoofing/)
+>
+> [网络层-TCP-UDP-攻击与防御原理](https://cshihong.github.io/2019/05/14/%E7%BD%91%E7%BB%9C%E5%B1%82-TCP-UDP-%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E5%BE%A1%E5%8E%9F%E7%90%86/)
