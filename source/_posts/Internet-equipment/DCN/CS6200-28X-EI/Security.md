@@ -281,7 +281,11 @@ IP欺骗简述: hacker发送修改过源IP数据包给服务器, 服务器错误
 
 简述: IP支持2^16字节, MTU一般都是1500字节, hacker发送>2^16字节的数据包, 导致系统出错
 
-指令[全局]:  `dosattack-check icmp-attacking`
+**指令[全局]**
+
+icmp不可分片:  `dosattack-check icmp-attacking`
+
+设置icmp数据包长度: `dosattack-check icmpV4-size 100`
 
 ## VLAN hopping
 
