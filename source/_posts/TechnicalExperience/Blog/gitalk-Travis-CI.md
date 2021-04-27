@@ -75,7 +75,7 @@ after_script:
   - git config user.email "manu2001@163.com"
   - git add .
   - git commit -m "Travis CI Auto Builder at $(date +'%Y-%m-%d')"
-  - git push --force --quiet "https://${ACCESS_TOKEN}@github.com/manuev/manuev.github.io.git" master:master
+  - git push --force --quiet "https://${ACCESS_TOKEN}@github.com/shepherdev/shepherdev.github.io.git" master:master
 ```
 
 推送后可以在travis官网查看实时部署动态，值得一提的是配置的步骤有一行代码报错就会部署失败

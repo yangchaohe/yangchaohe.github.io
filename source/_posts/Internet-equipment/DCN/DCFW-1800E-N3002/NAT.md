@@ -27,3 +27,5 @@ DNAT: 修改目标IP可以让公网IP访问到LAN的服务器(DMZ)
 ![](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static//img/article/2021/Screenshot_20210425_201053.png)
 
 ![](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static//img/article/2021/DNAT.png)
+
+注意: 配置NAT时可以先配置地址簿(存储IP地址条目)和服务簿(协议,端口条目)

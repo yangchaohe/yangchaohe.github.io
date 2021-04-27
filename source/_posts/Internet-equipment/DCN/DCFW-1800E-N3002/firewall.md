@@ -29,7 +29,7 @@ keywords:
 
 安全域将网络划分为不同部分,例如 trust(通常为内网等可信任部分)、untrust(通常为因
 特网等存在安全威胁的不可信任部分)等。将配置的策略规则应用到安全域上后,安全网关就能够
-对出入安全域的流量进行管理和控制。系统提供 8 个预定义安全域,分别是: trust、 untrust、 dmz、L2-trust、L2-untrust、L2-dmz、VPNHub 和 HA。
+对出入安全域的流量进行管理和控制。系统提供 8 个预定义安全域, 分别是: trust、 untrust、 dmz、L2-trust、L2-untrust、L2-dmz、VPNHub 和 HA。
 
 一个安全域只能绑定一个VS或VR
 
