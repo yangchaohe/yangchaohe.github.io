@@ -4,7 +4,7 @@ title: aircrack-ng破解wifi
 date: 2020-5-4
 author: manu
 toc: true
-categories: [个人技术心得,Linux]
+categories: [个人技术心得,渗透]
 tags: [aircrack-ng]
 ---
 

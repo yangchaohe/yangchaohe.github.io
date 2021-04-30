@@ -1,5 +1,5 @@
 ---
-
+１
 thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/manjaro/manjaro-dog.jpg
 title: 优化Manjaro
 date: 2020-5-17 18:00

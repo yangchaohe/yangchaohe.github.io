@@ -13,7 +13,11 @@ mathJax: false
 
 <!-- more -->
 
-## 全局变量
+## 变量
+
+mysql有全局变量（global），会话变量（local/session）和用户变量
+
+### 全局变量
 
 使用 `show global variables` 可以显示全局变量。
 
@@ -39,7 +43,7 @@ show global variables like '%datadir%'
 +---------------+-----------------+
 ```
 
-服务开启时可以使用 `set` 更改这些变量
+服务开启时可以动态的使用 `set` 更改一些可写变量
 
 ```sql
 set global general_log_file="/var/log/mysql/general.log"
@@ -59,7 +63,43 @@ general_log=ON
 general_log_file='/var/log/mysql/general.log'
 ```
 
-> 注意：如果文件不存在mysql不会记录，需要手动创建文件才行
+> 显示全局变量可以用 `show global variables like 'variable_name'`，也可以用 `select @@global.variable_name`
+
+下面一张表记录了我常用的变量
+
+| 变量                 | 功能     |
+| -------------------- | -------- |
+| @@version_compile_os | 系统版本 |
+|                      |          |
+|                      |          |
+
+## 自带的数据库
+
+### information_schema
+
+这里面保存了 Mysql 服务器所有数据库的信息,如数据库名，数据库的表，表栏的数据类型与访问权限，包括变量等都是存在这里。
+
+- `TABLES`：有两个字段 table_name 和 table_schema，分别记录 DBMS 中的存储的表名和表名所在的数据库
+
+![](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static//img/article/2021/information-schema-tables.png)
+
+- `COLUMNS`：提供了表中的列信息。详细表述了某张表的所有列以及每个列的信息。是show columns from schemaname.tablename的结果取之此表。
+- `SCHEMATA`：提供了当前mysql实例中所有数据库的信息。是show databases的结果取之此表。
+- `STATISTICS`：提供了关于表索引的信息。是show index from schemaname.tablename的结果取之此表。
+
+## 常用函数
+
+[参考MySQL8.0文档](https://dev.mysql.com/doc/refman/8.0/en/sql-function-reference.html)
+
+| 函数                                                         | 功能                           |
+| ------------------------------------------------------------ | ------------------------------ |
+| version()                                                    | 查看当前数据库版本             |
+| database()                                                   | 显示当前所处数据库             |
+| user()                                                       | 当前用户                       |
+| [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex) | 将输入的数字或字符串输出16进制 |
+| [`LOAD_FILE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_load-file) | 以字符的形式返回文件的内容     |
+|                                                              |                                |
+|                                                              |                                |
 
 ## 杂项
 
@@ -82,3 +122,12 @@ general_log_file='/var/log/mysql/general.log'
 
 命令历史记录在用户主目录下.mysql_history里面
 
+`into outfile`语句可以将选中的数据以 [特定格式](https://dev.mysql.com/doc/refman/8.0/en/select-into.html) 写入文件，
+
+`into dumpfile`将数据以单行写入文件，通常用来输出二进制文件
+
+> 参考文章
+>
+> [mysql自带的4个数据库](https://blog.csdn.net/chen_jl168/article/details/79123820)
+>
+> [MYSQL的用户变量和系统变量](https://zhuanlan.zhihu.com/p/33666600)

