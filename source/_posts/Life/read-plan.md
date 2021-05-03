@@ -18,5 +18,5 @@ tags: [阅读]
 - [ ] 《UNIX网络编程》（两卷本）for W.Richard Stevens
 - [ ] 《UNIX环境高级编程》for W.Richard Stevens
 - [ ] 《TCP/IP详解》（三卷本）for W.Richard Stevens
-- [ ] 编程珠玑
-- [ ] 线性代数及其应用
+- [ ] 编程珠玑（算法）
+- [ ] 线性代数及其应用（高数入门）
