@@ -58,3 +58,85 @@ where id=123
 
 ## 技巧
 
+找到注入点以后，如果该注入点会返回查询的的数据，就可以着手获取数据库的基本信息了
+
+如果没有返回数据，考虑双层（双查询）注入和盲注
+
+### 判断查询字段数
+
+- **order by**：表示根据第几字段排序，超出会报错
+
+```sql
+MariaDB sqlilabs@(none):security> select *  from users where id=1 order by 4
+(1054, "Unknown column '4' in 'order clause'")
+```
+
+- **select into**：原意是备份表，可备份全部字段或者部分字段，into 后面跟新表。表可以用变量@来表示，几个变量代表几个字段，运行报错就代表不是该字段数，字段数正确不会报错，但是前端得不到数据，会报500错误。（除了＠，也可以用null）
+
+  **该方法可用在limit后面**
+
+![](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static//img/article/2021/into-injection.png)
+
+- **union**：union字段数，类型不兼容，则会报错，利用这个原理猜字段数，不报错就说明猜对了
+
+![](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static//img/article/2021/union-injection.png)
+
+> 请注意这是查询的字段数，不一定等于表的字段数，后端逻辑可能是查询全部字段然后进行筛选
+
+### 获取数据库的表
+
+```sql
+MariaDB root@(none):(none)> select table_name from information_schema.tables where table_schema='security'
++------------+ 
+| table_name |
++------------+
+| users      |
+| emails     |
+| uagents    |
+| referers   |
++------------+
+4 rows in set
+Time: 0.005s
+```
+
+### 获取表的字段
+
+```sql
+MariaDB root@(none):(none)> 
+select column_name 
+from information_schema.columns 
+where table_schema = 'security' and table_name='users'
++-------------+
+| column_name |
++-------------+
+| id          |
+| username    |
+| password    |
++-------------+
+3 rows in set
+Time: 0.009s
+```
+
+### 绕过输出一行的逻辑
+
+前端的逻辑可能获取到第一行数据后就后面的数据（我想要获取的数据）丢掉，可以让他第一行查不出来，这样就会显示我想显示的数据
+
+![](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static//img/article/2021/sql-injection2.png)
+
+## 双查询注入
+
+当后端sql运行正确时不会返回数据，而错误才会返回信息，这时就可以利用错误的信息将数据库的信息暴露出来
+
+双查询注入利用的是 `group by` 子句的原理，**配合count**（重复插入时报错），floor和rand(产生两个随机值相撞的概率大)使其报错．
+
+### 获取数据库名
+
+![](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static//img/article/2021/double-sql-injection.png)
+
+> **参考文章**
+>
+> [【技术分享】MySQL 注入攻击与防御](https://www.anquanke.com/post/id/85936)
+>
+> [Web安全学习笔记](https://websec.readthedocs.io/zh/latest/index.html)
+>
+> [sql注入--双查询报错注入原理探索](https://www.cnblogs.com/laoxiajiadeyun/p/10283251.html)

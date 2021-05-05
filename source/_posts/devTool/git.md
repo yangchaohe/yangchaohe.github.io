@@ -4,10 +4,7 @@ date: 2020-3-31
 author: manu
 toc: true
 categories: [开发工具,git]
-thumbnail:
 tags:
-categories: 
-toc: true
 recommend: 1
 keywords: 
 uniqueId: 开发工具/git.html

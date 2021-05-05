@@ -70,8 +70,7 @@ general_log_file='/var/log/mysql/general.log'
 | 变量                 | 功能     |
 | -------------------- | -------- |
 | @@version_compile_os | 系统版本 |
-|                      |          |
-|                      |          |
+| ＠＠hostname         | 系统名   |
 
 ## 自带的数据库
 
@@ -83,11 +82,11 @@ general_log_file='/var/log/mysql/general.log'
 
 ![](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static//img/article/2021/information-schema-tables.png)
 
-- `COLUMNS`：提供了表中的列信息。详细表述了某张表的所有列以及每个列的信息。是show columns from schemaname.tablename的结果取之此表。
+- `COLUMNS`：提供了表中的列信息。详细表述了某张表的所有列以及每个列的信息。是show columns from schemaname.tablename的结果取之此表（desc tablename也一样）。
 - `SCHEMATA`：提供了当前mysql实例中所有数据库的信息。是show databases的结果取之此表。
 - `STATISTICS`：提供了关于表索引的信息。是show index from schemaname.tablename的结果取之此表。
 
-## 常用函数
+## 常用函数和语句
 
 [参考MySQL8.0文档](https://dev.mysql.com/doc/refman/8.0/en/sql-function-reference.html)
 
@@ -98,8 +97,28 @@ general_log_file='/var/log/mysql/general.log'
 | user()                                                       | 当前用户                       |
 | [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex) | 将输入的数字或字符串输出16进制 |
 | [`LOAD_FILE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_load-file) | 以字符的形式返回文件的内容     |
-|                                                              |                                |
-|                                                              |                                |
+| left(a,b)                                                    | 截取字符串a的前b位             |
+| substr(a,b,c)                                                | 截取字符串a从b位到c位是        |
+| if(a,b,c)                                                    | a为true，返回b，否则c          |
+| sleep(sec)                                                   | 延迟查询sec秒数                |
+
+| 语句   | 功能             |
+| ------ | ---------------- |
+| regexp | 后面接正则表达式 |
+| like   | 模糊查找，%_     |
+
+## 运算符
+
+`a <> b`：如果a!=b则为true
+
+`IS NULL` or `<==>`：都可以用来与NULL作比较
+
+`＠`：用户变量
+
+`＠＠`：系统变量
+`=`：在 `SET` 和 `update` 语句中是**赋值**的作用，在其他语句是关系运算符**等于**
+
+`:=`：赋值
 
 ## 杂项
 
@@ -126,8 +145,28 @@ general_log_file='/var/log/mysql/general.log'
 
 `into dumpfile`将数据以单行写入文件，通常用来输出二进制文件
 
+更新系统权限后使用 `flash privilegs` 刷新权限
+
+```sql
+MariaDB root@(none):(none)> grant all privileges on sqlilabs.* to 'sqlilabs'@'%'
+MariaDB root@(none):(none)> flush privileges;
+```
+
+远程访问服务器要绑定0.0.0.0地址
+
+- 多表查询的字符集一定要兼容，不然会报错
+
+```sql
+(1267, "Illegal mix of collations (gbk_chinese_ci,IMPLICIT) and (utf8_general_ci,SYSCONST) for operation 'UNION'")
+```
+
+
+
 > 参考文章
 >
 > [mysql自带的4个数据库](https://blog.csdn.net/chen_jl168/article/details/79123820)
 >
 > [MYSQL的用户变量和系统变量](https://zhuanlan.zhihu.com/p/33666600)
+>
+> [Linux下远程连接MySQL数据库](https://www.jianshu.com/p/8fc90e518e2c)
+
