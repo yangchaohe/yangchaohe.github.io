@@ -1,12 +1,9 @@
 ---
-title: 阅读计划
 date: 2019-12-19 21:37:26
 author: manu
-categories: [生活]
-tags: [阅读]
+comments: false
+thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/read3.jpg
 ---
-
-<!-- more -->
 
 - [ ] 《c++ primer plus》
 - [ ] ~~《计算机网络(第五版)》~~

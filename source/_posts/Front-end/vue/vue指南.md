@@ -1,6 +1,6 @@
 ---
 thumbnail:
-title: vue指南
+title: vue学习笔记
 date: 2021-4-2
 tags:
 categories: [前端,VUE]

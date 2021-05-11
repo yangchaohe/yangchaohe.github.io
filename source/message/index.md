@@ -1,5 +1,5 @@
 ---
-thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/blog/mito3.png
+thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/mito3.png
 date: 2018-11-11 08:24:49
 comments: true
 ---

@@ -3,7 +3,7 @@ title: CI框架
 date: 2021-3.20 12:00
 author: manu
 toc: true
-categories: [编程语言,PHP]
+categories: [PHP]
 tags: PHP
 ---
 

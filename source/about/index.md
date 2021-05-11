@@ -1,14 +1,12 @@
 ---
 date: 2020-04-12 
 comments: false
-thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/blog/mito2.jpg
+thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/mito2.jpg
 ---
 
 **<u>本博客属于学习笔记类型，技术性输出文章很少，勿喷</u>**
 
-我是一名刚大一的大学生，专业计算机网络，普普通通，没啥特点
-
-如果想对我提一些建议，可以去留言板块，如果评论出现`Error: Network Error`，稍等一会再重新刷新网页即可，若还是报错，可以联系我的邮箱shepherd2001@163.com
+如果想对我提一些建议，可以联系我的邮箱manu@qq.com
 
 **感谢理解与支持！**
 

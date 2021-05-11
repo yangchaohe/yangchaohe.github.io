@@ -27,9 +27,11 @@ public_dir: public
 tag_dir: tags
 archive_dir: archives
 category_dir: categories
+# mindmap_dir: mindmap
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render: "markmap/**/*"
+skip_render: 
+  - "life/life.md"
 
 # Writing
 new_post_name: :title.md # File name of new posts
