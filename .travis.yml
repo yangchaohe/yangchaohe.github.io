@@ -6,7 +6,10 @@ branches:
     - hexo
 install:
   - npm install hexo
+  - npm install markmap-cli
 script:
+  - markmap source/mindmap-src/*.md
+  - mv source/mindmap-src/*.html source/mindmap/
   - hexo clean
   - hexo g
 after_script:
