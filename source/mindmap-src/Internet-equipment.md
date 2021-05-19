@@ -6,5 +6,24 @@
 - 标语以及接口描述
 - 配置IP[v4|v6]、环回接口与激活端口（还有串口）
 - [配置线路（tty, vty, console, aux）](https://www.cisco.com/c/zh_cn/support/docs/ios-nx-os-software/ios-software-releases-110/45843-configpasswords.html)
-- 
+### 路由
+- 静态路由
+- 动态路由
+     - RIP
+     - EIGRP
+     - OSPF
+     - IS-IS
 ## 交换机
+### 基础
+- 双工和速度，auto-MDIX
+- telnet
+### 安全
+- ssh
+- 端口安全（静态MAC）
+### VLAN
+- 配置vlan和ip
+- Trunk，本征vlan(TRUNK两端相同)，封装协议
+- DTP
+- VTP
+- vlan间路由，单臂路由（子接口，解封装）
+- 
