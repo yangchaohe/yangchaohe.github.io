@@ -25,9 +25,7 @@ JRE(Java Runtime Environment)也就是java运行环境，JDK(Java Development Ki
 
 ## 环境变量配置
 
-JDK安装后，路径下u有个`bin`，`javac`、`java`等编译运行指令都在这个目录，如果不想每次编译都
-
-输入很长的命令就把它设置到环境变量吧，win10找到path添加绝对路径，linux可以在/etc/profile、~/.bashrc、\~/.bash_profile里面添加`PATH="${PATH}:你jdk的bin存放的绝对路径"`，重新打开一个shell就有了
+JDK安装后，路径下u有个`bin`，`javac`、`java`等编译运行指令都在这个目录，如果不想每次编译都输入很长的命令就把它设置到环境变量吧，win10找到path添加绝对路径，linux可以在/etc/profile、~/.bashrc、\~/.bash_profile里面添加`PATH="${PATH}:你jdk的bin存放的绝对路径"`，重新打开一个shell就有了
 
 注意新增一个变量classpath，设置路径后，就可以在任意地方运行你的java程序了
 

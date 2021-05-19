@@ -17,3 +17,5 @@ thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/im
 - [ ] 《TCP/IP详解》（三卷本）for W.Richard Stevens
 - [ ] 编程珠玑（算法）
 - [ ] 线性代数及其应用（高数入门）
+- [ ] Metasploit渗透测试魔鬼训练营
+- [ ] 白帽子讲 Web 安全

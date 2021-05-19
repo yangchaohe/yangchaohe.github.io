@@ -72,9 +72,10 @@ Switch(config-if)#switchport port-security mac-address mac_address #绑定mac
 
 - **不要指定vlan1**
 
-**中继链路上允许的 VLAN 列表**:`switchport trunk allowed vlan vlan-list`
+**中继链路上允许通过的 VLAN 列表**:`switchport trunk allowed vlan vlan-list`
 
 - list写法: 1,2,3,4....
+- 默认允许1-1005
 
 **接口switchport信息**: `show interfaces (f/g) switchport`
 

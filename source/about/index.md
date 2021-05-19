@@ -6,7 +6,7 @@ thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/im
 
 **<u>本博客属于学习笔记类型，技术性输出文章很少，勿喷</u>**
 
-如果想对我提一些建议，可以联系我的邮箱manu@qq.com
+如果想对我提一些建议，可以联系我的邮箱manu2x@qq.com
 
 **感谢理解与支持！**
 
