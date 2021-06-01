@@ -12,7 +12,8 @@ comments: false
 
 # 网络
 
-- [设备管理](./internet-equipment.html)
+- [设备管理](./Ｉnternet-equipment.html)
 
-# [数据库](./sql.html)
+# 数据库
 
+- [数据库基础](./SQL-base.html)
