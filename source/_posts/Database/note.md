@@ -101,6 +101,7 @@ general_log_file='/var/log/mysql/general.log'
 | substr(a,b,c)                                                | 截取字符串a从b位到c位是        |
 | if(a,b,c)                                                    | a为true，返回b，否则c          |
 | sleep(sec)                                                   | 延迟查询sec秒数                |
+| group_concat()                                               | 将该column的值用`,`连接起来    |
 
 | 语句   | 功能             |
 | ------ | ---------------- |

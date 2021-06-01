@@ -10,4 +10,9 @@ comments: false
 
 - [web开发](./webdev.html)
 
- 
+# 网络
+
+- [设备管理](./internet-equipment.html)
+
+# [数据库](./sql.html)
+

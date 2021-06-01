@@ -591,7 +591,7 @@ let a = 2;
 switch(a){
 	case 0: console.log(0);break;
 	case 2: console.log(2);break;
-}
+}	
 ```
 
 ### for循环

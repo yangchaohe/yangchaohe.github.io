@@ -60,13 +60,31 @@ Switch(config-if)#switchport port-security mac-address mac_address #绑定mac
 - 路由端口不支持二层协议(并不是全部, STP)
 - 创建SVI要保证VLAN在VLAN数据库内
 
+## Trunk
+
+配置Trunk需要注意三点：
+
+1. 两个端口之间本征vlan必须一致
+2. 两端必须都为Trunk
+3. 允许相同vlan通过
+
+### 检验
+
+- `show interfaces [interface_name] trunk`
+
 ## 指令
 
 > 开启trunk后, 默认会为vlan1转发流量
 
 创建VLAN: `vlan vlan_id`
 
-**显示vlan基本信息**: `show vlan brief`
+- 创建多个VLAN：`vlan 1,3,100-120`
+- vlan_id范围：1-1005
+- 扩展vlan_id：1006-4096
+
+**显示vlan信息**: `show vlan [brief|id vlan_id|name vlan_name|summary]`
+
+- `show interfaces [interface_id|vlan vlan_id|switchport]`
 
 **配置本征VLAN**: `switchport trunk native vlan (vlan-id)`
 

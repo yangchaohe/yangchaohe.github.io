@@ -2,7 +2,7 @@
 title: 个人简历
 date: 2021-05-13 21:46:14
 comments: false
-thumbnail：
+thumbnail:
 ---
 
 ## 个人信息

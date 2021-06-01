@@ -119,7 +119,7 @@ Time: 0.009s
 
 ### 绕过输出一行的逻辑
 
-前端的逻辑可能获取到第一行数据后就后面的数据（我想要获取的数据）丢掉，可以让他第一行查不出来，这样就会显示我想显示的数据
+前端的逻辑可能获取到第一行数据后就把	后面的数据（我想要获取的数据）丢掉，可以让他第一行查不出来，这样就会显示我想显示的数据
 
 ![](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static//img/article/2021/sql-injection2.png)
 
