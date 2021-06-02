@@ -12,7 +12,7 @@ comments: false
 
 # 网络
 
-- [设备管理](./Ｉnternet-equipment.html)
+- [设备管理](./Internet-equipment.html)
 
 # 数据库
 
