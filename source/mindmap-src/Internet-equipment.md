@@ -19,16 +19,24 @@
 - 设置密码（以及加密）
 - 标语以及接口描述
 - 配置IP[v4|v6]、环回接口与激活端口（还有串口）
-- [配置线路（tty, vty, console, aux）](https://www.cisco.com/c/zh_cn/support/docs/ios-nx-os-software/ios-software-releases-110/45843-configpasswords.html)
+- [配置线路（tty, vty, console, aux）](https://www.cisco.com/c/zh_cn/support/docs/ios-nx-os-software/ios-software-releases-110/45843-configpasswords.html)(cisco)
 ### 路由
 - 静态路由
 - 动态路由
-     - RIP
-     - EIGRP
-     - OSPF
-     - IS-IS
+    - IGP
+             - RIP[v1|v2|ng]
+             - EIGRP
+             - OSPF[v2]
+             - IS-IS
+    - EGP
+             - BGP
 ### 安全
 - ACL
+### FHRP
+- HSRP(cisco)
+- VRRP[v2|v3]
+- GLBP(cisco)
+- IRDP
 ### 其他配置
 - DHCP[v4/v6]
      - 协议概述
@@ -53,4 +61,14 @@
 - DTP
 - VTP
 - vlan间路由，单臂路由（子接口，解封装）
-- 
+- STP
+    - PVST+(cisco)
+    - RSTP
+    - 快速PVST+(cisco)
+    - MSTP
+- EtherChannel
+    - 静态
+    - PAgP(cisco)
+    - LACP
+    - P.S. 使用动态协议的端口根据自身信息自动调整端口状态
+

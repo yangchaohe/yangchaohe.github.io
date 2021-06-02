@@ -88,7 +88,7 @@ general_log_file='/var/log/mysql/general.log'
 
 ## 常用函数和语句
 
-[参考MySQL8.0文档](https://dev.mysql.com/doc/refman/8.0/en/sql-function-reference.html)
+[参考MySQL8.0文档](https://dev.mysql.com/doc/refman/8.0/en/functions.html)
 
 | 函数                                                         | 功能                           |
 | ------------------------------------------------------------ | ------------------------------ |

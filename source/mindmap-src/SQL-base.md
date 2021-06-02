@@ -26,7 +26,7 @@
     - MyISAM
     - Memory
     - CSV
-    - ..SHOW ENGINES
+    - ..`SHOW ENGINES`
 - 基本数据类型
     - TINYINT, SMALLINT, MEDIUMINT, INT, BIGINT
     - FLOAT, DOUBLE, DECIMAL/DEC
