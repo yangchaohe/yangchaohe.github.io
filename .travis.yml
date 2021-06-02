@@ -8,7 +8,7 @@ install:
   - npm install hexo
   - npm install markmap-cli
 script:
-  - markmap source/mindmap-src/*.md
+  - ls source/mindmap-src/*.md | xargs -n1 markmap
   - mv source/mindmap-src/*.html source/mindmap/
   - hexo clean
   - hexo g
