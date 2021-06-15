@@ -14,6 +14,16 @@ comments: false
 
 - [设备管理](./Internet-equipment.html)
 
+>　参考思科技术学院教程
+
 # 数据库
 
 - [数据库基础](./SQL-base.html)
+
+# [计算机色彩](./color.html)
+
+> 参考文章
+>
+> - [sRGB 和 NTSC 色域的区别在哪里？](https://www.zhihu.com/question/25337649/answer/655284153)
+>
+> - [调色名词浅析——色彩空间与色域（上）](https://zhuanlan.zhihu.com/p/36968533)

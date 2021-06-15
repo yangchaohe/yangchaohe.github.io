@@ -1,3 +1,13 @@
+## 2021-06-15
+
+[解决npm不使用sudo问题](https://github.com/sindresorhus/guides/blob/main/npm-global-without-sudo.md#install-npm-packages-globally-without-sudo-on-macos-and-linux)
+
+三次原则（rule of three)
+
+## 2021-06-14
+
+最好是精通一种编辑器，并将其用于所有编辑任务。如果不坚持使用一种编辑器，可能会面临现代的巴别特大混乱。
+
 ## 2021-05-12
 
 2021年5月7日信息安全比赛省赛的总结：

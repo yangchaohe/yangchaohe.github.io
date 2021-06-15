@@ -19,3 +19,5 @@ thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/im
 - [ ] 线性代数及其应用（高数入门）
 - [ ] Metasploit渗透测试魔鬼训练营
 - [ ] 白帽子讲 Web 安全
+- [ ] 程序员修炼之道
+- [ ] 黑客与画家

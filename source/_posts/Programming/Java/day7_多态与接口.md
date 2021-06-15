@@ -112,7 +112,7 @@ class B implements A{
 
 ### 注意
 
-- 单继承，多实现
+- w单继承，多实现
 
 `class Test extends 类 implements 接口1,接口2{}`
 

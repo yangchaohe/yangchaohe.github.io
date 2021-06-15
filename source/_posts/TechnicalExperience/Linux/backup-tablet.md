@@ -1,5 +1,4 @@
 ---
-
 thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/manjaro/manjaro_maia_abstract2.jpg
 title: 备份Manjaro
 date: 2020-5-23 12:00
