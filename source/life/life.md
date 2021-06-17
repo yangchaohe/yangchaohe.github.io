@@ -1,3 +1,23 @@
+## 2021-06-17 ##
+
+**理解GPG和PGP协议**
+
+**疏理HTTPS的加密过程****
+
+1. 浏览器通过服务器公钥加密自己生成的对称加密密钥
+
+2. 服务器解密得到对称密钥，使用其加密
+
+*如何保证服务器公钥安全性？*
+
+数字证书，通过机构来认证。可以防止中间人攻击
+
+*如何防止数字证书被修改？*
+
+数字签名
+
+数据证书在是以明文证书数据+私钥加密明文数据后的hash值进行传递的，进行hash主要是为了效率
+
 ## 2021-06-15
 
 [解决npm不使用sudo问题](https://github.com/sindresorhus/guides/blob/main/npm-global-without-sudo.md#install-npm-packages-globally-without-sudo-on-macos-and-linux)
