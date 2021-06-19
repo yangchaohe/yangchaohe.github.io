@@ -1,3 +1,36 @@
+## 2021-06-20
+
+- 函数编程要点：
+
+    1. 函数可作为变量，参数
+    2. 尽量使用表达式，而非语句
+    3. 返回新值，不改变原值
+    4. 不修改变量，使用递归将状态保存在参数里
+    5. 参数一致，结果一致
+
+> Ref Link
+> [函数式编程初探](http://www.ruanyifeng.com/blog/2012/04/functional_programming.html)
+
+- update&upgrade
+
+update代表量的变化，upgrade代表质的变化
+
+- 抽象三原则
+
+DRY，YAGNI，rule of three.
+
+- User space $ Kernel space
+
+- 如何看编程语言文档？
+
+边看手册边找一些好的代码例子练习（不搞大项目），官网一般都会有大量例子
+
+- mkfifo
+
+`|`可以将一个指令的stdout给另一个指令，而mkfifo可以创建一个pipe文件，不限制两个指令
+
+EOF
+
 ## 2021-06-18
 
 - js正则断言（断言是程序中的一阶逻辑）
@@ -41,8 +74,6 @@
 ## 2021-06-15
 
 [解决npm不使用sudo问题](https://github.com/sindresorhus/guides/blob/main/npm-global-without-sudo.md#install-npm-packages-globally-without-sudo-on-macos-and-linux)
-
-三次原则（rule of three)
 
 ## 2021-06-14
 
