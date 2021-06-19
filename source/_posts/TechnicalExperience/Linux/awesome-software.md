@@ -46,3 +46,7 @@ Cat clone with syntax highlighting and git integration
 ## [fzf](https://github.com/junegunn/fzf#using-git)
 
 非常好用的文件模糊搜索工具，支持vim
+
+## gitg
+
+简单的git图形化工具

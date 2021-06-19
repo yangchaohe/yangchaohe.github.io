@@ -37,6 +37,7 @@
     "hexo-wordcount": "^6.0.1",
     "inferno": "^7.4.2",
     "inferno-create-element": "^7.4.2",
+    "markdown-it": "^12.0.6",
     "request": "^2.88.2",
     "sitemap": "^6.1.0",
     "xml-parser": "^1.2.1",

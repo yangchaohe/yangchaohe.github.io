@@ -7,7 +7,7 @@ thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/im
 <div class="time-axis-main">
 	<ul class="time-axis"></ul>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/markdown-it/12.0.6/markdown-it.min.js"></script>
 <script src="/js/life.js"></script>
 <br>
 <br>
