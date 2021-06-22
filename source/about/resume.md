@@ -7,11 +7,13 @@ thumbnail:
 
 ## 个人信息
 
-姓名：杨勇											电话：18085515238
+姓名：杨勇       电话：18085515238
 
-微信号：PermissionNotAccess			 			    QQ：2633650083
+微信号：PermissionNotAccess	
 
-邮箱：manu2x@qq.com									就业方向：网络搭建，运维，前端工程师
+QQ：2633650083   邮箱：manu2x@qq.com	
+
+就业方向：网络搭建，运维，前端工程师
 
 ## 教育经历
 
@@ -25,11 +27,9 @@ thumbnail:
 
 **编程语言**：
 
-- C：使用aclib库写贪吃蛇
-- Python：使用爬虫框架Scrapy
-- PHP：零基础自学一个月时间使用CI框架完成一个点餐小程序（微信小程序，包括前端）
+熟悉c，python，java，php
 
-> 熟练使用git进行版本管理，懂一点汇编
+> 熟练使用git进行版本管理
 
 **网络**：
 
@@ -39,14 +39,10 @@ thumbnail:
 
 - 使用linux发行版Arch分支Manjaro作为主系统两年
 
-**网络安全：**
-
-- sql注入：使用BP进行布尔注入，时间注入
-
 **web开发**：
 
 - 搭建LAMP环境
-- 基本网页编写(使用框架)
+- 网页编写(使用框架)
 
 ## 证书
 
@@ -58,7 +54,9 @@ thumbnail:
 
 **写作**：喜欢使用markdown编写文章
 
-喜欢专研Android
+**编程**：平时喜欢使用python来完成自己的需求
+
+喜欢钻研Android
 
 ## 自我评价
 

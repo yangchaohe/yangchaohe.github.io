@@ -16,9 +16,9 @@
 - 操作表数据
     - `insert into [select * from]`
     - `replace into [select * from] [set]`
-    - `update table set [where]`
+    - `update table_name set [where]`
     - `delete from table [where]`
-    - `truncate table`
+    - `truncate table_name`
 - 
 ## MySQL
 - 引擎
