@@ -12,7 +12,13 @@ comments: false
 
 # 网络
 
-- [设备管理](./Internet-equipment.html)
+理论知识:
+
+- [计算机网络(面试版)](./network.html)
+
+实践+理论:
+
+- [网络设备管理](./Internet-equipment.html)
 
 >　参考思科技术学院教程
 

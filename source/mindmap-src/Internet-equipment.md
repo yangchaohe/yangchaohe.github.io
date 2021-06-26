@@ -23,13 +23,13 @@
 ### 路由
 - 静态路由
 - 动态路由
-    - IGP
-             - RIP[v1|v2|ng]
-             - EIGRP
-             - OSPF[v2]
-             - IS-IS
-    - EGP
-             - BGP
+     - IGP
+          - RIP[v1|v2|ng]
+          - EIGRP(cisco)
+          - OSPF[v2]
+          - IS-IS
+     - EGP
+          - BGP
 ### 安全
 - ACL
 ### FHRP
@@ -45,7 +45,7 @@
 - IPv4 NAT
      - 静态NAT
      - 动态NAT
-     - PAT
+     - PAT(端口地址转换)
 ## 交换机
 ### 前置知识
 - 冲突域和广播域
@@ -56,6 +56,7 @@
 - ssh
 - 端口安全（静态MAC）
 ### VLAN
+- vlan原理
 - 配置vlan和ip
 - Trunk，本征vlan(TRUNK两端相同)，封装协议dot1Q
 - DTP
@@ -71,4 +72,3 @@
     - PAgP(cisco)
     - LACP
     - P.S. 使用动态协议的端口根据自身信息自动调整端口状态
-
