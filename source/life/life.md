@@ -1,3 +1,14 @@
+## 2021-06-28
+
+markdown支持的一些icons:
+
+information_source :information_source:
+ballot_box_with_check :ballot_box_with_check:
+warning :warning:
+x :x:
+exclamation :exclamation:
+heavy_multiplication_x :heavy_multiplication_x:
+
 ##  2021-06-27 
 
 今天无聊看了下当前博客的字数, 有点意思..

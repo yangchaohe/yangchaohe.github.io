@@ -20,7 +20,6 @@ categories: [前端,CSS]
 > - 层叠就是多层结构，高的可以覆盖低的
 >
 > - css可以为网页每个层次设置样式
->
 
 <!-- more -->
 
@@ -55,7 +54,7 @@ categories: [前端,CSS]
 
 - 外部样式表
 
-  进一步复用，利用link链接多个网页，方便管理
+  title进一步复用，利用link链接多个网页，方便管理
 
   使用步骤：
 
@@ -236,7 +235,7 @@ a:active{}
 :active
 ```
 
-		IE6不兼容
+> :warning: IE6不兼容
 
 - 文本框获取焦点时的状态
 
@@ -608,7 +607,6 @@ font: 16px/30px "字体";
 - line-through删除线
 
 > 超链接默认text-decoration默认是underline
->
 
 `letter-spacing`修改字符间距
 
