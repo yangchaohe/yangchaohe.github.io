@@ -3,6 +3,7 @@ title: asc字符图表、流程图，渲染代码图
 date: 2020-5-26 12:00
 author: manu
 toc: true
+mermaid: true
 categories: [个人技术心得,博客,工具]
 thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/water/water.jpg
 ---
