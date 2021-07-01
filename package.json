@@ -42,5 +42,13 @@
     "sitemap": "^6.1.0",
     "xml-parser": "^1.2.1",
     "yamljs": "^0.3.0"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.3.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

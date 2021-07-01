@@ -4,11 +4,9 @@ comments: false
 thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/mito/mito2.jpg
 ---
 
-**<u>本博客属于学习笔记类型，技术性输出文章很少，勿喷</u>**
+**<u>本博客属于学习笔记类型</u>**
 
 如果想对我提一些建议，可以联系我的邮箱manu2x@qq.com
-
-**感谢理解与支持！**
 
 <br>
 

@@ -1,3 +1,22 @@
+## 2021-06-30
+
+cs: |, 数据隐写
+
+- 管道符'|'的还可以用来单独执行后面的指令
+- docx隐写: 自身隐写和压缩包藏匿
+- python写了一个取出所有icmp数据包data某个字符
+
+## 2021-06-29
+
+cs: 以后, 所有的commit都采用[Angular 规范](https://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
+
+该日志也将采用Angular规范, 不过type稍微修改下:
+
+- life: 生活
+- cs: 计算机科学, 思想 
+- tool: 工具
+- boring: 闲聊 
+
 ## 2021-06-28
 
 markdown支持的一些icons:

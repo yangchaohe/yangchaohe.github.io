@@ -50,3 +50,14 @@ Cat clone with syntax highlighting and git integration
 ## gitg
 
 简单的git图形化工具
+
+## [fd](https://github.com/sharkdp/fd)
+
+「 *fd*是一种简单ㄡ快速和用户友好的[*find*](https://www.gnu.org/software/findutils/)替代方案.」
+
+## Commitizen
+
+[Commitizen](https://github.com/commitizen/cz-cli)是一个撰写合格 Commit message 的工具。
+
+install: `$ npm install -g commitizen`
+
