@@ -1,3 +1,80 @@
+## 2021-07-12
+
+ctf: 文件上传
+
+1. 条件竞争
+    利用php后端将文件先上传后检测的漏洞，在上传和删除的间隙里进行访问，即可短暂执行该文件
+    该文件可以植入一个webshell到服务器上
+
+cs: php eval和system的区别, 什么是IDC？什么是Docker？什么是Nginx？
+
+- eval执行php语句，必须以`;`结尾
+- systemctl执行系统语句
+
+- IDC全称互联网数据中心，是一个标准的电信专业级机房环境，可以提供服务器托管、租用等服务
+
+- Docker是对Linux容器的封装，Linux容器可以简单理解为轻量级的虚拟机，但开销小得多；容器的出现解决了环境配置麻烦、困难的事情。
+- 作用就是提供原始环境，提供弹性的云服务，组建微服务架构
+
+- Nginx的特点是轻量级，抗并发，高度模块化设计，社区活跃
+
+life: 如果有幸被贵公司录取，我需要学习或者了解些什么
+
+## 2021-07-11
+
+ctf: 文件上传，什么是PWN、Pwn2Own、0day
+
+- 黑名单绕过
+    比如将.php设置为黑名单，但Apache将php3,phtml....都解析成php，我们设置成这些后缀绕过
+    P.S.: 查看/etc/mime.types里能解析成php的后缀
+
+- PWN: 指攻破设备或系统，发音‘砰’
+- Pwn2Own: 国际赛事
+- 0day: 指没有被负责编写程序人员发现的漏洞，因为没有用其进行首次攻击，所以叫0day，攻击后就是nday
+
+cs: php获取前端json格式编码数据
+
+- 前端application/json编码的数据无法使用$\_POST获取
+- 使用file_get_contents("php://input")可获取原始post数据
+
+## 2022-07-10 
+
+cs: .htaccess认证，apache权限控制、虚拟主机，php opcache，logrotate，rsyslog
+
+使用htpasswd指令创建用户
+
+apache2.2 使用Order,limit,allow,deny进行控制
+apache2.4 使用Require进行控制
+
+虚拟主机可以将多个主机名对应一个IP
+本地测试时，虚拟主机名必须要在hosts里设置对应的IP
+设置虚拟主机必须将原始的主机名也添加进去
+
+apache如何与php通信以及opcache如何工作
+
+复习logrotate,rsyslog
+
+ctf: 文件上传
+
+1. **.htaccess绕过**
+    通过添加`AddType application/x-httpd-php .png`可以将.png解析成php
+2. windows大小写绕过
+    windows不区分大小写，比如处理.php，我们可以换成.phP
+3. %00截断
+    - 前提条件：
+        magic_quotes_gpc = Off
+        PHP 版本小于 5.3.4
+    - PHP底层是C语言，字符串结尾使用\x00代表结束。
+    - [GET型] 00 截断配合**路径**来截断，抓包看看应该是存在路径信息的，然后直接在**路径**后面使用 %00 来截断一下就可以成功绕过，为啥 %00 直接就可以绕过了呢？这是因为路径信息是从 GET 方式传递个后端的，这样默认会进行一次 URL 解码，%00 解码后就是空字节
+    - [POST型] 抓包后同样找路径，添加%00使用URL解码，放包
+
+## 2021-07-09
+
+life: 一份面试初稿
+cs: chrome代理本地流量
+
+除了设置localhost在不代理列表外，还需要将`<-loopback>`添加在列表才能代理localhost
+
 ## 2021-07-08
 
 life: 第一次面试总结
@@ -19,6 +96,32 @@ life: 找工作需要注意的事
 2. 薪资待遇
 3. 晋升途径
 
+## 2021-07-05 
+
+ctf: 文件绕过-MIME
+
+## 2021-07-04 
+
+life: 房子终于找到了, 就是有点高
+cs: hydra爆破ssh, metasploit简单入门
+
+hydra -l root -x 6:6:a dst_ip ssh -v
+metasploit: use cve...;show missing;set RHOST=xxx.xxx.xxx.xxx;exploit
+
+## 2021-07-03
+
+ctf: 文件上传-绕过js
+
+## 2021-07-02
+
+boring: 找工作的一天
+cs: 渗透
+
+渗透知识点
+
+- TCP全开扫描: 指一次完整的TCP连接(三次握手)
+- TCP半开扫描: 指SYN连接(不容易留下痕迹)
+
 ## 2021-06-30
 
 cs: |, 数据隐写
@@ -37,6 +140,8 @@ cs: 以后, 所有的commit都采用[Angular 规范](https://www.ruanyifeng.com/
 - cs: 计算机科学, 思想 
 - tool: 工具
 - boring: 闲聊 
+- blog: 博客
+- ctf
 
 ## 2021-06-28
 
@@ -357,3 +462,4 @@ EOF
 - 海岛升级16本
 
 ## 
+
