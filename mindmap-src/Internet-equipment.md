@@ -1,0 +1,74 @@
+# 配置
+### 设备管理维护
+- 发现设备
+     - CDP(cisco专有)
+     - LLDP
+- 设备管理
+     - NTP
+     - 系统日志
+- 设备维护
+     - 文件系统基础操作
+     - 运行配置操作
+     - 备份升级系统
+     - 密码恢复
+## 路由器
+### 前置知识
+- 路由表条目
+### 基础
+- 命名
+- 设置密码（以及加密）
+- 标语以及接口描述
+- 配置IP[v4|v6]、环回接口与激活端口（还有串口）
+- [配置线路（tty, vty, console, aux）](https://www.cisco.com/c/zh_cn/support/docs/ios-nx-os-software/ios-software-releases-110/45843-configpasswords.html)(cisco)
+### 路由
+- 静态路由
+- 动态路由
+     - IGP
+          - RIP[v1|v2|ng]
+          - EIGRP(cisco)
+          - OSPF[v2]
+          - IS-IS
+     - EGP
+          - BGP
+### 安全
+- ACL
+### FHRP
+- HSRP(cisco)
+- VRRP[v2|v3]
+- GLBP(cisco)
+- IRDP
+### 其他配置
+- DHCP[v4/v6]
+     - 协议概述
+     - 基本配置
+     - DHCP中继
+- IPv4 NAT
+     - 静态NAT
+     - 动态NAT
+     - PAT(端口地址转换)
+## 交换机
+### 前置知识
+- 冲突域和广播域
+### 基础
+- 双工和速度，auto-MDIX
+- telnet
+### 安全
+- ssh
+- 端口安全（静态MAC）
+### VLAN
+- vlan原理
+- 配置vlan和ip
+- Trunk，本征vlan(TRUNK两端相同)，封装协议dot1Q
+- DTP
+- VTP
+- vlan间路由，单臂路由（子接口，解封装）
+- STP
+    - PVST+(cisco)
+    - RSTP
+    - 快速PVST+(cisco)
+    - MSTP
+- EtherChannel
+    - 静态
+    - PAgP(cisco)
+    - LACP
+    - P.S. 使用动态协议的端口根据自身信息自动调整端口状态

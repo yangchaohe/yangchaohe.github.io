@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Markmap</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.1.6/dist/style.min.css">
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script src="https://cdn.jsdelivr.net/npm/d3@6.6.0"></script><script src="https://cdn.jsdelivr.net/npm/markmap-view@0.2.6"></script><script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.1.6/dist/index.umd.min.js"></script><script>(r => {
+          setTimeout(r);
+        })(() => {
+  const {
+    markmap,
+    mm
+  } = window;
+  const toolbar = new markmap.Toolbar();
+  toolbar.attach(mm);
+  const el = toolbar.render();
+  el.setAttribute('style', 'position:absolute;bottom:20px;right:20px');
+  document.body.append(el);
+})</script><script>((getMarkmap, getOptions, data) => {
+        const {
+          Markmap
+        } = getMarkmap();
+        window.mm = Markmap.create('svg#mindmap', getOptions == null ? void 0 : getOptions(), data);
+      })(() => window.markmap,null,{"t":"heading","d":1,"p":{"lines":[0,1]},"v":"配置","c":[{"t":"heading","d":2,"p":{"lines":[1,2]},"v":"设备管理维护","c":[{"t":"list_item","d":4,"p":{"lines":[2,3]},"v":"发现设备","c":[{"t":"list_item","d":6,"p":{"lines":[3,4]},"v":"CDP(cisco专有)"},{"t":"list_item","d":6,"p":{"lines":[4,5]},"v":"LLDP"}]},{"t":"list_item","d":4,"p":{"lines":[5,6]},"v":"设备管理","c":[{"t":"list_item","d":6,"p":{"lines":[6,7]},"v":"NTP"},{"t":"list_item","d":6,"p":{"lines":[7,8]},"v":"系统日志"}]},{"t":"list_item","d":4,"p":{"lines":[8,9]},"v":"设备维护","c":[{"t":"list_item","d":6,"p":{"lines":[9,10]},"v":"文件系统基础操作"},{"t":"list_item","d":6,"p":{"lines":[10,11]},"v":"运行配置操作"},{"t":"list_item","d":6,"p":{"lines":[11,12]},"v":"备份升级系统"},{"t":"list_item","d":6,"p":{"lines":[12,13]},"v":"密码恢复"}]}]},{"t":"heading","d":2,"p":{"lines":[13,14]},"v":"路由器","c":[{"t":"heading","d":3,"p":{"lines":[14,15]},"v":"前置知识","c":[{"t":"list_item","d":5,"p":{"lines":[15,16]},"v":"路由表条目"}]},{"t":"heading","d":3,"p":{"lines":[16,17]},"v":"基础","c":[{"t":"list_item","d":5,"p":{"lines":[17,18]},"v":"命名"},{"t":"list_item","d":5,"p":{"lines":[18,19]},"v":"设置密码（以及加密）"},{"t":"list_item","d":5,"p":{"lines":[19,20]},"v":"标语以及接口描述"},{"t":"list_item","d":5,"p":{"lines":[20,21]},"v":"配置IP[v4|v6]、环回接口与激活端口（还有串口）"},{"t":"list_item","d":5,"p":{"lines":[21,22]},"v":"<a href=\"https://www.cisco.com/c/zh_cn/support/docs/ios-nx-os-software/ios-software-releases-110/45843-configpasswords.html\">配置线路（tty, vty, console, aux）</a>(cisco)"}]},{"t":"heading","d":3,"p":{"lines":[22,23]},"v":"路由","c":[{"t":"list_item","d":5,"p":{"lines":[23,24]},"v":"静态路由"},{"t":"list_item","d":5,"p":{"lines":[24,25]},"v":"动态路由","c":[{"t":"list_item","d":7,"p":{"lines":[25,26]},"v":"IGP","c":[{"t":"list_item","d":9,"p":{"lines":[26,27]},"v":"RIP[v1|v2|ng]"},{"t":"list_item","d":9,"p":{"lines":[27,28]},"v":"EIGRP(cisco)"},{"t":"list_item","d":9,"p":{"lines":[28,29]},"v":"OSPF[v2]"},{"t":"list_item","d":9,"p":{"lines":[29,30]},"v":"IS-IS"}]},{"t":"list_item","d":7,"p":{"lines":[30,31]},"v":"EGP","c":[{"t":"list_item","d":9,"p":{"lines":[31,32]},"v":"BGP"}]}]}]},{"t":"heading","d":3,"p":{"lines":[32,33]},"v":"安全","c":[{"t":"list_item","d":5,"p":{"lines":[33,34]},"v":"ACL"}]},{"t":"heading","d":3,"p":{"lines":[34,35]},"v":"FHRP","c":[{"t":"list_item","d":5,"p":{"lines":[35,36]},"v":"HSRP(cisco)"},{"t":"list_item","d":5,"p":{"lines":[36,37]},"v":"VRRP[v2|v3]"},{"t":"list_item","d":5,"p":{"lines":[37,38]},"v":"GLBP(cisco)"},{"t":"list_item","d":5,"p":{"lines":[38,39]},"v":"IRDP"}]},{"t":"heading","d":3,"p":{"lines":[39,40]},"v":"其他配置","c":[{"t":"list_item","d":5,"p":{"lines":[40,41]},"v":"DHCP[v4/v6]","c":[{"t":"list_item","d":7,"p":{"lines":[41,42]},"v":"协议概述"},{"t":"list_item","d":7,"p":{"lines":[42,43]},"v":"基本配置"},{"t":"list_item","d":7,"p":{"lines":[43,44]},"v":"DHCP中继"}]},{"t":"list_item","d":5,"p":{"lines":[44,45]},"v":"IPv4 NAT","c":[{"t":"list_item","d":7,"p":{"lines":[45,46]},"v":"静态NAT"},{"t":"list_item","d":7,"p":{"lines":[46,47]},"v":"动态NAT"},{"t":"list_item","d":7,"p":{"lines":[47,48]},"v":"PAT(端口地址转换)"}]}]}]},{"t":"heading","d":2,"p":{"lines":[48,49]},"v":"交换机","c":[{"t":"heading","d":3,"p":{"lines":[49,50]},"v":"前置知识","c":[{"t":"list_item","d":5,"p":{"lines":[50,51]},"v":"冲突域和广播域"}]},{"t":"heading","d":3,"p":{"lines":[51,52]},"v":"基础","c":[{"t":"list_item","d":5,"p":{"lines":[52,53]},"v":"双工和速度，auto-MDIX"},{"t":"list_item","d":5,"p":{"lines":[53,54]},"v":"telnet"}]},{"t":"heading","d":3,"p":{"lines":[54,55]},"v":"安全","c":[{"t":"list_item","d":5,"p":{"lines":[55,56]},"v":"ssh"},{"t":"list_item","d":5,"p":{"lines":[56,57]},"v":"端口安全（静态MAC）"}]},{"t":"heading","d":3,"p":{"lines":[57,58]},"v":"VLAN","c":[{"t":"list_item","d":5,"p":{"lines":[58,59]},"v":"vlan原理"},{"t":"list_item","d":5,"p":{"lines":[59,60]},"v":"配置vlan和ip"},{"t":"list_item","d":5,"p":{"lines":[60,61]},"v":"Trunk，本征vlan(TRUNK两端相同)，封装协议dot1Q"},{"t":"list_item","d":5,"p":{"lines":[61,62]},"v":"DTP"},{"t":"list_item","d":5,"p":{"lines":[62,63]},"v":"VTP"},{"t":"list_item","d":5,"p":{"lines":[63,64]},"v":"vlan间路由，单臂路由（子接口，解封装）"},{"t":"list_item","d":5,"p":{"lines":[64,65]},"v":"STP","c":[{"t":"list_item","d":7,"p":{"lines":[65,66]},"v":"PVST+(cisco)"},{"t":"list_item","d":7,"p":{"lines":[66,67]},"v":"RSTP"},{"t":"list_item","d":7,"p":{"lines":[67,68]},"v":"快速PVST+(cisco)"},{"t":"list_item","d":7,"p":{"lines":[68,69]},"v":"MSTP"}]},{"t":"list_item","d":5,"p":{"lines":[69,70]},"v":"EtherChannel","c":[{"t":"list_item","d":7,"p":{"lines":[70,71]},"v":"静态"},{"t":"list_item","d":7,"p":{"lines":[71,72]},"v":"PAgP(cisco)"},{"t":"list_item","d":7,"p":{"lines":[72,73]},"v":"LACP"},{"t":"list_item","d":7,"p":{"lines":[73,74]},"v":"P.S. 使用动态协议的端口根据自身信息自动调整端口状态"}]}]}]}]})</script>
+</body>
+</html>
