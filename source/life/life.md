@@ -1,3 +1,16 @@
+## 2021-08-03 
+
+tool: 解决BP字体锯齿感严重
+
+根源是执行jar没有抗锯齿参数
+全局变量添加：`_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=setting'`
+
+## 2021-07-29 
+
+code: 优化curl json输出
+
+npm i -g json; curl后重定向至json
+
 ## 2021-07-28 
 
 code: 测试的数据尽量使用真实的数据，方便后期调试
