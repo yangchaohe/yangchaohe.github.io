@@ -4,6 +4,7 @@ tool: 解决BP字体锯齿感严重
 
 根源是执行jar没有抗锯齿参数
 全局变量添加：`_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=setting'`
+[Java Runtime Environment fonts](https://wiki.archlinux.org/title/Java_Runtime_Environment_fonts_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E9%80%89%E6%8B%A9%E5%AD%97%E4%BD%93)
 
 ## 2021-07-29 
 
