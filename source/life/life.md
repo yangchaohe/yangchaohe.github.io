@@ -1,4 +1,4 @@
-## 2021-08-03 
+## 2021-08-03
 
 tool: 解决BP字体锯齿感严重
 
@@ -6,24 +6,24 @@ tool: 解决BP字体锯齿感严重
 全局变量添加：`_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=setting'`
 [Java Runtime Environment fonts](https://wiki.archlinux.org/title/Java_Runtime_Environment_fonts_(%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87)#%E9%80%89%E6%8B%A9%E5%AD%97%E4%BD%93)
 
-## 2021-07-29 
+## 2021-07-29
 
 code: 优化curl json输出
 
 npm i -g json; curl后重定向至json
 
-## 2021-07-28 
+## 2021-07-28
 
 code: 测试的数据尽量使用真实的数据，方便后期调试
 
-## 2021-07-21 
+## 2021-07-21
 
 code: php isset和empty的区别
 
 1. isset可以判断null与非null
 2. empty可以判断空字符串，空数组
 
-## 2021-07-20 
+## 2021-07-20
 
 code: php定义常量
 
@@ -35,8 +35,8 @@ code: php定义常量
 ctf: 文件上传
 
 1. 条件竞争
-    利用php后端将文件先上传后检测的漏洞，在上传和删除的间隙里进行访问，即可短暂执行该文件
-    该文件可以植入一个webshell到服务器上
+利用php后端将文件先上传后检测的漏洞，在上传和删除的间隙里进行访问，即可短暂执行该文件
+该文件可以植入一个webshell到服务器上
 
 cs: php eval和system的区别, 什么是IDC？什么是Docker？什么是Nginx？
 
@@ -50,7 +50,7 @@ cs: php eval和system的区别, 什么是IDC？什么是Docker？什么是Nginx�
 
 - Nginx的特点是轻量级，抗并发，高度模块化设计，社区活跃
 
-life: 如果有幸被贵公司录取，我需要学习或者了解些什么
+    life: 如果有幸被贵公司录取，我需要学习或者了解些什么
 
 ## 2021-07-11
 
@@ -64,12 +64,12 @@ ctf: 文件上传，什么是PWN、Pwn2Own、0day
 - Pwn2Own: 国际赛事
 - 0day: 指没有被负责编写程序人员发现的漏洞，因为没有用其进行首次攻击，所以叫0day，攻击后就是nday
 
-cs: php获取前端json格式编码数据
+    cs: php获取前端json格式编码数据
 
 - 前端application/json编码的数据无法使用$\_POST获取
 - 使用file_get_contents("php://input")可获取原始post数据
 
-## 2022-07-10 
+## 2022-07-10
 
 cs: .htaccess认证，apache权限控制、虚拟主机，php opcache，logrotate，rsyslog
 
@@ -89,9 +89,9 @@ apache如何与php通信以及opcache如何工作
 ctf: 文件上传
 
 1. **.htaccess绕过**
-    通过添加`AddType application/x-httpd-php .png`可以将.png解析成php
+通过添加`AddType application/x-httpd-php .png`可以将.png解析成php
 2. windows大小写绕过
-    windows不区分大小写，比如处理.php，我们可以换成.phP
+windows不区分大小写，比如处理.php，我们可以换成.phP
 3. %00截断
     - 前提条件：
         magic_quotes_gpc = Off
@@ -128,11 +128,11 @@ life: 找工作需要注意的事
 2. 薪资待遇
 3. 晋升途径
 
-## 2021-07-05 
+## 2021-07-05
 
 ctf: 文件绕过-MIME
 
-## 2021-07-04 
+## 2021-07-04
 
 life: 房子终于找到了, 就是有点高
 cs: hydra爆破ssh, metasploit简单入门
@@ -169,9 +169,9 @@ cs: 以后, 所有的commit都采用[Angular 规范](https://www.ruanyifeng.com/
 该日志也将采用Angular规范, 不过type稍微修改下:
 
 - life: 生活
-- cs: 计算机科学, 思想 
+- cs: 计算机科学, 思想
 - tool: 工具
-- boring: 闲聊 
+- boring: 闲聊
 - blog: 博客
 - ctf
 
@@ -186,7 +186,7 @@ x :x:
 exclamation :exclamation:
 heavy_multiplication_x :heavy_multiplication_x:
 
-##  2021-06-27 
+##  2021-06-27
 
 今天无聊看了下当前博客的字数, 有点意思..
 
@@ -211,28 +211,28 @@ heavy_multiplication_x :heavy_multiplication_x:
     4. 不修改变量，使用递归将状态保存在参数里
     5. 参数一致，结果一致
 
-> Ref Link
-> [函数式编程初探](http://www.ruanyifeng.com/blog/2012/04/functional_programming.html)
+    > Ref Link
+    > [函数式编程初探](http://www.ruanyifeng.com/blog/2012/04/functional_programming.html)
 
 - update&upgrade
 
-update代表量的变化，upgrade代表质的变化
+    update代表量的变化，upgrade代表质的变化
 
 - 抽象三原则
 
-DRY，YAGNI，rule of three.
+    DRY，YAGNI，rule of three.
 
 - User space $ Kernel space
 
 - 如何看编程语言文档？
 
-边看手册边找一些好的代码例子练习（不搞大项目），官网一般都会有大量例子
+    边看手册边找一些好的代码例子练习（不搞大项目），官网一般都会有大量例子
 
 - mkfifo
 
-`|`可以将一个指令的stdout给另一个指令，而mkfifo可以创建一个pipe文件，不限制两个指令
+    `|`可以将一个指令的stdout给另一个指令，而mkfifo可以创建一个pipe文件，不限制两个指令
 
-EOF
+    EOF
 
 ## 2021-06-18
 
@@ -249,7 +249,7 @@ EOF
 - js其他正则字符
 
     1. `\n`: 最后的第n个子捕获匹配的子字符串
-    2. `(?:)`: 非捕获括号, 用来表示可以匹配但是并不存储数据 
+    2. `(?:)`: 非捕获括号, 用来表示可以匹配但是并不存储数据
 
 > Reference Link
 > [正则表达式的先行断言(lookahead)和后行断言(lookbehind)](https://www.runoob.com/w3cnote/reg-lookahead-lookbehind.html)
@@ -292,11 +292,11 @@ EOF
 
 - 关于设备配置方面：
 
-  使用CRT连接交换机配置，其他设备连接网口在web网页上配置，设备分为两个小阶段，
+    使用CRT连接交换机配置，其他设备连接网口在web网页上配置，设备分为两个小阶段，
 
-  一是按照拓扑图将所有设备的接口IP配置好（交换机还要配置VLAN），这方面没什么好说的，学好CISCO的配置就能完成这个小阶段。
+    一是按照拓扑图将所有设备的接口IP配置好（交换机还要配置VLAN），这方面没什么好说的，学好CISCO的配置就能完成这个小阶段。
 
-  二是设备的安全配置，我这次的交换机主要涉及ACL，port-channel，端口环路检测；防火墙主要涉及洪水攻击防护，规划策略（明白trust和untrust这两个概念就好），对某些服务的拦截等等；web应用防火墙就不说了，根据关键字在图形界面上临场发挥的...
+    二是设备的安全配置，我这次的交换机主要涉及ACL，port-channel，端口环路检测；防火墙主要涉及洪水攻击防护，规划策略（明白trust和untrust这两个概念就好），对某些服务的拦截等等；web应用防火墙就不说了，根据关键字在图形界面上临场发挥的...
 
 > 我的学习途径：设备基本都是参考师兄提供的设备手册，手册我放在这个文档的同级目录下了
 >
@@ -311,9 +311,9 @@ EOF
 
 - 关于系统安全方面：
 
-  这个阶段也有几大模块，有CMS漏洞（web渗透），PHP代码审计，wireshark抓包分析...主要就是抓flag值，这几乎是涉及计算机知识范围最广的阶段了，计算机网络、web前端、操作系统、数据库、后端.......
+    这个阶段也有几大模块，有CMS漏洞（web渗透），PHP代码审计，wireshark抓包分析...主要就是抓flag值，这几乎是涉及计算机知识范围最广的阶段了，计算机网络、web前端、操作系统、数据库、后端.......
 
-  不仅需要理论，还要大量的实践
+    不仅需要理论，还要大量的实践
 
 > 时间关系我只学了SQL注入，但比赛没有这个项目，所以我也就没能参加这个阶段，但我也想给出一点建议：
 >
@@ -339,13 +339,13 @@ EOF
 
 - 大二的我没有了看视频入门的习惯，觉得视频太老，不专业．．喜欢去官网硬啃（哪怕是英文）
 
-  但现在想了想，老的视频也是他的历史，了解历史才会知道为什么会这样发展
+    但现在想了想，老的视频也是他的历史，了解历史才会知道为什么会这样发展
 
 - 在网上收集资料确实有必要单独记录
 
-暂时就这么多吧．．
+    暂时就这么多吧．．
 
-思维导图等我比赛完毕在写页面吧．．
+    思维导图等我比赛完毕在写页面吧．．
 
 ## 2021-05-03
 
@@ -383,9 +383,9 @@ EOF
 
     ```java
     public Optional<String> readFromFile(String file) {
-        if (!fileExist(file)) {
-            return Optional.empty();
-        }
+    if (!fileExist(file)) {
+    return Optional.empty();
+    }
     }
     ```
 
@@ -479,7 +479,7 @@ EOF
 
     细节: 一般情况下, 优先选择最长的子网掩码的路由, 如果有多条路由, 则匹配管理距离, 管理距离小的路由优先, 如果管理距离相同, 再匹配度量值, 度量值小的优先, 如果度量值相同, 则选择负载均衡, 具体的方式看采用哪种路由协议和相关的配置
 
-- English translate 
+- English translate
 
 ## Nov 14 2020
 
@@ -493,5 +493,5 @@ EOF
 - 摆弄了virtualbox并立下了学汇编的flag(为了逆向, 系统)
 - 海岛升级16本
 
-## 
+##
 
