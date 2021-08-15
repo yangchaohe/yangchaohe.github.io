@@ -1,3 +1,21 @@
+## 2021-08-14 ##
+
+code: 命令行输出正则匹配的组
+
+```bash
+echo One Infinite Loop, Cupertino 95014 | rg -o "^[^,]+,\s*(.+?)\s*(\d{5})$"  -r '$2'
+```
+
+code: 复杂的逻辑 **必须** 使用流程图梳理清楚
+
+流程图 **可以** 使用 [Mermaid工具](https://github.com/mermaid-js/mermaid)
+
+## 2020-08-13
+
+code: php
+
+require_once 代价很大
+
 ## 2021-08-03
 
 tool: 解决BP字体锯齿感严重
