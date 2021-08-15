@@ -16,6 +16,12 @@ code: php
 
 require_once 代价很大
 
+## 2021-08-04
+
+cs: 解决Manjaro在双显示器下帧率为144的屏幕降为60Hz的问题
+
+在/etc/environment里添加`__GL_SYNC_DISPLAY_DEVICE=DP-2`
+
 ## 2021-08-03
 
 tool: 解决BP字体锯齿感严重
@@ -29,6 +35,10 @@ tool: 解决BP字体锯齿感严重
 code: 优化curl json输出
 
 npm i -g json; curl后重定向至json
+
+code: nodejs配置默认源
+
+`npm set registry https://registry.npmjs.org/`
 
 ## 2021-07-28
 
@@ -269,8 +279,8 @@ heavy_multiplication_x :heavy_multiplication_x:
     1. `\n`: 最后的第n个子捕获匹配的子字符串
     2. `(?:)`: 非捕获括号, 用来表示可以匹配但是并不存储数据
 
-> Reference Link
-> [正则表达式的先行断言(lookahead)和后行断言(lookbehind)](https://www.runoob.com/w3cnote/reg-lookahead-lookbehind.html)
+    > Reference Link
+    > [正则表达式的先行断言(lookahead)和后行断言(lookbehind)](https://www.runoob.com/w3cnote/reg-lookahead-lookbehind.html)
 
 ## 2021-06-17
 
@@ -316,16 +326,16 @@ heavy_multiplication_x :heavy_multiplication_x:
 
     二是设备的安全配置，我这次的交换机主要涉及ACL，port-channel，端口环路检测；防火墙主要涉及洪水攻击防护，规划策略（明白trust和untrust这两个概念就好），对某些服务的拦截等等；web应用防火墙就不说了，根据关键字在图形界面上临场发挥的...
 
-> 我的学习途径：设备基本都是参考师兄提供的设备手册，手册我放在这个文档的同级目录下了
->
-> 我的学习笔记：https://yangchaohe.github.io/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/
->
-> 笔记基本都是抄的手册和记录自己的一些心得
->
-> 我的建议：
->
-> 1. 交换机没必要深入三层协议（RIP,OSPF..）和二层协议（MSTP..），我们主安全配置
-> 2. 注意设备系统版本，参照比赛标准进行学习
+    > 我的学习途径：设备基本都是参考师兄提供的设备手册，手册我放在这个文档的同级目录下了
+    >
+    > 我的学习笔记：https://yangchaohe.github.io/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/
+    >
+    > 笔记基本都是抄的手册和记录自己的一些心得
+    >
+    > 我的建议：
+    >
+    > 1. 交换机没必要深入三层协议（RIP,OSPF..）和二层协议（MSTP..），我们主安全配置
+    > 2. 注意设备系统版本，参照比赛标准进行学习
 
 - 关于系统安全方面：
 
@@ -333,11 +343,11 @@ heavy_multiplication_x :heavy_multiplication_x:
 
     不仅需要理论，还要大量的实践
 
-> 时间关系我只学了SQL注入，但比赛没有这个项目，所以我也就没能参加这个阶段，但我也想给出一点建议：
->
-> - hackbar，burpsuite，中国菜刀..几个工具越熟练越好
-> - 我推荐一个这方面的博主https://www.sqlsec.com/
-> - DVWA靶场
+    > 时间关系我只学了SQL注入，但比赛没有这个项目，所以我也就没能参加这个阶段，但我也想给出一点建议：
+    >
+    > - hackbar，burpsuite，中国菜刀..几个工具越熟练越好
+    > - 我推荐一个这方面的博主https://www.sqlsec.com/
+    > - DVWA靶场
 
 ## 2021-05-04
 

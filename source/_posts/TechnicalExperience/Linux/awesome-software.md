@@ -61,3 +61,14 @@ Cat clone with syntax highlighting and git integration
 
 install: `$ npm install -g commitizen`
 
+## rg
+
+code搜索工具，以行为单位，是grep的替代工具，速度更快
+
+install: `pacman -S ripgrep`
+
+## ag
+
+code搜索工具，以行为单位，是grep的替代工具，速度更快
+
+install: `pacman -S the_silver_searcher`
