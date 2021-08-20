@@ -1,4 +1,26 @@
-## 2021-08-14 ##
+## 2021-08-19
+
+life: Don't ever grow up. Play on!
+
+code: 设计模式
+
+1. SOLID原则
+
+code: [并发编程——原子性，可见性和有序性](https://blog.csdn.net/eff666/article/details/66473088)
+
+todo: PHP
+
+1. Laravel 开发 Web 项目 (0%)
+2. PHP 1000h 计划 (10h)
+
+## 2021-08-17
+
+tool: git 从其他分支获取文件
+
+`git > 2.23`: git restore -s <branch_name> -- <file/dir_path>
+`git <= 2.23`: git check <branch_name> -- <file/dir_path>
+
+## 2021-08-14
 
 code: 命令行输出正则匹配的组
 
