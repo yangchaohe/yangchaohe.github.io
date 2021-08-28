@@ -30,7 +30,7 @@ category_dir: categories
 # mindmap_dir: mindmap
 code_dir: downloads/code
 i18n_dir: :lang
-skip_render: 
+skip_render:
   - "life/life.md"
   - "mindmap-src/*.md"
   - "mindmap/*.html"
@@ -102,12 +102,12 @@ theme: hexo-theme-amazing
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: 
+  repo:
     github: git@github.com:yangchaohe/yangchaohe.github.io.git
     # coding: git@e.coding.net:ych2n/yangchaohe.git
   branch: master
   # message: "Site updated: {{ now('YYYY-MM-DD HH:mm:ss') }})"
-  
+
 
 #matery
 #高亮
@@ -149,9 +149,9 @@ githubEmojis:
 #   up_host: http://upload.qiniu.com #默认即可
 #   local_dir: static
 #   update_exist: true
-#   image: 
+#   image:
 #     folder: images
-#     extend: 
+#     extend:
 #   js:
 #     folder: js
 #   css:
@@ -182,3 +182,11 @@ mermaid:
   version: "7.1.2"
   options:  # find more api options from https://github.com/knsv/mermaid/blob/master/src/mermaidAPI.js
     #startOnload: true  // default true
+feed:
+    type: atom
+    path: atom.xml
+    limit: 20
+    hub:
+    content:
+    content_limit:
+    content_limit_delim: '<!-- more -->'
