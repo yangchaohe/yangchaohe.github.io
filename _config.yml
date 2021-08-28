@@ -189,4 +189,4 @@ feed:
     hub:
     content:
     content_limit:
-    content_limit_delim: '<!-- more -->'
+    content_limit_delim: #'<!-- more -->'
