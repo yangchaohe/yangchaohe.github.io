@@ -1,3 +1,66 @@
+## 2021-09-06
+
+todo: PHP
+
+1. Laravel 开发 Web 项目 (65%)
+2. PHP 1000h 计划 (16h+45min*22)
+
+## 2021-09-05
+
+todo: PHP
+
+1. Laravel 开发 Web 项目 (62%)
+2. PHP 1000h 计划 (16h+45min*20)
+
+## 2021-08-29
+
+todo: PHP
+
+1. Laravel 开发 Web 项目 (42%)
+2. PHP 1000h 计划 (16h+45min*14)
+
+## 2021-08-24
+
+tool: vim 恢复文件
+
+`vim -r filename`
+
+todo: PHP
+
+1. Laravel 开发 Web 项目 (40%)
+2. PHP 1000h 计划 (16h+45min*7)
+
+## 2021-08-23
+
+todo: PHP
+
+1. Laravel 开发 Web 项目 (40%)
+2. PHP 1000h 计划 (16h+45min*7)
+
+## 2021-08-22
+
+todo: PHP
+
+1. Laravel 开发 Web 项目 (35%)
+2. PHP 1000h 计划 (10h+45min*12)
+
+## 2021-08-21
+
+life: -79￥
+
+tool: kde
+
+更新后报错：无法创建输入输出后端。klauncher 回应：找不到插件“/usr/lib/qt/plugins/kf5/kio/file.so”。
+
+解决方法：「dbus-launch dolphin」
+
+todo: PHP
+
+1. Laravel 开发 Web 项目 (0%)
+2. PHP 1000h 计划 (10h+45min*3)
+
+life: 人的大脑一下子暴露在太多的新概念下，会使人变得焦躁。
+
 ## 2021-08-19
 
 life: Don't ever grow up. Play on!
@@ -6,7 +69,7 @@ code: 设计模式
 
 1. SOLID原则
 
-code: [并发编程——原子性，可见性和有序性](https://blog.csdn.net/eff666/article/details/66473088)
+code: [并发编程——原子性，可见性和有序](https://blog.c sdn.net/eff666/article/details/66473088)
 
 todo: PHP
 
@@ -17,8 +80,16 @@ todo: PHP
 
 tool: git 从其他分支获取文件
 
-`git > 2.23`: git restore -s <branch_name> -- <file/dir_path>
-`git <= 2.23`: git check <branch_name> -- <file/dir_path>
+`git > 2.23`: `git restore -s <branch_name> -- <file/dir_path>`
+
+`git <= 2.23`: `git check <branch_name> -- <file/dir_path>`
+
+## 2021-08-15
+
+code: 好的编程习惯
+
+1. 继承表示「是一个」的关系
+2. 单例和链式调用都要慎用
 
 ## 2021-08-14
 
