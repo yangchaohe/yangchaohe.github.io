@@ -11,3 +11,4 @@ thumbnail: https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/im
 <script src="/js/life.js"></script>
 <br>
 <br>
+

