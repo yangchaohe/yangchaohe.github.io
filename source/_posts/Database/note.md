@@ -98,10 +98,11 @@ general_log_file='/var/log/mysql/general.log'
 | [`HEX()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_hex) | 将输入的数字或字符串输出16进制 |
 | [`LOAD_FILE()`](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_load-file) | 以字符的形式返回文件的内容     |
 | left(a,b)                                                    | 截取字符串a的前b位             |
-| substr(a,b,c)                                                | 截取字符串a从b位到c位是        |
+| substr(a,b,c)                                                | 截取字符串a从b位截到c位        |
 | if(a,b,c)                                                    | a为true，返回b，否则c          |
 | sleep(sec)                                                   | 延迟查询sec秒数                |
 | group_concat()                                               | 将该column的值用`,`连接起来    |
+| concat()                                                     | 将所有的参数连接起来成为字符串 |
 
 | 语句   | 功能             |
 | ------ | ---------------- |
