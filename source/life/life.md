@@ -1,3 +1,8 @@
+## 2021-09-08
+
+tool: Chrome 支持将路径转为 curl
+code: 使用phpunit进行测试
+
 ## 2021-09-06
 
 todo: PHP
@@ -12,6 +17,13 @@ todo: PHP
 1. Laravel 开发 Web 项目 (62%)
 2. PHP 1000h 计划 (16h+45min*20)
 
+## 2021-09-02
+
+tool: Shift + 鼠标滚轮：横向滚动
+os: 并发和并行的区别
+
+并发：cpu 执行 a 任务的一部分后，又去执行 b 任务的一部分(程序里的多线程)
+并行：多核cpu中，a cpu 执行 a 任务，b cpu 执行 b 任务(操作系统决定)
 ## 2021-08-29
 
 todo: PHP
@@ -615,4 +627,3 @@ heavy_multiplication_x :heavy_multiplication_x:
 - 海岛升级16本
 
 ##
-
