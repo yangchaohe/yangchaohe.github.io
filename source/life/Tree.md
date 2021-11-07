@@ -5,7 +5,7 @@
 
 ## 网络安全
 
-### CTF
+### CTF-WEB
 
 1. 信息泄漏
 
@@ -51,11 +51,11 @@
 
         1. Chrome 插件 hackbar
 
-3. xss 注入：20 min
+3. xss 注入(https://xss.pt/)：20 min
 
     - [x] 反射型 XSS
 
-4. 文件上传：10h +76min
+4. 文件上传：10h +76min+21min
     - [x] 无验证，直接上传
 
     - [x] 前端验证（js）
@@ -82,7 +82,7 @@
 
     - [x] 文件头绕过：后端如果验证的是文件头，可以在后门文件头部伪造成其他的文件绕过
 
-    - [x] 00 截断：在 PHP<5.3.4 的版本中，存在 00 截断漏洞（底层 C），抓包在上传路径了添加 `%00` 即可忽略后面的文件名
+    - [x] 00 截断(GET, POST)：在 PHP<5.3.4 的版本中，存在 00 截断漏洞（底层 C），抓包在上传路径了添加 `%00` 即可忽略后面的文件名
 
     - [x] 双写后缀绕过：
 
@@ -104,7 +104,47 @@
         <?php fputs(fopen('xiao.php','w'),'<?php eval($_REQUEST[1]);?>');?>
         ```
 
-        
+    - [x] `move_uploaded_file(tmp_file, path)` : 对于php<5.3.4的版本可以使用00截断，实际上 `path` 也会被 `/.` 截断
 
-    
+5. RCE (remote command/code execute):  +85min+30min+79min
+
+    - [x] eval 执行（system, exec, passthru）
+
+    - [x] 文件包含
+
+    - [x] php://input (php.ini: allow_url_include=on)
+
+        用于**执行php代码**
+
+        POST 的 body 里面写 木马语句
+
+    - [x] 远程包含：同上
+
+    - [ ] php://filter (php.ini: allow_url_include=on)：用于**读取源码**
+
+    - [x] 命令注入
+
+    - [x] 过滤空格 ( `<, <>, $IFS` )
+
+    - [x] 过滤cat（ less, more？）
+
+    - [x] 过滤 `/` (还有 `&&`, `||`, `;`)
+
+    - [x] 过滤 `&&`、`||`( `;` )
+
+    - [x] 过滤 `| || & && ; / cat flag ctfhub [:space:]`
+
+        我们知道 linux 下的 的换行符是 `\r` , url 编码是 `%0a` (0a 在 ascii 里就是 `\r`)
+
+        利用 %0a 就能执行其他命令。
+
+        利用 `${IFS}`代替空格，`ca\t` 代替 `cat`， `fla\g `代替 `flag` 就可以获取flag了。
+
+        ps： 还能使用空的变量绕过过滤的名字，比如 `f${i_am_null}lag`
+
+6. SSRF (Server-side request forgery) 30min
+
+    - [x] 内网访问
+    - [x] 伪协议读取文件 ( file:/// )
+    - [ ] 
 
