@@ -142,9 +142,29 @@
 
         ps： 还能使用空的变量绕过过滤的名字，比如 `f${i_am_null}lag`
 
-6. SSRF (Server-side request forgery) 30min
+6. SSRF (Server-side request forgery) 30min + 8h
 
     - [x] 内网访问
+    
     - [x] 伪协议读取文件 ( file:/// )
-    - [ ] 
+    
+    - [x] 端口扫描（BP 内网爆破）
+    
+    - [x] POST请求（gopher://）
+    
+    - [x] 上传文件（gopher://）
+    
+    - [x] FastCGI 协议（漏洞脚本 exp, gopher://）
+    
+    - [x] Redis 协议（RESP 协议，抓包，gopher;//）
+    
+    - [x] URL bypass (`url 认证机制 @`)
+    
+    - [x] 数字IP bypass (我 tm 直接 localhost，或者 `7f000001`)
+    
+    - [x] 302跳转 Bypass (localhost)
+    
+        正常逻辑应该是先访问302页面，gopher多转一次 url 编码
+    
+    - [x] [DNS Rebinding](https://zhuanlan.zhihu.com/p/89426041) (利用 DNS TTL 的漏洞)
 
