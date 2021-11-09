@@ -11,8 +11,12 @@
 
     - [x] 目录遍历
     - [x] phpinfo
-    - [x] 备份文件（dirsearch）
-    - [x] Git 泄漏（log）
+    - [x] 备份文件（dirsearch 爆破目录）
+      - 网站源码
+      - bak 文件
+      - vim 缓存
+      - 
+    - [x] Git 泄漏（[GitHack](https://github.com/BugScanTeam/GitHack)）
 
 2. sql 注入：1.5h+1.5h+1h+2h+2h+85min
 
@@ -167,4 +171,3 @@
         正常逻辑应该是先访问302页面，gopher多转一次 url 编码
     
     - [x] [DNS Rebinding](https://zhuanlan.zhihu.com/p/89426041) (利用 DNS TTL 的漏洞)
-

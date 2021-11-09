@@ -1,4 +1,18 @@
+---
+title: Fastcgi协议分析 && PHP-FPM未授权访问漏洞 && Exp编写
+toc: true
+recommend: 1
+uniqueId: '2021-11-09 06:59:53/fastcgi.html'
+mathJax: false
+date: 2021-11-09 14:59:53
+thumbnail:
+tags:
+categories:
+keywords:
+---
 > 转载自 [Fastcgi协议分析 && PHP-FPM未授权访问漏洞 && Exp编写](https://blog.csdn.net/mysteryflower/article/details/94386461)
+
+<!-- more -->
 
 搭过php相关环境的同学应该对fastcgi不陌生，那么fastcgi究竟是什么东西，为什么nginx可以通过fastcgi来对接php？
 
