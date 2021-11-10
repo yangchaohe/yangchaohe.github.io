@@ -27,3 +27,9 @@ echo -n '%68%65%6c%6c%6f' | sed 's/%//g' | xxd -r -p
 echo -n '%68%65%6c%6c%6f' | tr -d '%' | xxd -r -p
 ```
 
+3. bc 进制转换
+
+```bash
+echo "obase=16;ibase=2;11101" | bc
+```
+

@@ -171,3 +171,5 @@
         正常逻辑应该是先访问302页面，gopher多转一次 url 编码
     
     - [x] [DNS Rebinding](https://zhuanlan.zhihu.com/p/89426041) (利用 DNS TTL 的漏洞)
+    
+7. 密码学：+5h+30min
