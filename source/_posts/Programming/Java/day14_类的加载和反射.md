@@ -32,12 +32,12 @@ ok，介绍完毕，代码部分
 package com.manu;
 
 public class Student {
-    
+
     private String name;
     private int id;
     private int age;
     public int score;
-    
+
     public Student (){}
     public Student(String name, int id, int age) {
         this.name = name;
@@ -77,7 +77,7 @@ package com.manu;
 
 public class GetClass {
     public static void main(String[] args) throws Exception {
-        
+
         //获取class对象
         //1.通过对象获得
         Student s = new Student();
@@ -99,31 +99,31 @@ import java.lang.reflect.Constructor;
 
 public class GetConstructor {
     public static void main(String[] args) throws Exception {
-        
+
         Class c = Class.forName("com.manu.Student");
-        
+
         //获得所有public构造方法
         Constructor[] cs = c.getConstructors();
-        
+
         //获得指定构造方法,没有参数代表无参构造方法
 //        Constructor cs2 = c.getConstructor();
         Constructor cs2 = c.getConstructor(String.class,int.class,int.class);
-        
+
         //调用构造方法
         Object o = cs2.newInstance("manu",100,19);
         Student s = (Student)o;
         s.show();
-        
+
         //忽略权限得到构造方法
         Constructor[] cs3 = c.getDeclaredConstructors();
         Constructor cs4 = c.getDeclaredConstructor(int.class);
-        
+
         //使用private的构造方法
         cs4.setAccessible(true);
         Object o2 = cs4.newInstance(19);
         Student s2 = (Student)o2;
         s2.show();
-        
+
     }
 }
 ```
@@ -140,24 +140,24 @@ public class GetField {
         //因为获取字段需要对象，这里new一个对象
         Student stu = new Student("manu",9001,19);
         Class c = Class.forName("com.manu.Student");
-        
+
         //得到所有public字段（成员变量）
         Field[] fields = c.getFields();
         //指定字段名字，public
         Field field = c.getField("score");
-        
+
         //反射形式访问字段
         System.out.println(field.get(stu));
-        
+
         //得到所有字段（忽略权限）
         Field[] fields2 = c.getDeclaredFields();
         //指定字段名字（忽略权限）
         Field field2 = c.getDeclaredField("age");
-        
+
         //反射形式访问字段
         field2.setAccessible(true);
         System.out.println(field2.get(stu));
-        
+
     }
 }
 ```
@@ -171,10 +171,10 @@ import java.lang.reflect.Method;
 
 public class GetMethod {
     public static void main(String[] args) throws Exception {
-        
+
         Student stu = new Student("manu",9001,19);
         Class c = Class.forName("com.manu.Student");
-        
+
         //得到所有public方法，包括继承父类
         Method[] method = c.getMethods();
         //指定方法名,public,
@@ -183,10 +183,10 @@ public class GetMethod {
         //加上参数
         Method m2 = c.getMethod("learn",String.class);
         m2.invoke(stu, "Java");
-        
+
         //得到自身的所有方法，包括private
         Method[] m3 = c.getDeclaredMethods();
-        
+
         //调用private方法
         Method m4 = c.getDeclaredMethod("eat", String.class);
         m4.setAccessible(true);
@@ -194,4 +194,3 @@ public class GetMethod {
     }
 }
 ```
-

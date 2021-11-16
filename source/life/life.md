@@ -1,3 +1,8 @@
+## 2021-11-13
+
+life: 不要纠结细节问题，学到最后终得解
+learn: 按照 Morty 老师的方法学习英语
+
 ## 2021-09-08
 
 tool: Chrome 支持将路径转为 curl
@@ -306,7 +311,8 @@ cs: 以后, 所有的commit都采用[Angular 规范](https://www.ruanyifeng.com/
 - tool: 工具
 - boring: 闲聊
 - blog: 博客
-- ctf
+- ctf: CTF 赛事
+- learn: 学习
 
 ## 2021-06-28
 

@@ -15,7 +15,7 @@
       - 网站源码
       - bak 文件
       - vim 缓存
-      - 
+      -
     - [x] Git 泄漏（[GitHack](https://github.com/BugScanTeam/GitHack)）
 
 2. sql 注入：1.5h+1.5h+1h+2h+2h+85min
@@ -58,6 +58,7 @@
 3. xss 注入(https://xss.pt/)：20 min
 
     - [x] 反射型 XSS
+    - [ ] 存储型 XSS
 
 4. 文件上传：10h +76min+21min
     - [x] 无验证，直接上传
@@ -124,7 +125,7 @@
 
     - [x] 远程包含：同上
 
-    - [ ] php://filter (php.ini: allow_url_include=on)：用于**读取源码**
+    - [x] php://filter (php.ini: allow_url_include=on)：用于**读取源码**
 
     - [x] 命令注入
 
@@ -149,27 +150,32 @@
 6. SSRF (Server-side request forgery) 30min + 8h
 
     - [x] 内网访问
-    
+
     - [x] 伪协议读取文件 ( file:/// )
-    
+
     - [x] 端口扫描（BP 内网爆破）
-    
+
     - [x] POST请求（gopher://）
-    
+
     - [x] 上传文件（gopher://）
-    
+
     - [x] FastCGI 协议（漏洞脚本 exp, gopher://）
-    
+
     - [x] Redis 协议（RESP 协议，抓包，gopher;//）
-    
+
     - [x] URL bypass (`url 认证机制 @`)
-    
+
     - [x] 数字IP bypass (我 tm 直接 localhost，或者 `7f000001`)
-    
+
     - [x] 302跳转 Bypass (localhost)
-    
+
         正常逻辑应该是先访问302页面，gopher多转一次 url 编码
-    
+
     - [x] [DNS Rebinding](https://zhuanlan.zhihu.com/p/89426041) (利用 DNS TTL 的漏洞)
-    
+
 7. 密码学：+5h+30min
+
+
+## English
+
+- [ ] 过一遍新概念
