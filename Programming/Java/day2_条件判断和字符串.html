@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>条件判断和字符串 - 码奴的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="码奴的博客"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="码奴的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="分支、循环与字符串相关的一些操作"><meta property="og:type" content="note"><meta property="og:title" content="码奴"><meta property="og:url" content="https://yangchaohe.github.io/"><meta property="og:site_name" content="MANU"><meta property="og:description" content="分支、循环与字符串相关的一些操作"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yangchaohe.github.io/img/avatar.png"><meta property="article:published_time" content="2020-02-23T16:00:00.000Z"><meta property="article:modified_time" content="2023-01-06T10:37:32.768Z"><meta property="article:author" content="manu"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchaohe.github.io/Programming/Java/day2_%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2.html"},"headline":"码奴的博客","image":["https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/引用数据类型存放内存.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/字符串new存储方式.png"],"datePublished":"2020-02-23T16:00:00.000Z","dateModified":"2023-01-06T10:37:32.768Z","author":{"@type":"Person","name":"manu"},"description":"分支、循环与字符串相关的一些操作"}</script><link rel="canonical" href="http://yangchaohe.github.io/Programming/Java/day2_%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2.html"><link rel="icon" href="/img/favicon.png"><meta name="referrer" content="no-referrer-when-downgrade"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="码奴的博客" type="application/atom+xml">
+</head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/mindmap">思维导图</a><a class="navbar-item" href="/read">书籍</a><a class="navbar-item" href="/life">日志</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><!--!--><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2020-02-24  <span class="level-item"> manu </span><a class="commentCountImg" href="/Programming/Java/day2_%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2.html#comment-container"><span class="display-none-class">/Programming/Java/day2_条件判断和字符串.html</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="6efd893be50a585993e1b1eca5637cda">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>6 分钟  <i class="fas fa-pencil-alt"> </i>1.0 k</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">条件判断和字符串</h1><div class="content"><p> 分支、循环与字符串相关的一些操作</p>
+<span id="more"></span>
+
+<h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><h3 id="1-if语句"><a href="#1-if语句" class="headerlink" title="1.if语句"></a>1.if语句</h3><p>语法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//形式1</span></span><br><span class="line"><span class="keyword">if</span> (布尔表达式) &#123;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//形式3(else if数量不限，else可有可无)</span></span><br><span class="line"><span class="keyword">if</span> (布尔表达式) &#123;</span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (布尔表达式) &#123;</span><br><span class="line">    </span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-switch语句"><a href="#2-switch语句" class="headerlink" title="2.switch语句"></a>2.switch语句</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">	<span class="keyword">case</span> value1:</span><br><span class="line">		语句块;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">case</span> value2:</span><br><span class="line">		语句块;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	<span class="keyword">default</span>:</span><br><span class="line">		语句块;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>表达式可以是整数，字符，枚举，字符串</p>
+<p>case后面必须是常量</p>
+<p>break用来中断语句</p>
+</blockquote>
+<h2 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h2><h3 id="1-while循环"><a href="#1-while循环" class="headerlink" title="1.while循环"></a>1.while循环</h3><p>语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(布尔表达式)&#123;</span><br><span class="line">	循环体;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>满足条件运行循环体</p>
+<h3 id="2-do-while循环"><a href="#2-do-while循环" class="headerlink" title="2.do while循环"></a>2.do while循环</h3><p>语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">	循环体;</span><br><span class="line">&#125;<span class="keyword">while</span>(表达式)</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-for循环"><a href="#3-for循环" class="headerlink" title="3.for循环"></a>3.for循环</h3><p>语法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="keyword">for</span>(初始化语句;条件判断语句;更新语句)&#123;</span><br><span class="line">	循环体;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//2</span></span><br><span class="line"><span class="keyword">for</span> (循环变量类型 循环变量名称 : 要被遍历的对象) &#123;</span><br><span class="line">    循环体        </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>条件判断语句不写默认true</li>
+</ul>
+<h2 id="break-continue"><a href="#break-continue" class="headerlink" title="break continue"></a>break continue</h2><ul>
+<li>break跳出<strong>当前</strong>循环</li>
+<li>continue中断<strong>当前</strong>循环，进入下一次循环</li>
+</ul>
+<h3 id="break的其他用法"><a href="#break的其他用法" class="headerlink" title="break的其他用法"></a>break的其他用法</h3><ul>
+<li>自定义标签，跳出标签所在循环</li>
+</ul>
+<p>比如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">outside:</span><br><span class="line"><span class="keyword">while</span>()&#123;</span><br><span class="line">	inside:</span><br><span class="line">	<span class="keyword">for</span>()&#123;</span><br><span class="line">		<span class="keyword">break</span> outside;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><p>在<code>&quot;&quot;</code>里面的就是字符串常量</p>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>定义一个字符串变量需要引用一个新的类<code>String</code></p>
+<p>有两种定义模式</p>
+<p>1.<code>String str = &quot;HelloWorld!&quot;;</code></p>
+<p>2.<code>String str2 = new String(&quot;HelloWorld!&quot;);</code></p>
+<h3 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h3><p>通过<code>+</code>可以对字符串（或其他数据类型）常量和变量作连接操作</p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+<li>字符串是无法被修改的</li>
+<li>基本数据类型都在<strong>栈</strong>区，栈容量比较小</li>
+<li>引用数据类型在<strong>栈</strong>存放地址，数据存放在<strong>方法常量区</strong>，地址指向数据</li>
+</ul>
+<p>如图</p>
+<img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/引用数据类型存放内存.png" alt="引用数据类型存放内存" style="zoom:50%;" />
+
+<ul>
+<li>基本数据类型变量改变时会直接覆盖原始数据</li>
+<li>引用数据类型的原始数据不会被删除，改变时会创建新的数据，并改变地址指向</li>
+</ul>
+<h3 id="信息获取"><a href="#信息获取" class="headerlink" title="信息获取"></a>信息获取</h3><p>也就是针对字符串的一些操作</p>
+<h4 id="长度"><a href="#长度" class="headerlink" title="长度"></a>长度</h4><p><code>s.length()</code></p>
+<p>s代表字符变量</p>
+<p>示例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">System.out.println(str.length());</span><br></pre></td></tr></table></figure>
+
+<p>结果就是12</p>
+<h4 id="查找子字符串的位置"><a href="#查找子字符串的位置" class="headerlink" title="查找子字符串的位置"></a>查找子字符串的位置</h4><p>查找字符会从0开始索引</p>
+<p>1.<code>s.indexOf(int c);</code></p>
+<p>传递一个数字或字符，返回字符的索引</p>
+<p>2.<code>s.indexOf(String str);</code></p>
+<p>传递一段字符串，返回第一个字符的索引，不存在返回-1</p>
+<p>3.<code>s.lastIndexOf(String str);</code></p>
+<p>从字符串末尾开始查找，返回第一个字符的索引</p>
+<h4 id="获取指定索引的字符"><a href="#获取指定索引的字符" class="headerlink" title="获取指定索引的字符"></a>获取指定索引的字符</h4><p><code>s.charAt(int index);</code></p>
+<h4 id="获取指定字符串"><a href="#获取指定字符串" class="headerlink" title="获取指定字符串"></a>获取指定字符串</h4><p><code>s.substring(int beginindex);</code></p>
+<p>得到索引以后的字符</p>
+<p><code>s.substring(int beginindex,int endindex);</code></p>
+<p>得到索引范围内的字符</p>
+<h3 id="判断"><a href="#判断" class="headerlink" title="判断"></a>判断</h3><p>判断的返回值是布尔值</p>
+<h4 id="开头字符"><a href="#开头字符" class="headerlink" title="开头字符"></a>开头字符</h4><p><code>s.startWith(String prefix);</code></p>
+<h4 id="结尾字符"><a href="#结尾字符" class="headerlink" title="结尾字符"></a>结尾字符</h4><p><code>s.endWith(String suffix);</code></p>
+<blockquote>
+<p><code>&quot;&quot;</code>虽然也返回true，但没有意义</p>
+</blockquote>
+<h4 id="相等"><a href="#相等" class="headerlink" title="相等"></a>相等</h4><p>1.<code>==</code></p>
+<p>功能：可以判断数据引用是否相同</p>
+<p>规则：<code>str1==str2</code></p>
+<p>特例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str1 = <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">String str2 = <span class="keyword">new</span> String(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">System.out.println(str1==str2);</span><br></pre></td></tr></table></figure>
+
+<p>结果是<code>false</code></p>
+<p>为什么？</p>
+<p>看图：</p>
+<img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/字符串new存储方式.png" alt="字符串new存储方式" style="zoom:50%;" />
+
+<p>2.<code>s.equals(String str);</code></p>
+<p>功能：直接查看字符是否相同</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str1 = <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line">String str2 = <span class="keyword">new</span> String(<span class="string">&quot;Hello World!&quot;</span>);</span><br><span class="line">System.out.println(str1.equals(str2));</span><br></pre></td></tr></table></figure>
+
+<p>3.<code>s.equalsIgnoreCase(String str);</code></p>
+<p>功能：忽略大小写</p>
+<p>4.<code>s.compareTo(String str);</code></p>
+<p>功能：比较字符串的大小，通过索引一个一个字符的比较，相同则跳过，遇到不同则返回差值，若s与str前面几个字符相同后面不同则返回字符串长度的差值</p>
+<h4 id="含某子字符串"><a href="#含某子字符串" class="headerlink" title="含某子字符串"></a>含某子字符串</h4><p><code>s.contains(String str)</code></p>
+<h4 id="空字符串"><a href="#空字符串" class="headerlink" title="空字符串"></a>空字符串</h4><p><code>s.isEmpty</code></p>
+<p>空的状态</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s1 = <span class="string">&quot;&quot;</span>;		<span class="comment">//空指针</span></span><br><span class="line">String s2 = <span class="keyword">null</span>;	<span class="comment">//空对象</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="转换操作"><a href="#转换操作" class="headerlink" title="转换操作"></a>转换操作</h3><p>操作都不会改变原有字符串，会创建新的字符串</p>
+<h4 id="大小写"><a href="#大小写" class="headerlink" title="大小写"></a>大小写</h4><p><code>s.toLowerCase(String str)</code></p>
+<p><code>s.toUpperCase(String str)</code></p>
+<h4 id="除去首尾空格"><a href="#除去首尾空格" class="headerlink" title="除去首尾空格"></a>除去首尾空格</h4><p><code>s.trim(String str)</code></p>
+<h4 id="替换"><a href="#替换" class="headerlink" title="替换"></a>替换</h4><p><code>s.replace(old str,new str)</code></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>条件判断和字符串</p><p><a href="http://yangchaohe.github.io/Programming/Java/day2_条件判断和字符串.html">http://yangchaohe.github.io/Programming/Java/day2_条件判断和字符串.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><a href="http://yangchaohe.github.io"><p>manu</p></a></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-02-24</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-01-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="recommend-area"><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 相关文章</span><br><span>  1.<a class="is-size-6" href="/Programming/Java/day14_%E7%B1%BB%E7%9A%84%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%8F%8D%E5%B0%84.html" target="_blank">类的加载和反射</a><br></span><span>  2.<a class="is-size-6" href="/Programming/Java/day13_%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B.html" target="_blank">网络编程</a><br></span><span>  3.<a class="is-size-6" href="/Programming/Java/day12_%E5%A4%9A%E7%BA%BF%E7%A8%8B.html" target="_blank">理解多线程</a><br></span><span>  4.<a class="is-size-6" href="/Programming/Java/day11_IO%E6%B5%81.html" target="_blank">理解IO流</a><br></span><span>  5.<a class="is-size-6" href="/Programming/Java/day10_%E9%9B%86%E5%90%88%E7%B1%BB.html" target="_blank">集合类</a><br></span><span>  6.<a class="is-size-6" href="/Programming/Java/day9_%E5%90%84%E7%A7%8D%E5%B7%A5%E5%85%B7%E7%B1%BB.html" target="_blank">工具类</a><br></span><span>  7.<a class="is-size-6" href="/Programming/Java/day7_%E5%A4%9A%E6%80%81%E4%B8%8E%E6%8E%A5%E5%8F%A3.html" target="_blank">多态与接口</a><br></span><span>  8.<a class="is-size-6" href="/Programming/Java/day8_ide_eclipse.html" target="_blank">简单使用Eclipse</a><br></span></div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 推荐文章</span><br><span>  1.<a class="is-size-6" href="/Database/ALTER.html" target="_blank">ALTER</a><br></span><span>  2.<a class="is-size-6" href="/Database/note.html" target="_blank">数据库笔记</a><br></span><span>  3.<a class="is-size-6" href="/Front-end/wechat-app.html" target="_blank">微信小程序笔记</a><br></span><span>  4.<a class="is-size-6" href="/Reverse/OD.html" target="_blank">动态调试-OD</a><br></span><span>  5.<a class="is-size-6" href="/Reverse/winPE.html" target="_blank">winPE结构</a><br></span><span>  6.<a class="is-size-6" href="/devTool/git.html" target="_blank">git指令</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Programming/C/%E6%8C%89%E4%BD%8D%E4%B8%8E%E7%A7%BB%E4%BD%8D.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">按位运算与移位运算</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Programming/Java/day1_%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html"><span class="level-item">Java基础</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">通知</h3><ul><li><span><span>2021.6.28 公告测试</span></span></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex is-mobile" href="#条件判断"><span class="mr-2">1</span><span>条件判断</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#1-if语句"><span class="mr-2">1.1</span><span>1.if语句</span></a></li><li><a class="is-flex is-mobile" href="#2-switch语句"><span class="mr-2">1.2</span><span>2.switch语句</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#循环"><span class="mr-2">2</span><span>循环</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#1-while循环"><span class="mr-2">2.1</span><span>1.while循环</span></a></li><li><a class="is-flex is-mobile" href="#2-do-while循环"><span class="mr-2">2.2</span><span>2.do while循环</span></a></li><li><a class="is-flex is-mobile" href="#3-for循环"><span class="mr-2">2.3</span><span>3.for循环</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#break-continue"><span class="mr-2">3</span><span>break continue</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#break的其他用法"><span class="mr-2">3.1</span><span>break的其他用法</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#字符串"><span class="mr-2">4</span><span>字符串</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#常量"><span class="mr-2">4.1</span><span>常量</span></a></li><li><a class="is-flex is-mobile" href="#变量"><span class="mr-2">4.2</span><span>变量</span></a></li><li><a class="is-flex is-mobile" href="#连接"><span class="mr-2">4.3</span><span>连接</span></a></li><li><a class="is-flex is-mobile" href="#特性"><span class="mr-2">4.4</span><span>特性</span></a></li><li><a class="is-flex is-mobile" href="#信息获取"><span class="mr-2">4.5</span><span>信息获取</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#长度"><span class="mr-2">4.5.1</span><span>长度</span></a></li><li><a class="is-flex is-mobile" href="#查找子字符串的位置"><span class="mr-2">4.5.2</span><span>查找子字符串的位置</span></a></li><li><a class="is-flex is-mobile" href="#获取指定索引的字符"><span class="mr-2">4.5.3</span><span>获取指定索引的字符</span></a></li><li><a class="is-flex is-mobile" href="#获取指定字符串"><span class="mr-2">4.5.4</span><span>获取指定字符串</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#判断"><span class="mr-2">4.6</span><span>判断</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#开头字符"><span class="mr-2">4.6.1</span><span>开头字符</span></a></li><li><a class="is-flex is-mobile" href="#结尾字符"><span class="mr-2">4.6.2</span><span>结尾字符</span></a></li><li><a class="is-flex is-mobile" href="#相等"><span class="mr-2">4.6.3</span><span>相等</span></a></li><li><a class="is-flex is-mobile" href="#含某子字符串"><span class="mr-2">4.6.4</span><span>含某子字符串</span></a></li><li><a class="is-flex is-mobile" href="#空字符串"><span class="mr-2">4.6.5</span><span>空字符串</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#转换操作"><span class="mr-2">4.7</span><span>转换操作</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#大小写"><span class="mr-2">4.7.1</span><span>大小写</span></a></li><li><a class="is-flex is-mobile" href="#除去首尾空格"><span class="mr-2">4.7.2</span><span>除去首尾空格</span></a></li><li><a class="is-flex is-mobile" href="#替换"><span class="mr-2">4.7.3</span><span>替换</span></a></li></ul></li></ul></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="码奴"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">码奴</p><p class="is-size-6 is-block">待人友善是修养，独来独往是性格</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>中国贵州</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">157</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">39</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">161</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/yangchaohe" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/yangchaohe"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:manu2x@.com"><i class="fa fa-envelope"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"来源《"+data.from+"》</p><p>提供者-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-17T14:05:40.000Z">2021-11-17</time></p><p class="title"><a href="/English/G/G002.html">G002</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-15T15:40:52.000Z">2021-11-15</time></p><p class="title"><a href="/English/G/G001.html">G001</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-14T02:44:54.000Z">2021-11-14</time></p><p class="title"><a href="/English/M/How-to-learn-English.html">How to learn English?</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T07:01:45.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/ctf-linux-cmd.html">ctf-linux-cmd.md</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T06:59:53.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/fastcgi.html">Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag is-grey-lightest">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag is-grey-lightest">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"><span class="tag">技能大赛-信息安全</span><span class="tag is-grey-lightest">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CS6200-28X-EI/"><span class="tag">CS6200-28X-EI</span><span class="tag is-grey-lightest">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/manjaro/"><span class="tag">manjaro</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DCFW-1800E-N3002/"><span class="tag">DCFW-1800E-N3002</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="tag">数据库</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><span class="tag">正则表达式</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/"><span class="tag">系统优化</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CPU/"><span class="tag">CPU</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DHCP/"><span class="tag">DHCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/bash/"><span class="tag">bash</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%87%BD%E6%95%B0/"><span class="tag">函数</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%AA%E8%BE%91/"><span class="tag">剪辑</span><span class="tag is-grey-lightest">2</span></a></div></div><div class="field is-grouped is-grouped-multiline"><a class="tags has-addons" href="/tags/"><span class="tag">查看全部&gt;&gt;</span></a></div></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a><p class="size-small"><span>&copy; 2023 manu</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请给我发<a href="mailto:manu2x@qq.com">邮件</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
+            var n = new Date(time);
+            now.setTime(now.getTime() + 250),
+                days = (now - n) / 1e3 / 60 / 60 / 24,
+                dnum = Math.floor(days),
+                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
+                hnum = Math.floor(hours),
+            1 == String(hnum).length && (hnum = "0" + hnum),
+                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
+                mnum = Math.floor(minutes),
+            1 == String(mnum).length && (mnum = "0" + mnum),
+                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
+                snum = Math.round(seconds),
+            1 == String(snum).length && (snum = "0" + snum),
+                document.getElementById("statistic-times").innerHTML = "❤️本站自 <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> 已运行 <strong>" + dnum + "</strong> 天 <strong>" + hnum + "</strong> 小时 <strong>" + mnum + "</strong> 分 <strong>" + snum + "</strong> 秒！❤️";
+        }var now = new Date();setInterval("createTime('2019/12/19 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️感谢 <strong><span id="busuanzi_value_site_uv">99+</span></strong> 小伙伴的 <strong><span id="busuanzi_value_site_pv">99+</span></strong> 次光临！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="4967313247" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        function loadMathJax() { //加载mathjax
+            $.getScript("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", function () {
+                MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$'], ['\(', '\)']] } });
+                var math = document.getElementsByClassName("entry-content")[0];
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+            });
+        };
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(false){
+                $.getScript('/js/comment-issue-data.js',function(){loadIssueData('undefined','undefined','undefined','undefined',undefined);});
+            }
+            if(false){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script></body></html>

@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>码奴的博客</title>
+  
+  <subtitle>Hello World</subtitle>
+  <link href="http://yangchaohe.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://yangchaohe.github.io/"/>
+  <updated>2023-01-06T10:37:32.764Z</updated>
+  <id>http://yangchaohe.github.io/</id>
+  
+  <author>
+    <name>manu</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>G002</title>
+    <link href="http://yangchaohe.github.io/English/G/G002.html"/>
+    <id>http://yangchaohe.github.io/English/G/G002.html</id>
+    <published>2021-11-17T14:05:40.000Z</published>
+    <updated>2023-01-06T10:37:32.764Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;be 动词的数&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>G001</title>
+    <link href="http://yangchaohe.github.io/English/G/G001.html"/>
+    <id>http://yangchaohe.github.io/English/G/G001.html</id>
+    <published>2021-11-15T15:40:52.000Z</published>
+    <updated>2023-01-06T10:37:32.764Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;名词的数&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>How to learn English?</title>
+    <link href="http://yangchaohe.github.io/English/M/How-to-learn-English.html"/>
+    <id>http://yangchaohe.github.io/English/M/How-to-learn-English.html</id>
+    <published>2021-11-14T02:44:54.000Z</published>
+    <updated>2023-01-06T10:37:32.764Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;code: 1&lt;br&gt;summary: Note by YaYo, refrence for Morty&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ctf-linux-cmd.md</title>
+    <link href="http://yangchaohe.github.io/TechnicalExperience/Penetration/ctf-linux-cmd.html"/>
+    <id>http://yangchaohe.github.io/TechnicalExperience/Penetration/ctf-linux-cmd.html</id>
+    <published>2021-11-09T07:01:45.000Z</published>
+    <updated>2023-01-06T10:37:32.768Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;使用 linux 系统解题的一些小技巧&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</title>
+    <link href="http://yangchaohe.github.io/TechnicalExperience/Penetration/fastcgi.html"/>
+    <id>http://yangchaohe.github.io/TechnicalExperience/Penetration/fastcgi.html</id>
+    <published>2021-11-09T06:59:53.000Z</published>
+    <updated>2023-01-06T10:37:32.768Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;转载自 &lt;a href=&quot;https://blog.csdn.net/mysteryflower/article/details/94386461&quot;&gt;Fastcgi协议分析 &amp;amp;&amp;amp; PHP-FPM未授权访问漏洞 &amp;amp;&amp;amp; Exp编写&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ctfhub.md</title>
+    <link href="http://yangchaohe.github.io/TechnicalExperience/Penetration/ctfhub.html"/>
+    <id>http://yangchaohe.github.io/TechnicalExperience/Penetration/ctfhub.html</id>
+    <published>2021-10-24T13:32:39.000Z</published>
+    <updated>2023-01-06T10:37:32.768Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;在ctfhub的一点一滴&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Laravel笔记</title>
+    <link href="http://yangchaohe.github.io/Programming/PHP/Laravel.html"/>
+    <id>http://yangchaohe.github.io/Programming/PHP/Laravel.html</id>
+    <published>2021-08-03T16:18:44.000Z</published>
+    <updated>2023-01-06T10:37:32.768Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;摘要&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Linux常用好软推荐</title>
+    <link href="http://yangchaohe.github.io/TechnicalExperience/Linux/awesome-software.html"/>
+    <id>http://yangchaohe.github.io/TechnicalExperience/Linux/awesome-software.html</id>
+    <published>2021-06-15T04:39:47.000Z</published>
+    <updated>2023-01-06T10:37:32.768Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt; 记录我自己喜欢的linux软件，此文章长期更新&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="个人技术心得" scheme="http://yangchaohe.github.io/categories/%E4%B8%AA%E4%BA%BA%E6%8A%80%E6%9C%AF%E5%BF%83%E5%BE%97/"/>
+    
+    <category term="Linux" scheme="http://yangchaohe.github.io/categories/%E4%B8%AA%E4%BA%BA%E6%8A%80%E6%9C%AF%E5%BF%83%E5%BE%97/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>隐写秘籍</title>
+    <link href="http://yangchaohe.github.io/TechnicalExperience/Penetration/steganography.html"/>
+    <id>http://yangchaohe.github.io/TechnicalExperience/Penetration/steganography.html</id>
+    <published>2021-06-03T14:49:28.000Z</published>
+    <updated>2023-01-06T10:37:32.768Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;隐写术是将秘密数据隐藏在普通的、非秘密的文件或消息中以避免被发现的技术；然后再目的地提取秘密数据。隐写术的使用可以与加密相结合，作为隐藏或保护数据的额外步骤。隐写术这个词来源于希腊词steganos（意思是隐藏或覆盖）和希腊词graph（意思是写）。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="个人技术心得" scheme="http://yangchaohe.github.io/categories/%E4%B8%AA%E4%BA%BA%E6%8A%80%E6%9C%AF%E5%BF%83%E5%BE%97/"/>
+    
+    <category term="渗透" scheme="http://yangchaohe.github.io/categories/%E4%B8%AA%E4%BA%BA%E6%8A%80%E6%9C%AF%E5%BF%83%E5%BE%97/%E6%B8%97%E9%80%8F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>sql盲注笔记</title>
+    <link href="http://yangchaohe.github.io/TechnicalExperience/Penetration/sql-injection-blind.html"/>
+    <id>http://yangchaohe.github.io/TechnicalExperience/Penetration/sql-injection-blind.html</id>
+    <published>2021-05-04T15:59:48.000Z</published>
+    <updated>2023-01-06T10:37:32.768Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;什么是盲注？在sql注入点输入sql语句不回显任何数据，只返回了网页处理的结果（使用布尔盲注），甚至不返回结果（设置数据库查询时间，时间盲注）&lt;/p&gt;
+&lt;p&gt;盲注是非常繁琐的，需要不断的更改url进行判断，可以用BP的intruder模块配合或者编程（直到我发现了sqlmap）&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>常用SQL注入方法总结</title>
+    <link href="http://yangchaohe.github.io/TechnicalExperience/Penetration/sql-injection.html"/>
+    <id>http://yangchaohe.github.io/TechnicalExperience/Penetration/sql-injection.html</id>
+    <published>2021-05-03T08:39:13.000Z</published>
+    <updated>2023-01-06T10:37:32.768Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;网上资料过于繁杂，所以想写一篇文章记录我的收获&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="个人技术心得" scheme="http://yangchaohe.github.io/categories/%E4%B8%AA%E4%BA%BA%E6%8A%80%E6%9C%AF%E5%BF%83%E5%BE%97/"/>
+    
+    <category term="渗透" scheme="http://yangchaohe.github.io/categories/%E4%B8%AA%E4%BA%BA%E6%8A%80%E6%9C%AF%E5%BF%83%E5%BE%97/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="数据库" scheme="http://yangchaohe.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>udf提权</title>
+    <link href="http://yangchaohe.github.io/TechnicalExperience/Penetration/udf.html"/>
+    <id>http://yangchaohe.github.io/TechnicalExperience/Penetration/udf.html</id>
+    <published>2021-04-30T16:05:09.000Z</published>
+    <updated>2023-01-06T10:37:32.768Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt; UDF 即 User Defined Funtion，通过udf提权可以用来把数据库root用户权限转化为数据库管理员（mysql）的权限，在windows里面可能就获取到了系统管理员的权限&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="个人技术心得" scheme="http://yangchaohe.github.io/categories/%E4%B8%AA%E4%BA%BA%E6%8A%80%E6%9C%AF%E5%BF%83%E5%BE%97/"/>
+    
+    <category term="渗透" scheme="http://yangchaohe.github.io/categories/%E4%B8%AA%E4%BA%BA%E6%8A%80%E6%9C%AF%E5%BF%83%E5%BE%97/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="MySQL" scheme="http://yangchaohe.github.io/tags/MySQL/"/>
+    
+    <category term="数据库" scheme="http://yangchaohe.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据库反弹shell的几种方式</title>
+    <link href="http://yangchaohe.github.io/TechnicalExperience/Penetration/reverse-shell.html"/>
+    <id>http://yangchaohe.github.io/TechnicalExperience/Penetration/reverse-shell.html</id>
+    <published>2021-04-28T14:23:26.000Z</published>
+    <updated>2023-01-06T10:37:32.768Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;反弹shell: 将已经获取控制权的机器返回一个shell给外部机器&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="个人技术心得" scheme="http://yangchaohe.github.io/categories/%E4%B8%AA%E4%BA%BA%E6%8A%80%E6%9C%AF%E5%BF%83%E5%BE%97/"/>
+    
+    <category term="渗透" scheme="http://yangchaohe.github.io/categories/%E4%B8%AA%E4%BA%BA%E6%8A%80%E6%9C%AF%E5%BF%83%E5%BE%97/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="webshell" scheme="http://yangchaohe.github.io/tags/webshell/"/>
+    
+    <category term="MySQL" scheme="http://yangchaohe.github.io/tags/MySQL/"/>
+    
+    <category term="数据库" scheme="http://yangchaohe.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>fw-rule</title>
+    <link href="http://yangchaohe.github.io/Question/fw-rule.html"/>
+    <id>http://yangchaohe.github.io/Question/fw-rule.html</id>
+    <published>2021-04-26T08:21:52.000Z</published>
+    <updated>2023-01-06T10:37:32.768Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;..&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    
+    <category term="question" scheme="http://yangchaohe.github.io/tags/question/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ALTER</title>
+    <link href="http://yangchaohe.github.io/Database/ALTER.html"/>
+    <id>http://yangchaohe.github.io/Database/ALTER.html</id>
+    <published>2021-04-25T15:49:04.000Z</published>
+    <updated>2023-01-06T10:37:32.764Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt; 常用&lt;strong&gt;ALTER&lt;/strong&gt;语法&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="数据库" scheme="http://yangchaohe.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>NAT简述及其配置</title>
+    <link href="http://yangchaohe.github.io/Internet-equipment/DCN/DCFW-1800E-N3002/NAT.html"/>
+    <id>http://yangchaohe.github.io/Internet-equipment/DCN/DCFW-1800E-N3002/NAT.html</id>
+    <published>2021-04-25T03:25:11.000Z</published>
+    <updated>2023-01-06T10:37:32.764Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;网络地址转换(&lt;em&gt;Network Address Translation&lt;/em&gt;)简称为 NAT,是将 IP 数据包包头中的 IP地址转换为另一个 IP 地址的协议。当 IP 数据包通过路由器或者安全网关时,路由器或者安全网关会把 IP 数据包的源 IP 地址和/或者目的 IP 地址进行转换。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="网络设备配置" scheme="http://yangchaohe.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AE/"/>
+    
+    <category term="神州" scheme="http://yangchaohe.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AE/%E7%A5%9E%E5%B7%9E/"/>
+    
+    
+    <category term="技能大赛-信息安全" scheme="http://yangchaohe.github.io/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="DCFW-1800E-N3002" scheme="http://yangchaohe.github.io/tags/DCFW-1800E-N3002/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>VPN简述及实现</title>
+    <link href="http://yangchaohe.github.io/Internet-equipment/DCN/DCFW-1800E-N3002/VPN.html"/>
+    <id>http://yangchaohe.github.io/Internet-equipment/DCN/DCFW-1800E-N3002/VPN.html</id>
+    <published>2021-04-25T03:17:02.000Z</published>
+    <updated>2023-01-06T10:37:32.764Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;VPN(&lt;em&gt;Virtual Private Network&lt;/em&gt;虚拟专用网络)&lt;/p&gt;
+&lt;p&gt;vpn通常拿来做2个事情，一个是可以让世界上任意2台机器进入一个虚拟的局域网中（当然这个局域网的数据通讯是加密的，很安全，用起来和一个家庭局域网没有区别），一个是可以用来翻墙&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="网络设备配置" scheme="http://yangchaohe.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AE/"/>
+    
+    <category term="神州" scheme="http://yangchaohe.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AE/%E7%A5%9E%E5%B7%9E/"/>
+    
+    
+    <category term="技能大赛-信息安全" scheme="http://yangchaohe.github.io/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="DCFW-1800E-N3002" scheme="http://yangchaohe.github.io/tags/DCFW-1800E-N3002/"/>
+    
+    <category term="IPsec" scheme="http://yangchaohe.github.io/tags/IPsec/"/>
+    
+    <category term="SSL" scheme="http://yangchaohe.github.io/tags/SSL/"/>
+    
+    <category term="L2TP" scheme="http://yangchaohe.github.io/tags/L2TP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DCP-debugging</title>
+    <link href="http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/DCP-debugging.html"/>
+    <id>http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/DCP-debugging.html</id>
+    <published>2021-04-24T03:50:17.000Z</published>
+    <updated>2023-01-06T10:37:32.764Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;DCP(&lt;em&gt;Dynamic CPU Protection&lt;/em&gt;)动态CPU防护, 当检测到具有某种特定源IP的报文上CPU的速率超过一定的速率值时, 将对该类报文进行限速处理。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="网络设备配置" scheme="http://yangchaohe.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AE/"/>
+    
+    <category term="神州" scheme="http://yangchaohe.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AE/%E7%A5%9E%E5%B7%9E/"/>
+    
+    
+    <category term="技能大赛-信息安全" scheme="http://yangchaohe.github.io/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="CS6200-28X-EI" scheme="http://yangchaohe.github.io/tags/CS6200-28X-EI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>dynamic-vlan</title>
+    <link href="http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/dynamic-vlan.html"/>
+    <id>http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/dynamic-vlan.html</id>
+    <published>2021-04-22T02:05:56.000Z</published>
+    <updated>2023-01-06T10:37:32.764Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt; 动态VLAN可以根据用户的MAC, IP, 网络层协议进行划分&lt;/p&gt;
+&lt;p&gt;静态VLAN是基于端口进行划分&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="网络设备配置" scheme="http://yangchaohe.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AE/"/>
+    
+    <category term="神州" scheme="http://yangchaohe.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AE/%E7%A5%9E%E5%B7%9E/"/>
+    
+    
+    <category term="技能大赛-信息安全" scheme="http://yangchaohe.github.io/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="CS6200-28X-EI" scheme="http://yangchaohe.github.io/tags/CS6200-28X-EI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Security</title>
+    <link href="http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/Security.html"/>
+    <id>http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/Security.html</id>
+    <published>2021-04-21T12:17:38.000Z</published>
+    <updated>2023-01-06T10:37:32.764Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;  交换机端口安全和ARP, ACL, URPF, DOS等配置&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="网络设备配置" scheme="http://yangchaohe.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AE/"/>
+    
+    <category term="神州" scheme="http://yangchaohe.github.io/categories/%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E9%85%8D%E7%BD%AE/%E7%A5%9E%E5%B7%9E/"/>
+    
+    
+    <category term="技能大赛-信息安全" scheme="http://yangchaohe.github.io/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    <category term="CS6200-28X-EI" scheme="http://yangchaohe.github.io/tags/CS6200-28X-EI/"/>
+    
+  </entry>
+  
+</feed>

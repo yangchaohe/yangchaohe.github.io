@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>计算机基本科学 - 码奴的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="码奴的博客"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="码奴的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="注：以下内容包括图片均截取自 Youtube Crash Course的视频，若有侵权请联系我"><meta property="og:type" content="note"><meta property="og:title" content="码奴"><meta property="og:url" content="https://yangchaohe.github.io/"><meta property="og:site_name" content="MANU"><meta property="og:description" content="注：以下内容包括图片均截取自 Youtube Crash Course的视频，若有侵权请联系我"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yangchaohe.github.io/img/avatar.png"><meta property="article:published_time" content="2019-12-11T14:37:26.000Z"><meta property="article:modified_time" content="2023-01-06T10:37:32.768Z"><meta property="article:author" content="manu"><meta property="article:tag" content="CPU"><meta property="article:tag" content="内存"><meta property="article:tag" content="汇编"><meta property="article:tag" content="ALU"><meta property="article:tag" content="寄存器"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchaohe.github.io/computer-internal/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6.html"},"headline":"码奴的博客","image":["https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E6%99%B6%E4%BD%93%E7%AE%A1.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/NOT.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/and.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/OR.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/xor.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/AND-OR-latch.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/门锁.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/8%E4%BD%8D%E5%AF%84%E5%AD%98%E5%99%A8.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E7%9F%A9%E9%98%B51.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E7%9F%A9%E9%98%B52.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%99%A8.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/256-bit-memory.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/256-byte-memory.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/addressable.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E5%8D%8A%E5%8A%A0%E5%99%A8.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/Fulladder.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/8bitadder.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA0.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/alu.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/opcode.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E8%A7%A3%E7%A0%81.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E8%AF%86%E5%88%AB%E6%93%8D%E4%BD%9C%E7%A0%81.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E6%89%A7%E8%A1%8C%E9%98%B6%E6%AE%B5.png"],"datePublished":"2019-12-11T14:37:26.000Z","dateModified":"2023-01-06T10:37:32.768Z","author":{"@type":"Person","name":"manu"},"description":"注：以下内容包括图片均截取自 Youtube Crash Course的视频，若有侵权请联系我"}</script><link rel="canonical" href="http://yangchaohe.github.io/computer-internal/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6.html"><link rel="icon" href="/img/favicon.png"><meta name="referrer" content="no-referrer-when-downgrade"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="码奴的博客" type="application/atom+xml">
+</head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/mindmap">思维导图</a><a class="navbar-item" href="/read">书籍</a><a class="navbar-item" href="/life">日志</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><!--!--><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2019-12-11  <span class="level-item"> manu </span><a class="commentCountImg" href="/computer-internal/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6.html#comment-container"><span class="display-none-class">/computer-internal/计算机科学.html</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="08a93210616a0b520051317e00803fe4">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>10 分钟  <i class="fas fa-pencil-alt"> </i>1.6 k</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">计算机基本科学</h1><div class="content"><p>注：以下内容包括图片均截取自 Youtube <a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PL8dPuuaLjXtNlUrzyH5r6jN9ulI">Crash Course的视频</a>，若有侵权请联系我</p>
+<span id="more"></span>
+
+<h2 id="计算机发展历史"><a href="#计算机发展历史" class="headerlink" title="计算机发展历史"></a>计算机发展历史</h2><ol>
+<li>为了减少人类工作量，出现算盘</li>
+<li>然后有了<code>步进计算器</code>（原理就是数个齿轮，每个有十个齿，表示0-9，每加到9时，再加1会到0，前面的齿轮+1，就像算盘，减法相反，乘除不过是多个加减），可以做加减乘除</li>
+<li><code>computer</code>最开始是指计算的人，后来才指机器</li>
+<li>因为计算机可以减少很多人力物力，然后计算机高速发展</li>
+</ol>
+<h2 id="电子计算机"><a href="#电子计算机" class="headerlink" title="电子计算机"></a>电子计算机</h2><h3 id="机电"><a href="#机电" class="headerlink" title="机电"></a><strong>机电</strong></h3><ol>
+<li>早期使用机械继电器连接电路， 比如控制马达，使齿轮+1（每秒50次）</li>
+<li>缺点：因为是机械，所以有延迟，磨损。</li>
+<li>要排除故障太费力，还会吸引臭虫（<code>bug</code>）</li>
+</ol>
+<h3 id="热电子管（玻璃）"><a href="#热电子管（玻璃）" class="headerlink" title="热电子管（玻璃）"></a><strong>热电子管（玻璃）</strong></h3><ol>
+<li>二极管（<code>单向流动</code>）： 一极加热放出电子，另一极吸引正电子（<code>电流</code>）；</li>
+<li>三极管：在二极管的基础上加一个控制电极，施加正电允许电子流动，负电阻止电子流动（与继电器功能一样，断开和闭合电路，但没有磨损） 。</li>
+<li>缺点：成本高， 会向灯泡一样被烧坏；</li>
+</ol>
+<h3 id="晶体管（固态）"><a href="#晶体管（固态）" class="headerlink" title="晶体管（固态）"></a><strong>晶体管（固态）</strong></h3><p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E6%99%B6%E4%BD%93%E7%AE%A1.png" alt=""></p>
+<ol>
+<li>中间是半导体，可以控制半导体的导电性来控制电流。</li>
+<li>每秒10000次；</li>
+<li>体积更小，因为是固体，所以相对于热电子管更经用；（现在晶体管的小于50nm，而一张纸的厚度是10,000nm，每秒几百万次，工作时间更耐久）</li>
+<li>后来采用二进制进行计算</li>
+</ol>
+<h2 id="布尔逻辑和逻辑门"><a href="#布尔逻辑和逻辑门" class="headerlink" title="布尔逻辑和逻辑门"></a>布尔逻辑和逻辑门</h2><ol>
+<li>使用两种状态就可以表示所有东西了。 </li>
+<li>晶体管不仅可以开和关， 还可以让不同大小的电流通过，早期的计算机有三进制和五进制，但是进制越多越难区分信号（<code>被干扰</code>）</li>
+<li>早期数学已经开始研究二进制了，已经解决了所有运算法则（<code>布尔代数</code>）</li>
+</ol>
+<p><strong>三个基本布尔操作</strong> </p>
+<p><code>NOT</code>：将布尔值反转</p>
+<p> <img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/NOT.png" alt=""></p>
+<p><code>AND</code>：有false则output为false（将晶体管串联实现）</p>
+<p> <img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/and.png" alt=""></p>
+<p><code>OR</code>：有true则为true</p>
+<p> <img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/OR.png" alt=""></p>
+<p><code>XOR</code>：相同则为false；不同为true</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/xor.png" alt=""></p>
+<h2 id="寄存器和内存"><a href="#寄存器和内存" class="headerlink" title="寄存器和内存"></a>寄存器和内存</h2><p>因为使用ALU计算后的数值需要存起来，于是有了内存。</p>
+<p><strong>RAM</strong>（<code>Random Access Memory</code>随机存取存储器）：</p>
+<ul>
+<li>只在通电时数据是保留的 </li>
+</ul>
+<h3 id="锁存器"><a href="#锁存器" class="headerlink" title="锁存器"></a><strong>锁存器</strong></h3><ul>
+<li>可以记录一位信息</li>
+</ul>
+<div class="img-x">
+    <img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/AND-OR-latch.png" alt="1" style="zoom:100%;" /> <img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/门锁.png" alt="2" style="zoom:100%;" /></div>    
+
+<h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a><strong>寄存器</strong></h3><ul>
+<li><p>并排存放的一组锁存器</p>
+</li>
+<li><p>寄存器能存一个数字，这个数字有多少位叫<code>位宽</code></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/8%E4%BD%8D%E5%AF%84%E5%AD%98%E5%99%A8.png" alt=""></p>
+</li>
+<li><p><strong>Memory</strong></p>
+<ul>
+<li>因为要存更多数据，并排存放的话需要很多数据线，此时需要用矩阵</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E7%9F%A9%E9%98%B51.png" alt="矩阵1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E7%9F%A9%E9%98%B52.png" alt="矩阵2">  ​   </p>
+<ul>
+<li><p>那如何确定一个地址呢：</p>
+<ul>
+<li><p>使用“多路复用器（<code>Multplexers</code>）”</p>
+</li>
+<li><p>原理（将行和列转化位8位二进制）</p>
+<p>  <img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E5%99%A8.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>抽象化</p>
+<p><strong>256-bit-memory</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/256-bit-memory.png" alt=""></p>
+<p><strong>256-byte-memory</strong></p>
+<p> <img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/256-byte-memory.png" alt=""></p>
+<p>可以将上面整体看成一个可寻址内存（RAM）：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/addressable.png" alt=""></p>
+<p>以上内存是一个静态内存<code>SRAM</code>,现在有<code>DRAM</code>等很多</p>
+<h2 id="ALU"><a href="#ALU" class="headerlink" title="ALU"></a>ALU</h2><p>在CPU里面，ALU主要负责计算和判断</p>
+<h3 id="算术单元（arithmetic）"><a href="#算术单元（arithmetic）" class="headerlink" title="算术单元（arithmetic）"></a>算术单元（arithmetic）</h3><p>负责加减</p>
+<ul>
+<li><strong>半加器</strong>（<code>Half adder</code>）<ul>
+<li>功能：输入两个bit，输出两个的<strong>和（<code>SUM</code>）</strong>及<strong>进位（<code>CARRY</code>）</strong></li>
+<li>实现：</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E5%8D%8A%E5%8A%A0%E5%99%A8.png" alt=""></p>
+<ul>
+<li><strong>全加器</strong>（<code>Full adder</code>）<ul>
+<li>功能：三个输入bit，同样输出<code>sum</code>与<code>carry</code></li>
+<li>实现电路：</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/Fulladder.png" alt=""></p>
+<p>例子（8位行波进位加法器）</p>
+<p> <img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/8bitadder.png" alt=""></p>
+<p>超出所表示位数表示“溢出”，后果很严重。</p>
+<p>ps：现在使用<strong>超前进位加法器</strong></p>
+<h3 id="逻辑单元（logic）"><a href="#逻辑单元（logic）" class="headerlink" title="逻辑单元（logic）"></a>逻辑单元（logic）</h3><ul>
+<li><p>用来执行一些逻辑操作，比如AND OR NOT等，还有判断是否为负数，是否为0等</p>
+<p> <img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E4%B8%BA0.png" alt=""></p>
+</li>
+</ul>
+<p>抽象化：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/alu.png" alt=""></p>
+<h2 id="自建CPU"><a href="#自建CPU" class="headerlink" title="自建CPU"></a>自建CPU</h2><h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><ul>
+<li><p>需要RAM</p>
+</li>
+<li><p><em>假设</em>一个操作码（<code>opcode</code>）</p>
+<p>前四位：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/opcode.png" alt=""></p>
+</li>
+</ul>
+<p>​    后四位表示<code>地址</code></p>
+<ul>
+<li>所需寄存器<ul>
+<li><strong>指令地址寄存器</strong>：追踪程序运行到哪里，存当前指令的内存地址</li>
+<li><strong>指令寄存器</strong>：存当前指令</li>
+</ul>
+</li>
+<li>启动计算机时，寄存器从<strong>0</strong>开始</li>
+</ul>
+<h3 id="CPU工作阶段"><a href="#CPU工作阶段" class="headerlink" title="CPU工作阶段"></a>CPU工作阶段</h3><h4 id="FETCH-PHASE"><a href="#FETCH-PHASE" class="headerlink" title="FETCH PHASE"></a>FETCH PHASE</h4><ul>
+<li><p>取指令阶段</p>
+</li>
+<li><p>将指令地址寄存器连接到<code>RAM</code>，寄存器的值为0，RAM返回地址0的值</p>
+</li>
+<li><p>将值给<em>指令寄存器</em></p>
+</li>
+</ul>
+<h4 id="DECODE-PHASE"><a href="#DECODE-PHASE" class="headerlink" title="DECODE PHASE"></a>DECODE PHASE</h4><ul>
+<li>解码阶段</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E8%A7%A3%E7%A0%81.png" alt=""></p>
+<ul>
+<li>识别操作码电路</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E8%AF%86%E5%88%AB%E6%93%8D%E4%BD%9C%E7%A0%81.png" alt=""></p>
+<h4 id="EXECUTE-PHASE"><a href="#EXECUTE-PHASE" class="headerlink" title="EXECUTE PHASE"></a>EXECUTE PHASE</h4><ul>
+<li>执行阶段</li>
+</ul>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/%E6%89%A7%E8%A1%8C%E9%98%B6%E6%AE%B5.png" alt=""></p>
+<ul>
+<li>操作码正确可以打开RAM的<strong>允许读取线</strong></li>
+<li>这里说的是将地址14的数据放入寄存器A（<code>RAM需要连接所有寄存器</code>）</li>
+<li>这个阶段完成，指令地址寄存器+1</li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>计算机基本科学</p><p><a href="http://yangchaohe.github.io/computer-internal/计算机科学.html">http://yangchaohe.github.io/computer-internal/计算机科学.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><a href="http://yangchaohe.github.io"><p>manu</p></a></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-12-11</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-01-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="recommend-area"><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 相关文章</span><br><span>  1.<a class="is-size-6" href="/computer-internal/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E8%AE%BA.html" target="_blank">计算机概论</a><br></span></div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 推荐文章</span><br><span>  1.<a class="is-size-6" href="/Database/ALTER.html" target="_blank">ALTER</a><br></span><span>  2.<a class="is-size-6" href="/Database/note.html" target="_blank">数据库笔记</a><br></span><span>  3.<a class="is-size-6" href="/Front-end/wechat-app.html" target="_blank">微信小程序笔记</a><br></span><span>  4.<a class="is-size-6" href="/Reverse/OD.html" target="_blank">动态调试-OD</a><br></span><span>  5.<a class="is-size-6" href="/Reverse/winPE.html" target="_blank">winPE结构</a><br></span><span>  6.<a class="is-size-6" href="/devTool/git.html" target="_blank">git指令</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/computer-internal/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E8%AE%BA.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">计算机概论</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Programming/C/%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E5%87%BD%E6%95%B0.html"><span class="level-item">简单理解函数</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">通知</h3><ul><li><span><span>2021.6.28 公告测试</span></span></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex is-mobile" href="#计算机发展历史"><span class="mr-2">1</span><span>计算机发展历史</span></a></li><li><a class="is-flex is-mobile" href="#电子计算机"><span class="mr-2">2</span><span>电子计算机</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#机电"><span class="mr-2">2.1</span><span>机电</span></a></li><li><a class="is-flex is-mobile" href="#热电子管（玻璃）"><span class="mr-2">2.2</span><span>热电子管（玻璃）</span></a></li><li><a class="is-flex is-mobile" href="#晶体管（固态）"><span class="mr-2">2.3</span><span>晶体管（固态）</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#布尔逻辑和逻辑门"><span class="mr-2">3</span><span>布尔逻辑和逻辑门</span></a></li><li><a class="is-flex is-mobile" href="#寄存器和内存"><span class="mr-2">4</span><span>寄存器和内存</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#锁存器"><span class="mr-2">4.1</span><span>锁存器</span></a></li><li><a class="is-flex is-mobile" href="#寄存器"><span class="mr-2">4.2</span><span>寄存器</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#ALU"><span class="mr-2">5</span><span>ALU</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#算术单元（arithmetic）"><span class="mr-2">5.1</span><span>算术单元（arithmetic）</span></a></li><li><a class="is-flex is-mobile" href="#逻辑单元（logic）"><span class="mr-2">5.2</span><span>逻辑单元（logic）</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#自建CPU"><span class="mr-2">6</span><span>自建CPU</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#组件"><span class="mr-2">6.1</span><span>组件</span></a></li><li><a class="is-flex is-mobile" href="#CPU工作阶段"><span class="mr-2">6.2</span><span>CPU工作阶段</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#FETCH-PHASE"><span class="mr-2">6.2.1</span><span>FETCH PHASE</span></a></li><li><a class="is-flex is-mobile" href="#DECODE-PHASE"><span class="mr-2">6.2.2</span><span>DECODE PHASE</span></a></li><li><a class="is-flex is-mobile" href="#EXECUTE-PHASE"><span class="mr-2">6.2.3</span><span>EXECUTE PHASE</span></a></li></ul></li></ul></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="码奴"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">码奴</p><p class="is-size-6 is-block">待人友善是修养，独来独往是性格</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>中国贵州</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">157</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">39</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">161</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/yangchaohe" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/yangchaohe"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:manu2x@.com"><i class="fa fa-envelope"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"来源《"+data.from+"》</p><p>提供者-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-17T14:05:40.000Z">2021-11-17</time></p><p class="title"><a href="/English/G/G002.html">G002</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-15T15:40:52.000Z">2021-11-15</time></p><p class="title"><a href="/English/G/G001.html">G001</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-14T02:44:54.000Z">2021-11-14</time></p><p class="title"><a href="/English/M/How-to-learn-English.html">How to learn English?</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T07:01:45.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/ctf-linux-cmd.html">ctf-linux-cmd.md</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T06:59:53.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/fastcgi.html">Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag is-grey-lightest">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag is-grey-lightest">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"><span class="tag">技能大赛-信息安全</span><span class="tag is-grey-lightest">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CS6200-28X-EI/"><span class="tag">CS6200-28X-EI</span><span class="tag is-grey-lightest">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/manjaro/"><span class="tag">manjaro</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DCFW-1800E-N3002/"><span class="tag">DCFW-1800E-N3002</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="tag">数据库</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><span class="tag">正则表达式</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/"><span class="tag">系统优化</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CPU/"><span class="tag">CPU</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DHCP/"><span class="tag">DHCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/bash/"><span class="tag">bash</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%87%BD%E6%95%B0/"><span class="tag">函数</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%AA%E8%BE%91/"><span class="tag">剪辑</span><span class="tag is-grey-lightest">2</span></a></div></div><div class="field is-grouped is-grouped-multiline"><a class="tags has-addons" href="/tags/"><span class="tag">查看全部&gt;&gt;</span></a></div></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a><p class="size-small"><span>&copy; 2023 manu</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请给我发<a href="mailto:manu2x@qq.com">邮件</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
+            var n = new Date(time);
+            now.setTime(now.getTime() + 250),
+                days = (now - n) / 1e3 / 60 / 60 / 24,
+                dnum = Math.floor(days),
+                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
+                hnum = Math.floor(hours),
+            1 == String(hnum).length && (hnum = "0" + hnum),
+                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
+                mnum = Math.floor(minutes),
+            1 == String(mnum).length && (mnum = "0" + mnum),
+                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
+                snum = Math.round(seconds),
+            1 == String(snum).length && (snum = "0" + snum),
+                document.getElementById("statistic-times").innerHTML = "❤️本站自 <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> 已运行 <strong>" + dnum + "</strong> 天 <strong>" + hnum + "</strong> 小时 <strong>" + mnum + "</strong> 分 <strong>" + snum + "</strong> 秒！❤️";
+        }var now = new Date();setInterval("createTime('2019/12/19 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️感谢 <strong><span id="busuanzi_value_site_uv">99+</span></strong> 小伙伴的 <strong><span id="busuanzi_value_site_pv">99+</span></strong> 次光临！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="4967313247" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        function loadMathJax() { //加载mathjax
+            $.getScript("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", function () {
+                MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$'], ['\(', '\)']] } });
+                var math = document.getElementsByClassName("entry-content")[0];
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+            });
+        };
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(false){
+                $.getScript('/js/comment-issue-data.js',function(){loadIssueData('undefined','undefined','undefined','undefined',undefined);});
+            }
+            if(false){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script></body></html>

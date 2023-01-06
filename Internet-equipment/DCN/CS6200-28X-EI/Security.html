@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Security - 码奴的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="码奴的博客"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="码奴的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="交换机端口安全和ARP, ACL, URPF, DOS等配置"><meta property="og:type" content="note"><meta property="og:title" content="码奴"><meta property="og:url" content="https://yangchaohe.github.io/"><meta property="og:site_name" content="MANU"><meta property="og:description" content="交换机端口安全和ARP, ACL, URPF, DOS等配置"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yangchaohe.github.io/img/avatar.png"><meta property="article:published_time" content="2021-04-21T12:17:38.000Z"><meta property="article:modified_time" content="2023-01-06T10:37:32.764Z"><meta property="article:author" content="manu"><meta property="article:tag" content="技能大赛-信息安全"><meta property="article:tag" content="CS6200-28X-EI"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/Security.html"},"headline":"码奴的博客","image":["http://yangchaohe.github.io/img/og_image.png"],"datePublished":"2021-04-21T12:17:38.000Z","dateModified":"2023-01-06T10:37:32.764Z","author":{"@type":"Person","name":"manu"},"description":"交换机端口安全和ARP, ACL, URPF, DOS等配置"}</script><link rel="canonical" href="http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/Security.html"><link rel="icon" href="/img/favicon.png"><meta name="referrer" content="no-referrer-when-downgrade"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="码奴的博客" type="application/atom+xml">
+</head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/mindmap">思维导图</a><a class="navbar-item" href="/read">书籍</a><a class="navbar-item" href="/life">日志</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><!--!--><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2021-04-21  <a class="commentCountImg" href="/Internet-equipment/DCN/CS6200-28X-EI/Security.html#comment-container"><span class="display-none-class">/Internet-equipment/DCN/CS6200-28X-EI/Security.html</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="3addba614e2d1525de1a11e7b7853aa9">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>15 分钟  <i class="fas fa-pencil-alt"> </i>2.3 k</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">Security</h1><div class="content"><blockquote>
+<p>  交换机端口安全和ARP, ACL, URPF, DOS等配置</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h2><blockquote>
+<p>建议使用命名ACL</p>
+</blockquote>
+<p>神州交换机的ACL设置语句语法与CISCO <a href="../Networking/Cisco/ACL.md">ACL.md</a> 的基本一样, 使用有以下区别</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果要启用ACL, 必须使用以下指令</span></span><br><span class="line">Sw(config)<span class="comment">#firewall enable </span></span><br><span class="line"><span class="comment"># 可以将ACL应用于Telnet/ssh/web, test是我配置的命名ACL</span></span><br><span class="line">Sw(config)<span class="comment">#authentication ip access-class test in telnet </span></span><br><span class="line"><span class="comment"># access-group可以显示一条access-list与特定端口的绑定关系</span></span><br><span class="line">Sw(config)<span class="comment">#show access-group interface ethernet 1/0/1</span></span><br><span class="line">interface name:Ethernet1/<span class="number">0</span>/<span class="number">1</span></span><br><span class="line">    IP Ingress access<span class="literal">-list</span> used is test, traffic<span class="literal">-statistics</span> Disable.</span><br><span class="line">Sw(config)<span class="comment">#show access-lists </span></span><br><span class="line">ip access<span class="literal">-list</span> standard test(used <span class="number">1</span> time(s)) <span class="number">2</span> rule(s)</span><br><span class="line">   rule ID <span class="number">1</span>: deny <span class="number">192.168</span>.<span class="number">1.0</span> <span class="number">0.0</span>.<span class="number">0.255</span></span><br><span class="line">   rule ID <span class="number">3</span>: deny <span class="number">10.1</span>.<span class="number">128.0</span> <span class="number">0.0</span>.<span class="number">0.255</span></span><br><span class="line">   </span><br><span class="line">S3(config)<span class="comment">#access-list ?</span></span><br><span class="line">  &lt;<span class="number">1</span><span class="literal">-99</span>&gt;       IP 标准访问列表 &lt;<span class="number">1</span><span class="literal">-99</span>&gt;</span><br><span class="line">  &lt;<span class="number">100</span><span class="literal">-199</span>&gt;    扩展访问列表规则 &lt;<span class="number">100</span><span class="literal">-199</span>&gt;</span><br><span class="line">  &lt;<span class="number">1100</span><span class="literal">-1199</span>&gt;  MAC扩展访问列表规则 &lt;<span class="number">1100</span><span class="literal">-1199</span>&gt;</span><br><span class="line">  &lt;<span class="number">200</span><span class="literal">-299</span>&gt;    扩展访问列表规则(支持非连续IP地址掩码) &lt;<span class="number">200</span><span class="literal">-299</span>&gt;</span><br><span class="line">  &lt;<span class="number">3100</span><span class="literal">-3199</span>&gt;  MAC<span class="literal">-IP</span>扩展访问列表规则 &lt;<span class="number">3100</span><span class="literal">-3199</span>&gt;</span><br><span class="line">  &lt;<span class="number">3200</span><span class="literal">-3299</span>&gt;  MAC<span class="literal">-IP</span>扩展访问列表规则(支持非连续IP地址掩码) &lt;<span class="number">3200</span><span class="literal">-3299</span>&gt;</span><br><span class="line">  &lt;<span class="number">5000</span><span class="literal">-5099</span>&gt;  组播源控制访问列表规则 &lt;<span class="number">5000</span><span class="literal">-5099</span>&gt;</span><br><span class="line">  &lt;<span class="number">6000</span><span class="literal">-7999</span>&gt;  组播目的控制访问列表规则 &lt;<span class="number">6000</span><span class="literal">-7999</span>&gt;</span><br><span class="line">  &lt;<span class="number">700</span><span class="literal">-799</span>&gt;    MAC标准访问列表规则 &lt;<span class="number">700</span><span class="literal">-799</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="端口绑定MAC"><a href="#端口绑定MAC" class="headerlink" title="端口绑定MAC"></a>端口绑定MAC</h2><blockquote>
+<p>绑定后如果连接的不是绑定的MAC, 或者数量超出限制, 都会触发交换机的保护机制</p>
+<p>可以有效的防止MAC泛洪</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Sw(config)<span class="comment">#interface ethernet 1/0/1</span></span><br><span class="line">Sw(config<span class="literal">-if</span><span class="literal">-ethernet1</span>/<span class="number">0</span>/<span class="number">1</span>)<span class="comment">#switchport port-security</span></span><br><span class="line"><span class="comment"># 静态绑定</span></span><br><span class="line">Sw(config<span class="literal">-if</span><span class="literal">-ethernet1</span>/<span class="number">0</span>/<span class="number">1</span>)<span class="comment">#switchport port-security 00:90:9e:9a:a0:60</span></span><br><span class="line"><span class="comment"># 可设置MAC数量</span></span><br><span class="line">switchport port<span class="literal">-security</span> max &lt;cnt&gt;</span><br><span class="line"><span class="comment"># 动态学习</span></span><br><span class="line">Sw(config)<span class="comment">#mac-address-learning cpu-control </span></span><br><span class="line">Sw(config)<span class="comment">#show port-security address      </span></span><br><span class="line"></span><br><span class="line">Secure Mac Address Table                          </span><br><span class="line">-------------------------------------------------------------------------------------  </span><br><span class="line">Vlan                Mac Address                             <span class="built_in">Type</span>                Ports               </span><br><span class="line"><span class="number">1</span>                   <span class="number">00</span><span class="literal">-90</span><span class="literal">-9e</span><span class="literal">-9a</span><span class="literal">-a0</span><span class="literal">-60</span>                       SECURED             Ethernet1/<span class="number">0</span>/<span class="number">1</span>       </span><br><span class="line">Total Addresses:<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>端口模式下</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>`switchport port-security violation {protect</td>
+<td>recovery</td>
+</tr>
+<tr>
+<td>`clear port-security {all</td>
+<td>configured</td>
+</tr>
+</tbody></table>
+<h2 id="端口的IP和MAC-IP绑定-AM"><a href="#端口的IP和MAC-IP绑定-AM" class="headerlink" title="端口的IP和MAC-IP绑定[AM]"></a>端口的IP和MAC-IP绑定[AM]</h2><p>AM(<em>Access Management</em>)可以配置只转发某IP或者MAC-IP</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Sw(config)<span class="comment">#am enable               </span></span><br><span class="line">Sw(config)<span class="comment">#interface ethernet 1/0/1 </span></span><br><span class="line"><span class="comment"># 端口启用AM, 默认禁止所有的IP报文与ARP报文转发</span></span><br><span class="line">Sw(config<span class="literal">-if</span><span class="literal">-ethernet1</span>/<span class="number">0</span>/<span class="number">1</span>)<span class="comment">#am port </span></span><br><span class="line"><span class="comment"># ip, 最后一个参数可以理解为192.168.1.1-10, 是一个范围值</span></span><br><span class="line">Sw(config<span class="literal">-if</span><span class="literal">-ethernet1</span>/<span class="number">0</span>/<span class="number">1</span>)<span class="comment">#am ip-pool 192.168.1.1 10</span></span><br><span class="line"><span class="comment"># MAC-IP</span></span><br><span class="line">Sw(config<span class="literal">-if</span><span class="literal">-ethernet1</span>/<span class="number">0</span>/<span class="number">1</span>)<span class="comment">#am mac-ip-pool 00:90:9e:9a:a0:60 10.1.128.24</span></span><br><span class="line">Sw(config)<span class="comment"># show am interface ethernet 1/0/1</span></span><br><span class="line">AM is enabled</span><br><span class="line">Interface Ethernet1/<span class="number">0</span>/<span class="number">1</span></span><br><span class="line">    am port</span><br><span class="line">    am mac<span class="literal">-ip</span><span class="literal">-pool</span>  <span class="number">00</span><span class="literal">-90</span><span class="literal">-9e</span><span class="literal">-9a</span><span class="literal">-a0</span><span class="literal">-60</span> <span class="number">10.1</span>.<span class="number">128.24</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="URPF-三层"><a href="#URPF-三层" class="headerlink" title="URPF[三层]"></a>URPF[三层]</h2><blockquote>
+<p>通常情况下，网络中的路由器接收到报文后，获取报文的目的地址，针对目的地址查找路由，如果查找到则进行正常的转发，否则丢弃该报文。由此得知，路由器转发报文时，并不关心数据包的源地址，这就给源地址欺骗攻击有了可乘之机。</p>
+<p>源地址欺骗攻击就是入侵者通过构造一系列带有伪造源地址的报文，频繁访问目的地址所在设备或者主机，即使受害主机或网络的回应报文不能返回到入侵者，也会对被攻击对象造成一定程度的破坏。</p>
+<p><strong>URPF(<em>Unicast Reverse Path Forwarding</em>)</strong>通过检查数据包中源IP地址，并根据接收到数据包的接口和路由表中是否存在源地址路由信息条目，来确定流量是否真实有效，并选择数据包是转发或丢弃。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>全局配置模式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>urpf enable</code></td>
+<td>全局启动URPF</td>
+</tr>
+<tr>
+<td>端口配置模式</td>
+<td>作用</td>
+</tr>
+<tr>
+<td>`ip urpf enable {loose</td>
+<td>strict}`</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>strict:</strong> 不但要求路由器转发表中，存在去往报文源地址的路由；而且还要求报文的入接口与转发表中去往源地址路由的出接口一致</li>
+<li><strong>loose:</strong> 仅要求路由器的转发表中，存在去往报文的源地址路由即可</li>
+</ul>
+<h2 id="ARP"><a href="#ARP" class="headerlink" title="ARP"></a>ARP</h2><table>
+<thead>
+<tr>
+<th>全局</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>arp timeout</code></td>
+<td>arp表项老化时间(s)</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>vlan接口下</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>arp &lt;ip_address&gt; &lt;mac_address&gt; &#123;interface [ethernet] &lt;portName&gt; &#125;</code></td>
+<td>指定静态arp</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>静态arp只能在vlan下且参数必须有物理接口才能添加成功</p>
+</blockquote>
+<h2 id="防ARP扫描攻击"><a href="#防ARP扫描攻击" class="headerlink" title="防ARP扫描攻击"></a>防ARP扫描攻击</h2><blockquote>
+<p>ARP攻击会在局域网内大量的广播ARP报文, 消耗网络带宽</p>
+<p>ARP也能也能进行其他攻击, 比如<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/system/5157.html">中间人攻击-ARP毒化</a></p>
+<p>这些攻击极度的威胁着网络的安全</p>
+</blockquote>
+<p>防止ARP扫描攻击有两种方式</p>
+<ol>
+<li><p><strong>基于端口</strong></p>
+<p>如果某个端口的ARP报文超过一定阈值, 则down该端口</p>
+</li>
+<li><p><strong>基于IP</strong></p>
+<p>记录某个IP的报文, 可以设置限速和隔离两个阈值, 超过隔离阈值则禁止来自此IP的任何流量</p>
+</li>
+</ol>
+<p><em>两者可同时存在</em></p>
+<h3 id="基于端口和基于IP的配置"><a href="#基于端口和基于IP的配置" class="headerlink" title="基于端口和基于IP的配置"></a>基于端口和基于IP的配置</h3><ol>
+<li>开启ARP扫描功能</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">anti<span class="literal">-arpscan</span> enable [<span class="type">ip</span>|<span class="type">port</span>]</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>设置基于端口阈值(包/s)</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">anti<span class="literal">-arpscan</span> port<span class="literal">-based</span> threshold &lt;threshold<span class="literal">-value</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>基于IP的阈值配置, 二级阈值必须&gt;一级阈值</li>
+</ol>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">anti<span class="literal">-arpscan</span> ip<span class="literal">-based</span> level1|level2 threshold &lt;threshold<span class="literal">-value</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意: CS6200-28X-EI SoftWare Package Version 7.5.3.2(R0004.0030)不支持一二级阈值, 超过设置阈值则禁止来自此IP的任何流量</p>
+</blockquote>
+<h3 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h3><table>
+<thead>
+<tr>
+<th>全局</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>anti-arpscan trust ip &lt;ip-address&gt; [&lt;netmask&gt;]</code></td>
+<td>配置信任IP</td>
+</tr>
+<tr>
+<td><code>anti-arpscan recovery enable</code></td>
+<td>启用自动恢复功能</td>
+</tr>
+<tr>
+<td><code>anti-arpscan recovery time &lt;seconds&gt;</code></td>
+<td>恢复秒数</td>
+</tr>
+<tr>
+<td><code>anti-arpscan log enable</code></td>
+<td>打开日志</td>
+</tr>
+</tbody></table>
+<p>配置信任端口</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 端口模式下</span></span><br><span class="line">anti<span class="literal">-arpscan</span> trust &lt;port | supertrust<span class="literal">-port</span>| iptrust<span class="literal">-port</span> &gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ARP绑定"><a href="#ARP绑定" class="headerlink" title="ARP绑定"></a>ARP绑定</h2><blockquote>
+<p>在IPv4里, 为了防止ARP中间人攻击, ARP绑定也是一种防御手段</p>
+<p>IPv6使用的是ND协议, 这是一个类ARP的协议, ND绑定命令同ARP</p>
+</blockquote>
+<p>ARP绑定有两种方法</p>
+<h3 id="关闭交换机ARP更新"><a href="#关闭交换机ARP更新" class="headerlink" title="关闭交换机ARP更新"></a>关闭交换机ARP更新</h3><p>即交换机的MAC-PORT表存在后就不允许再改变</p>
+<p>指令[全局配置]: <code>ip arp-security updateprotect</code></p>
+<h3 id="关闭自动学习功能"><a href="#关闭自动学习功能" class="headerlink" title="关闭自动学习功能"></a>关闭自动学习功能</h3><p>只能设置静态ARP, 如果先前有动态也可以手动转化为静态</p>
+<p>指令[全局配置]: <code>ip arp-security learnprotect</code></p>
+<p>动态转为静态[全局配置]: <code>ip arp-security convert</code></p>
+<h2 id="ARP-guard"><a href="#ARP-guard" class="headerlink" title="ARP guard"></a>ARP guard</h2><blockquote>
+<p>对于ARP中间人攻击, arp guard则采用了保护ip的方法, 如果arp报文的源IP与保护IP一致则丢弃该报文, 通常用来保护网关, 不应该用来保护大量的IP地址, 会影响性能</p>
+</blockquote>
+<p>指令[全局]: <code>arp-guard ip &lt;addr&gt;</code></p>
+<h2 id="端口-amp-vlan的MAC和IP数量限制"><a href="#端口-amp-vlan的MAC和IP数量限制" class="headerlink" title="端口&amp;vlan的MAC和IP数量限制"></a>端口&amp;vlan的MAC和IP数量限制</h2><p>交换机默认对MAC和IP表项的数量都没有限制, 直到将硬件填满为止.</p>
+<p>这样在遭受DOS攻击时(如ARP, MAC欺骗), 很容易将表项填满, 进行数量限制可以预防DOS攻击</p>
+<p>对于动态学习的现存表项, 都满足大于限制数量则停止学习, 小于则可以继续学习的原则</p>
+<h3 id="端口限制"><a href="#端口限制" class="headerlink" title="端口限制"></a>端口限制</h3><table>
+<thead>
+<tr>
+<th>端口模式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>switchport mac-address dynamic maximum &lt;value&gt;</code></td>
+<td>启用限制MAC功能</td>
+</tr>
+<tr>
+<td>`switchport &lt;arp</td>
+<td>nd&gt; dynamic maximum <value>`</td>
+</tr>
+<tr>
+<td>`switchport mac-address violation {protect</td>
+<td>shutdown} [recovery &lt;5-3600&gt;]`</td>
+</tr>
+</tbody></table>
+<h3 id="VLAN限制"><a href="#VLAN限制" class="headerlink" title="VLAN限制"></a>VLAN限制</h3><table>
+<thead>
+<tr>
+<th><code>vlan vlan_id</code>模式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>vlan mac-address dynamic maximum &lt;value&gt;</code></td>
+<td>开启限制MAC功能</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>vlan接口模式</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>`ip[v6] &lt;arp</td>
+<td>nd&gt; dynamic maximum <value>`</td>
+</tr>
+</tbody></table>
+<h2 id="Gratuitous-免费-ARP"><a href="#Gratuitous-免费-ARP" class="headerlink" title="Gratuitous(免费) ARP"></a>Gratuitous(免费) ARP</h2><p>也是一种可以防止ARP欺骗的方法, <strong>交换机主动通过向局域网广播ARP报文</strong></p>
+<ul>
+<li>减少ARP请求次数</li>
+<li>防止ARP欺骗网关</li>
+</ul>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>指令[全局/接口]: <code>ip gratuitous-arp &lt;5-1200s&gt;</code></p>
+<h2 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启用服务</span></span><br><span class="line"><span class="keyword">Switch</span>(config)<span class="comment">#ip http secure-server</span></span><br><span class="line"><span class="comment"># 绑定端口</span></span><br><span class="line"><span class="keyword">Switch</span>(config)<span class="comment">#ip http secure-port 1025</span></span><br><span class="line"><span class="comment"># 加密套件</span></span><br><span class="line"><span class="keyword">Switch</span>(config)<span class="comment">#ip http secure-ciphersuite rc4-128-sha</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="防DOS攻击"><a href="#防DOS攻击" class="headerlink" title="防DOS攻击"></a>防DOS攻击</h2><blockquote>
+<p>DoS 是 <em>Denial of Service</em> 的缩写,意为拒绝服务。DoS 攻击是网络上一种简单但很有效的破坏性攻击手段,服务器会由于不停顿地处理攻击者的数据包,从而正常用户发送的数据包会被丢弃,得不到处理,从而造成了服务器的拒绝服务,更严重的会导致服务器敏感数据泄漏。</p>
+</blockquote>
+<h3 id="IP-Spoofing"><a href="#IP-Spoofing" class="headerlink" title="IP Spoofing"></a>IP Spoofing</h3><p>IP欺骗简述: hacker发送修改过源IP数据包给服务器, 服务器错误的将数据回复给修改过的IP客户端, 利用该原理可义进行DOS和DDOS攻击, 并且有一定<strong>隐匿性</strong></p>
+<p>解决方案: 在网络边缘设备检查源IP与其来源是否匹配</p>
+<p>指令[全局]: <code>dosattack-check srcip-equal-dstip</code></p>
+<h3 id="TCP非法标志攻击"><a href="#TCP非法标志攻击" class="headerlink" title="TCP非法标志攻击"></a>TCP非法标志攻击</h3><p>简述:   hacker利用TCP报文的6个标志位进行攻击, 如SYN泛洪, ACK和FIN/RST泛洪等</p>
+<p>指令[全局]: <code>dosattack-check tcp-flags enable</code></p>
+<h3 id="ICMP碎片攻击"><a href="#ICMP碎片攻击" class="headerlink" title="ICMP碎片攻击"></a>ICMP碎片攻击</h3><p>简述: IP支持2^16字节, MTU一般都是1500字节, hacker发送&gt;2^16字节的数据包, 导致系统出错</p>
+<p><strong>指令[全局]</strong></p>
+<p>icmp不可分片:  <code>dosattack-check icmp-attacking</code></p>
+<p>设置icmp数据包长度: <code>dosattack-check icmpV4-size 100</code></p>
+<h2 id="VLAN-hopping"><a href="#VLAN-hopping" class="headerlink" title="VLAN hopping"></a>VLAN hopping</h2><p>原理简述: 交换机开启了DTP(动态中继协议)后, hacker如果和交换机间建立了一条中继链路, 然后就能获取该<strong>交换机所有VLAN中的信息</strong>.</p>
+<p>解决方法: 关闭DTP, 手动中继</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cloudflare.com/zh-cn/learning/ddos/glossary/ip-spoofing/">什么是 IP 欺骗？</a></p>
+<p><a target="_blank" rel="noopener" href="https://cshihong.github.io/2019/05/14/%E7%BD%91%E7%BB%9C%E5%B1%82-TCP-UDP-%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E5%BE%A1%E5%8E%9F%E7%90%86/">网络层-TCP-UDP-攻击与防御原理</a></p>
+</blockquote>
+</div><div class="article-licensing box"><div class="licensing-title"><p>Security</p><p><a href="http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/Security.html">http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/Security.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><a href="http://yangchaohe.github.io"><p>manu</p></a></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-04-21</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-01-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="recommend-area"><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 相关文章</span><br><span>  1.<a class="is-size-6" href="/Internet-equipment/DCN/DCFW-1800E-N3002/NAT.html" target="_blank">NAT简述及其配置</a><br></span><span>  2.<a class="is-size-6" href="/Internet-equipment/DCN/DCFW-1800E-N3002/VPN.html" target="_blank">VPN简述及实现</a><br></span><span>  3.<a class="is-size-6" href="/Internet-equipment/DCN/CS6200-28X-EI/DCP-debugging.html" target="_blank">DCP-debugging</a><br></span><span>  4.<a class="is-size-6" href="/Internet-equipment/DCN/CS6200-28X-EI/dynamic-vlan.html" target="_blank">dynamic-vlan</a><br></span><span>  5.<a class="is-size-6" href="/Internet-equipment/DCN/CS6200-28X-EI/Authentication.html" target="_blank">交换机认证配置</a><br></span><span>  6.<a class="is-size-6" href="/Internet-equipment/DCN/CS6200-28X-EI/Port-channel.html" target="_blank">Port_channel</a><br></span><span>  7.<a class="is-size-6" href="/Internet-equipment/DCN/CS6200-28X-EI/MSTP.html" target="_blank">MSTP</a><br></span><span>  8.<a class="is-size-6" href="/Internet-equipment/DCN/CS6200-28X-EI/Basic.html" target="_blank">交换机基础配置</a><br></span></div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 推荐文章</span><br><span>  1.<a class="is-size-6" href="/Database/ALTER.html" target="_blank">ALTER</a><br></span><span>  2.<a class="is-size-6" href="/Database/note.html" target="_blank">数据库笔记</a><br></span><span>  3.<a class="is-size-6" href="/Front-end/wechat-app.html" target="_blank">微信小程序笔记</a><br></span><span>  4.<a class="is-size-6" href="/Reverse/OD.html" target="_blank">动态调试-OD</a><br></span><span>  5.<a class="is-size-6" href="/Reverse/winPE.html" target="_blank">winPE结构</a><br></span><span>  6.<a class="is-size-6" href="/devTool/git.html" target="_blank">git指令</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Internet-equipment/DCN/CS6200-28X-EI/dynamic-vlan.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">dynamic-vlan</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Internet-equipment/DCN/CS6200-28X-EI/Authentication.html"><span class="level-item">交换机认证配置</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">通知</h3><ul><li><span><span>2021.6.28 公告测试</span></span></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex is-mobile" href="#ACL"><span class="mr-2">1</span><span>ACL</span></a></li><li><a class="is-flex is-mobile" href="#端口绑定MAC"><span class="mr-2">2</span><span>端口绑定MAC</span></a></li><li><a class="is-flex is-mobile" href="#端口的IP和MAC-IP绑定-AM"><span class="mr-2">3</span><span>端口的IP和MAC-IP绑定[AM]</span></a></li><li><a class="is-flex is-mobile" href="#URPF-三层"><span class="mr-2">4</span><span>URPF[三层]</span></a></li><li><a class="is-flex is-mobile" href="#ARP"><span class="mr-2">5</span><span>ARP</span></a></li><li><a class="is-flex is-mobile" href="#防ARP扫描攻击"><span class="mr-2">6</span><span>防ARP扫描攻击</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#基于端口和基于IP的配置"><span class="mr-2">6.1</span><span>基于端口和基于IP的配置</span></a></li><li><a class="is-flex is-mobile" href="#其他配置"><span class="mr-2">6.2</span><span>其他配置</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#ARP绑定"><span class="mr-2">7</span><span>ARP绑定</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#关闭交换机ARP更新"><span class="mr-2">7.1</span><span>关闭交换机ARP更新</span></a></li><li><a class="is-flex is-mobile" href="#关闭自动学习功能"><span class="mr-2">7.2</span><span>关闭自动学习功能</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#ARP-guard"><span class="mr-2">8</span><span>ARP guard</span></a></li><li><a class="is-flex is-mobile" href="#端口-amp-vlan的MAC和IP数量限制"><span class="mr-2">9</span><span>端口&amp;vlan的MAC和IP数量限制</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#端口限制"><span class="mr-2">9.1</span><span>端口限制</span></a></li><li><a class="is-flex is-mobile" href="#VLAN限制"><span class="mr-2">9.2</span><span>VLAN限制</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#Gratuitous-免费-ARP"><span class="mr-2">10</span><span>Gratuitous(免费) ARP</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#配置"><span class="mr-2">10.1</span><span>配置</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#SSL"><span class="mr-2">11</span><span>SSL</span></a></li><li><a class="is-flex is-mobile" href="#防DOS攻击"><span class="mr-2">12</span><span>防DOS攻击</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#IP-Spoofing"><span class="mr-2">12.1</span><span>IP Spoofing</span></a></li><li><a class="is-flex is-mobile" href="#TCP非法标志攻击"><span class="mr-2">12.2</span><span>TCP非法标志攻击</span></a></li><li><a class="is-flex is-mobile" href="#ICMP碎片攻击"><span class="mr-2">12.3</span><span>ICMP碎片攻击</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#VLAN-hopping"><span class="mr-2">13</span><span>VLAN hopping</span></a></li><li><a class="is-flex is-mobile" href="#参考"><span class="mr-2">14</span><span>参考</span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="码奴"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">码奴</p><p class="is-size-6 is-block">待人友善是修养，独来独往是性格</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>中国贵州</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">157</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">39</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">161</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/yangchaohe" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/yangchaohe"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:manu2x@.com"><i class="fa fa-envelope"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"来源《"+data.from+"》</p><p>提供者-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-17T14:05:40.000Z">2021-11-17</time></p><p class="title"><a href="/English/G/G002.html">G002</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-15T15:40:52.000Z">2021-11-15</time></p><p class="title"><a href="/English/G/G001.html">G001</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-14T02:44:54.000Z">2021-11-14</time></p><p class="title"><a href="/English/M/How-to-learn-English.html">How to learn English?</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T07:01:45.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/ctf-linux-cmd.html">ctf-linux-cmd.md</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T06:59:53.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/fastcgi.html">Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag is-grey-lightest">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag is-grey-lightest">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"><span class="tag">技能大赛-信息安全</span><span class="tag is-grey-lightest">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CS6200-28X-EI/"><span class="tag">CS6200-28X-EI</span><span class="tag is-grey-lightest">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/manjaro/"><span class="tag">manjaro</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DCFW-1800E-N3002/"><span class="tag">DCFW-1800E-N3002</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="tag">数据库</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><span class="tag">正则表达式</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/"><span class="tag">系统优化</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CPU/"><span class="tag">CPU</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DHCP/"><span class="tag">DHCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/bash/"><span class="tag">bash</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%87%BD%E6%95%B0/"><span class="tag">函数</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%AA%E8%BE%91/"><span class="tag">剪辑</span><span class="tag is-grey-lightest">2</span></a></div></div><div class="field is-grouped is-grouped-multiline"><a class="tags has-addons" href="/tags/"><span class="tag">查看全部&gt;&gt;</span></a></div></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a><p class="size-small"><span>&copy; 2023 manu</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请给我发<a href="mailto:manu2x@qq.com">邮件</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
+            var n = new Date(time);
+            now.setTime(now.getTime() + 250),
+                days = (now - n) / 1e3 / 60 / 60 / 24,
+                dnum = Math.floor(days),
+                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
+                hnum = Math.floor(hours),
+            1 == String(hnum).length && (hnum = "0" + hnum),
+                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
+                mnum = Math.floor(minutes),
+            1 == String(mnum).length && (mnum = "0" + mnum),
+                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
+                snum = Math.round(seconds),
+            1 == String(snum).length && (snum = "0" + snum),
+                document.getElementById("statistic-times").innerHTML = "❤️本站自 <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> 已运行 <strong>" + dnum + "</strong> 天 <strong>" + hnum + "</strong> 小时 <strong>" + mnum + "</strong> 分 <strong>" + snum + "</strong> 秒！❤️";
+        }var now = new Date();setInterval("createTime('2019/12/19 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️感谢 <strong><span id="busuanzi_value_site_uv">99+</span></strong> 小伙伴的 <strong><span id="busuanzi_value_site_pv">99+</span></strong> 次光临！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="4967313247" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        function loadMathJax() { //加载mathjax
+            $.getScript("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", function () {
+                MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$'], ['\(', '\)']] } });
+                var math = document.getElementsByClassName("entry-content")[0];
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+            });
+        };
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(false){
+                $.getScript('/js/comment-issue-data.js',function(){loadIssueData('undefined','undefined','undefined','undefined',undefined);});
+            }
+            if(false){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script></body></html>

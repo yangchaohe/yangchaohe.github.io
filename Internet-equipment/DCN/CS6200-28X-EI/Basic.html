@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>交换机基础配置 - 码奴的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="码奴的博客"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="码奴的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="记录一些实用的用法, 我的环境是Version 7.5.3.2(R0004.0030)"><meta property="og:type" content="note"><meta property="og:title" content="码奴"><meta property="og:url" content="https://yangchaohe.github.io/"><meta property="og:site_name" content="MANU"><meta property="og:description" content="记录一些实用的用法, 我的环境是Version 7.5.3.2(R0004.0030)"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yangchaohe.github.io/img/avatar.png"><meta property="article:published_time" content="2021-04-17T12:41:07.000Z"><meta property="article:modified_time" content="2023-01-06T10:37:32.764Z"><meta property="article:author" content="manu"><meta property="article:tag" content="技能大赛-信息安全"><meta property="article:tag" content="CS6200-28X-EI"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/Basic.html"},"headline":"码奴的博客","image":["http://yangchaohe.github.io/img/og_image.png"],"datePublished":"2021-04-17T12:41:07.000Z","dateModified":"2023-01-06T10:37:32.764Z","author":{"@type":"Person","name":"manu"},"description":"记录一些实用的用法, 我的环境是Version 7.5.3.2(R0004.0030)"}</script><link rel="canonical" href="http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/Basic.html"><link rel="icon" href="/img/favicon.png"><meta name="referrer" content="no-referrer-when-downgrade"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="码奴的博客" type="application/atom+xml">
+</head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/mindmap">思维导图</a><a class="navbar-item" href="/read">书籍</a><a class="navbar-item" href="/life">日志</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><!--!--><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2021-04-17  <a class="commentCountImg" href="/Internet-equipment/DCN/CS6200-28X-EI/Basic.html#comment-container"><span class="display-none-class">/Internet-equipment/DCN/CS6200-28X-EI/Basic.html</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="c72bad2acb020f1f86d6faada1d02340">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>10 分钟  <i class="fas fa-pencil-alt"> </i>1.6 k</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">交换机基础配置</h1><div class="content"><blockquote>
+<p>记录一些实用的用法, 我的环境是Version 7.5.3.2(R0004.0030)</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="vlan"><a href="#vlan" class="headerlink" title="vlan"></a>vlan</h2><table>
+<thead>
+<tr>
+<th>全局</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>show vlan</code></td>
+<td>vlan brief</td>
+</tr>
+<tr>
+<td><code>interface ethernet &lt;interface-list&gt;</code></td>
+<td>进入一个或多个VLAN, 不连续用 <code>;</code>, 连续用 <code>-</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li>默认VLAN是可以互相通信的(自动启用路由功能)</li>
+</ul>
+<h2 id="telnet"><a href="#telnet" class="headerlink" title="telnet"></a>telnet</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置用户</span></span><br><span class="line">username &lt;username&gt; <span class="function">[<span class="type">privilege</span> &lt;<span class="type">privilege</span>&gt;] <span class="title">password</span></span> (<span class="number">0</span> | <span class="number">7</span>) &lt;password&gt;</span><br><span class="line"><span class="comment"># 开启服务</span></span><br><span class="line">telnet<span class="literal">-server</span> enable</span><br><span class="line"><span class="comment"># 启用ACL</span></span><br><span class="line">authentication line vty login local</span><br><span class="line"><span class="comment"># 启用该IP作为安全IP</span></span><br><span class="line">authentication securityip &lt;ip<span class="literal">-addr</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>show users</code>可查看telnet和ssh登录的用户</p>
+</blockquote>
+<h2 id="http"><a href="#http" class="headerlink" title="http"></a>http</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip http server</span><br></pre></td></tr></table></figure>
+
+<h2 id="ssh"><a href="#ssh" class="headerlink" title="ssh"></a>ssh</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成密钥</span></span><br><span class="line">ssh<span class="literal">-server</span> host<span class="literal">-key</span> create rsa modulus &lt;<span class="number">768</span><span class="literal">-2048</span>&gt;</span><br><span class="line"><span class="comment"># 开启服务</span></span><br><span class="line">ssh<span class="literal">-server</span> enable</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>神州交换机的ssh版本有点老, 自带的ssh客户端可能连不上, 需要加一些参数</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/column/p/30840210">ssh 登录旧设备的问题解决</a></p>
+</blockquote>
+<h2 id="SVI"><a href="#SVI" class="headerlink" title="SVI"></a>SVI</h2><blockquote>
+<p>没有cisco的<code>no switchport</code>指令, 将接口加入vlan就行了</p>
+</blockquote>
+<p>目标: 让两台三层交换机下不同VLAN的PC互联</p>
+<p>PC1:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo route add -net 192.168.20.0 netmask 255.255.255.0 gw 192.168.10.1</span><br></pre></td></tr></table></figure>
+
+<p>ip: 192.168.10.2</p>
+<p>gw: 192.168.10.1</p>
+<p>PC2:</p>
+<p>ip: 192.168.20.2</p>
+<p>gw: 192.168.20.1</p>
+<p>S1:</p>
+<p>vlan10: 192.168.10.1/24</p>
+<p>vlan2: 192.168.2.1/24</p>
+<p>S2:</p>
+<p>vlan20: 192.168.20.1/24</p>
+<p>vlan2: 192.168.2.2/24</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">S1(config)<span class="comment">#vlan 10</span></span><br><span class="line">S1(config<span class="literal">-vlan10</span>)<span class="comment">#vlan 2            </span></span><br><span class="line">S1(config<span class="literal">-vlan2</span>)<span class="comment">#switchport interface            </span></span><br><span class="line">S1(config<span class="literal">-vlan2</span>)<span class="comment">#switchport interface ethernet 1/0/3</span></span><br><span class="line">S1(config<span class="literal">-vlan2</span>)<span class="comment">#exit</span></span><br><span class="line">S1(config)<span class="comment">#interface vlan 2</span></span><br><span class="line">S1(config<span class="literal">-if</span><span class="literal">-vlan2</span>)<span class="comment">#ip address 192.168.2.1 255.255.255.0</span></span><br><span class="line">S1(config<span class="literal">-if</span><span class="literal">-vlan2</span>)<span class="comment">#exit                </span></span><br><span class="line">S1(config)<span class="comment">#interface vlan 10</span></span><br><span class="line">S1(config<span class="literal">-if</span><span class="literal">-vlan10</span>)<span class="comment">#ip address 192.168.10.1 255.255.255.0</span></span><br><span class="line">S1(config<span class="literal">-if</span><span class="literal">-vlan10</span>)<span class="comment">#exit</span></span><br><span class="line">S1(config)<span class="comment">#interface ethernet 1/0/1</span></span><br><span class="line">S1(config<span class="literal">-if</span><span class="literal">-ethernet1</span>/<span class="number">0</span>/<span class="number">1</span>)<span class="comment">#switchport mode access </span></span><br><span class="line">S1(config<span class="literal">-if</span><span class="literal">-ethernet1</span>/<span class="number">0</span>/<span class="number">1</span>)<span class="comment">#switchport access vlan 10</span></span><br><span class="line">S1(config)<span class="comment">#ip route 192.168.20.0 255.255.255.0 192.168.2.2</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">S2(config)<span class="comment">#vlan 20</span></span><br><span class="line">S2(config<span class="literal">-vlan20</span>)<span class="comment">#exit</span></span><br><span class="line">S2(config)<span class="comment">#interface vlan 20</span></span><br><span class="line">S2(config<span class="literal">-if</span><span class="literal">-vlan20</span>)<span class="comment">#ip address 192.168.20.1 255.255.255.0</span></span><br><span class="line">S2(config<span class="literal">-if</span><span class="literal">-vlan20</span>)<span class="comment">#exit</span></span><br><span class="line">S2(config)<span class="comment">#vlan 2</span></span><br><span class="line">S2(config<span class="literal">-vlan2</span>)<span class="comment">#exit</span></span><br><span class="line">S2(config)<span class="comment">#interface vlan 2</span></span><br><span class="line">S2(config<span class="literal">-if</span><span class="literal">-vlan2</span>)<span class="comment">#ip address 192.168.2.2 255.255.255.0</span></span><br><span class="line">S2(config<span class="literal">-if</span><span class="literal">-vlan2</span>)<span class="comment">#exit</span></span><br><span class="line">S2(config)<span class="comment">#ip route 192.168.10.0 255.255.255.0 192.168.2.1</span></span><br><span class="line">S2(config)<span class="comment">#interface ethernet 1/0/3</span></span><br><span class="line">S2(config<span class="literal">-if</span><span class="literal">-ethernet1</span>/<span class="number">0</span>/<span class="number">3</span>)<span class="comment">#switchport mode access           </span></span><br><span class="line">S2(config<span class="literal">-if</span><span class="literal">-ethernet1</span>/<span class="number">0</span>/<span class="number">3</span>)<span class="comment">#switchport access vlan 2</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="RIPv2"><a href="#RIPv2" class="headerlink" title="RIPv2"></a>RIPv2</h2><p>与思科 <a href="../Networking/Cisco/RIP.md">RIP.md</a> 基本一致</p>
+<p><code>show ip route rip</code>显示RIP network的路由</p>
+<p><code>show ip protocol</code>查看RIP详情</p>
+<h2 id="OSPFv2"><a href="#OSPFv2" class="headerlink" title="OSPFv2"></a>OSPFv2</h2><blockquote>
+<p>v2适用于IPv4, v3适用于IPv6</p>
+</blockquote>
+<ul>
+<li><p>相同的域共享相同的LSDB</p>
+</li>
+<li><p>0代表主干域</p>
+</li>
+</ul>
+<blockquote>
+<p>OSPF的区域以Backbone（骨干区域）作为核心，该区域标识为0域，所有的其他区域都必须与0域在逻辑上相连，0域必须保证连续。</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">S1(config)<span class="comment">#router ospf </span></span><br><span class="line">S1(config<span class="literal">-router</span>)<span class="comment">#network 192.168.10.0/24 area 0</span></span><br><span class="line">S1(config<span class="literal">-router</span>)<span class="comment">#network 192.168.2.0/24 area 0 </span></span><br><span class="line">S1(config<span class="literal">-router</span>)<span class="comment">#show ip ospf route </span></span><br><span class="line">O  <span class="number">192.168</span>.<span class="number">2.0</span>/<span class="number">24</span> [<span class="number">1</span>] is directly connected, Vlan2:<span class="number">192.168</span>.<span class="number">2.1</span>, Area <span class="number">0.0</span>.<span class="number">0.0</span>  tag:<span class="number">0</span></span><br><span class="line"></span><br><span class="line">O  <span class="number">192.168</span>.<span class="number">10.0</span>/<span class="number">24</span> [<span class="number">1</span>] is directly connected, Vlan10:<span class="number">192.168</span>.<span class="number">10.1</span>, Area <span class="number">0.0</span>.<span class="number">0.0</span>  tag:<span class="number">0</span></span><br><span class="line"></span><br><span class="line">S2(config)<span class="comment">#router ospf</span></span><br><span class="line">S2(config<span class="literal">-router</span>)<span class="comment">#network 192.168.2.0/24 area 0</span></span><br><span class="line">Apr <span class="number">16</span> <span class="number">20</span>:<span class="number">00</span>:<span class="number">56</span>:<span class="number">000</span> <span class="number">2021</span> S1 DEFAULT/<span class="number">7</span>/:[<span class="type">OSPF</span>]Neighbor [<span class="type">Vlan2</span>:<span class="number">192.168</span><span class="type">.2.1</span>-<span class="number">192.168</span><span class="type">.20.1</span>]: Status change Loading -&gt; Fulls</span><br><span class="line">S2(config<span class="literal">-router</span>)<span class="comment">#network 192.168.20.0/24 area 0</span></span><br><span class="line">S2(config<span class="literal">-router</span>)<span class="comment">#show ip route</span></span><br><span class="line">Codes: K - kernel, C - connected, S - <span class="keyword">static</span>, <span class="built_in">R</span> - RIP, B - BGP</span><br><span class="line">       O - OSPF, IA - OSPF inter area</span><br><span class="line">       N1 - OSPF NSSA external <span class="built_in">type</span> <span class="number">1</span>, N2 - OSPF NSSA external <span class="built_in">type</span> <span class="number">2</span></span><br><span class="line">       E1 - OSPF external <span class="built_in">type</span> <span class="number">1</span>, E2 - OSPF external <span class="built_in">type</span> <span class="number">2</span></span><br><span class="line">       i - IS<span class="operator">-IS</span>, L1 - IS<span class="operator">-IS</span> level<span class="literal">-1</span>, L2 - IS<span class="operator">-IS</span> level<span class="literal">-2</span>, ia - IS<span class="operator">-IS</span> inter area</span><br><span class="line">       * - candidate default</span><br><span class="line"></span><br><span class="line">C       <span class="number">127.0</span>.<span class="number">0.0</span>/<span class="number">8</span> is directly connected, Loopback  tag:<span class="number">0</span></span><br><span class="line">C       <span class="number">192.168</span>.<span class="number">2.0</span>/<span class="number">24</span> is directly connected, Vlan2  tag:<span class="number">0</span></span><br><span class="line">O       <span class="number">192.168</span>.<span class="number">10.0</span>/<span class="number">24</span> [<span class="number">110</span>/<span class="number">2</span>] via <span class="number">192.168</span>.<span class="number">2.1</span>, Vlan2, <span class="number">00</span>:<span class="number">00</span>:<span class="number">30</span>  tag:<span class="number">0</span></span><br><span class="line">C       <span class="number">192.168</span>.<span class="number">20.0</span>/<span class="number">24</span> is directly connected, Vlan20  tag:<span class="number">0</span></span><br><span class="line">Total routes are : <span class="number">4</span> item(s)</span><br></pre></td></tr></table></figure>
+
+<h2 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置</span></span><br><span class="line">S1(config)<span class="comment">#ip dhcp pool &lt;pool_name&gt;</span></span><br><span class="line">S1(dhcp<span class="literal">-manu</span><span class="literal">-config</span>)<span class="comment">#network-address 192.168.10.1 24</span></span><br><span class="line"><span class="comment"># gw</span></span><br><span class="line">S1(dhcp<span class="literal">-manu</span><span class="literal">-config</span>)<span class="comment">#default-router 192.168.10.1</span></span><br><span class="line">S1(dhcp<span class="literal">-manu</span><span class="literal">-config</span>)<span class="comment">#exit</span></span><br><span class="line"><span class="comment"># 启用</span></span><br><span class="line">S1(config)<span class="comment">#service dhcp</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 中继(设置其他DHCP服务器)</span></span><br><span class="line"><span class="comment"># config启用转发DHCP报文</span></span><br><span class="line">ip forwark<span class="literal">-protocol</span> udp bootps</span><br><span class="line"><span class="comment"># 在接口设置转发地址</span></span><br><span class="line">interface vlan_id</span><br><span class="line">ip helper<span class="literal">-address</span> dhcp_server_ip</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若设置多个pool时, 如不指定中继, 则会获得同一网段的pool的支持</p>
+<p>DHCPv6需要在接口指定IP pool</p>
+<p><code>ipv6 dhcp server &lt;poolname&gt; [preference&lt;value&gt;] [rapid-commit] [allow-hint]</code></p>
+</blockquote>
+<h2 id="DHCP侦听"><a href="#DHCP侦听" class="headerlink" title="DHCP侦听"></a>DHCP侦听</h2><p>作用是屏蔽接入网络中的非法的DHCP服务器。即开启 DHCP Snooping 功能后，网络中的客户端只有从管理员指定的DHCP服务器获取IP地址。 由于DHCP报文缺少认证机制，如果网络中存在非法DHCP服务器，管理员将无法保证客户端从管理员指定的DHCP服务器获取合法地址，客户机有可能从非法DHCP服务器获得错误的IP地址等配置信息，导致客户端无法正常使用网络。</p>
+<ul>
+<li>建议将连接<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/DHCP">DHCP</a>服务器的端口设置为信任端口，其他端口设置为非信任端口。</li>
+</ul>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">S1(config)<span class="comment">#ip dhcp snooping enable </span></span><br><span class="line"><span class="comment"># 记录非法信息</span></span><br><span class="line">S1(config)<span class="comment">#ip dhcp snooping blocked record enable</span></span><br><span class="line"><span class="comment"># 信任口</span></span><br><span class="line">S1(config<span class="literal">-if</span><span class="literal">-ethernet1</span>/<span class="number">0</span>/<span class="number">1</span>)<span class="comment">#ip dhcp snooping trust</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h2><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">S2(config)<span class="comment">#service password-encryption</span></span><br><span class="line">show run</span><br><span class="line">username test password <span class="number">7</span> <span class="number">098</span>f6bcd4621d373cade4e832627b4f6</span><br></pre></td></tr></table></figure>
+
+<h2 id="RIPng"><a href="#RIPng" class="headerlink" title="RIPng"></a>RIPng</h2><blockquote>
+<p>运行在IPv6的RIP协议</p>
+</blockquote>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">S1(config)<span class="comment">#router ipv6 rip </span></span><br><span class="line">S1(config<span class="literal">-router</span>)<span class="comment">#exit           </span></span><br><span class="line">S1(config)<span class="comment">#interface vlan 10</span></span><br><span class="line"></span><br><span class="line">S1(config<span class="literal">-if</span><span class="literal">-vlan10</span>)<span class="comment">#ipv6 address 2021:4:17:10::1/64</span></span><br><span class="line"><span class="comment"># 在该接口运行RIPng，类似IPv4的network</span></span><br><span class="line">S1(config<span class="literal">-if</span><span class="literal">-vlan10</span>)<span class="comment">#ipv6 router rip</span></span><br><span class="line"></span><br><span class="line">S1(config<span class="literal">-if</span><span class="literal">-vlan10</span>)<span class="comment">#interface vlan 2</span></span><br><span class="line">S1(config<span class="literal">-if</span><span class="literal">-vlan2</span>)<span class="comment">#ipv6 address 2021:4:17:2::1/64</span></span><br><span class="line">S1(config<span class="literal">-if</span><span class="literal">-vlan2</span>)<span class="comment">#ipv6 router rip</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="端口隔离"><a href="#端口隔离" class="headerlink" title="端口隔离"></a>端口隔离</h2><p>利用端口隔离的特性，可以实现vlan内部的端口隔离</p>
+<p>配置端口隔离功能后，一个<strong>隔离组内的端口之间相互隔离</strong>, 不同隔离组和不属于隔离组的端口可以互相访问</p>
+<p>一台交换机上最多能够配置16个隔离组</p>
+<table>
+<thead>
+<tr>
+<th>全局模式下</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>isolate-port group &lt;WORD&gt;</code></td>
+<td>创建隔离组</td>
+</tr>
+<tr>
+<td>`isolate-port group <WORD> switchport interface [ethernet</td>
+<td>port-channel] <IFNAME>`</td>
+</tr>
+<tr>
+<td><code>show isolate-port group [ &lt;WORD&gt; ]</code></td>
+<td>显示端口隔离的相关配置</td>
+</tr>
+</tbody></table>
+<h2 id="端口环路检测"><a href="#端口环路检测" class="headerlink" title="端口环路检测"></a>端口环路检测</h2><p>当交换机的端口接收到一个自己发送出去的报文时, 对其进行处理, 与STP有点类似</p>
+<p>但与STP并不冲突, 端口环路检测针对一个端口, STP是全局</p>
+<table>
+<thead>
+<tr>
+<th>全局模式下</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>loopback-detection interval-time &lt;loopback&gt; &lt;no-loopback&gt;</code></td>
+<td>设置环路检测的时间间隔</td>
+</tr>
+<tr>
+<td><code>oopback-detection control-recovery timeout &lt;0-3600&gt;</code></td>
+<td>配置环路检测受控方式是否自动恢复或者恢复的时间间隔</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>端口模式下</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>loopback-detection specified-vlan &lt;vlan-list&gt;</code></td>
+<td>开启端口环路检测</td>
+</tr>
+<tr>
+<td>`loopback-detection control {shutdown</td>
+<td>block}`</td>
+</tr>
+</tbody></table>
+<h2 id="端口镜像"><a href="#端口镜像" class="headerlink" title="端口镜像"></a>端口镜像</h2><blockquote>
+<p><strong>端口镜像功能</strong>是指交换机把某一个端口接收或发送的数据帧完全相同的复制给另一个端口；其中被复制的端口称为镜像源端口，复制的端口称为镜像目的端口</p>
+<p><strong>流镜像功能</strong>是指交换机把<strong>端口的指定规则</strong>的接收的数据帧完全复制给一个端口，其中指定规则只有为<code>permit</code>时流镜像才能生效</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>全局模式下</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>`monitor session <session> source {interface <interface-list>} {rx</td>
+<td>tx</td>
+</tr>
+<tr>
+<td><code>monitor session &lt;session&gt; destination interface &lt;interface-number&gt;</code></td>
+<td>指定目标</td>
+</tr>
+<tr>
+<td>`monitor session <session> source {interface <interface-list>} access-group <num> {rx</td>
+<td>tx</td>
+</tr>
+</tbody></table>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">S3(config)<span class="comment">#monitor session 1 source interface ethernet1/0/1 ?</span></span><br><span class="line">  access<span class="literal">-list</span>  访问列表</span><br><span class="line">  both         管理发送和接收的流量</span><br><span class="line">  rx           只管理接收的流量</span><br><span class="line">  tx           只管理发送的流量</span><br></pre></td></tr></table></figure>
+
+</div><div class="article-licensing box"><div class="licensing-title"><p>交换机基础配置</p><p><a href="http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/Basic.html">http://yangchaohe.github.io/Internet-equipment/DCN/CS6200-28X-EI/Basic.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><a href="http://yangchaohe.github.io"><p>manu</p></a></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-04-17</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-01-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="recommend-area"><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 相关文章</span><br><span>  1.<a class="is-size-6" href="/Internet-equipment/DCN/DCFW-1800E-N3002/NAT.html" target="_blank">NAT简述及其配置</a><br></span><span>  2.<a class="is-size-6" href="/Internet-equipment/DCN/DCFW-1800E-N3002/VPN.html" target="_blank">VPN简述及实现</a><br></span><span>  3.<a class="is-size-6" href="/Internet-equipment/DCN/CS6200-28X-EI/DCP-debugging.html" target="_blank">DCP-debugging</a><br></span><span>  4.<a class="is-size-6" href="/Internet-equipment/DCN/CS6200-28X-EI/dynamic-vlan.html" target="_blank">dynamic-vlan</a><br></span><span>  5.<a class="is-size-6" href="/Internet-equipment/DCN/CS6200-28X-EI/Security.html" target="_blank">Security</a><br></span><span>  6.<a class="is-size-6" href="/Internet-equipment/DCN/CS6200-28X-EI/Authentication.html" target="_blank">交换机认证配置</a><br></span><span>  7.<a class="is-size-6" href="/Internet-equipment/DCN/CS6200-28X-EI/Port-channel.html" target="_blank">Port_channel</a><br></span><span>  8.<a class="is-size-6" href="/Internet-equipment/DCN/CS6200-28X-EI/MSTP.html" target="_blank">MSTP</a><br></span></div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 推荐文章</span><br><span>  1.<a class="is-size-6" href="/Database/ALTER.html" target="_blank">ALTER</a><br></span><span>  2.<a class="is-size-6" href="/Database/note.html" target="_blank">数据库笔记</a><br></span><span>  3.<a class="is-size-6" href="/Front-end/wechat-app.html" target="_blank">微信小程序笔记</a><br></span><span>  4.<a class="is-size-6" href="/Reverse/OD.html" target="_blank">动态调试-OD</a><br></span><span>  5.<a class="is-size-6" href="/Reverse/winPE.html" target="_blank">winPE结构</a><br></span><span>  6.<a class="is-size-6" href="/devTool/git.html" target="_blank">git指令</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Internet-equipment/DCN/CS6200-28X-EI/MSTP.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">MSTP</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Internet-equipment/DCN/DCFW-1800E-N3002/firewall.html"><span class="level-item">防火墙基础概念及配置</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">通知</h3><ul><li><span><span>2021.6.28 公告测试</span></span></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex is-mobile" href="#vlan"><span class="mr-2">1</span><span>vlan</span></a></li><li><a class="is-flex is-mobile" href="#telnet"><span class="mr-2">2</span><span>telnet</span></a></li><li><a class="is-flex is-mobile" href="#http"><span class="mr-2">3</span><span>http</span></a></li><li><a class="is-flex is-mobile" href="#ssh"><span class="mr-2">4</span><span>ssh</span></a></li><li><a class="is-flex is-mobile" href="#SVI"><span class="mr-2">5</span><span>SVI</span></a></li><li><a class="is-flex is-mobile" href="#RIPv2"><span class="mr-2">6</span><span>RIPv2</span></a></li><li><a class="is-flex is-mobile" href="#OSPFv2"><span class="mr-2">7</span><span>OSPFv2</span></a></li><li><a class="is-flex is-mobile" href="#DHCP"><span class="mr-2">8</span><span>DHCP</span></a></li><li><a class="is-flex is-mobile" href="#DHCP侦听"><span class="mr-2">9</span><span>DHCP侦听</span></a></li><li><a class="is-flex is-mobile" href="#加密"><span class="mr-2">10</span><span>加密</span></a></li><li><a class="is-flex is-mobile" href="#RIPng"><span class="mr-2">11</span><span>RIPng</span></a></li><li><a class="is-flex is-mobile" href="#端口隔离"><span class="mr-2">12</span><span>端口隔离</span></a></li><li><a class="is-flex is-mobile" href="#端口环路检测"><span class="mr-2">13</span><span>端口环路检测</span></a></li><li><a class="is-flex is-mobile" href="#端口镜像"><span class="mr-2">14</span><span>端口镜像</span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="码奴"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">码奴</p><p class="is-size-6 is-block">待人友善是修养，独来独往是性格</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>中国贵州</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">157</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">39</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">161</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/yangchaohe" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/yangchaohe"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:manu2x@.com"><i class="fa fa-envelope"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"来源《"+data.from+"》</p><p>提供者-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-17T14:05:40.000Z">2021-11-17</time></p><p class="title"><a href="/English/G/G002.html">G002</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-15T15:40:52.000Z">2021-11-15</time></p><p class="title"><a href="/English/G/G001.html">G001</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-14T02:44:54.000Z">2021-11-14</time></p><p class="title"><a href="/English/M/How-to-learn-English.html">How to learn English?</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T07:01:45.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/ctf-linux-cmd.html">ctf-linux-cmd.md</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T06:59:53.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/fastcgi.html">Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag is-grey-lightest">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag is-grey-lightest">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"><span class="tag">技能大赛-信息安全</span><span class="tag is-grey-lightest">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CS6200-28X-EI/"><span class="tag">CS6200-28X-EI</span><span class="tag is-grey-lightest">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/manjaro/"><span class="tag">manjaro</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DCFW-1800E-N3002/"><span class="tag">DCFW-1800E-N3002</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="tag">数据库</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><span class="tag">正则表达式</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/"><span class="tag">系统优化</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CPU/"><span class="tag">CPU</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DHCP/"><span class="tag">DHCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/bash/"><span class="tag">bash</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%87%BD%E6%95%B0/"><span class="tag">函数</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%AA%E8%BE%91/"><span class="tag">剪辑</span><span class="tag is-grey-lightest">2</span></a></div></div><div class="field is-grouped is-grouped-multiline"><a class="tags has-addons" href="/tags/"><span class="tag">查看全部&gt;&gt;</span></a></div></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a><p class="size-small"><span>&copy; 2023 manu</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请给我发<a href="mailto:manu2x@qq.com">邮件</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
+            var n = new Date(time);
+            now.setTime(now.getTime() + 250),
+                days = (now - n) / 1e3 / 60 / 60 / 24,
+                dnum = Math.floor(days),
+                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
+                hnum = Math.floor(hours),
+            1 == String(hnum).length && (hnum = "0" + hnum),
+                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
+                mnum = Math.floor(minutes),
+            1 == String(mnum).length && (mnum = "0" + mnum),
+                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
+                snum = Math.round(seconds),
+            1 == String(snum).length && (snum = "0" + snum),
+                document.getElementById("statistic-times").innerHTML = "❤️本站自 <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> 已运行 <strong>" + dnum + "</strong> 天 <strong>" + hnum + "</strong> 小时 <strong>" + mnum + "</strong> 分 <strong>" + snum + "</strong> 秒！❤️";
+        }var now = new Date();setInterval("createTime('2019/12/19 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️感谢 <strong><span id="busuanzi_value_site_uv">99+</span></strong> 小伙伴的 <strong><span id="busuanzi_value_site_pv">99+</span></strong> 次光临！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="4967313247" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        function loadMathJax() { //加载mathjax
+            $.getScript("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", function () {
+                MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$'], ['\(', '\)']] } });
+                var math = document.getElementsByClassName("entry-content")[0];
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+            });
+        };
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(false){
+                $.getScript('/js/comment-issue-data.js',function(){loadIssueData('undefined','undefined','undefined','undefined',undefined);});
+            }
+            if(false){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script></body></html>

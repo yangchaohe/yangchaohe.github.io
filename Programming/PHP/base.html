@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>PHP基础学习笔记 - 码奴的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="码奴的博客"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="码奴的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="PHP（全称：PHP：Hypertext Preprocessor，即“PHP：超文本预处理器”）是一种开源的通用计算机脚本语言，尤其适用于网络开发并可嵌入HTML中使用"><meta property="og:type" content="note"><meta property="og:title" content="码奴"><meta property="og:url" content="https://yangchaohe.github.io/"><meta property="og:site_name" content="MANU"><meta property="og:description" content="PHP（全称：PHP：Hypertext Preprocessor，即“PHP：超文本预处理器”）是一种开源的通用计算机脚本语言，尤其适用于网络开发并可嵌入HTML中使用"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yangchaohe.github.io/img/avatar.png"><meta property="article:published_time" content="2021-03-09T07:00:00.000Z"><meta property="article:modified_time" content="2023-01-06T10:37:32.768Z"><meta property="article:author" content="manu"><meta property="article:tag" content="PHP"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchaohe.github.io/Programming/PHP/base.html"},"headline":"码奴的博客","image":["http://yangchaohe.github.io/img/og_image.png"],"datePublished":"2021-03-09T07:00:00.000Z","dateModified":"2023-01-06T10:37:32.768Z","author":{"@type":"Person","name":"manu"},"description":"PHP（全称：PHP：Hypertext Preprocessor，即“PHP：超文本预处理器”）是一种开源的通用计算机脚本语言，尤其适用于网络开发并可嵌入HTML中使用"}</script><link rel="canonical" href="http://yangchaohe.github.io/Programming/PHP/base.html"><link rel="icon" href="/img/favicon.png"><meta name="referrer" content="no-referrer-when-downgrade"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="码奴的博客" type="application/atom+xml">
+</head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/mindmap">思维导图</a><a class="navbar-item" href="/read">书籍</a><a class="navbar-item" href="/life">日志</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><!--!--><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2021-03-09  <span class="level-item"> manu </span><a class="commentCountImg" href="/Programming/PHP/base.html#comment-container"><span class="display-none-class">/Programming/PHP/base.html</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="1dbbe827ab1869469b3f3ee2bb32400f">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>21 分钟  <i class="fas fa-pencil-alt"> </i>3.2 k</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">PHP基础学习笔记</h1><div class="content"><blockquote>
+<p><strong>PHP</strong>（全称：<strong>P</strong>HP：<strong>H</strong>ypertext <strong>P</strong>reprocessor，即“PHP：超文本预处理器”）是一种<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/开源">开源</a>的通用<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/计算机">计算机</a><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/脚本语言">脚本语言</a>，尤其适用于<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/网络开发">网络开发</a>并可嵌入<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/HTML">HTML</a>中使用</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="PHP的超全局变量"><a href="#PHP的超全局变量" class="headerlink" title="PHP的超全局变量"></a>PHP的超全局变量</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/reserved.variables.server.php">$_SERVER</a>是PHP里面的超全局变量, 包含了web服务器提供的所有信息.可通过<code>phpinfo()</code>查看<ul>
+<li><code>$_SERVER[&#39;PHP_SELF&#39;]</code>得到自身文件名</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/reserved.variables.globals.php">$GLOBALS</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/reserved.variables.get.php">$_GET</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/reserved.variables.post.php">$_POST</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/reserved.variables.files.php">$_FILES</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/reserved.variables.cookies.php">$_COOKIE</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/reserved.variables.session.php">$_SESSION</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/reserved.variables.request.php">$_REQUEST</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/reserved.variables.environment.php">$_ENV</a></li>
+</ul>
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ul>
+<li>描述变量使用<code>$</code>或者<code>$&#123;&#125;</code>, 前者会匹配更多字符让其合法</li>
+<li><code>&lt;?php echo</code>==<code>&lt;?=</code></li>
+<li>纯php文件文末结束符可省略</li>
+<li>支持<code>#</code>,<code>//</code>,<code>/* */</code>注释(<code>//,#</code>后面的<code>?&gt;</code>不会被注释), <code>/* */</code>不可嵌套</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.intro.php">PHP 支持 10 种原始数据类型</a></li>
+<li>如果想查看某个<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.expressions.php">表达式</a>的值和类型，用 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.var-dump.php">var_dump()</a> 函数。</li>
+<li>如果只是想得到一个易读懂的类型的表达方式用于调试，用 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.gettype.php">gettype()</a> 函数。要检验某个类型，<em>不要</em>用 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.gettype.php">gettype()</a>，而用 <code>is_type</code> 函数</li>
+<li>如果要将一个变量强制转换为某类型，可以对其使用<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.type-juggling.php#language.types.typecasting">强制转换</a>或者 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.settype.php">settype()</a> 函数, 使用<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.type-juggling.php">*</a>符号也能改变类型</li>
+</ul>
+<h3 id="整型"><a href="#整型" class="headerlink" title="整型"></a>整型</h3><ul>
+<li>要使用八进制表达，数字前必须加上 <code>0</code>（零）。要使用十六进制表达，数字前必须加上 <code>0x</code>。要使用二进制表达，数字前必须加上 <code>0b</code></li>
+<li>将 resource 转换成 integer 时， 结果会是 PHP 运行时为 resource 分配的唯一资源号</li>
+<li><strong>PHP 7.4.0</strong> 之前不支持<code>_</code>, 如<code>1_234</code></li>
+</ul>
+<h3 id="浮点型"><a href="#浮点型" class="headerlink" title="浮点型"></a>浮点型</h3><ul>
+<li>永远不要相信浮点数结果精确到了最后一位，也永远不要比较两个浮点数是否相等。如果确实需要更高的精度，应该使用<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/ref.bc.php">任意精度数学函数</a>或者 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/ref.gmp.php">gmp 函数</a></li>
+<li>由于 <strong><code>NAN</code></strong> 代表着任何不同值，不应拿 <strong><code>NAN</code></strong> 去和其它值进行比较，包括其自身，应该用 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.is-nan.php">is_nan()</a> 来检查</li>
+</ul>
+<h3 id="String字符串"><a href="#String字符串" class="headerlink" title="String字符串"></a>String字符串</h3><ul>
+<li><code>.</code>与<code>.=</code></li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$a</span> = <span class="string">&quot;Hello &quot;</span>;</span><br><span class="line"><span class="variable">$b</span> = <span class="variable">$a</span> . <span class="string">&quot;World!&quot;</span>; <span class="comment">// now $b contains &quot;Hello World!&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$a</span> = <span class="string">&quot;Hello &quot;</span>;</span><br><span class="line"><span class="variable">$a</span> .= <span class="string">&quot;World!&quot;</span>;     <span class="comment">// now $a contains &quot;Hello World!&quot;</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>单引号代表的字符串里的<code>\</code>转义符能转<code>&#39;\</code>两个字符, <code>\n</code>没有任何含义, 在单引号里的<code>$</code>失去了变量的含义(类似linux)</li>
+<li>双引号里的<code>\</code>能转移一些特殊字母和解析<code>$</code>变量</li>
+<li>在<code>&#123;&#125;</code>里面可以使用多重变量, 如</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">foo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> <span class="variable">$bar</span> = <span class="string">&#x27;I am bar.&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable">$foo</span> = <span class="keyword">new</span> foo();</span><br><span class="line"><span class="variable">$bar</span> = <span class="string">&#x27;bar&#x27;</span>;</span><br><span class="line"><span class="variable">$baz</span> = <span class="keyword">array</span>(<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>, <span class="string">&#x27;baz&#x27;</span>, <span class="string">&#x27;quux&#x27;</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">&#123;$foo-&gt;$bar&#125;</span>\n&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">&#123;$foo-&gt;&#123;$baz[1]&#125;</span>&#125;\n&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>[]与{}都可以访问字符串片段</li>
+<li><code>.</code>可以连接字符串</li>
+</ul>
+<h4 id="heredoc结构"><a href="#heredoc结构" class="headerlink" title="heredoc结构"></a>heredoc结构</h4><p>类似linux的<code>cat &gt; file.name &lt;&lt; eof</code>, 可输入转义字符和变量, 如</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$str</span> = <span class="string">&lt;&lt;&lt;EOD</span></span><br><span class="line"><span class="string">Example of string</span></span><br><span class="line"><span class="string">spanning multiple lines</span></span><br><span class="line"><span class="string">using heredoc syntax.</span></span><br><span class="line"><span class="string">EOD</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.string.php">更多用法</a></p>
+<h4 id="newdoc结构"><a href="#newdoc结构" class="headerlink" title="newdoc结构"></a>newdoc结构</h4><ul>
+<li>与heredoc的区别是不具备转义和解析变量的能力</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$str</span> = &lt;&lt;&lt;<span class="string">&#x27;EOD&#x27;</span></span><br><span class="line">Example of <span class="keyword">string</span></span><br><span class="line">spanning multiple lines</span><br><span class="line">using nowdoc syntax.</span><br><span class="line">EOD;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Array数组"><a href="#Array数组" class="headerlink" title="Array数组"></a>Array数组</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$array</span> = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">&quot;foo&quot;</span> =&gt; <span class="string">&quot;bar&quot;</span>,</span><br><span class="line">    <span class="string">&quot;bar&quot;</span> =&gt; <span class="string">&quot;foo&quot;</span>,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自 PHP 5.4 起</span></span><br><span class="line"><span class="variable">$array</span> = [</span><br><span class="line">    <span class="string">&quot;foo&quot;</span> =&gt; <span class="string">&quot;bar&quot;</span>,</span><br><span class="line">    <span class="string">&quot;bar&quot;</span> =&gt; <span class="string">&quot;foo&quot;</span>,</span><br><span class="line">];</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>PHP的Array支持键值对</li>
+<li>可以使用<code>array()</code>或者<code>[]</code>初始化一个array对象</li>
+<li><code>key</code>只能是<code>interge</code>和<code>string</code></li>
+<li>使用<code>print_r</code>或者<code>var_dump</code>函数来输出array</li>
+<li>要删除某键值对，对其调用 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.unset.php">unset()</a> 函数。</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.unset.php">unset()</a> 函数允许删除数组中的某个键。但要注意数组将<em>不会</em>重建索引。如果需要删除后重建索引，可以用 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.array-values.php">array_values()</a> 函数</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/control-structrues.foreach.php">foreach</a> 控制结构是专门用于数组的。它提供了一个简单的方法来遍历数组。</li>
+<li>数组最后一个元素的 <code>$value</code> 引用在 <code>foreach</code> 循环之后仍会保留。建议使用 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.unset.php">unset()</a> 来将其销毁。</li>
+</ul>
+<h3 id="Iterable"><a href="#Iterable" class="headerlink" title="Iterable"></a>Iterable</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.iterable.php">Iterable</a>是 PHP 7.1 中引入的一个伪类型。它接受任何 array 或实现了 <strong>Traversable</strong> 接口的对象。这些类型都能用 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/control-structrues.foreach.php">foreach</a> 迭代， 也可以和 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.generators.php">生成器</a> 里的 <strong>yield from</strong> 一起使用</p>
+</blockquote>
+<ul>
+<li>类在扩展/实现（extending/implementing）的时候， 可以将参数类型从 array 或 <strong>Traversable</strong> 放宽到 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.iterable.php">iterable</a>， 也可以将返回类型 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.iterable.php">iterable</a> 的范围缩小到 array 或 <strong>Traversable</strong></li>
+</ul>
+<h3 id="Resource"><a href="#Resource" class="headerlink" title="Resource"></a>Resource</h3><p>资源 resource 是一种特殊变量，保存了到外部资源的一个引用。资源是通过专门的函数来建立和使用的。所有这些函数及其相应资源类型见<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/resource.php">附录</a>。</p>
+<blockquote>
+<p>参见 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.get-resource-type.php">get_resource_type()</a></p>
+<p>持久数据库连接比较特殊，它们<em>不会</em>被垃圾回收系统销毁。参见<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/featrues.persistent-connections.php">数据库永久连接</a>一章</p>
+</blockquote>
+<h3 id="NULL"><a href="#NULL" class="headerlink" title="NULL"></a>NULL</h3><p>null不区分大小写</p>
+<blockquote>
+<p>PHP8.0.0新增了一个类型<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.types.declarations.php#language.types.declarations.mixed">mixed</a>, 代表任意类型</p>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/userlandnaming.tips.php"><code>namespace</code></a>可以避免与其它用户空间代码出现命名空间冲突</p>
+</blockquote>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ul>
+<li><strong>PHP变量区分大小写</strong></li>
+<li>变量名规则<code>^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$</code>    </li>
+<li>PHP变量名可以使用中文</li>
+<li><code>&amp;</code><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.references.php">引用赋值(只有有名字的变量才可以引用赋值)</a></li>
+</ul>
+<ul>
+<li>PHP 提供了大量的预定义变量, <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.variables.superglobals.php">超全局变量列表</a></li>
+<li>PHP 中全局变量在函数中使用时必须声明为 <code>global</code>或者使用<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/reserved.variables.globals.php">$GLOBALS</a>数组</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># global</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$a</span> = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$b</span> = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sum</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">global</span> <span class="variable">$a</span>, <span class="variable">$b</span>;</span><br><span class="line"></span><br><span class="line">    <span class="variable">$b</span> = <span class="variable">$a</span> + <span class="variable">$b</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Sum();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$b</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment"># GLOBALS</span></span><br><span class="line"><span class="variable">$a</span> = <span class="number">1</span>;</span><br><span class="line"><span class="variable">$b</span> = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Sum</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$GLOBALS</span>[<span class="string">&#x27;b&#x27;</span>] = <span class="variable">$GLOBALS</span>[<span class="string">&#x27;a&#x27;</span>] + <span class="variable">$GLOBALS</span>[<span class="string">&#x27;b&#x27;</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Sum();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$b</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>静态变量在离开函数后不会被销毁, 声明<code>static $var</code></li>
+<li>可变变量使用<code>$$</code></li>
+</ul>
+<blockquote>
+<p>要将可变变量用于数组，必须解决一个模棱两可的问题。这就是当写下 <code>$$a[1]</code> 时，解析器需要知道是想要 <code>$a[1]</code> 作为一个变量呢，还是想要 <code>$$a</code> 作为一个变量并取出该变量中索引为 [1] 的值。解决此问题的语法是，对第一种情况用 <code>$&#123;$a[1]&#125;</code>，对第二种情况用 <code>$&#123;$a&#125;[1]</code></p>
+<p>对于对象, <code>$foo-&gt;$bar</code>将bar解析后作为foo的属性</p>
+<p><strong>注意</strong>: 在 PHP 的函数和类的方法中，<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.variables.superglobals.php">超全局变量</a>不能用作可变变量。<code>$this</code> 变量也是一个特殊变量，不能被动态引用</p>
+</blockquote>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><ul>
+<li>定义规则<code>^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$</code></li>
+<li>使用<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.define.php">define(name, value)</a> 和const定义一个常量</li>
+</ul>
+<blockquote>
+<p>const打小写敏感</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.constants.predefined.php">PHP预定义常量</a></li>
+</ul>
+<h2 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h2><ul>
+<li>三元表达式</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$first</span> ? <span class="variable">$second</span> : <span class="variable">$third</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><ul>
+<li>除了基本的比较运算符外, PHP还支持<code>===(值与类型相等)</code>和<code>!==</code></li>
+<li>PHP支持递增和递减运算符和<code>**</code>运算符</li>
+<li>PHP 支持引用赋值，使用<code>$var = &amp;$othervar;</code>语法。引用赋值意味着两个变量指向了同一个数据(类型linux硬链接)</li>
+</ul>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.oop5.cloning.php">对象复制</a></p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.oop5.basic.php#language.oop5.basic.new">new</a> 运算符自动返回一个引用，因此对 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.oop5.basic.php#language.oop5.basic.new">new</a> 的结果进行引用赋值是错误的</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.operators.comparison.php#language.operators.comparison.coalesce">NULL 合并运算符<code>??</code></a></li>
+<li><code>&lt;=&gt;</code>返回-1 0 1</li>
+<li>PHP 支持一个错误控制运算符：@。当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉。</li>
+</ul>
+<blockquote>
+<p>@ 运算符只对<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.expressions.php">表达式</a>有效。对新手来说一个简单的规则就是：如果能从某处得到值，就能在它前面加上 @ 运算符</p>
+</blockquote>
+<ul>
+<li><code>(``)</code>命令执行运算符</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$output</span> = `ls -al`;<span class="comment">#输出当前目录所有文件及详细信息</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;pre&gt;<span class="subst">$output</span>&lt;/pre&gt;&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在windows上, 如果输出是二进制文件, 需要使用<a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.popen.php">popen()</a>, 因为windows的管道是以文件形式打开的</p>
+</blockquote>
+<ul>
+<li><code>&amp;&amp;,||,</code>比<code>and,or</code>运算优先级高. </li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.operators.array.php">数组运算符</a></li>
+<li><code>instanceof</code> 用于确定一个 PHP 变量是否属于某一类 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/language.oop5.basic.php#language.oop5.basic.class">class</a>,确定一个变量是不是继承自某一父类的子类</li>
+</ul>
+<h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2><ul>
+<li><code>elseif</code>与<code>else if</code>语义一样, 区别在于前者可以使用冒号, 后者不行</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 不正确的使用方法： */</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$a</span> &gt; <span class="variable">$b</span>):</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$a</span>.<span class="string">&quot; is greater than &quot;</span>.<span class="variable">$b</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (<span class="variable">$a</span> == <span class="variable">$b</span>): <span class="comment">// 将无法编译</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">&quot;The above line causes a parse error.&quot;</span>;</span><br><span class="line"><span class="keyword">endif</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 正确的使用方法： */</span></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$a</span> &gt; <span class="variable">$b</span>):</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$a</span>.<span class="string">&quot; is greater than &quot;</span>.<span class="variable">$b</span>;</span><br><span class="line"><span class="keyword">elseif</span> (<span class="variable">$a</span> == <span class="variable">$b</span>): <span class="comment">// 注意使用了一个单词的 elseif</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$a</span>.<span class="string">&quot; equals &quot;</span>.<span class="variable">$b</span>;</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$a</span>.<span class="string">&quot; is neither greater than or equal to &quot;</span>.<span class="variable">$b</span>;</span><br><span class="line"><span class="keyword">endif</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>PHP 提供了一些流程控制的替代语法，包括 <code>if</code>，<code>while</code>，<code>for</code>，<code>foreach</code> 和 <code>switch</code>。替代语法的基本形式是把左花括号（{）换成冒号（:），把右花括号（}）分别换成 <code>endif;</code>，<code>endwhile;</code>，<code>endfor;</code>，<code>endforeach;</code> 以及 <code>endswitch;</code></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php if ($a == 5): ?&gt;</span><br><span class="line">A is equal to 5</span><br><span class="line">&lt;?php endif; ?&gt;</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">if ($a == 5):</span><br><span class="line">    echo &quot;a equals 5&quot;;</span><br><span class="line">    echo &quot;...&quot;;</span><br><span class="line">elseif ($a == 6):</span><br><span class="line">    echo &quot;a equals 6&quot;;</span><br><span class="line">    echo &quot;!!!&quot;;</span><br><span class="line">else:</span><br><span class="line">    echo &quot;a is neither 5 nor 6&quot;;</span><br><span class="line">endif;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意如果不是<code>^&lt;?php</code>这样写的话会输出空格</p>
+</blockquote>
+<ul>
+<li>foreach不支持使用@来抑制错误信息</li>
+</ul>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><ul>
+<li>使用默认参数时，任何默认参数必须放在任何非默认参数的右侧</li>
+<li><code>...</code>指定可变参数, 也可用于传递array作为函数参数</li>
+<li><code>:</code>命名参数允许传入乱序的参数, 需要指定参数名</li>
+<li>命名参数也可以与位置参数相结合使用。此种情况下，命名参数必须在位置参数之后</li>
+<li>PHP支持可变函数, 函数名和方法名都可以使用变量指定</li>
+<li>箭头函数支持与 <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/functions.anonymous.php">匿名函数</a> 相同的功能，只是其父作用域的变量总是自动的<ul>
+<li>会参考参数去父作用域中寻找是否有该值</li>
+</ul>
+</li>
+<li>匿名函数需要使用<code>use</code>继承父作用域的变量</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$message</span> = <span class="string">&#x27;hello&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 继承 $message</span></span><br><span class="line"><span class="variable">$example</span> = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) <span class="keyword">use</span> (<span class="params"><span class="variable">$message</span></span>) </span>&#123;</span><br><span class="line">    var_dump(<span class="variable">$message</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>匿名函数会自动绑定当前实例<code>this</code>, 可以使用静态匿名函数阻止绑定</li>
+</ul>
+<h2 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 取整(PHP4,5,6,7,8),参数mode传入常量,代表四舍五入还是直接舍去小数</span></span><br><span class="line">round ( <span class="keyword">float</span> <span class="variable">$val</span> , <span class="keyword">int</span> <span class="variable">$precision</span> = <span class="number">0</span> , <span class="keyword">int</span> <span class="variable">$mode</span> = PHP_ROUND_HALF_UP ) : <span class="keyword">float</span></span><br><span class="line"><span class="comment"># 整除(PHP7,8)</span></span><br><span class="line">intdiv ( <span class="keyword">int</span> <span class="variable">$dividend</span> , <span class="keyword">int</span> <span class="variable">$divisor</span> ) : <span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.isset.php">isset()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.substr.php">substr()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.substr-replace.php">substr_replace()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/ref.strings.php">字符串函数</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/ref.array.php">数组函数</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/ref.var.php">变量函数</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/ref.math.php">数学函数</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.error-get-last.php">error_get_last()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.shell-exec.php">shell_exec()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.get-class.php">get_class()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.is-a.php">is_a()</a></li>
+</ul>
+<h2 id="语言结构"><a href="#语言结构" class="headerlink" title="语言结构"></a>语言结构</h2><blockquote>
+<p>语言结构就是PHP本身支持的语句, 比如<code>echo, print</code>等.</p>
+<p>与函数的区别在于语句的运行速度快, 但缺少了函数的一些特性, 比如函数可以接受其他函数返回的参数等</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.list.php">list()</a>: 解构赋值?</li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.array.php">array()</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.echo.php">echo</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/function.eval.php">eval()</a></li>
+</ul>
+<h2 id="文本处理"><a href="#文本处理" class="headerlink" title="文本处理"></a>文本处理</h2><p><a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/regexp.reference.delimiters.php">RCRE</a></p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>PHP基础学习笔记</p><p><a href="http://yangchaohe.github.io/Programming/PHP/base.html">http://yangchaohe.github.io/Programming/PHP/base.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><a href="http://yangchaohe.github.io"><p>manu</p></a></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-03-09</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-01-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="recommend-area"><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 相关文章</span><br><span>  1.<a class="is-size-6" href="/Programming/PHP/CodeIgniter.html" target="_blank">CI框架</a><br></span></div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 推荐文章</span><br><span>  1.<a class="is-size-6" href="/Database/ALTER.html" target="_blank">ALTER</a><br></span><span>  2.<a class="is-size-6" href="/Database/note.html" target="_blank">数据库笔记</a><br></span><span>  3.<a class="is-size-6" href="/Front-end/wechat-app.html" target="_blank">微信小程序笔记</a><br></span><span>  4.<a class="is-size-6" href="/Reverse/OD.html" target="_blank">动态调试-OD</a><br></span><span>  5.<a class="is-size-6" href="/Reverse/winPE.html" target="_blank">winPE结构</a><br></span><span>  6.<a class="is-size-6" href="/devTool/git.html" target="_blank">git指令</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Database/note.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">数据库笔记</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Front-end/wechat-app.html"><span class="level-item">微信小程序笔记</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">通知</h3><ul><li><span><span>2021.6.28 公告测试</span></span></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex is-mobile" href="#PHP的超全局变量"><span class="mr-2">1</span><span>PHP的超全局变量</span></a></li><li><a class="is-flex is-mobile" href="#基础"><span class="mr-2">2</span><span>基础</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#整型"><span class="mr-2">2.1</span><span>整型</span></a></li><li><a class="is-flex is-mobile" href="#浮点型"><span class="mr-2">2.2</span><span>浮点型</span></a></li><li><a class="is-flex is-mobile" href="#String字符串"><span class="mr-2">2.3</span><span>String字符串</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#heredoc结构"><span class="mr-2">2.3.1</span><span>heredoc结构</span></a></li><li><a class="is-flex is-mobile" href="#newdoc结构"><span class="mr-2">2.3.2</span><span>newdoc结构</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#Array数组"><span class="mr-2">2.4</span><span>Array数组</span></a></li><li><a class="is-flex is-mobile" href="#Iterable"><span class="mr-2">2.5</span><span>Iterable</span></a></li><li><a class="is-flex is-mobile" href="#Resource"><span class="mr-2">2.6</span><span>Resource</span></a></li><li><a class="is-flex is-mobile" href="#NULL"><span class="mr-2">2.7</span><span>NULL</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#变量"><span class="mr-2">3</span><span>变量</span></a></li><li><a class="is-flex is-mobile" href="#常量"><span class="mr-2">4</span><span>常量</span></a></li><li><a class="is-flex is-mobile" href="#表达式"><span class="mr-2">5</span><span>表达式</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#运算符"><span class="mr-2">5.1</span><span>运算符</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#流程控制"><span class="mr-2">6</span><span>流程控制</span></a></li><li><a class="is-flex is-mobile" href="#函数"><span class="mr-2">7</span><span>函数</span></a></li><li><a class="is-flex is-mobile" href="#常用函数"><span class="mr-2">8</span><span>常用函数</span></a></li><li><a class="is-flex is-mobile" href="#语言结构"><span class="mr-2">9</span><span>语言结构</span></a></li><li><a class="is-flex is-mobile" href="#文本处理"><span class="mr-2">10</span><span>文本处理</span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="码奴"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">码奴</p><p class="is-size-6 is-block">待人友善是修养，独来独往是性格</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>中国贵州</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">157</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">39</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">161</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/yangchaohe" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/yangchaohe"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:manu2x@.com"><i class="fa fa-envelope"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"来源《"+data.from+"》</p><p>提供者-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-17T14:05:40.000Z">2021-11-17</time></p><p class="title"><a href="/English/G/G002.html">G002</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-15T15:40:52.000Z">2021-11-15</time></p><p class="title"><a href="/English/G/G001.html">G001</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-14T02:44:54.000Z">2021-11-14</time></p><p class="title"><a href="/English/M/How-to-learn-English.html">How to learn English?</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T07:01:45.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/ctf-linux-cmd.html">ctf-linux-cmd.md</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T06:59:53.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/fastcgi.html">Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag is-grey-lightest">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag is-grey-lightest">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"><span class="tag">技能大赛-信息安全</span><span class="tag is-grey-lightest">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CS6200-28X-EI/"><span class="tag">CS6200-28X-EI</span><span class="tag is-grey-lightest">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/manjaro/"><span class="tag">manjaro</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DCFW-1800E-N3002/"><span class="tag">DCFW-1800E-N3002</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="tag">数据库</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><span class="tag">正则表达式</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/"><span class="tag">系统优化</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CPU/"><span class="tag">CPU</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DHCP/"><span class="tag">DHCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/bash/"><span class="tag">bash</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%87%BD%E6%95%B0/"><span class="tag">函数</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%AA%E8%BE%91/"><span class="tag">剪辑</span><span class="tag is-grey-lightest">2</span></a></div></div><div class="field is-grouped is-grouped-multiline"><a class="tags has-addons" href="/tags/"><span class="tag">查看全部&gt;&gt;</span></a></div></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a><p class="size-small"><span>&copy; 2023 manu</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请给我发<a href="mailto:manu2x@qq.com">邮件</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
+            var n = new Date(time);
+            now.setTime(now.getTime() + 250),
+                days = (now - n) / 1e3 / 60 / 60 / 24,
+                dnum = Math.floor(days),
+                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
+                hnum = Math.floor(hours),
+            1 == String(hnum).length && (hnum = "0" + hnum),
+                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
+                mnum = Math.floor(minutes),
+            1 == String(mnum).length && (mnum = "0" + mnum),
+                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
+                snum = Math.round(seconds),
+            1 == String(snum).length && (snum = "0" + snum),
+                document.getElementById("statistic-times").innerHTML = "❤️本站自 <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> 已运行 <strong>" + dnum + "</strong> 天 <strong>" + hnum + "</strong> 小时 <strong>" + mnum + "</strong> 分 <strong>" + snum + "</strong> 秒！❤️";
+        }var now = new Date();setInterval("createTime('2019/12/19 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️感谢 <strong><span id="busuanzi_value_site_uv">99+</span></strong> 小伙伴的 <strong><span id="busuanzi_value_site_pv">99+</span></strong> 次光临！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="4967313247" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        function loadMathJax() { //加载mathjax
+            $.getScript("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", function () {
+                MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$'], ['\(', '\)']] } });
+                var math = document.getElementsByClassName("entry-content")[0];
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+            });
+        };
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(false){
+                $.getScript('/js/comment-issue-data.js',function(){loadIssueData('undefined','undefined','undefined','undefined',undefined);});
+            }
+            if(false){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script></body></html>

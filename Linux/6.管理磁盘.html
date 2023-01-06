@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>（六）管理磁盘 - 码奴的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="码奴的博客"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="码奴的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="该调教一个磁盘了"><meta property="og:type" content="note"><meta property="og:title" content="码奴"><meta property="og:url" content="https://yangchaohe.github.io/"><meta property="og:site_name" content="MANU"><meta property="og:description" content="该调教一个磁盘了"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yangchaohe.github.io/img/avatar.png"><meta property="article:published_time" content="2020-01-13T16:00:00.000Z"><meta property="article:modified_time" content="2023-01-06T10:37:32.764Z"><meta property="article:author" content="manu"><meta property="article:tag" content="文件系统"><meta property="article:tag" content="挂载"><meta property="article:tag" content="swap"><meta property="article:tag" content="分区"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchaohe.github.io/Linux/6.%E7%AE%A1%E7%90%86%E7%A3%81%E7%9B%98.html"},"headline":"码奴的博客","image":["http://yangchaohe.github.io/img/og_image.png"],"datePublished":"2020-01-13T16:00:00.000Z","dateModified":"2023-01-06T10:37:32.764Z","author":{"@type":"Person","name":"manu"},"description":"该调教一个磁盘了"}</script><link rel="canonical" href="http://yangchaohe.github.io/Linux/6.%E7%AE%A1%E7%90%86%E7%A3%81%E7%9B%98.html"><link rel="icon" href="/img/favicon.png"><meta name="referrer" content="no-referrer-when-downgrade"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="码奴的博客" type="application/atom+xml">
+</head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/mindmap">思维导图</a><a class="navbar-item" href="/read">书籍</a><a class="navbar-item" href="/life">日志</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><!--!--><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2020-01-14  <span class="level-item"> manu </span><a class="commentCountImg" href="/Linux/6.%E7%AE%A1%E7%90%86%E7%A3%81%E7%9B%98.html#comment-container"><span class="display-none-class">/Linux/6.管理磁盘.html</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="eebf8d5764de3e8fa9bdfa6ea74860cd">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>22 分钟  <i class="fas fa-pencil-alt"> </i>3.3 k</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">（六）管理磁盘</h1><div class="content"><p> 该调教一个磁盘了</p>
+<span id="more"></span>
+
+<h2 id="新磁盘"><a href="#新磁盘" class="headerlink" title="新磁盘"></a>新磁盘</h2><p>得到一块磁盘，要进行一下操作</p>
+<ol>
+<li>建立硬盘分区</li>
+<li>对分区进行<strong>format</strong>（格式化），建立文件系统</li>
+<li>然后可以对文件系统检验一下</li>
+<li>最后挂载才能使用</li>
+</ol>
+<h2 id="观察磁盘分区状态"><a href="#观察磁盘分区状态" class="headerlink" title="观察磁盘分区状态"></a>观察磁盘分区状态</h2><h3 id="lsblk"><a href="#lsblk" class="headerlink" title="lsblk"></a>lsblk</h3><ul>
+<li>list block devices，列出所有存储设备</li>
+<li><code>lsblk [-] [device]</code></li>
+<li><code>-d</code>列出磁盘本身，不列出分区数据</li>
+<li><code>-f</code>同时列出磁盘内文件系统名字</li>
+<li><code>-i</code>使用ASCII的字符输出，而不用复杂的编码</li>
+<li><code>-m</code>输出设备在/dev的权限信息</li>
+<li><code>-p</code>列出设备的完整文件名</li>
+<li><code>-t</code>列出详细数据</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[manu@study ~]$ lsblk</span><br><span class="line">NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT</span><br><span class="line">sda               8:0    0   40G  0 disk </span><br><span class="line">├─sda1            8:1    0    2M  0 part </span><br><span class="line">├─sda2            8:2    0    1G  0 part /boot</span><br><span class="line">└─sda3            8:3    0   30G  0 part </span><br><span class="line">  ├─centos-root 253:0    0   10G  0 lvm  /</span><br><span class="line">  ├─centos-swap 253:1    0    2G  0 lvm  [SWAP]</span><br><span class="line">  └─centos-home 253:2    0    5G  0 lvm  /home</span><br><span class="line">sr0              11:0    1 10.3G  0 rom  /run/media/manu/CentOS 7 x86_64</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>NAME</code>设备名</li>
+<li><code>MAJ:MIN</code>主要设备和次要设备代码</li>
+<li><code>RM</code>是否为可卸载设备（remove device），如光盘,usb等</li>
+<li><code>SIZE</code>容量</li>
+<li><code>RO</code>是否只读</li>
+<li><code>TYPE</code>有磁盘disk，分区partition，和只读存储器rom等</li>
+<li><code>MOUNTPOINT</code>挂载点</li>
+</ul>
+<h3 id="blkid"><a href="#blkid" class="headerlink" title="blkid"></a>blkid</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]<span class="comment"># blkid</span></span><br><span class="line">/dev/sda1: PARTUUID=<span class="string">&quot;0914c759-c4fa-4ec5-8f17-286976c070d1&quot;</span> </span><br><span class="line">/dev/sda2: UUID=<span class="string">&quot;1bedab37-0c01-459c-a8f7-cfd4c5f203f9&quot;</span> TYPE=<span class="string">&quot;xfs&quot;</span> PARTUUID=<span class="string">&quot;83aceed5-29cd-45df-9151-9f450ccdadfa&quot;</span> </span><br><span class="line">/dev/sda3: UUID=<span class="string">&quot;YUgqln-n8fP-6ecM-NMyS-lGlw-PTrz-KTxWfv&quot;</span> TYPE=<span class="string">&quot;LVM2_member&quot;</span> PARTUUID=<span class="string">&quot;522d939a-fc63-4e61-af9e-6f66527afcb5&quot;</span> </span><br><span class="line">/dev/sr0: UUID=<span class="string">&quot;2019-09-09-19-08-41-00&quot;</span> LABEL=<span class="string">&quot;CentOS 7 x86_64&quot;</span> TYPE=<span class="string">&quot;iso9660&quot;</span> PTTYPE=<span class="string">&quot;dos&quot;</span> </span><br><span class="line">/dev/mapper/centos-root: UUID=<span class="string">&quot;5b52ce1c-18f5-43d0-8c31-ededfefd6aeb&quot;</span> TYPE=<span class="string">&quot;xfs&quot;</span> </span><br><span class="line">/dev/mapper/centos-swap: UUID=<span class="string">&quot;080b56ed-a551-4b09-ab36-43515cdb2b78&quot;</span> TYPE=<span class="string">&quot;swap&quot;</span> </span><br><span class="line">/dev/mapper/centos-home: UUID=<span class="string">&quot;8eccf850-c8c0-4aab-a24a-55f5b4ef0dbe&quot;</span> TYPE=<span class="string">&quot;xfs&quot;</span> </span><br></pre></td></tr></table></figure>
+
+<p>UUID是<strong>通用唯一标识符</strong>（Universally unique identifer），Linux会给每个设备独一无二的标识符</p>
+<h3 id="parted"><a href="#parted" class="headerlink" title="parted"></a>parted</h3><ul>
+<li>列出磁盘的分区类型与分区信息</li>
+<li><code>parted dev_name print</code></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]<span class="comment"># parted /dev/sda print</span></span><br><span class="line">Model: VMware, VMware Virtual S (scsi)		<span class="comment">#磁盘模块名称</span></span><br><span class="line">Disk /dev/sda: 42.9GB						<span class="comment">#总容量</span></span><br><span class="line">Sector size (logical/physical): 512B/512B	<span class="comment">#每个逻辑/物理扇区容量</span></span><br><span class="line">Partition Table: gpt						<span class="comment">#分区表格式</span></span><br><span class="line">Disk Flags: pmbr_boot</span><br><span class="line"></span><br><span class="line">Number  Start   End     Size    File system  Name  标志</span><br><span class="line"> 1      1049kB  3146kB  2097kB                     bios_grub</span><br><span class="line"> 2      3146kB  1077MB  1074MB  xfs</span><br><span class="line"> 3      1077MB  33.3GB  32.2GB                     lvm</span><br></pre></td></tr></table></figure>
+
+<h2 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h2><ul>
+<li>GPT使用<code>gdisk</code>工具</li>
+<li>MBR使用<code>fdisk</code>工具</li>
+<li>使用完后可以用partprobe -s指令更新内核的分区表</li>
+</ul>
+<p>不要去操作一个正在活动的分区，会导致系统不稳定，最好将它卸载再操作</p>
+<h2 id="创建文件系统"><a href="#创建文件系统" class="headerlink" title="创建文件系统"></a>创建文件系统</h2><p>也就是格式化，使用mkfs创建文件系统，以下是支持的文件系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]<span class="comment"># mkfs</span></span><br><span class="line">mkfs         mkfs.btrfs   mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.fat     mkfs.minix   mkfs.msdos   mkfs.vfat    mkfs.xfs   </span><br></pre></td></tr></table></figure>
+
+<p>可以使用<code>mkfs -t fsname partition</code>或者<code>mkfs.fsname partition</code>创建</p>
+<p>创建xfs几乎瞬间完成，而ext4则是等了一会</p>
+<p>其实创建时有很多选项，有关于RAID的，但都要对文件系统有所了解，针对性的创建对性能有一定的优化，想要加一些选项的话，自己man吧</p>
+<h2 id="文件系统检验"><a href="#文件系统检验" class="headerlink" title="文件系统检验"></a>文件系统检验</h2><p>突发情况文件系统会发生错乱，这时候就需要检验文件系统</p>
+<h3 id="xfs-repair"><a href="#xfs-repair" class="headerlink" title="xfs_repair"></a>xfs_repair</h3><ul>
+<li><code>xfs_repair [-fnd] 某个分区</code></li>
+<li><code>-f</code>后面的设备其实是个文件<ul>
+<li>官方原文：Specifies that the filesystem image to be processed is stored in a regular file at device (see the mkfs.xfs -d file option). This might happen if an image copy of a filesystem has been copied or written into an ordinary file.  This option implies that any external log or realtime section is also in an  ordi‐nary file.</li>
+</ul>
+</li>
+<li><code>-n</code>只是检查而不修改任何数据</li>
+<li><code>-d</code>在单人维护模式下对根目录操作</li>
+<li><code>-L</code>Force  Log Zeroing. </li>
+</ul>
+<p>挂载的文件系统要卸载才能操作</p>
+<h3 id="fsck-ext4"><a href="#fsck-ext4" class="headerlink" title="fsck.ext4"></a>fsck.ext4</h3><p>可以对ext4检查</p>
+<ul>
+<li><code>-p</code>需要修复时，不用你输入y</li>
+<li><code>-f</code>强制检查，一般只有遇到unclean才会强制检查</li>
+<li><code>-b</code>后接超级区块的位置（使用dumpe2fs可以查看），超级区块损坏时使用</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]<span class="comment"># dumpe2fs -h /dev/sda5 | grep &#x27;Blocks per group&#x27;</span></span><br><span class="line">dumpe2fs 1.42.9 (28-Dec-2013)</span><br><span class="line">Blocks per group:         32768</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>grep可以锁定某一串字符</p>
+</blockquote>
+<p>我尝试用书上的指令检查了一下sda5，发现和书上发生了相同的问题，这么巧合？？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]<span class="comment"># fsck.ext4 -b 32768 /dev/sda5</span></span><br><span class="line">e2fsck 1.42.9 (28-Dec-2013)</span><br><span class="line">/dev/sda5 was not cleanly unmounted, 强制检查.</span><br><span class="line">第一步: 检查inode,块,和大小</span><br><span class="line">删除 inode 1577 has zero dtime.  处理&lt;y&gt;? 是</span><br><span class="line">第二步: 检查目录结构</span><br><span class="line">第3步: 检查目录连接性</span><br><span class="line">Pass 4: Checking reference counts</span><br><span class="line">第5步: 检查簇概要信息</span><br><span class="line"></span><br><span class="line">/dev/sda5: ***** 文件系统已修改 *****</span><br><span class="line">/dev/sda5: 11/65536 files (0.0% non-contiguous), 12955/262144 blocks</span><br></pre></td></tr></table></figure>
+
+<p>只有出问题才去检查文件系统，没事别使用</p>
+<p>执行命令的硬盘分区都要卸载</p>
+<h2 id="挂载和卸载"><a href="#挂载和卸载" class="headerlink" title="挂载和卸载"></a>挂载和卸载</h2><p>挂载前要注意</p>
+<ol>
+<li>单一文件系统不能重复挂载在其他目录</li>
+<li>单一目录不能挂载多个文件系统</li>
+<li>挂载点的目录最好是空的</li>
+</ol>
+<h3 id="挂载指令mount"><a href="#挂载指令mount" class="headerlink" title="挂载指令mount"></a>挂载指令mount</h3><ul>
+<li><p><code>mount -a</code>照/etc/fstab的数据将未挂载的磁盘全部挂载</p>
+</li>
+<li><p><code>mount [-l]</code>默认显示当前挂载信息，加上l显示laber</p>
+</li>
+<li><p><code>mount  [-t fs] LABEL=&#39;&#39; dir</code></p>
+</li>
+<li><p><code>mount  [-t fs] UUID=&#39;&#39; dir</code></p>
+</li>
+<li><p><code>mount  [-t fs] dev dir</code></p>
+</li>
+<li><p>其实mount很复杂，更多信息还是man</p>
+</li>
+<li><p>mount默认只有root才能执行</p>
+</li>
+<li><p>实际上不加t选项也行，系统知道该是什么文件系统，我们在格式化就已经弄好了</p>
+</li>
+<li><p>在命令行挂载光盘后，无法退出光驱，要先卸载</p>
+</li>
+</ul>
+<blockquote>
+<p>那么Linux是怎么识别这些文件系统类型的呢？</p>
+<p>Linux通过分析super block加上自己的驱动来测试挂载，测试成功就自动挂载，测试参考两个文件</p>
+<ol>
+<li>/etc/filesystems：测试挂载fs的优先级</li>
+<li>/proc/filesystems：已挂载的fs</li>
+</ol>
+<p>驱动写在下面的文件中</p>
+<ul>
+<li>/lib/modules/$(uname -r)/kernel/fs/</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]<span class="comment"># cd /lib/modules/$(uname -r)/kernel/fs/</span></span><br><span class="line">[root@study fs]<span class="comment"># ls</span></span><br><span class="line">binfmt_misc.ko.xz  cachefiles  cifs    dlm    ext4  fscache  gfs2   jbd2   mbcache.ko.xz  nfs_common  nls        pstore    udf</span><br><span class="line">btrfs              ceph        cramfs  exofs  fat   fuse     isofs  lockd  nfs            nfsd        overlayfs  squashfs  xfs</span><br></pre></td></tr></table></figure>
+
+</blockquote>
+<h3 id="挂载vfat移动磁盘"><a href="#挂载vfat移动磁盘" class="headerlink" title="挂载vfat移动磁盘"></a>挂载vfat移动磁盘</h3><p>挂载时可以指定文件系统的语系，中文语系是950，By default, codepage 437 is used.还可以指定编码，比如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o codepage=950,iocharset=utf-8 UUID=<span class="string">&#x27;&#x27;</span> dir</span><br></pre></td></tr></table></figure>
+
+<p>如果磁盘是NTFS，那么需要安装NTFS的驱动才行</p>
+<h3 id="重新挂载根木目录"><a href="#重新挂载根木目录" class="headerlink" title="重新挂载根木目录"></a>重新挂载根木目录</h3><p>根目录是不能卸载的，若根目录出现只读的状态，处理的办法有</p>
+<ol>
+<li>reboot</li>
+<li>重新挂载，输入<code>mount -o remount,rw,auto /</code></li>
+</ol>
+<h3 id="挂载文件结构层次"><a href="#挂载文件结构层次" class="headerlink" title="挂载文件结构层次"></a>挂载文件结构层次</h3><p>我的理解就是类似符号链接一样，将这个目录挂载到其他的目录，两个目录都链接到了同一个inode</p>
+<p>指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount --<span class="built_in">bind</span> olddir dir</span><br></pre></td></tr></table></figure>
+
+<h3 id="umount卸载"><a href="#umount卸载" class="headerlink" title="umount卸载"></a>umount卸载</h3><ul>
+<li><code>umount [-fn] 设备名或者挂载点</code></li>
+<li><code>-f</code>强制卸载</li>
+<li><code>-l</code>立刻卸载</li>
+<li><code>-n</code>不更新/etc/mtab情况下卸载</li>
+<li>不过要注意，要离开这个挂载点才能卸载</li>
+</ul>
+<h2 id="磁盘、文件系统参数自定义"><a href="#磁盘、文件系统参数自定义" class="headerlink" title="磁盘、文件系统参数自定义"></a>磁盘、文件系统参数自定义</h2><h3 id="mknod"><a href="#mknod" class="headerlink" title="mknod"></a>mknod</h3><p>Linux的文件代表设备，就是通过文件的major和minor数值来代替的，比如下面的8和0,1,2,3..就是major和minor，更多信息<a target="_blank" rel="noopener" href="https://www.kernel.org/doc/html/latest/admin-guide/devices.html">https://www.kernel.org/doc/html/latest/admin-guide/devices.html</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[manu@study ~]$ ll /dev/sda*</span><br><span class="line">brw-rw----. 1 root disk 8, 0 1月  10 03:22 /dev/sda</span><br><span class="line">brw-rw----. 1 root disk 8, 1 1月  10 03:22 /dev/sda1</span><br><span class="line">brw-rw----. 1 root disk 8, 2 1月  10 03:22 /dev/sda2</span><br><span class="line">brw-rw----. 1 root disk 8, 3 1月  10 03:22 /dev/sda3</span><br><span class="line">brw-rw----. 1 root disk 8, 4 1月  10 03:22 /dev/sda4</span><br><span class="line">brw-rw----. 1 root disk 8, 5 1月  10 03:22 /dev/sda5</span><br></pre></td></tr></table></figure>
+
+<p>一般都是自动产生的，在某些情况下就需要手动处理，这时就需要mknod</p>
+<ul>
+<li><p><code>mknod dev [bcp] [Major] [Minor]</code></p>
+</li>
+<li><p><code>b</code>一个外接存储设备，磁盘等</p>
+</li>
+<li><p><code>c</code>外接输入设备，如键盘鼠标etc</p>
+</li>
+<li><p><code>p</code>设备名称是一个FIFO（先进先出）文件</p>
+</li>
+</ul>
+<h3 id="xfs-admin"><a href="#xfs-admin" class="headerlink" title="xfs_admin"></a>xfs_admin</h3><ul>
+<li>可以修改XFS的UUID和LABLEname</li>
+<li><code>xfs_admin [-L label] [-u uuoid] dev</code></li>
+<li><code>-l</code> Print the current filesystem label.</li>
+<li><code>-L</code>Set the filesystem label.</li>
+<li><code>-u</code>Print the current filesystem UUID.</li>
+<li><code>-U</code>set the filesystem UUID.</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]<span class="comment"># xfs_admrein -l /dev/sda4</span></span><br><span class="line">label = <span class="string">&quot;&quot;</span></span><br><span class="line">[root@study ~]<span class="comment"># xfs_admin -L yang.xfs /dev/sda4</span></span><br><span class="line">writing all SBs</span><br><span class="line">new label = <span class="string">&quot;yang.xfs&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>设置UUID前，先用<code>uuidgen</code>产生新的、独一无二的UUID，卸载文件系统再设置</p>
+<h3 id="tune2fs"><a href="#tune2fs" class="headerlink" title="tune2fs"></a>tune2fs</h3><ul>
+<li><code>tune2fs [-l][-L label][-U uuid]</code></li>
+<li><code>-l</code>显示超级区块的信息</li>
+</ul>
+<h2 id="自动挂载"><a href="#自动挂载" class="headerlink" title="自动挂载"></a>自动挂载</h2><p>前面手动挂载后重启，系统会查找/etc/fstab的信息挂载，自然我们也要重新手动挂载，能不能让系统自动挂载呢，这时候就要去修改fstab。有几个前提</p>
+<ol>
+<li><code>/</code>必须挂载，且要最先挂载</li>
+<li>其他挂载点必须要是已建立目录，为了易读，最好按照<a target="_blank" rel="noopener" href="https://www.cnblogs.com/happyframework/p/4480228.html">FHS</a>标准</li>
+<li>所有挂载点同一时间内只能挂载一次</li>
+<li>所有硬盘分区同一时间内只能挂载一次</li>
+<li>卸载时要离开卸载的目录</li>
+</ol>
+<p>查看fstab（filesystem table）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/fstab</span></span><br><span class="line"><span class="comment"># Created by anaconda on Sat Dec 28 07:29:36 2019</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Accessible filesystems, by reference, are maintained under &#x27;/dev/disk&#x27;</span></span><br><span class="line"><span class="comment"># See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#devices                       Mount point          filesystem   options       dump fsck</span></span><br><span class="line">/dev/mapper/centos-root         /                   xfs          defaults        0    0</span><br><span class="line">UUID=1bedab37-0c01-459c-a8f7-cfd4c5f203f9 /boot     xfs          defaults        0    0</span><br><span class="line">/dev/mapper/centos-home         /home               xfs          defaults        0    0</span><br><span class="line">/dev/mapper/centos-swap         swap                swap         defaults        0    0</span><br></pre></td></tr></table></figure>
+
+<p>原文件排版不是很好，我改了一下，顺便加上了每行的注释</p>
+<ul>
+<li>第一列可以是UUID、LABEL、/dev/，代表那个设备</li>
+<li>第二列是挂载点</li>
+<li>第三列是文件系统</li>
+<li>第四列是文件系统参数</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>options</th>
+<th>表示意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>async(异步)/sync(同步)</td>
+<td>设置磁盘是否以异步执行，默认async</td>
+</tr>
+<tr>
+<td>auto/noauto</td>
+<td>执行mount -a时，是否会被主动测试挂载，默认auto</td>
+</tr>
+<tr>
+<td>rw(读写)/ro(只读)</td>
+<td>挂载的状态，若设置ro，就算有w也不能写</td>
+</tr>
+<tr>
+<td>exec/noexec</td>
+<td>是否可执行这个文件系统</td>
+</tr>
+<tr>
+<td>user/nouser</td>
+<td>是否允许用户使用mount挂载，默认nouser</td>
+</tr>
+<tr>
+<td>suid/nosuid</td>
+<td>是否有SUID，有执行文件时还是设置suid比较好</td>
+</tr>
+<tr>
+<td>defaults</td>
+<td>表示rw,suid,dev(解析文件上的特殊设备),exec,auto,nouser,async</td>
+</tr>
+</tbody></table>
+<p>更多options参见mount(8)和<a target="_blank" rel="noopener" href="https://wiki.archlinux.org/index.php/Fstab_(简体中文))">https://wiki.archlinux.org/index.php/Fstab_(简体中文))</a></p>
+<ul>
+<li>第五列是dump备份</li>
+<li>第六列是fsck检验扇区</li>
+</ul>
+<p>比如我要挂载我的sda4，就在fstab下添加一行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LABEL=yang.xfs                  /data/xfs           xfs          defaults        0    0</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>修改fstab后最好mount -a测试一下，如果重启错误会进入单人维护模式，根目录只读.</p>
+<p>需要指令<code>mount -n -o remount,rw /</code></p>
+</blockquote>
+<h2 id="loop设备挂载"><a href="#loop设备挂载" class="headerlink" title="loop设备挂载"></a>loop设备挂载</h2><p>有光盘镜像文件时，可以直接挂载，不用刻录</p>
+<h3 id="挂载CD-DVD镜像文件"><a href="#挂载CD-DVD镜像文件" class="headerlink" title="挂载CD/DVD镜像文件"></a>挂载CD/DVD镜像文件</h3><p>直接输入指令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o loop file mouontpoint</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里我碰到了一个小问题，我的CentOS-everthing有10.3G，挂载后使用ll -h看了下，整个镜像文件就像缩水一样，最小14，最大几十M，但是在桌面环境查看却没啥异样，是ll -h的单位不一样吗？</p>
+<p>来自几个月后的我解决了这个问题, ll -h显示的单位是bloock</p>
+</blockquote>
+<h3 id="制作loop设备并挂载"><a href="#制作loop设备并挂载" class="headerlink" title="制作loop设备并挂载"></a>制作loop设备并挂载</h3><p>既然镜像文件能够被挂载，于是有一个想法，就是建立一个大文件，把这个文件创建文件系统，然后挂载。感觉吧就像分区里的分区，如果某个分区太大，我可以在分出一部分，将它挂载，等于多了一个分区</p>
+<h4 id="1-建立大型文件"><a href="#1-建立大型文件" class="headerlink" title="1.建立大型文件"></a>1.建立大型文件</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]<span class="comment"># dd if=/dev/zero of=/srv/dvd bs=1M count=512</span></span><br><span class="line">记录了512+0 的读入</span><br><span class="line">记录了512+0 的写出</span><br><span class="line">536870912字节(537 MB)已复制，3.77046 秒，142 MB/秒</span><br><span class="line">[root@study ~]<span class="comment"># ll -h /srv/dvd</span></span><br><span class="line">-rw-r--r--. 1 root root 512M 1月  10 19:57 /srv/dvd</span><br></pre></td></tr></table></figure>
+
+<p><strong>dd</strong></p>
+<ul>
+<li><code>if</code>input file，/dev/zero是一个一值输出0的设备</li>
+<li><code>of</code>ouput file</li>
+<li><code>bs</code>block size</li>
+<li><code>count</code>bs*count</li>
+</ul>
+<h4 id="2-创建文件系统、挂载"><a href="#2-创建文件系统、挂载" class="headerlink" title="2.创建文件系统、挂载"></a>2.创建文件系统、挂载</h4><p>默认的xfs不能格式化文件，需要加上-f选项</p>
+<ol>
+<li><code>mkfs.xfs -f file</code></li>
+<li>查看<code>UUID</code></li>
+<li>挂载<code>mount -o loop UUID=&quot;&quot; dir</code></li>
+<li>想要永久挂载就更新<code>fstab</code></li>
+</ol>
+<p>注意设备名不建议写UUID，UUID通常是设备上的，最好使用文件名，不容易出现错误</p>
+<h2 id="内存交换分区swap"><a href="#内存交换分区swap" class="headerlink" title="内存交换分区swap"></a>内存交换分区swap</h2><p>当内存不足时会将以一些数据暂存swap，在现在的来说很少用到，毕竟现在内存这么大， 动不动就是64G的，一般是用到服务器上以备不时之需的。</p>
+<p>一般建立系统时可以创建swap</p>
+<p>进入系统的创建方法</p>
+<p><strong>1.划出一个物理分区创建为swap</strong></p>
+<ul>
+<li>使用gdisk分区，分区默认code是8300，改成8200就代表swap</li>
+<li>格式化分区使用<code>mkswap /dev</code></li>
+<li>挂载，不过不是用mount，而是<code>swapon /dev</code></li>
+<li><code>free</code>和<code>swapon -s</code>可以查看内存使用量</li>
+</ul>
+<p><strong>2.大型文件转为swap</strong></p>
+<p>类似于loop设备文件，使用dd创建一个大文件，将其格式化，挂载就可以了</p>
+<p>格式化指令<code>mkswap dir</code></p>
+<p>挂载指令<code>swapon dir</code></p>
+<p>关闭swap指令<code>swapoff dir/dev</code></p>
+<p>此外要自动挂载的话，更新fstab要注意文件的UUID系统搜不到，swap的挂载点要设为<code>swap</code></p>
+<h2 id="分区通用指令parted"><a href="#分区通用指令parted" class="headerlink" title="分区通用指令parted"></a>分区通用指令parted</h2><ul>
+<li><code>parted [dev] [command [options]]</code></li>
+</ul>
+<p><code>command</code></p>
+<ol>
+<li>创建分区：<code>mkpart [primary|logical|Extended] [ext4|vfat|xfs]</code></li>
+<li>显示指令：<code>print</code></li>
+<li>删除分区：<code>rm [partition]</code></li>
+</ol>
+<hr>
+<blockquote>
+<p>参考《鸟哥的Linux私房菜 基础学习篇》</p>
+</blockquote>
+</div><div class="article-licensing box"><div class="licensing-title"><p>（六）管理磁盘</p><p><a href="http://yangchaohe.github.io/Linux/6.管理磁盘.html">http://yangchaohe.github.io/Linux/6.管理磁盘.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><a href="http://yangchaohe.github.io"><p>manu</p></a></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-01-14</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-01-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="recommend-area"><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 相关文章</span><br><span>  1.<a class="is-size-6" href="/Linux/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E8%AE%BE%E6%80%BB%E7%BB%93.html" target="_blank">Linux服务器架设总结</a><br></span><span>  2.<a class="is-size-6" href="/Linux/%E8%BF%9B%E7%A8%8B.html" target="_blank">进程</a><br></span><span>  3.<a class="is-size-6" href="/Linux/14.LVM.html" target="_blank">（十四）LVM</a><br></span><span>  4.<a class="is-size-6" href="/Linux/13.%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97.html" target="_blank">（十三）磁盘阵列</a><br></span><span>  5.<a class="is-size-6" href="/Linux/12.%E7%A3%81%E7%9B%98%E9%85%8D%E9%A2%9D.html" target="_blank">（十二）磁盘配额</a><br></span><span>  6.<a class="is-size-6" href="/Linux/7.%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%A4%87%E4%BB%BD.html" target="_blank">（七）压缩与备份</a><br></span><span>  7.<a class="is-size-6" href="/Linux/5.%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html" target="_blank">（五）Linux文件系统管理</a><br></span><span>  8.<a class="is-size-6" href="/Linux/4.%E6%93%8D%E4%BD%9C%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E4%BB%B6.html" target="_blank">（四）Linux文件和目录</a><br></span></div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 推荐文章</span><br><span>  1.<a class="is-size-6" href="/Database/ALTER.html" target="_blank">ALTER</a><br></span><span>  2.<a class="is-size-6" href="/Database/note.html" target="_blank">数据库笔记</a><br></span><span>  3.<a class="is-size-6" href="/Front-end/wechat-app.html" target="_blank">微信小程序笔记</a><br></span><span>  4.<a class="is-size-6" href="/Reverse/OD.html" target="_blank">动态调试-OD</a><br></span><span>  5.<a class="is-size-6" href="/Reverse/winPE.html" target="_blank">winPE结构</a><br></span><span>  6.<a class="is-size-6" href="/devTool/git.html" target="_blank">git指令</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Linux/7.%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%A4%87%E4%BB%BD.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">（七）压缩与备份</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Linux/5.%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html"><span class="level-item">（五）Linux文件系统管理</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">通知</h3><ul><li><span><span>2021.6.28 公告测试</span></span></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex is-mobile" href="#新磁盘"><span class="mr-2">1</span><span>新磁盘</span></a></li><li><a class="is-flex is-mobile" href="#观察磁盘分区状态"><span class="mr-2">2</span><span>观察磁盘分区状态</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#lsblk"><span class="mr-2">2.1</span><span>lsblk</span></a></li><li><a class="is-flex is-mobile" href="#blkid"><span class="mr-2">2.2</span><span>blkid</span></a></li><li><a class="is-flex is-mobile" href="#parted"><span class="mr-2">2.3</span><span>parted</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#磁盘分区"><span class="mr-2">3</span><span>磁盘分区</span></a></li><li><a class="is-flex is-mobile" href="#创建文件系统"><span class="mr-2">4</span><span>创建文件系统</span></a></li><li><a class="is-flex is-mobile" href="#文件系统检验"><span class="mr-2">5</span><span>文件系统检验</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#xfs-repair"><span class="mr-2">5.1</span><span>xfs_repair</span></a></li><li><a class="is-flex is-mobile" href="#fsck-ext4"><span class="mr-2">5.2</span><span>fsck.ext4</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#挂载和卸载"><span class="mr-2">6</span><span>挂载和卸载</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#挂载指令mount"><span class="mr-2">6.1</span><span>挂载指令mount</span></a></li><li><a class="is-flex is-mobile" href="#挂载vfat移动磁盘"><span class="mr-2">6.2</span><span>挂载vfat移动磁盘</span></a></li><li><a class="is-flex is-mobile" href="#重新挂载根木目录"><span class="mr-2">6.3</span><span>重新挂载根木目录</span></a></li><li><a class="is-flex is-mobile" href="#挂载文件结构层次"><span class="mr-2">6.4</span><span>挂载文件结构层次</span></a></li><li><a class="is-flex is-mobile" href="#umount卸载"><span class="mr-2">6.5</span><span>umount卸载</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#磁盘、文件系统参数自定义"><span class="mr-2">7</span><span>磁盘、文件系统参数自定义</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#mknod"><span class="mr-2">7.1</span><span>mknod</span></a></li><li><a class="is-flex is-mobile" href="#xfs-admin"><span class="mr-2">7.2</span><span>xfs_admin</span></a></li><li><a class="is-flex is-mobile" href="#tune2fs"><span class="mr-2">7.3</span><span>tune2fs</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#自动挂载"><span class="mr-2">8</span><span>自动挂载</span></a></li><li><a class="is-flex is-mobile" href="#loop设备挂载"><span class="mr-2">9</span><span>loop设备挂载</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#挂载CD-DVD镜像文件"><span class="mr-2">9.1</span><span>挂载CD/DVD镜像文件</span></a></li><li><a class="is-flex is-mobile" href="#制作loop设备并挂载"><span class="mr-2">9.2</span><span>制作loop设备并挂载</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#1-建立大型文件"><span class="mr-2">9.2.1</span><span>1.建立大型文件</span></a></li><li><a class="is-flex is-mobile" href="#2-创建文件系统、挂载"><span class="mr-2">9.2.2</span><span>2.创建文件系统、挂载</span></a></li></ul></li></ul></li><li><a class="is-flex is-mobile" href="#内存交换分区swap"><span class="mr-2">10</span><span>内存交换分区swap</span></a></li><li><a class="is-flex is-mobile" href="#分区通用指令parted"><span class="mr-2">11</span><span>分区通用指令parted</span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="码奴"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">码奴</p><p class="is-size-6 is-block">待人友善是修养，独来独往是性格</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>中国贵州</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">157</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">39</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">161</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/yangchaohe" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/yangchaohe"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:manu2x@.com"><i class="fa fa-envelope"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"来源《"+data.from+"》</p><p>提供者-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-17T14:05:40.000Z">2021-11-17</time></p><p class="title"><a href="/English/G/G002.html">G002</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-15T15:40:52.000Z">2021-11-15</time></p><p class="title"><a href="/English/G/G001.html">G001</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-14T02:44:54.000Z">2021-11-14</time></p><p class="title"><a href="/English/M/How-to-learn-English.html">How to learn English?</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T07:01:45.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/ctf-linux-cmd.html">ctf-linux-cmd.md</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T06:59:53.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/fastcgi.html">Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag is-grey-lightest">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag is-grey-lightest">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"><span class="tag">技能大赛-信息安全</span><span class="tag is-grey-lightest">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CS6200-28X-EI/"><span class="tag">CS6200-28X-EI</span><span class="tag is-grey-lightest">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/manjaro/"><span class="tag">manjaro</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DCFW-1800E-N3002/"><span class="tag">DCFW-1800E-N3002</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="tag">数据库</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><span class="tag">正则表达式</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/"><span class="tag">系统优化</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CPU/"><span class="tag">CPU</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DHCP/"><span class="tag">DHCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/bash/"><span class="tag">bash</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%87%BD%E6%95%B0/"><span class="tag">函数</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%AA%E8%BE%91/"><span class="tag">剪辑</span><span class="tag is-grey-lightest">2</span></a></div></div><div class="field is-grouped is-grouped-multiline"><a class="tags has-addons" href="/tags/"><span class="tag">查看全部&gt;&gt;</span></a></div></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a><p class="size-small"><span>&copy; 2023 manu</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请给我发<a href="mailto:manu2x@qq.com">邮件</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
+            var n = new Date(time);
+            now.setTime(now.getTime() + 250),
+                days = (now - n) / 1e3 / 60 / 60 / 24,
+                dnum = Math.floor(days),
+                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
+                hnum = Math.floor(hours),
+            1 == String(hnum).length && (hnum = "0" + hnum),
+                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
+                mnum = Math.floor(minutes),
+            1 == String(mnum).length && (mnum = "0" + mnum),
+                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
+                snum = Math.round(seconds),
+            1 == String(snum).length && (snum = "0" + snum),
+                document.getElementById("statistic-times").innerHTML = "❤️本站自 <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> 已运行 <strong>" + dnum + "</strong> 天 <strong>" + hnum + "</strong> 小时 <strong>" + mnum + "</strong> 分 <strong>" + snum + "</strong> 秒！❤️";
+        }var now = new Date();setInterval("createTime('2019/12/19 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️感谢 <strong><span id="busuanzi_value_site_uv">99+</span></strong> 小伙伴的 <strong><span id="busuanzi_value_site_pv">99+</span></strong> 次光临！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="4967313247" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        function loadMathJax() { //加载mathjax
+            $.getScript("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", function () {
+                MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$'], ['\(', '\)']] } });
+                var math = document.getElementsByClassName("entry-content")[0];
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+            });
+        };
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(false){
+                $.getScript('/js/comment-issue-data.js',function(){loadIssueData('undefined','undefined','undefined','undefined',undefined);});
+            }
+            if(false){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script></body></html>

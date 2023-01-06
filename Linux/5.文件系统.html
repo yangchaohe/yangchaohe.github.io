@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>（五）Linux文件系统管理 - 码奴的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="码奴的博客"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="码奴的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="深入理解3"><meta property="og:type" content="note"><meta property="og:title" content="码奴"><meta property="og:url" content="https://yangchaohe.github.io/"><meta property="og:site_name" content="MANU"><meta property="og:description" content="深入理解3"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yangchaohe.github.io/img/avatar.png"><meta property="article:published_time" content="2020-01-09T16:00:00.000Z"><meta property="article:modified_time" content="2023-01-06T10:37:32.764Z"><meta property="article:author" content="manu"><meta property="article:tag" content="文件系统"><meta property="article:tag" content="inode"><meta property="article:tag" content="ext2"><meta property="article:tag" content="ext4"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchaohe.github.io/Linux/5.%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html"},"headline":"码奴的博客","image":["https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/ext2.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/inode.jpg"],"datePublished":"2020-01-09T16:00:00.000Z","dateModified":"2023-01-06T10:37:32.764Z","author":{"@type":"Person","name":"manu"},"description":"深入理解3"}</script><link rel="canonical" href="http://yangchaohe.github.io/Linux/5.%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html"><link rel="icon" href="/img/favicon.png"><meta name="referrer" content="no-referrer-when-downgrade"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="码奴的博客" type="application/atom+xml">
+</head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/mindmap">思维导图</a><a class="navbar-item" href="/read">书籍</a><a class="navbar-item" href="/life">日志</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><!--!--><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2020-01-10  <span class="level-item"> manu </span><a class="commentCountImg" href="/Linux/5.%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F.html#comment-container"><span class="display-none-class">/Linux/5.文件系统.html</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="7cb216121ae8471137e1b438bbc82ad1">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>29 分钟  <i class="fas fa-pencil-alt"> </i>4.3 k</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">（五）Linux文件系统管理</h1><div class="content"><p> 深入理解3</p>
+<span id="more"></span>
+
+<h2 id="文件系统特性"><a href="#文件系统特性" class="headerlink" title="文件系统特性"></a>文件系统特性</h2><ul>
+<li>每个操作系统设置的文件属性、权限都不同，将分区格式化才能成为系统能够利用的文件格式（filesystem）</li>
+<li>传统一个分区只能格式化成一个文件系统，新技术能将一个分区格式化成多个文件系统（LVM）<ul>
+<li>格式化不再针对硬盘分区</li>
+<li><strong>一个被挂载的数据为一个文件系统而不是一个分区</strong></li>
+</ul>
+</li>
+<li>Linux有文件权限、属性，文件系统会将两部分数据存放在不同的区块，权限属性放在inode，实际数据放在数据块中，还有一个超级区块（superblock）记录文件系统的整体信息，比如数据快总量、剩余、使用</li>
+<li>每个inode和区块都有编号，它们的作用如下<ul>
+<li>超级区块：记录文件系统的整体信息，包括inode和超级区块的总量、使用、剩余，以及文件系统的格式和信息等</li>
+<li>inode：记录文件属性，一个属性占用一个inode，同时记录文件数据所在的区块号码</li>
+<li>数据区块：实际记录文件的内容，文件过大占用多个区块</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>硬盘的读取顺序是inode记录的号码，比如记录的是1、3、5、6号码，则硬盘会一次性读取这四个块的内容，这叫<strong>索引式文件系统</strong></p>
+<p>u盘的FAT格式则是<code>1-&gt;3-&gt;5-&gt;6</code>这样的读取顺序</p>
+<ul>
+<li>碎片整理：当存取的文件过于离散（读取性能差）时使用碎片整理可以将文件的区块集中起来</li>
+</ul>
+</blockquote>
+<h2 id="Linux的ext2文件系统"><a href="#Linux的ext2文件系统" class="headerlink" title="Linux的ext2文件系统"></a>Linux的ext2文件系统</h2><p>ext2(Linux second extended filesystem,ext2fs)</p>
+<p>ext2采用了inode，文件系统一开始就将inode和数据块规划好了了，除非重新格式化或者使用resize2fs命令修改大小，但将inode和数据块放在一起不好管理，所以一般都是区分为多个区块群组</p>
+<img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/ext2.png" alt="ext2" style="zoom:50%;" />
+
+<p>文件系统最前面有一个boot sector，可以用来装<strong>引导程序</strong>（多重引导）</p>
+<p>每个群组有六个主要内容</p>
+<h3 id="数据区块"><a href="#数据区块" class="headerlink" title="数据区块"></a>数据区块</h3><p>在ext2文件系统中支持的区块大小有1k、2k和4k，大小在格式化时确定，每个区块大小所支持的单一文件大小和文件系统的最大支持磁盘容量都不相同</p>
+<table>
+<thead>
+<tr>
+<th>Block大小</th>
+<th>1KB</th>
+<th>2KB</th>
+<th>4KB</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单一文件限制</td>
+<td>16GB</td>
+<td>256GB</td>
+<td>2TB</td>
+</tr>
+<tr>
+<td>最大文件系统总容量</td>
+<td>2TB</td>
+<td>8TB</td>
+<td>16TB</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>就算文件系统支持2TB，软件也要支持才行</p>
+</blockquote>
+<p><strong>ext2文件系统的区块限制</strong></p>
+<ol>
+<li>原则上，区块的大小与数量在格式化完就不能再修改（重新格式化）</li>
+<li>每个区块内最多只能放一个文件的数据</li>
+<li>如果文件大于一个区块，则一个文件会占用多个区块</li>
+<li>若文件小于一个区块，则剩余容量被浪费</li>
+</ol>
+<blockquote>
+<p>比如文件系统使用4k大小，而每个文件只有1k，则存储一个文件会浪费3k</p>
+<p>当文件过大时，使用区块容量最大的则文件系统的区块号码就少，方便读写</p>
+</blockquote>
+<h3 id="inode-table"><a href="#inode-table" class="headerlink" title="inode table"></a>inode table</h3><ul>
+<li>记录了读写属性</li>
+<li>拥有者和群组</li>
+<li>大小</li>
+<li>文件的atimr、ctime、mtime</li>
+<li>特性标识flag，如SetUID</li>
+<li>该文件的真正内容指向（pointer）</li>
+<li>每个inode的大小为128B（ext4、xfs可以到256B）</li>
+<li>每个文件仅占用一个inode</li>
+<li>所以系统能建立的文件数量与inode数量有关</li>
+<li>系统读取文件时会先找到inode，分析inode记录的权限与用户的权限是否符合，然后才能读取</li>
+</ul>
+<p>为了记录更多的信息，inode记录的区块号码的区域定义是12个直接、1个间接、1个双间接、1个三间接</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/inode.jpg" alt="inode"></p>
+<p>图源<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/40604943">https://zhuanlan.zhihu.com/p/40604943</a></p>
+<p><strong>文件太大是，才会用到间接，间接就是再拿一个区块来记录区块号码的记录区</strong></p>
+<blockquote>
+<p>以1k区块为例</p>
+<ul>
+<li>12个直接：12X1K=12K</li>
+</ul>
+<p>每个区块1K，记录一个区块使用4B，一个区块能记录256个区块</p>
+<ul>
+<li>间接：256X1K=256K</li>
+<li>双间接：256X256X1K=256^2K</li>
+<li>三间接：256^3K</li>
+</ul>
+<p>以上加起来16GB</p>
+<p>由于大于2K的区块会受到ext2文件系统的限制，上面的计算不适用2K、4K</p>
+</blockquote>
+<h3 id="Superblock"><a href="#Superblock" class="headerlink" title="Superblock"></a>Superblock</h3><ul>
+<li>记录数据区块与inode的总量</li>
+<li>未使用的、已使用的inode与数据块数量</li>
+<li>数据块的大小（1、2、4k），inode的大小（128、256B）</li>
+<li>文件系统的挂载信息，最近一次写入数据的时间、最近一次检验磁盘（fsck）的时间等文件系统相关信息</li>
+<li>一个有效位数值，若此文件已被挂载，则有效位为0，否则为1</li>
+</ul>
+<p>虽然每个群组都可能含有超级区块，但实际上文件系统应仅有一个超级区块，除了第一个区块有超级区块外，后面不一定有超级区块，有的话主要也是作为备份</p>
+<h3 id="Filesystem-Description"><a href="#Filesystem-Description" class="headerlink" title="Filesystem Description"></a>Filesystem Description</h3><p>可以描述每个区块群组的开始和结束区块，以及说明每个区段（suoerblock、对照表、inode对照表、数据区块）分别位于哪一个区块之间，可以使用dumpe2fs观察</p>
+<h3 id="区块对照表（block-bitmap）"><a href="#区块对照表（block-bitmap）" class="headerlink" title="区块对照表（block bitmap）"></a>区块对照表（block bitmap）</h3><p>说明哪些区块是是空的，哪些使用过的</p>
+<h3 id="inode对照表"><a href="#inode对照表" class="headerlink" title="inode对照表"></a>inode对照表</h3><p>负责记录使用与未使用的inode号码</p>
+<h3 id="dumpe2fs"><a href="#dumpe2fs" class="headerlink" title="dumpe2fs"></a>dumpe2fs</h3><p>可以用查询ext系列超级区块的信息</p>
+<h2 id="结合目录树"><a href="#结合目录树" class="headerlink" title="结合目录树"></a>结合目录树</h2><h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><p>目录主要记录文件名，文件才是真正记录文件的地方</p>
+<ul>
+<li><p>创建目录时，文件系统会分配一个<strong>inode</strong>和至少一个<strong>区块</strong>给目录</p>
+<ul>
+<li><strong>inode</strong>记录权限和属性</li>
+<li>区块记录<strong>文件名</strong>和<strong>文件名的inode</strong>信息</li>
+</ul>
+</li>
+<li><p>目录的文件名过多时，会使用多个区块</p>
+</li>
+</ul>
+<h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><ul>
+<li>建立文件时，会分配<strong>一个inode</strong>和<strong>相对于文件大小的区块数量</strong>，注意直接不够用时用间接会使用额外的区块</li>
+</ul>
+<h3 id="读取目录树"><a href="#读取目录树" class="headerlink" title="读取目录树"></a>读取目录树</h3><p>目录树从根目录开始，系统通过挂载点的信息找到挂载点的inode，层层递进找到正确的目录</p>
+<p>例如<code>/etc/passwd</code></p>
+<ol>
+<li>通过挂载点找到<code>/</code>的<strong>inode</strong>，判断权限<strong>rx</strong>才能进入</li>
+<li>承上找到<code>/</code>的<strong>区块</strong>，在区块里找到<strong>etc/的inode</strong>号码，同样判断<strong>rx</strong>权限</li>
+<li>承上找到<code>etc/</code>的<strong>区块</strong>，找到<strong>passwd</strong>文件的<strong>inode</strong>号码，判断<strong>r</strong></li>
+<li>读取passwd的区块内的内容</li>
+</ol>
+<h3 id="文件大小和读取性能"><a href="#文件大小和读取性能" class="headerlink" title="文件大小和读取性能"></a>文件大小和读取性能</h3><p>文件通常是无法写在一起的，一般是填充在空的区块中，就会发生<strong>文件数据离散</strong></p>
+<ul>
+<li>当文件太过离散时，就会发生读取效率降低</li>
+<li>可以把文件系统的数据复制出来，格式化文件系统在复制回去解决</li>
+<li>但是文件系统太大时，文件太容易分散，磁盘的物理结构查找比较费时，要合理规划文件系统大小</li>
+</ul>
+<h2 id="ext文件的存取和日志式文件系统的功能"><a href="#ext文件的存取和日志式文件系统的功能" class="headerlink" title="ext文件的存取和日志式文件系统的功能"></a>ext文件的存取和日志式文件系统的功能</h2><p>创建文件时文件系统的操作是</p>
+<ul>
+<li>判断用户在此目录是否具有wx权限</li>
+<li>在inode对照表找到空的inode号码，写入权限属性</li>
+<li>根据区块对照表找到空的区块号码，写入数据，并更新inode所指向的区块数据</li>
+<li>更新inode对照表与区块对照表，然后更新超级区块</li>
+</ul>
+<p>一般将inode对照表、数据区块叫数据存放区，超级区块、区块对照表、inode对照表较元数据（metadata），因为数据变动时都可能会影响这些数据</p>
+<h3 id="数据的不一致（inconsistent）"><a href="#数据的不一致（inconsistent）" class="headerlink" title="数据的不一致（inconsistent）"></a>数据的不一致（inconsistent）</h3><p>正确的文件写入步骤如上，但总会碰到一些特殊情况，比如断电、死机、系统错误等，可能会导致元数据没有更新，然后元数据和实际数据就会不一致</p>
+<p>在ext2为了解决这个问题，借由超级区块当中记录的有效位（是否挂载）和文件系统的状态（是否正确卸载）来判断是否强制检查数据的一致性，或者手动使用<strong>e2fsck</strong>程序检查，但是这种检查都会检查整个文件系统，相当费时，于是有了后来的日志式文件系统</p>
+<h3 id="日志式文件系统（journaling-filesystem）"><a href="#日志式文件系统（journaling-filesystem）" class="headerlink" title="日志式文件系统（journaling filesystem）"></a>日志式文件系统（journaling filesystem）</h3><p>所谓日志就是使用一个区块专门记录文件的写入和修改文件的操作</p>
+<ul>
+<li>当系统写入文件时，会在日志记录区记录写入的信息</li>
+<li>然后开始正常写入，更新<code>metadata</code></li>
+<li>结束后才会完成此次记录</li>
+</ul>
+<p>出问题时就会专门检查这个记录区块，这样就达到了快速修复文件系统，是日志文件系统最基础的功能</p>
+<h3 id="Linux文件系统的运行"><a href="#Linux文件系统的运行" class="headerlink" title="Linux文件系统的运行"></a>Linux文件系统的运行</h3><p>若编辑一个大型文件，从磁盘读取到内存，再给CPU，编辑中如果再写入磁盘，由于磁盘速度比CPU慢很多，编辑中会频繁的等待，没有效率，于是Linux采用了<strong>异步处理</strong>（<code>asynchronously</code>）的方式，大致过程如下</p>
+<ol>
+<li>内存加载文件，若没被修改，则被系统设置为<strong>干净</strong>（<code>clean</code>）</li>
+<li>修改过则是<code>dirty</code></li>
+<li>系统会不定时的将dirty写进磁盘，或者手动使用<code>sync</code></li>
+</ol>
+<p>也就是将文件放在内存中以提高系统性能，所以Linux文件系统与内存关系很大</p>
+<ul>
+<li>系统会将常用的文件加载到内存缓存区</li>
+<li>所以Linux的物理内存都会用光，可以提高系统性能</li>
+<li>可以手动使用sync将数据写入磁盘</li>
+<li>正常关机也会调用sync指令</li>
+<li>若不正常关机，因为数据没写进磁盘，重新启动会花更多时间进行磁盘校验，甚至会导致文件系统损坏</li>
+</ul>
+<h3 id="挂载点的意义-mount-point"><a href="#挂载点的意义-mount-point" class="headerlink" title="挂载点的意义(mount point)"></a>挂载点的意义(mount point)</h3><p>每个文件系统都有inode、区块，要与目录树链接才能使用，这就是<strong>挂载</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[manu@study ~]$ ls -lid / /boot /home</span><br><span class="line">64 dr-xr-xr-x. 17 root root  245 1月   2 22:29 /</span><br><span class="line">64 dr-xr-xr-x.  5 root root 4096 12月 28 07:44 /boot</span><br><span class="line">64 drwxr-xr-x.  3 root root   20 12月 28 07:43 /home</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>装Linux时我安装了<code>/ 、/boot 、/home</code>三个目录，于是有3个挂载点</li>
+<li>每个的inode相同，代表三个不同的文件系统</li>
+</ul>
+<h2 id="Linux支持的文件系统"><a href="#Linux支持的文件系统" class="headerlink" title="Linux支持的文件系统"></a>Linux支持的文件系统</h2><ul>
+<li>传统文件系统：ext2、minix、FAT、iso9660等</li>
+<li>日志式文件系统：ext3、ext4、ReiserFS、Windows’NTFS、IBM’s JFS、SGI’s XFS、ZFS</li>
+<li>网络文件系统：NFS、SMBFS</li>
+</ul>
+<p>查看某Linux支持的文件系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[manu@study ~]$ ls -l /lib/modules/$(uname -r)/kernel/fs</span><br><span class="line">总用量 20</span><br><span class="line">-rw-r--r--. 1 root root 5980 8月   8 02:21 binfmt_misc.ko.xz</span><br><span class="line">drwxr-xr-x. 2 root root   25 12月 28 07:32 btrfs</span><br><span class="line">drwxr-xr-x. 2 root root   30 12月 28 07:32 cachefiles</span><br><span class="line">drwxr-xr-x. 2 root root   24 12月 28 07:32 ceph</span><br><span class="line">drwxr-xr-x. 2 root root   24 12月 28 07:32 cifs</span><br><span class="line">drwxr-xr-x. 2 root root   26 12月 28 07:32 cramfs</span><br><span class="line">drwxr-xr-x. 2 root root   23 12月 28 07:32 dlm</span><br><span class="line">drwxr-xr-x. 2 root root   26 12月 28 07:32 exofs</span><br><span class="line">drwxr-xr-x. 2 root root   24 12月 28 07:32 ext4</span><br><span class="line">drwxr-xr-x. 2 root root   60 12月 28 07:32 fat</span><br><span class="line">drwxr-xr-x. 2 root root   27 12月 28 07:32 fscache</span><br><span class="line">drwxr-xr-x. 2 root root   42 12月 28 07:32 fuse</span><br><span class="line">drwxr-xr-x. 2 root root   24 12月 28 07:32 gfs2</span><br><span class="line">drwxr-xr-x. 2 root root   25 12月 28 07:32 isofs</span><br><span class="line">drwxr-xr-x. 2 root root   24 12月 28 07:32 jbd2</span><br><span class="line">drwxr-xr-x. 2 root root   25 12月 28 07:32 lockd</span><br><span class="line">-rw-r--r--. 1 root root 5216 8月   8 02:21 mbcache.ko.xz</span><br><span class="line">drwxr-xr-x. 6 root root  137 12月 28 07:32 nfs</span><br><span class="line">drwxr-xr-x. 2 root root   46 12月 28 07:32 nfs_common</span><br><span class="line">drwxr-xr-x. 2 root root   24 12月 28 07:32 nfsd</span><br><span class="line">drwxr-xr-x. 2 root root 4096 12月 28 07:32 nls</span><br><span class="line">drwxr-xr-x. 2 root root   27 12月 28 07:32 overlayfs</span><br><span class="line">drwxr-xr-x. 2 root root   27 12月 28 07:32 pstore</span><br><span class="line">drwxr-xr-x. 2 root root   28 12月 28 07:32 squashfs</span><br><span class="line">drwxr-xr-x. 2 root root   23 12月 28 07:32 udf</span><br><span class="line">drwxr-xr-x. 2 root root   23 12月 28 07:32 xfs</span><br></pre></td></tr></table></figure>
+
+<h2 id="VFS-Virtual-Filesystem-Switch"><a href="#VFS-Virtual-Filesystem-Switch" class="headerlink" title="VFS(Virtual Filesystem Switch)"></a>VFS(Virtual Filesystem Switch)</h2><p>Linux通过<strong>VFS</strong>识别不同的文件系统，Linux识别的文件系统都是<strong>VFS</strong>管理</p>
+<p><a target="_blank" rel="noopener" href="https://www.ibm.com/developerworks/cn/linux/l-virtual-filesystem-switch/"><u>更多VFS的信息</u></a></p>
+<h2 id="XFS"><a href="#XFS" class="headerlink" title="XFS"></a>XFS</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>随着磁盘的容量越来越大，现在的单位已经是PB、EB，ext采用的是先规划出inode、区块、元数据，在大容量的磁盘面前需要很多时间，特别是一些巨型文件，在ext的效率也不是很好，然后有了xfs文件系统，是一个日志式文件系统，具备了几乎所有ext4文件系统的功能</p>
+<h3 id="XFS文件系统的配置"><a href="#XFS文件系统的配置" class="headerlink" title="XFS文件系统的配置"></a>XFS文件系统的配置</h3><h4 id="1-数据区（data-section）"><a href="#1-数据区（data-section）" class="headerlink" title="1.数据区（data section）"></a>1.数据区（data section）</h4><p>类似于ext的<code>block groups</code>，分为多个存储区群组<code>allocation groups</code>，每个群组包括了</p>
+<ul>
+<li>整个文件系统的超级区块</li>
+<li>inode的分配与追踪，inode与数据区块都是动态产生（所有格式化很快），不同意ext的事先规划</li>
+<li>剩余空间的管理机制</li>
+</ul>
+<p>此外，xfs的区块容量可以设置为512B<del>64K（Linux最大4K），inode可设置256B</del>2MB，</p>
+<h4 id="2-文件系统活动登陆区（log-section）"><a href="#2-文件系统活动登陆区（log-section）" class="headerlink" title="2.文件系统活动登陆区（log section）"></a>2.文件系统活动登陆区（log section）</h4><p>记录文件系统的变化，就像日志区</p>
+<p>因为所有操作都要在这个区作记录，所有这个区的读写很频繁</p>
+<p>xfs在设计上允许使用外部磁盘作为登陆区（比如使用SSD加快速度）</p>
+<h4 id="实时运行区（realtime-section）"><a href="#实时运行区（realtime-section）" class="headerlink" title="实时运行区（realtime section）"></a>实时运行区（realtime section）</h4><p>建立文件时，xfs会在这个区里找数个extent区块放置文件，然后写入data section的inode和区块中，extent的大小在格式化时指定，范围4K~1G</p>
+<p>xfs的详细信息可以参考<a target="_blank" rel="noopener" href="https://xfs.org/docs/xfsdocs-xml-dev/XFS_Filesystem_Structrue//tmp/en-US/html/index.html">xfs官网</a>和<a target="_blank" rel="noopener" href="https://blog.csdn.net/scaleqiao/article/details/520985">https://blog.csdn.net/scaleqiao/article/details/520985</a></p>
+<h3 id="xfs描述数据观察"><a href="#xfs描述数据观察" class="headerlink" title="xfs描述数据观察"></a>xfs描述数据观察</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[manu@study ~]$ df -T /boot</span><br><span class="line">文件系统       类型   1K-块   已用   可用 已用% 挂载点</span><br><span class="line">/dev/sda2      xfs  1038336 174128 864208   17% /boot</span><br><span class="line">[manu@study ~]$ xfs_info /dev/sda2</span><br><span class="line">meta-data=/dev/sda2              isize=512    agcount=4, agsize=65536 blks</span><br><span class="line">         =                       sectsz=512   attr=2, projid32bit=1</span><br><span class="line">         =                       crc=1        finobt=0 spinodes=0</span><br><span class="line">data     =                       bsize=4096   blocks=262144, imaxpct=25</span><br><span class="line">         =                       sunit=0      swidth=0 blks</span><br><span class="line">naming   =version 2              bsize=4096   ascii-ci=0 ftype=1</span><br><span class="line"><span class="built_in">log</span>      =internal               bsize=4096   blocks=2560, version=2</span><br><span class="line">         =                       sectsz=512   sunit=0 blks, lazy-count=1</span><br><span class="line">realtime =none                   extsz=4096   blocks=0, rtextents=0</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>isize</strong>指的是inode的容量256B，<strong>agcount</strong>代表allocation group的数量4个，<strong>agsize</strong>代表每个allocation group有多少区块，区块大小在第4行<code>bsize=4k</code>，所以整个文件系统大小=<code>4X65536X4K</code></li>
+<li>sectsz代表逻辑扇区的容量设置为<code>512B</code></li>
+<li>log=internal代表log section在文件系统内部，大小=<code>4096BX2560</code></li>
+</ul>
+<h2 id="简单操作"><a href="#简单操作" class="headerlink" title="简单操作"></a>简单操作</h2><h3 id="df"><a href="#df" class="headerlink" title="df"></a>df</h3><ul>
+<li>列出文件系统的整体磁盘使用量</li>
+<li><code>df [-] dir/file</code></li>
+<li><code>-a</code>列出所有文件系统</li>
+<li><code>-k</code>以KB显示文件系统</li>
+<li><code>-m</code>以MB显示文件系统</li>
+<li><code>-h</code>以GB、MB、KB自动显示，方便阅读</li>
+<li><code>-H</code>M=1024K</li>
+<li><code>-T</code>显示硬盘分区的文件系统</li>
+<li><code>-i</code>使用inode的形式显示</li>
+<li>没选项时默认将系统的所有文件系统全列出来</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[manu@study ~]$ df</span><br><span class="line">文件系统                   1K-块     已用    可用 已用% 挂载点</span><br><span class="line">devtmpfs                  480848        0  480848    0% /dev</span><br><span class="line">tmpfs                     497872        0  497872    0% /dev/shm</span><br><span class="line">tmpfs                     497872     8768  489104    2% /run</span><br><span class="line">tmpfs                     497872        0  497872    0% /sys/fs/cgroup</span><br><span class="line">/dev/mapper/centos-root 10475520  4250208 6225312   41% /</span><br><span class="line">/dev/sda2                1038336   174128  864208   17% /boot</span><br><span class="line">/dev/mapper/centos-home  5232640   122516 5110124    3% /home</span><br><span class="line">tmpfs                      99576        4   99572    1% /run/user/42</span><br><span class="line">tmpfs                      99576       40   99536    1% /run/user/1000</span><br><span class="line">/dev/sr0                10767514 10767514       0  100% /run/media/manu/CentOS 7 x86_64</span><br></pre></td></tr></table></figure>
+
+<p>这里说一下sr0，sr0是CD-ROM，无法写入，所以使用100%</p>
+<h3 id="du"><a href="#du" class="headerlink" title="du"></a>du</h3><ul>
+<li>会去文件系统内找当前目录或选定目录的文件数据</li>
+<li><code>du [-] dirname/filename</code></li>
+<li><code>-a</code>列出所有的文件和目录容量，<strong>默认是目录容量</strong></li>
+<li><code>-h</code>以易读的形式显示</li>
+<li><code>-s</code>仅列出该目录的总量</li>
+<li><code>-S</code> 仅列出子目录</li>
+<li><code>-k</code>默认值</li>
+<li><code>-m</code></li>
+</ul>
+<h3 id="硬链接Hard-link"><a href="#硬链接Hard-link" class="headerlink" title="硬链接Hard link"></a>硬链接Hard link</h3><p>我们知道，创建文件时会有一个inode，而目录是通过记录文件的inode来链接到该文件的</p>
+<p>所谓硬式链接就是：<strong>在某目录下创建一个文件，而这个文件的inode是我所需要的文件的inode</strong></p>
+<p>实例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@study /]<span class="comment"># ll -i yangyong.text </span></span><br><span class="line">3705 -rw-r--r--. 1 root root 0 1月   2 22:29 yangyong.text</span><br><span class="line">[root@study /]<span class="comment"># ln yangyong.text test</span></span><br><span class="line">[root@study /]<span class="comment"># ll -i yangyong.text test </span></span><br><span class="line">3705 -rw-r--r--. 2 root root 0 1月   2 22:29 <span class="built_in">test</span></span><br><span class="line">3705 -rw-r--r--. 2 root root 0 1月   2 22:29 yangyong.text</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p><code>2</code>表示有两个文件链接到了这个inode</p>
+</li>
+<li><p>比较安全(相当于备份)</p>
+</li>
+<li><p>硬链接一般不会占磁盘空间大小</p>
+</li>
+</ul>
+<p><strong>限制</strong></p>
+<ul>
+<li>只能在同一个文件系统</li>
+<li>不能链接目录</li>
+</ul>
+<h3 id="符号链接Symbolic-Link"><a href="#符号链接Symbolic-Link" class="headerlink" title="符号链接Symbolic Link"></a>符号链接Symbolic Link</h3><p>建立一个文件，这个文件记录的是我所需要的文件的<strong>文件名</strong></p>
+<p>实例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@study /]<span class="comment"># ln -s yangyong.text test2</span></span><br><span class="line">[root@study /]<span class="comment"># ll test2</span></span><br><span class="line">lrwxrwxrwx. 1 root root 13 1月   7 22:49 test2 -&gt; yangyong.text</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>test2的文件大小13B，源文件的文件名也是13个字符</p>
+</li>
+<li><p>源文件没了，链接文件会找不到文件</p>
+</li>
+<li><p>符号链接就相当于Windows的快捷方式</p>
+</li>
+</ul>
+<h3 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h3><ul>
+<li><code>ln [-] sourcefile linkname</code></li>
+<li><code>-s</code>符号链接，默认硬链接</li>
+<li><code>-f</code>若有这个linkname则将文件删除再创建</li>
+</ul>
+<blockquote>
+<p>创建一个目录时，这个目录下默认至少有两个文件，<code>.</code>and<code>..</code>，所有新目录会有两个链接数，父目录也会增加一个目录数</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>参考《鸟哥的Linux私房菜 基础学习篇》</p>
+</blockquote>
+</div><div class="article-licensing box"><div class="licensing-title"><p>（五）Linux文件系统管理</p><p><a href="http://yangchaohe.github.io/Linux/5.文件系统.html">http://yangchaohe.github.io/Linux/5.文件系统.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><a href="http://yangchaohe.github.io"><p>manu</p></a></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-01-10</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-01-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="recommend-area"><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 相关文章</span><br><span>  1.<a class="is-size-6" href="/Linux/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E8%AE%BE%E6%80%BB%E7%BB%93.html" target="_blank">Linux服务器架设总结</a><br></span><span>  2.<a class="is-size-6" href="/Linux/%E8%BF%9B%E7%A8%8B.html" target="_blank">进程</a><br></span><span>  3.<a class="is-size-6" href="/Linux/14.LVM.html" target="_blank">（十四）LVM</a><br></span><span>  4.<a class="is-size-6" href="/Linux/13.%E7%A3%81%E7%9B%98%E9%98%B5%E5%88%97.html" target="_blank">（十三）磁盘阵列</a><br></span><span>  5.<a class="is-size-6" href="/Linux/12.%E7%A3%81%E7%9B%98%E9%85%8D%E9%A2%9D.html" target="_blank">（十二）磁盘配额</a><br></span><span>  6.<a class="is-size-6" href="/Linux/7.%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%A4%87%E4%BB%BD.html" target="_blank">（七）压缩与备份</a><br></span><span>  7.<a class="is-size-6" href="/Linux/6.%E7%AE%A1%E7%90%86%E7%A3%81%E7%9B%98.html" target="_blank">（六）管理磁盘</a><br></span><span>  8.<a class="is-size-6" href="/Linux/4.%E6%93%8D%E4%BD%9C%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E4%BB%B6.html" target="_blank">（四）Linux文件和目录</a><br></span></div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 推荐文章</span><br><span>  1.<a class="is-size-6" href="/Database/ALTER.html" target="_blank">ALTER</a><br></span><span>  2.<a class="is-size-6" href="/Database/note.html" target="_blank">数据库笔记</a><br></span><span>  3.<a class="is-size-6" href="/Front-end/wechat-app.html" target="_blank">微信小程序笔记</a><br></span><span>  4.<a class="is-size-6" href="/Reverse/OD.html" target="_blank">动态调试-OD</a><br></span><span>  5.<a class="is-size-6" href="/Reverse/winPE.html" target="_blank">winPE结构</a><br></span><span>  6.<a class="is-size-6" href="/devTool/git.html" target="_blank">git指令</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Linux/6.%E7%AE%A1%E7%90%86%E7%A3%81%E7%9B%98.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">（六）管理磁盘</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Linux/4.%E6%93%8D%E4%BD%9C%E7%9B%AE%E5%BD%95%E4%B8%8E%E6%96%87%E4%BB%B6.html"><span class="level-item">（四）Linux文件和目录</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">通知</h3><ul><li><span><span>2021.6.28 公告测试</span></span></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex is-mobile" href="#文件系统特性"><span class="mr-2">1</span><span>文件系统特性</span></a></li><li><a class="is-flex is-mobile" href="#Linux的ext2文件系统"><span class="mr-2">2</span><span>Linux的ext2文件系统</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#数据区块"><span class="mr-2">2.1</span><span>数据区块</span></a></li><li><a class="is-flex is-mobile" href="#inode-table"><span class="mr-2">2.2</span><span>inode table</span></a></li><li><a class="is-flex is-mobile" href="#Superblock"><span class="mr-2">2.3</span><span>Superblock</span></a></li><li><a class="is-flex is-mobile" href="#Filesystem-Description"><span class="mr-2">2.4</span><span>Filesystem Description</span></a></li><li><a class="is-flex is-mobile" href="#区块对照表（block-bitmap）"><span class="mr-2">2.5</span><span>区块对照表（block bitmap）</span></a></li><li><a class="is-flex is-mobile" href="#inode对照表"><span class="mr-2">2.6</span><span>inode对照表</span></a></li><li><a class="is-flex is-mobile" href="#dumpe2fs"><span class="mr-2">2.7</span><span>dumpe2fs</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#结合目录树"><span class="mr-2">3</span><span>结合目录树</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#目录"><span class="mr-2">3.1</span><span>目录</span></a></li><li><a class="is-flex is-mobile" href="#文件"><span class="mr-2">3.2</span><span>文件</span></a></li><li><a class="is-flex is-mobile" href="#读取目录树"><span class="mr-2">3.3</span><span>读取目录树</span></a></li><li><a class="is-flex is-mobile" href="#文件大小和读取性能"><span class="mr-2">3.4</span><span>文件大小和读取性能</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#ext文件的存取和日志式文件系统的功能"><span class="mr-2">4</span><span>ext文件的存取和日志式文件系统的功能</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#数据的不一致（inconsistent）"><span class="mr-2">4.1</span><span>数据的不一致（inconsistent）</span></a></li><li><a class="is-flex is-mobile" href="#日志式文件系统（journaling-filesystem）"><span class="mr-2">4.2</span><span>日志式文件系统（journaling filesystem）</span></a></li><li><a class="is-flex is-mobile" href="#Linux文件系统的运行"><span class="mr-2">4.3</span><span>Linux文件系统的运行</span></a></li><li><a class="is-flex is-mobile" href="#挂载点的意义-mount-point"><span class="mr-2">4.4</span><span>挂载点的意义(mount point)</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#Linux支持的文件系统"><span class="mr-2">5</span><span>Linux支持的文件系统</span></a></li><li><a class="is-flex is-mobile" href="#VFS-Virtual-Filesystem-Switch"><span class="mr-2">6</span><span>VFS(Virtual Filesystem Switch)</span></a></li><li><a class="is-flex is-mobile" href="#XFS"><span class="mr-2">7</span><span>XFS</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#简介"><span class="mr-2">7.1</span><span>简介</span></a></li><li><a class="is-flex is-mobile" href="#XFS文件系统的配置"><span class="mr-2">7.2</span><span>XFS文件系统的配置</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#1-数据区（data-section）"><span class="mr-2">7.2.1</span><span>1.数据区（data section）</span></a></li><li><a class="is-flex is-mobile" href="#2-文件系统活动登陆区（log-section）"><span class="mr-2">7.2.2</span><span>2.文件系统活动登陆区（log section）</span></a></li><li><a class="is-flex is-mobile" href="#实时运行区（realtime-section）"><span class="mr-2">7.2.3</span><span>实时运行区（realtime section）</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#xfs描述数据观察"><span class="mr-2">7.3</span><span>xfs描述数据观察</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#简单操作"><span class="mr-2">8</span><span>简单操作</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#df"><span class="mr-2">8.1</span><span>df</span></a></li><li><a class="is-flex is-mobile" href="#du"><span class="mr-2">8.2</span><span>du</span></a></li><li><a class="is-flex is-mobile" href="#硬链接Hard-link"><span class="mr-2">8.3</span><span>硬链接Hard link</span></a></li><li><a class="is-flex is-mobile" href="#符号链接Symbolic-Link"><span class="mr-2">8.4</span><span>符号链接Symbolic Link</span></a></li><li><a class="is-flex is-mobile" href="#ln"><span class="mr-2">8.5</span><span>ln</span></a></li></ul></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="码奴"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">码奴</p><p class="is-size-6 is-block">待人友善是修养，独来独往是性格</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>中国贵州</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">157</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">39</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">161</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/yangchaohe" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/yangchaohe"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:manu2x@.com"><i class="fa fa-envelope"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"来源《"+data.from+"》</p><p>提供者-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-17T14:05:40.000Z">2021-11-17</time></p><p class="title"><a href="/English/G/G002.html">G002</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-15T15:40:52.000Z">2021-11-15</time></p><p class="title"><a href="/English/G/G001.html">G001</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-14T02:44:54.000Z">2021-11-14</time></p><p class="title"><a href="/English/M/How-to-learn-English.html">How to learn English?</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T07:01:45.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/ctf-linux-cmd.html">ctf-linux-cmd.md</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T06:59:53.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/fastcgi.html">Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag is-grey-lightest">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag is-grey-lightest">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"><span class="tag">技能大赛-信息安全</span><span class="tag is-grey-lightest">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CS6200-28X-EI/"><span class="tag">CS6200-28X-EI</span><span class="tag is-grey-lightest">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/manjaro/"><span class="tag">manjaro</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DCFW-1800E-N3002/"><span class="tag">DCFW-1800E-N3002</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="tag">数据库</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><span class="tag">正则表达式</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/"><span class="tag">系统优化</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CPU/"><span class="tag">CPU</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DHCP/"><span class="tag">DHCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/bash/"><span class="tag">bash</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%87%BD%E6%95%B0/"><span class="tag">函数</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%AA%E8%BE%91/"><span class="tag">剪辑</span><span class="tag is-grey-lightest">2</span></a></div></div><div class="field is-grouped is-grouped-multiline"><a class="tags has-addons" href="/tags/"><span class="tag">查看全部&gt;&gt;</span></a></div></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a><p class="size-small"><span>&copy; 2023 manu</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请给我发<a href="mailto:manu2x@qq.com">邮件</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
+            var n = new Date(time);
+            now.setTime(now.getTime() + 250),
+                days = (now - n) / 1e3 / 60 / 60 / 24,
+                dnum = Math.floor(days),
+                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
+                hnum = Math.floor(hours),
+            1 == String(hnum).length && (hnum = "0" + hnum),
+                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
+                mnum = Math.floor(minutes),
+            1 == String(mnum).length && (mnum = "0" + mnum),
+                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
+                snum = Math.round(seconds),
+            1 == String(snum).length && (snum = "0" + snum),
+                document.getElementById("statistic-times").innerHTML = "❤️本站自 <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> 已运行 <strong>" + dnum + "</strong> 天 <strong>" + hnum + "</strong> 小时 <strong>" + mnum + "</strong> 分 <strong>" + snum + "</strong> 秒！❤️";
+        }var now = new Date();setInterval("createTime('2019/12/19 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️感谢 <strong><span id="busuanzi_value_site_uv">99+</span></strong> 小伙伴的 <strong><span id="busuanzi_value_site_pv">99+</span></strong> 次光临！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="4967313247" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        function loadMathJax() { //加载mathjax
+            $.getScript("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", function () {
+                MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$'], ['\(', '\)']] } });
+                var math = document.getElementsByClassName("entry-content")[0];
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+            });
+        };
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(false){
+                $.getScript('/js/comment-issue-data.js',function(){loadIssueData('undefined','undefined','undefined','undefined',undefined);});
+            }
+            if(false){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script></body></html>

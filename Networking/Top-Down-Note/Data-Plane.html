@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>4.网络层-数据平面 - 码奴的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="码奴的博客"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="码奴的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="网络层分两部分讲解，数据平面和控制平面(区分这两个概念很重要)，该章主要讲解了数据报输入输出链路的选择、IP转发、通用转发、IPv4和IPv6.  理清楚术语有利于学习本章: 数据包和分组是同一概念, 都是packet翻译过来的. 数据报和数据包有点类似, 比如UDP数据报, IP数据报, TCP数据包, UDP数据包, IP数据包.."><meta property="og:type" content="note"><meta property="og:title" content="码奴"><meta property="og:url" content="https://yangchaohe.github.io/"><meta property="og:site_name" content="MANU"><meta property="og:description" content="网络层分两部分讲解，数据平面和控制平面(区分这两个概念很重要)，该章主要讲解了数据报输入输出链路的选择、IP转发、通用转发、IPv4和IPv6.  理清楚术语有利于学习本章: 数据包和分组是同一概念, 都是packet翻译过来的. 数据报和数据包有点类似, 比如UDP数据报, IP数据报, TCP数据包, UDP数据包, IP数据包.."><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yangchaohe.github.io/img/avatar.png"><meta property="article:published_time" content="2020-06-01T13:00:00.000Z"><meta property="article:modified_time" content="2023-01-06T10:37:32.768Z"><meta property="article:author" content="manu"><meta property="article:tag" content="DHCP"><meta property="article:tag" content="IP"><meta property="article:tag" content="SDN"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchaohe.github.io/Networking/Top-Down-Note/Data-Plane.html"},"headline":"码奴的博客","image":["https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/router-architecture.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/ip-v4-format.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/DHCP-CS-interaction.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/ip-v6-format.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/openflow-match-table.png"],"datePublished":"2020-06-01T13:00:00.000Z","dateModified":"2023-01-06T10:37:32.768Z","author":{"@type":"Person","name":"manu"},"description":"网络层分两部分讲解，数据平面和控制平面(区分这两个概念很重要)，该章主要讲解了数据报输入输出链路的选择、IP转发、通用转发、IPv4和IPv6.  理清楚术语有利于学习本章: 数据包和分组是同一概念, 都是packet翻译过来的. 数据报和数据包有点类似, 比如UDP数据报, IP数据报, TCP数据包, UDP数据包, IP数据包.."}</script><link rel="canonical" href="http://yangchaohe.github.io/Networking/Top-Down-Note/Data-Plane.html"><link rel="icon" href="/img/favicon.png"><meta name="referrer" content="no-referrer-when-downgrade"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="码奴的博客" type="application/atom+xml">
+</head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/mindmap">思维导图</a><a class="navbar-item" href="/read">书籍</a><a class="navbar-item" href="/life">日志</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><!--!--><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2020-06-01  <span class="level-item"> manu </span><a class="commentCountImg" href="/Networking/Top-Down-Note/Data-Plane.html#comment-container"><span class="display-none-class">/Networking/Top-Down-Note/Data-Plane.html</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="cd8cf096c833d4e5980d8d10a16ee6f6">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>36 分钟  <i class="fas fa-pencil-alt"> </i>5.4 k</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">4.网络层-数据平面</h1><div class="content"><p> 网络层分两部分讲解，数据平面和控制平面(区分这两个概念很重要)，该章主要讲解了数据报输入输出链路的选择、IP转发、通用转发、IPv4和IPv6.</p>
+<blockquote>
+<p>理清楚术语有利于学习本章: 数据包和分组是同一概念, 都是packet翻译过来的. 数据报和数据包有点类似, 比如UDP数据报, IP数据报, TCP数据包, UDP数据包, IP数据包..</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="4-1-Overview"><a href="#4-1-Overview" class="headerlink" title="4.1-Overview"></a>4.1-Overview</h2><p>路由器的数据平面将数据报从输入链路<strong>转发</strong>到输出链路，网络控制平面主要控制着数据报进行端到端传输。</p>
+<h3 id="4-1-1-转发和路由-数据和控制平面"><a href="#4-1-1-转发和路由-数据和控制平面" class="headerlink" title="4.1.1-转发和路由-数据和控制平面"></a>4.1.1-转发和路由-数据和控制平面</h3><p>将数据发送至目标主机，有两个重要的网络层功能。</p>
+<ul>
+<li><strong>转发</strong>：数据包在单一路由器里从输入到选择合适的输出链路（几纳秒），对应<strong>数据平面</strong></li>
+<li><strong>路由</strong>：网络层必须在所有路由器中确定数据包采用的路由或路径（几秒），相关算法称为路由算法，对应<strong>控制平面</strong></li>
+</ul>
+<p>路由器的关键是<strong>转发表</strong>，路由器会检查每个数据包首部字段，查询转发表以确定输出链路。</p>
+<p><em>控制平面的传统方法</em></p>
+<p>每个路由器都有一个可以和其他路由器通信的路由组件，路由器之间通过通信计算转发表的值</p>
+<p><em>控制平面的SDN方法</em></p>
+<p>(software-defined networking, SDN)将控制平面提升到了远程控制，通过远程控制器来分配转发表的值。</p>
+<h3 id="4-1-2-网络服务模型"><a href="#4-1-2-网络服务模型" class="headerlink" title="4.1.2-网络服务模型"></a>4.1.2-网络服务模型</h3><p>网络服务模型定义了发送方与接收方之间数据包的传递特性.</p>
+<p>网络层<em>能提供</em>的<strong>部分服务:</strong></p>
+<ul>
+<li><strong>保证交付数据</strong>: 确保源数据包可以到达目的主机. 此外还可以指定时延范围进行传递</li>
+<li><strong>有序的数据包</strong>: 保证数据包按照发送顺序到达目的主机. </li>
+<li><strong>*保证最小带宽</strong>: 在指定的链路速率下, 只要发送速率低于链路速率, 那么所有数据包都会到达目的主机.  </li>
+<li><strong>安全性</strong>: 在源主机进行加密, 目的主机进行解密即可保证安全性.</li>
+</ul>
+<p>但是Internet网络层提供的是<strong>尽力而为服务</strong>, 不保证<strong>到达-延迟-带宽,</strong> 虽然有其他模型满足上述服务, 但事实证明了尽力而为服务和现下非常契合. </p>
+<blockquote>
+<p>注意: 有两种类型交换机, 针对网络层的叫数据包交换机, 转发策略根据数据包头的信息决定, 通俗来说把数据包交换机叫路由器; 针对链路层的交换机是链路层设备. </p>
+</blockquote>
+<h2 id="4-2-路由器组成和作用"><a href="#4-2-路由器组成和作用" class="headerlink" title="4.2-路由器组成和作用"></a>4.2-路由器组成和作用</h2><p>路由器架构如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/router-architecture.png" alt="router-architecture"></p>
+<ul>
+<li><p><strong>输入端口</strong></p>
+<p>这个端口不是TCP套接字的端口, 而是代表物理端口(或者说接口更合适), 图中三个方框分别代表物理层, 链路层, 网络层. </p>
+</li>
+</ul>
+<p>  功能: 1. 物理链路与物理层的交互. 2. 链路层的交互. 3. 网络层, 查询转发表将数据包通过<strong>交换结构</strong>转发到输出接口. </p>
+<ul>
+<li><p><strong>交换结构</strong></p>
+<p>将输入端口连接到输出端口, 它完全包含在路由器中, 是一个网络路由器中的网络. </p>
+</li>
+<li><p><em>*输出端口</em></p>
+<p>存储从交换结构得到的数据包, 通过执行链路层和物理层的功能后在传输链路上进行传输(也可以取消). 如果链路是双向传输, 则输入和输出端口在印刷电路上有特殊的结构</p>
+</li>
+<li><p><strong>路由处理器</strong></p>
+<p>执行的是控制平面的功能. </p>
+<p>在传统的路由器中, 执行<strong>路由器协议</strong>, 维护路由表和链路状态信息, 并计算转发表.</p>
+<p>在SDN的路由器中, 它负责和远程控制器通信, 为路由器计算转发表</p>
+</li>
+</ul>
+<blockquote>
+<p>各个部分都使用了物理硬件来实现, 因为数据到达通常是ns级的, 对于软件来说太快了</p>
+</blockquote>
+<h3 id="4-2-1-输入端口细节"><a href="#4-2-1-输入端口细节" class="headerlink" title="4.2.1-输入端口细节"></a>4.2.1-输入端口细节</h3><p>输入端口通过<code>转发表</code>来找输出端口, 而转发表则由<code>路由处理器</code>计算或者从<code>SDN</code>接受. 转发表通过一条总线复制到每个端口, 避免了集中处理.</p>
+<p>在32位的IP地址中, 转发表如果为每一个可能的地址都分配了一个条目, 而地址可能有40多亿, 这不大现实. 一般来说, 会在某段地址范围之间选择一个链接接口. 也会采用前缀的形式进行选择, 如下</p>
+<table>
+<thead>
+<tr>
+<th>IP前缀</th>
+<th>转发链路接口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>11001000 0010</td>
+<td>0</td>
+</tr>
+<tr>
+<td>11001000 00100011</td>
+<td>1</td>
+</tr>
+<tr>
+<td>11001000 011</td>
+<td>2</td>
+</tr>
+<tr>
+<td>其他</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>如果匹配多项, 则会挑前缀最长的那项, 越长越精确</p>
+<p>cisco catalyst 6500, 7600系列有一百万个TCAM转发表条目</p>
+</blockquote>
+<p>为了更快的(ns)在转发表中查找, 一般选择使用<code>SRAM</code>和<code>TCAM</code>存储器.</p>
+<p>确定输出端口后, 就将数据包发给交换结构(牵扯到排队拥塞调度),  <strong>查找</strong>是输入端口中最重要的一个功能, 除此之外还有</p>
+<ul>
+<li>进行物理与链路层处理</li>
+<li>检查数据包的版本号, 校验, 生存时间</li>
+<li>更新网络管理的计数器</li>
+</ul>
+<h3 id="4-2-2-交换结构-switching-fabric-细节"><a href="#4-2-2-交换结构-switching-fabric-细节" class="headerlink" title="4.2.2-交换结构(switching fabric)细节"></a>4.2.2-交换结构(switching fabric)细节</h3><p>是路由器的核心, 有多种数据包交换(指从输入端口到输出端口)方式</p>
+<ol>
+<li><p>通过内存转发.</p>
+<p>输入输出相当于操作系统的IO, CPU(路由处理器)从数据包首部取出目的地址, 在转发表中找到输出端口后, 就将数据包复制到输出端口的缓冲区.(即使有不同的输出端口, 但因为是共享系统总线, 一次只能进行一次读写, <em>区别线路卡</em>)</p>
+<p>许多路由器都使用内存交换技术。然而，目的地址的查找和将分组存储(交换)进适当的存储位置是由输入线路卡上的处理器来执行的。</p>
+</li>
+<li><p>通过总线转发.</p>
+<p>输入端口通过共享总线将数据包直接转送到输出端口, 不需要路由处理器.</p>
+<p>虽然CPU没有涉及总线传送, 但因为总线共享, 还是只能一次传送一个数据包. 当数据包到达输入端口, 如果发现总线在忙, 他就会被阻塞(数据包进入内存需要通过总线).</p>
+</li>
+<li><p>通过互连网转发.</p>
+<p>使用互连网络, 可以克服共享总线带宽的限制, 当不同输入端口转发到不同输出端口时, 能够并行转发</p>
+</li>
+</ol>
+<h3 id="4-2-3-排队"><a href="#4-2-3-排队" class="headerlink" title="4.2.3-排队"></a>4.2.3-排队</h3><p>将输入链路速率和输出速率相等设为R, 交换结构处理速率设为L</p>
+<ul>
+<li><p>R&lt;&lt;L</p>
+<p>不存在输入排队, 存在输出排队</p>
+</li>
+<li><p>R&gt;L</p>
+<p>存在输入排队, 并且存在HOL(Head of the line)阻塞, 即排队第一个数据包被阻塞, 后面的数据包也会被影响</p>
+</li>
+</ul>
+<h3 id="4-2-4-数据包调度"><a href="#4-2-4-数据包调度" class="headerlink" title="4.2.4-数据包调度"></a>4.2.4-数据包调度</h3><p>如何处理排队, 这就是调度</p>
+<h4 id="1-FIFO-FCFS"><a href="#1-FIFO-FCFS" class="headerlink" title="1.FIFO(FCFS)"></a>1.FIFO(FCFS)</h4><p>先进先出(先到先服务)指的是<strong>按照到达顺序</strong>将队列数据包进行链路传输, 先到的先被处理</p>
+<h4 id="2-优先级"><a href="#2-优先级" class="headerlink" title="2.优先级"></a>2.优先级</h4><p>到达的数据包会进行分类, 高优先级队列的会比低优先级队列的先被传输, 优先级相同的数据包采用FIFO处理 </p>
+<h4 id="3-轮循-RR-和加权公平排队-WFQ"><a href="#3-轮循-RR-和加权公平排队-WFQ" class="headerlink" title="3.轮循(RR)和加权公平排队(WFQ)"></a>3.轮循(RR)和加权公平排队(WFQ)</h4><p>轮循就是循环不同的队列来发送数据包. </p>
+<p>WFQ与RR有点像, 但它为每一个队列进行<strong>加权</strong>, 避免优先级低的得不到服务, 还有就是采用轮循, 当队列为空时, 立刻切换到下一个队列</p>
+<h2 id="4-3-IPv4-IPv6"><a href="#4-3-IPv4-IPv6" class="headerlink" title="4.3-IPv4, IPv6"></a>4.3-IPv4, IPv6</h2><h3 id="IPv4数据报格式"><a href="#IPv4数据报格式" class="headerlink" title="IPv4数据报格式"></a>IPv4数据报格式</h3><p>对于网络, IP可以说是最为重要的一部分了(寻址, 转发), 下图就是IPv4报头的组成部分</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/ip-v4-format.png" alt=""></p>
+<ul>
+<li><code>version</code>: 占4bit, IP协议的版本号, 路由器根据不同的版本来解析IP数据报头</li>
+<li><code>Headerlength</code>: 4bits, 代表IP头的长度, 用来确定有效载荷, 典型的IP头是20字节(不包含该选项)</li>
+<li><code>Type of service</code>:  8bits, 服务类型用来区分不同类型的数据报(设置优先级), 如IP电话和FTP的数据报</li>
+<li><code>Datagram length</code>: 16bits, 代表IP数据报的总长度(IP头+数据), 单位字节(因为以太网帧的原因通常不超过1500字节)</li>
+<li><code>Identifier(16bit),Flags(3bit),Fragmentation(13bit) offset</code>: 标识符, 标志, 碎片偏移与IP分片有关.(IPv6没有分片)</li>
+<li><code>Time to live(8bit)</code>: TTL表示生存时间, 每经路由处理, 这个字段都要-1, 到达0时则丢弃该数据, 防止在网络中一直流通</li>
+<li><code>Upper-layer protocol(8bit)</code>: 指定传递的上层协议, 如6表示TCP, 17表示UDP, <a target="_blank" rel="noopener" href="https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml">参见IANA</a>. 类似传输层的端口, 将传输层与应用层粘合, 协议号将网络层与传输层粘合</li>
+<li><code>Header checksum(16bit)</code>: 标头校验和, 它只校验IP首部, 错误就丢弃, 这里要区分TCP/UCP的校验和, 它们是在整个段计算校验的.</li>
+<li><code>源IP和目标IP</code>: 源主机从DNS获取目标IP, 插入目标IP字段</li>
+<li><code>options</code>: 选项是对IP头的扩展, 出去性能考虑一般不怎么使用, IPv6没有该字段</li>
+<li><code>Data(有效负载)</code>:　如TCP段内容</li>
+</ul>
+<blockquote>
+<p>没有选项字段的IP头有20字节</p>
+</blockquote>
+<h3 id="IP数据包分段"><a href="#IP数据包分段" class="headerlink" title="IP数据包分段"></a>IP数据包分段</h3><p>链路层协议支持发送规定范围内的数据包, 如以太网帧可以容纳1500byte, 链路层MTU(maximum transmission unit, 最大传输单位)限制了链路层帧的最大容量, IP数据包会被封装在链路层帧中, 所以MTU会对IP数据包的长度限制.</p>
+<p>但是不同的路由器可能有不同的链路层协议, 有着不同的MTU. 当一个路由器的下一个路由器的MTU&lt;该路由的IP数据包长度, 这怎么办? 方法是将IP数据包再次拆分, 然后单独封装. 小的数据包称之为<code>fragment(片段)</code>.</p>
+<p>片段需要组装才能到达目的地的传输层, 为了保证路由器的性能, 将重组的工作交给了终端系统.</p>
+<p>源主机会在数据包中标记源-目的地址和标示号, 每个数据包(分片)都有, 目的通过检查标识号来知道该数据包是否是某个大数据包的片段. 由于IP不可靠, 会丢失片段, 需要使用偏移量来确定该片段的顺序, 使用标志位来确定最后一个数据包(0标识)</p>
+<h3 id="IP寻址"><a href="#IP寻址" class="headerlink" title="IP寻址"></a>IP寻址</h3><p>IPv4长度32位, 约有43亿个IPv4地址, 通常表示为十进制, 每字节使用<code>.</code>隔开, 如192.168.1.1</p>
+<p>主机和路由如何链接互联网? 主机网络接口连接一条网络链路, 通过该链路发送信息. 路由器也有接口, 但它需要在一个链接上接受, 在另一个链接上传输, 需要两个及以上的连接, 所以路由有多个接口. 每个接口都需要发送/接受数据, IP协议要求每个接口都需要有自己的IP. 所以IP与接口关联, 不与机器关联.</p>
+<blockquote>
+<p>全局Internet中每个主机和路由器上的每个接口必须具有全局唯一的IP地址(后面会说NAT), 接口IP地址由他的子网决定</p>
+<p>说一下192.168.1.0/24表示法: 也叫子网掩码, 代表前24位定义了子网地址</p>
+<p>子网: 将每个接口与主机和路由断开, 连续的线路就是一个子网</p>
+<p>子网里面的所有设备都具有相同的子网地址</p>
+</blockquote>
+<p>无类别域间路由Classless Interdomain Routing (CIDR)规定了子网寻址的概念, 它将IP地址分为两部分, <code>a.b.c.d/x</code>, a-d是十进制的IP地址, x是最高有效位, 构成IP地址的网络部分, 称为<strong>网络前缀</strong>. 通常为某个组织分配一个前缀, 然后该组织的所有设备都共享这个前缀.</p>
+<p><code>32-x</code>位可以区分组织内的设备, <code>32-x</code>也可以有组织内的子网</p>
+<blockquote>
+<p>前缀能减少路由器转发表的大小, a.b.c.d/x的形式足以将数据包转发到任何目的地</p>
+<p>使用单个前缀告知自己有多个网络的能力叫<code>路由聚合</code></p>
+</blockquote>
+<hr>
+<p>在使用CIDR之前, IP的网络部分被设置为8bit, 16bit, 24bit长度, 分别叫做A, B, C类网络, C类只能有$2^8-2=254$个IP地址(2个IP有其他作用), 而B类能有$2^{16}-2=65534$的IP地址. 假设某组织需要分配300个IP地址, 只能为其分配B类的子网地址, 空余65000个IP地址, 浪费了太多空间, 而且B类网络地址也会很快耗尽.</p>
+<blockquote>
+<p>当主机的发送目标为IP广播地址255.255.255.255时, 该数据包会发送给子网内的所有主机,  路由器一般不会转发</p>
+<p>ICANN非盈利性组织负责分配IP和管理DNS根服务器等工作</p>
+</blockquote>
+<h4 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h4><p>当组织获取到IP地址块后, 可以手动将IP分配给路由器和主机, 也可以通过<code>DHCP</code>(<code>Dynamic Host Configuration Protocol</code>,动态主机配置协议)自动配置(可以固定IP或者临时IP), 主机通过<code>DHCP</code>还可以获得子网掩码, 默认网关(第一跳路由器地址), 本地DNS服务器地址等.</p>
+<p><code>DHCP</code>是基于<code>CS</code>的协议, 每个子网都至少有一个<code>DHCP服务器</code>, 或者知道DHCP服务器地址的DHCP的代理(路由器)</p>
+<p>连上网络的主机想在DHCP协议下获取IP分为四步, 如图所示(yiaddr代表you internet address):</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/DHCP-CS-interaction.png" alt="DHCP-CS-interaction"></p>
+<ol>
+<li><p><code>DCHP discover</code>: 为了找到DHCP服务器, 客服端会使用UDP数据包发送<code>DCHP discover</code>消息, DHCP服务端使用67端口, 客户端使用68接口, 由于没有IP, 客服端会以广播IP地址255.255.255.255和自身IP地址0.0.0.0建立IP数据报传递到链路层, 链路层会广播到子网内所有的节点.</p>
+</li>
+<li><p><code>DCHP offer</code>: 服务端接受到信息后进行响应, 图中使用广播地址, 书中理由是因为可能有多个DHCP服务器, 广播可以让客户端选择合适的地址.</p>
+<p><u><strong>但我并不信服这个理由, 就算是单播也能让客户端进行选择啊</strong></u>.</p>
+<p><strong>上网查了下, 可以在DHCP Discovery / Request报文里设置<code>BROADCAST flag = 0</code>来代表单播</strong>.</p>
+<blockquote>
+<p>抓包得到Bootp flags: 0x0000 (Unicast)表示单播</p>
+</blockquote>
+<p>响应的消息会带有唯一会话ID, 建议的IP地址, 网络掩码, IP使用时间</p>
+<blockquote>
+<p>为什么要分为单播和广播?</p>
+<p>单播: 点对点, 不影响其他主机</p>
+<p>广播: 点对所有点, 会影响到子网内其他主机</p>
+<p>如果协议栈在初始化中不支持单播, 则使用广播</p>
+<p>如果支持则使用单播</p>
+</blockquote>
+</li>
+<li><p><code>DHCP request</code>: 客服端将到达的offer进行选择, 回显该提议的参数.</p>
+</li>
+<li><p><code>DHCP ACK</code>: 服务端确认该消息, 交互完成</p>
+</li>
+</ol>
+<blockquote>
+<p>书说DHCP的缺点是<u>每连接到一个新的子网都会得到一个新的IP地址, 当在子网之间移动无法维持远程应用的TCP连接</u>, <strong>不是很理解, 子网之间代表不同的子网, 子网不同IP还能相同?</strong></p>
+<p>网上找的缺点还有点像样, 如DHCP服务器无法知道其他DHCP服务器租出去的地址, 不能发现非DHCP使用的IP地址</p>
+</blockquote>
+<h3 id="网络地址转换NAT"><a href="#网络地址转换NAT" class="headerlink" title="网络地址转换NAT"></a>网络地址转换NAT</h3><p>IPv4总共就40亿多地址, 现在每个人都不只一个智能设备, 加上智能家居, 导致了IP的极度稀缺, 于是有了NAT<code>Network Address Translation</code>这个暂时策略</p>
+<blockquote>
+<p><strong>专有名词</strong></p>
+<p>公网IP: 通过ISP等途径获得的全球统一可寻址的地址</p>
+<p>私有IP: 内部地址, IANA保留了三类私有地址<a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc1918">RFC 1918</a></p>
+<p>10.0.0.0 - 10.255.255.255 (10/8)</p>
+<p>172.16.0.0 - 172.31.255.255 (172.16/12)</p>
+<p>192.168.0.0 - 192.168.255.255 (192.168/16)</p>
+<p>详细分类</p>
+<figure class="highlight plaintext"><figcaption><span>block >folded</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Address Block                    Name                              RFC                       </span><br><span class="line">0.0.0.0/8                        &quot;This host on this network&quot;       [RFC1122], section 3.2.1.3</span><br><span class="line">10.0.0.0/8                       Private-Use                       [RFC1918]                 </span><br><span class="line">100.64.0.0/10                    Shared Address Space              [RFC6598]                 </span><br><span class="line">127.0.0.0/8                      Loopback                          [RFC1122], section 3.2.1.3</span><br><span class="line">169.254.0.0/16                   Link Local                        [RFC3927]                 </span><br><span class="line">172.16.0.0/12                    Private-Use                       [RFC1918]                 </span><br><span class="line">192.0.0.0/24[2]                  IETF Protocol Assignments         [RFC6890], section 2.1    </span><br><span class="line">192.0.0.0/29                     IPv4 Service Continuity Prefix    [RFC7335]                 </span><br><span class="line">192.0.0.8/32                     IPv4 dummy address                [RFC7600]                 </span><br><span class="line">192.0.0.9/32                     Port Control Protocol Anycast     [RFC-ietf-pcp-anycast-08] </span><br><span class="line">192.0.0.170/32, 192.0.0.171/32   NAT64/DNS64 Discovery             [RFC7050], section 2.2    </span><br><span class="line">192.0.2.0/24                     Documentation (TEST-NET-1)        [RFC5737]                 </span><br><span class="line">192.31.196.0/24                  AS112-v4                          [RFC7535]                 </span><br><span class="line">192.52.193.0/24                  AMT                               [RFC7450]                 </span><br><span class="line">192.88.99.0/24                   Deprecated (6to4 Relay Anycast)   [RFC7526]                 </span><br><span class="line">192.168.0.0/16                   Private-Use                       [RFC1918]                 </span><br><span class="line">192.175.48.0/24                  Direct Delegation AS112 Service   [RFC7534]                 </span><br><span class="line">198.18.0.0/15                    Benchmarking                      [RFC2544]                 </span><br><span class="line">198.51.100.0/24                  Documentation (TEST-NET-2)        [RFC5737]                 </span><br><span class="line">203.0.113.0/24                   Documentation (TEST-NET-3)        [RFC5737]                 </span><br><span class="line">240.0.0.0/4                      Reserved                          [RFC1112], section 4      </span><br><span class="line">255.255.255.255/32               Limited Broadcast                 [RFC919], section 7 </span><br></pre></td></tr></table></figure>
+
+<p>外网IP: 相对私有IP来说, 外网IP可能是私有IP, 公网IP</p>
+<p>LAN: 局域网接口, 接上后分配私有IP</p>
+<p>WAN: 这个接口可以与运营商联系, 这并不代表是公网IP</p>
+</blockquote>
+<h4 id="NAT技术原理"><a href="#NAT技术原理" class="headerlink" title="NAT技术原理"></a>NAT技术原理</h4><p>NAT路由器通过WAN口连接一个可以与外界联系的IP地址(外网IP), 通过许多LAN口连接局域网的设备, 并分配内网地址.</p>
+<p> 当内网需要请求外网的的数据时, 把请求数据发给NAT路由器, NAT路由器会替换该数据的内网IP成外网IP,  使用现存端口替换原有端口, 将替换过程记录到NAT转发表, 数据到达NAT路由器时根据转发表发送给内网设备</p>
+<blockquote>
+<p>NAT路由器会运行DHCP服务器给内网设备提供IP地址</p>
+</blockquote>
+<p>优点: 稍微解决了IP不够用的问题</p>
+<p>缺点: 端口是寻找进程的, 在服务器上, NAT会导致服务端口失效, 如<strong>P2P</strong>, 现在的解决方法是<u>NAT穿越</u></p>
+<blockquote>
+<p><strong>关于网络安全</strong></p>
+<p>攻击者通过向IP发送恶意数据包来对主机进行攻击, 还可以进行ping扫描和端口扫描.</p>
+<p>防火墙可以  端口扫描和根据IP来拦截数据包. IDS(intrusion detection systems)会对数据包进行全身扫描, 还会对攻击的数据包签名, 可以保护主机免受已知攻击</p>
+</blockquote>
+<h3 id="IPv6数据报格式"><a href="#IPv6数据报格式" class="headerlink" title="IPv6数据报格式"></a>IPv6数据报格式</h3><p>随着时间的推移, IPv4逐渐用尽, 根本的解决方法是升级IP协议的版本, 让它有更多的地址可以分配.</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/ip-v6-format.png" alt="ip-v6-format"></p>
+<p><em>字段解读</em></p>
+<p><code>version(4bit)</code>：版本, IPv4是４, IPv6是6</p>
+<p><code>Traffic class(8bit)</code>: 同IPv4的<a href="#IPv4数据报格式">TOS</a>, 可以为数据报设置优先级</p>
+<p><code>Flow lable(20bit)</code>: 流标签, 标识数据流</p>
+<p><code>Payload length(16bit)</code>: 有效负载的长度, 代表数据头后面的数据报字节数</p>
+<p><code>Next header(8bit)</code>: 标识传递的上层协议</p>
+<p><code>Hop limit(8bit)</code>: 代表可以经过(跳)路由的次数, 每经过一个路由则-1, 到0则被丢弃</p>
+<p><code>src&amp;Dst address</code>: 128bit的地址</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://datatracker.ietf.org/doc/rfc4291/?include_text=1">查阅rfc4921</a></p>
+<p>IPv6的表示形式:</p>
+<ol>
+<li><p>8个16bit</p>
+<p><code>ABCD:EF01:2345:6789:ABCD:EF01:2345:6789</code></p>
+<p><code>2001:DB8:0:0:8:800:200C:417A</code></p>
+</li>
+<li><p>省略0</p>
+<p><code>2001:DB8:0:0:8:800:200C:417A</code></p>
+<p><code>2001:DB8::8:800:200C:417A</code></p>
+</li>
+</ol>
+</blockquote>
+<p><code>Data</code>: 传递到目的主机网络层的上层</p>
+<p>相对比IPv4, IPv6少了碎片<code>重组</code>, <code>头部校验和</code>, <code>选项</code>.</p>
+<ul>
+<li>如果数据报在路由器中过大, 则路由器会丢弃这个数据报, 并反馈给发送方, 发送方会调小数据报然后重新发送</li>
+<li>因为链路层+传输层都有校验, 而且每次<a href="#IPv4数据报格式">TTL</a>都会变化, IPv4的校验和都会重新计算, 比较耗资源, 所以IPv6觉得冗余删除了校验</li>
+<li>选项在报头不存在了, 但<code>Next header</code>可以指向它, 删除它主要是为了IPv6精简的40字节报头.</li>
+</ul>
+<h3 id="将IPv4升级为IPv6"><a href="#将IPv4升级为IPv6" class="headerlink" title="将IPv4升级为IPv6"></a>将IPv4升级为IPv6</h3><p>虽然IPv6向下兼容IPv4, 但现有的IPv4的系统并不支持IPv6, 不可能停用全球所有的支持IPv4的系统来升级IPv6</p>
+<p><strong><em>隧道技术</em></strong></p>
+<p>在两台IPv6的设备之间如果有IPv4的设备, 则会将IPv6整段报文放进IPv4的有效负载段(标识41代表IPv6), 到达目的地提取该IPv6数据段, 中间的IPv4设备就叫<code>隧道</code></p>
+<h2 id="4-4-通用转发和SDN"><a href="#4-4-通用转发和SDN" class="headerlink" title="4.4-通用转发和SDN"></a>4.4-通用转发和SDN</h2><blockquote>
+<p>数据包是基于IP发送的, 然IP是可以在路途中被修改的, 这些设备叫<code>中间盒</code></p>
+</blockquote>
+<p>以前介绍的转发是基于目标的转发, 根据查找目的IP(<code>匹配</code>), 然后将数据包转发给合适的端口(<code>操作</code>).</p>
+<p><code>通用转发</code>代表更宽广的<code>匹配</code>+<code>操作</code>, 匹配会在不同的层中进行, 操作可以将数据包转发到一个或者多个端口; 执行的设备被称为<code>分组交换机</code>, 区别于链路层的交换机和网络层的路由器.</p>
+<p><code>OpenFlow</code>(这是一个标准)将匹配和启动转发的条目称为<code>flow table(流表)</code>, 特点是</p>
+<ul>
+<li>一组和输入数据包可以<code>匹配的标头字段</code>, 采用硬件匹配(TCAM), 匹配则转发, 否则丢弃或交给远程控制</li>
+<li>随数据包和流表条目更新的<code>计数器</code>, 可以记录匹配数据包的数量和流表更新时间</li>
+<li><code>匹配的动作</code>, 有转发到指定端口, 丢弃, 复制到其他端口, 重写标头字段</li>
+</ul>
+<blockquote>
+<p><strong><em>Match(匹配字段)</em></strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/openflow-match-table.png" alt="openflow-match-table"></p>
+<p>详细的Openflow协议参考</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/57201400">OpenFlow协议初探——OpenFLow中的流和流表</a></p>
+<p>具体的action有: 跨多个输出接口(负载均衡)、重写报头(NAT), 阻塞/丢弃数据包(防火墙).</p>
+</blockquote>
+</div><div class="article-licensing box"><div class="licensing-title"><p>4.网络层-数据平面</p><p><a href="http://yangchaohe.github.io/Networking/Top-Down-Note/Data-Plane.html">http://yangchaohe.github.io/Networking/Top-Down-Note/Data-Plane.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><a href="http://yangchaohe.github.io"><p>manu</p></a></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-06-01</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-01-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="recommend-area"><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 相关文章</span><br><span>  1.<a class="is-size-6" href="/Networking/Top-Down-Note/Control-Plane.html" target="_blank">5.网络层-控制平面</a><br></span><span>  2.<a class="is-size-6" href="/Networking/Top-Down-Note/3.%E4%BC%A0%E8%BE%93%E5%B1%82.html" target="_blank">3.传输层</a><br></span><span>  3.<a class="is-size-6" href="/Networking/Top-Down-Note/2.%E5%BA%94%E7%94%A8%E5%B1%82.html" target="_blank">2.应用层</a><br></span><span>  4.<a class="is-size-6" href="/Networking/Top-Down-Note/1.%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%9B%A0%E7%89%B9%E7%BD%91.html" target="_blank">1.计算机网络与因特网</a><br></span></div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 推荐文章</span><br><span>  1.<a class="is-size-6" href="/Database/ALTER.html" target="_blank">ALTER</a><br></span><span>  2.<a class="is-size-6" href="/Database/note.html" target="_blank">数据库笔记</a><br></span><span>  3.<a class="is-size-6" href="/Front-end/wechat-app.html" target="_blank">微信小程序笔记</a><br></span><span>  4.<a class="is-size-6" href="/Reverse/OD.html" target="_blank">动态调试-OD</a><br></span><span>  5.<a class="is-size-6" href="/Reverse/winPE.html" target="_blank">winPE结构</a><br></span><span>  6.<a class="is-size-6" href="/devTool/git.html" target="_blank">git指令</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/English/G/03-%E8%B0%93%E8%AF%AD%E8%99%9A%E6%8B%9F%E8%AF%AD%E6%B0%94%E5%80%92%E8%A3%85.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">03-谓语/虚拟语气/倒装</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/English/G/02-%E5%AE%9A%E8%AF%AD%E5%8A%A8%E8%AF%8D.html"><span class="level-item">02-定语/动词</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">通知</h3><ul><li><span><span>2021.6.28 公告测试</span></span></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex is-mobile" href="#4-1-Overview"><span class="mr-2">1</span><span>4.1-Overview</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#4-1-1-转发和路由-数据和控制平面"><span class="mr-2">1.1</span><span>4.1.1-转发和路由-数据和控制平面</span></a></li><li><a class="is-flex is-mobile" href="#4-1-2-网络服务模型"><span class="mr-2">1.2</span><span>4.1.2-网络服务模型</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#4-2-路由器组成和作用"><span class="mr-2">2</span><span>4.2-路由器组成和作用</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#4-2-1-输入端口细节"><span class="mr-2">2.1</span><span>4.2.1-输入端口细节</span></a></li><li><a class="is-flex is-mobile" href="#4-2-2-交换结构-switching-fabric-细节"><span class="mr-2">2.2</span><span>4.2.2-交换结构(switching fabric)细节</span></a></li><li><a class="is-flex is-mobile" href="#4-2-3-排队"><span class="mr-2">2.3</span><span>4.2.3-排队</span></a></li><li><a class="is-flex is-mobile" href="#4-2-4-数据包调度"><span class="mr-2">2.4</span><span>4.2.4-数据包调度</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#1-FIFO-FCFS"><span class="mr-2">2.4.1</span><span>1.FIFO(FCFS)</span></a></li><li><a class="is-flex is-mobile" href="#2-优先级"><span class="mr-2">2.4.2</span><span>2.优先级</span></a></li><li><a class="is-flex is-mobile" href="#3-轮循-RR-和加权公平排队-WFQ"><span class="mr-2">2.4.3</span><span>3.轮循(RR)和加权公平排队(WFQ)</span></a></li></ul></li></ul></li><li><a class="is-flex is-mobile" href="#4-3-IPv4-IPv6"><span class="mr-2">3</span><span>4.3-IPv4, IPv6</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#IPv4数据报格式"><span class="mr-2">3.1</span><span>IPv4数据报格式</span></a></li><li><a class="is-flex is-mobile" href="#IP数据包分段"><span class="mr-2">3.2</span><span>IP数据包分段</span></a></li><li><a class="is-flex is-mobile" href="#IP寻址"><span class="mr-2">3.3</span><span>IP寻址</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#DHCP"><span class="mr-2">3.3.1</span><span>DHCP</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#网络地址转换NAT"><span class="mr-2">3.4</span><span>网络地址转换NAT</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#NAT技术原理"><span class="mr-2">3.4.1</span><span>NAT技术原理</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#IPv6数据报格式"><span class="mr-2">3.5</span><span>IPv6数据报格式</span></a></li><li><a class="is-flex is-mobile" href="#将IPv4升级为IPv6"><span class="mr-2">3.6</span><span>将IPv4升级为IPv6</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#4-4-通用转发和SDN"><span class="mr-2">4</span><span>4.4-通用转发和SDN</span></a></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="码奴"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">码奴</p><p class="is-size-6 is-block">待人友善是修养，独来独往是性格</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>中国贵州</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">157</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">39</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">161</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/yangchaohe" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/yangchaohe"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:manu2x@.com"><i class="fa fa-envelope"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"来源《"+data.from+"》</p><p>提供者-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-17T14:05:40.000Z">2021-11-17</time></p><p class="title"><a href="/English/G/G002.html">G002</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-15T15:40:52.000Z">2021-11-15</time></p><p class="title"><a href="/English/G/G001.html">G001</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-14T02:44:54.000Z">2021-11-14</time></p><p class="title"><a href="/English/M/How-to-learn-English.html">How to learn English?</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T07:01:45.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/ctf-linux-cmd.html">ctf-linux-cmd.md</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T06:59:53.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/fastcgi.html">Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag is-grey-lightest">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag is-grey-lightest">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"><span class="tag">技能大赛-信息安全</span><span class="tag is-grey-lightest">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CS6200-28X-EI/"><span class="tag">CS6200-28X-EI</span><span class="tag is-grey-lightest">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/manjaro/"><span class="tag">manjaro</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DCFW-1800E-N3002/"><span class="tag">DCFW-1800E-N3002</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="tag">数据库</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><span class="tag">正则表达式</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/"><span class="tag">系统优化</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CPU/"><span class="tag">CPU</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DHCP/"><span class="tag">DHCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/bash/"><span class="tag">bash</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%87%BD%E6%95%B0/"><span class="tag">函数</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%AA%E8%BE%91/"><span class="tag">剪辑</span><span class="tag is-grey-lightest">2</span></a></div></div><div class="field is-grouped is-grouped-multiline"><a class="tags has-addons" href="/tags/"><span class="tag">查看全部&gt;&gt;</span></a></div></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a><p class="size-small"><span>&copy; 2023 manu</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请给我发<a href="mailto:manu2x@qq.com">邮件</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
+            var n = new Date(time);
+            now.setTime(now.getTime() + 250),
+                days = (now - n) / 1e3 / 60 / 60 / 24,
+                dnum = Math.floor(days),
+                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
+                hnum = Math.floor(hours),
+            1 == String(hnum).length && (hnum = "0" + hnum),
+                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
+                mnum = Math.floor(minutes),
+            1 == String(mnum).length && (mnum = "0" + mnum),
+                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
+                snum = Math.round(seconds),
+            1 == String(snum).length && (snum = "0" + snum),
+                document.getElementById("statistic-times").innerHTML = "❤️本站自 <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> 已运行 <strong>" + dnum + "</strong> 天 <strong>" + hnum + "</strong> 小时 <strong>" + mnum + "</strong> 分 <strong>" + snum + "</strong> 秒！❤️";
+        }var now = new Date();setInterval("createTime('2019/12/19 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️感谢 <strong><span id="busuanzi_value_site_uv">99+</span></strong> 小伙伴的 <strong><span id="busuanzi_value_site_pv">99+</span></strong> 次光临！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="4967313247" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        function loadMathJax() { //加载mathjax
+            $.getScript("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", function () {
+                MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$'], ['\(', '\)']] } });
+                var math = document.getElementsByClassName("entry-content")[0];
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+            });
+        };
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(false){
+                $.getScript('/js/comment-issue-data.js',function(){loadIssueData('undefined','undefined','undefined','undefined',undefined);});
+            }
+            if(true){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script><script type="text/javascript">function loadMathJax() { //加载mathjax
+            $.getScript("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", function () {
+                MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$'], ['\(', '\)']] } });
+                var math = document.getElementsByClassName("entry-content")[0];
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+            });
+        };loadMathJax();</script></body></html>

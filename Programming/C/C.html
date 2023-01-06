@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>C语言基础 - 码奴的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="码奴的博客"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="码奴的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="这是我的入门语言，自己学得不是很好，也用的不多"><meta property="og:type" content="note"><meta property="og:title" content="码奴"><meta property="og:url" content="https://yangchaohe.github.io/"><meta property="og:site_name" content="MANU"><meta property="og:description" content="这是我的入门语言，自己学得不是很好，也用的不多"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yangchaohe.github.io/img/avatar.png"><meta property="article:published_time" content="2019-11-01T14:37:26.000Z"><meta property="article:modified_time" content="2023-01-06T10:37:32.768Z"><meta property="article:author" content="manu"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchaohe.github.io/Programming/C/C.html"},"headline":"码奴的博客","image":["http://yangchaohe.github.io/img/og_image.png"],"datePublished":"2019-11-01T14:37:26.000Z","dateModified":"2023-01-06T10:37:32.768Z","author":{"@type":"Person","name":"manu"},"description":"这是我的入门语言，自己学得不是很好，也用的不多"}</script><link rel="canonical" href="http://yangchaohe.github.io/Programming/C/C.html"><link rel="icon" href="/img/favicon.png"><meta name="referrer" content="no-referrer-when-downgrade"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="码奴的博客" type="application/atom+xml">
+</head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/mindmap">思维导图</a><a class="navbar-item" href="/read">书籍</a><a class="navbar-item" href="/life">日志</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><!--!--><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2019-11-01  <span class="level-item"> manu </span><a class="commentCountImg" href="/Programming/C/C.html#comment-container"><span class="display-none-class">/Programming/C/C.html</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="c49b9430f1a8c891470f4b4ae22ee76d">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>18 分钟  <i class="fas fa-pencil-alt"> </i>2.7 k</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">C语言基础</h1><div class="content"><p>这是我的入门语言，自己学得不是很好，也用的不多</p>
+<span id="more"></span>
+
+<h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&quot;stdio.h&quot;</span><span class="comment">//函数库</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span><span class="comment">//圆括号里为参数，main前面为类型，为main返回值类型 ，大括号是函数体 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> mychar=<span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">    <span class="built_in">putchar</span>(mychar);</span><br><span class="line">    mychar=getchar();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>在程序里可以用<code>&#123;&#125;</code>写调试代码，定义变量不会影响外面的变量<code>c99</code></p>
+<p>你的输入和你的程序中间还有一个<code>shell</code></p>
+<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><ul>
+<li>由字母和下划线，数字组成，但数字不能开头</li>
+<li>且不能用<code>C</code>关键字</li>
+<li>区分大小写，长度不限</li>
+</ul>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>变量定义格式为：<br>类型 变量名=<code>value</code>；</p>
+<ul>
+<li>每结束一个变量必须以；结尾</li>
+<li>变量说明必须放在函数开头部分</li>
+<li>通过<code>=</code>赋值；</li>
+</ul>
+<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><p>宏定义:<br><code>#define 常量名 数据</code></p>
+<p>函数内定义:<br>const  类型  类型名;</p>
+<blockquote>
+<p>说明：const只有c99才支持</p>
+</blockquote>
+<h2 id="整型数据"><a href="#整型数据" class="headerlink" title="整型数据"></a>整型数据</h2><h3 id="整型常量"><a href="#整型常量" class="headerlink" title="整型常量"></a>整型常量</h3><p>也叫常数，常见的有十进制，八进制（前缀<code>0</code>），16进制（前缀<code>0x</code>）</p>
+<h3 id="整型变量"><a href="#整型变量" class="headerlink" title="整型变量"></a>整型变量</h3><p>可以使用<code>int</code>创建一个存储整数的空间</p>
+<ul>
+<li>所占字节数要看寄存器的大小， </li>
+<li>有范围</li>
+<li>类型有<code>int</code>，<code>short</code>，<code>long</code>，<code>unsigned</code>，区分有符号的和无符号的</li>
+<li>通过，可同时编译多个变量</li>
+<li><code>sizeof()</code>可以知道某变量所占字节大小；</li>
+</ul>
+<blockquote>
+<p><code>sizeof()</code>是静态运算符，他的结果在编译时就决定了，不能在（）里做运算。</p>
+</blockquote>
+<h3 id="整形存储的二进制"><a href="#整形存储的二进制" class="headerlink" title="整形存储的二进制"></a>整形存储的二进制</h3><ul>
+<li><p>十进制的正整数在内部就是他的二进制</p>
+</li>
+<li><p>而负数则采用补码的形式：</p>
+<ul>
+<li><code>-a</code>，补码<code>2n-a</code>，<code>n</code>为类型的位数</li>
+</ul>
+</li>
+<li><p>优点：方便计算，而不用判断正负</p>
+</li>
+</ul>
+<p><code>1111 1111</code>用纯二进制代表<code>255</code>，补码代表-1</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41739364/article/details/100125337">https://blog.csdn.net/qq_41739364/article/details/100125337</a></p>
+<ul>
+<li>设计<code>unsigned</code>的初衷是为了移位 </li>
+</ul>
+<ul>
+<li><p>16进制的一个位==2进制的4个位</p>
+</li>
+<li><p>8进制的一个位==2进制的3个位</p>
+</li>
+</ul>
+<h2 id="实型数据（浮点型）"><a href="#实型数据（浮点型）" class="headerlink" title="实型数据（浮点型）"></a>实型数据（浮点型）</h2><h3 id="实型常量"><a href="#实型常量" class="headerlink" title="实型常量"></a>实型常量</h3><ul>
+<li>也叫<code>实数</code>或者<code>浮点数</code></li>
+<li>在c中，实数只采用十进制，有0-9和小数点组成</li>
+<li>指数形式需要加e或E以及阶码组成<br>如<code>2.6e-5</code></li>
+</ul>
+<h3 id="实型变量"><a href="#实型变量" class="headerlink" title="实型变量"></a>实型变量</h3><ul>
+<li>分为两类，单精度<code>float</code>(占4字节)，双精度<code>double</code>(占8字节)；</li>
+</ul>
+<h4 id="float"><a href="#float" class="headerlink" title="float"></a><code>float</code></h4><p>输入格式：<code>%f</code><br>输出：<code>%f</code><br>定义格式<br><code>float  a = 1.0f</code></p>
+<blockquote>
+<p>如果不带<code>f</code>则是<code>double</code></p>
+</blockquote>
+<h4 id="double"><a href="#double" class="headerlink" title="double"></a><code>double</code></h4><p>输入：<code>%lf</code><br>输出：<code>%f %lf</code></p>
+<h3 id="浮点数的精度"><a href="#浮点数的精度" class="headerlink" title="浮点数的精度"></a>浮点数的精度</h3><p>1.无法比较<br>2.永远不精确；</p>
+<p>通常使用double</p>
+<h2 id="字符型数据"><a href="#字符型数据" class="headerlink" title="字符型数据"></a>字符型数据</h2><h3 id="字符常量"><a href="#字符常量" class="headerlink" title="字符常量"></a>字符常量</h3><ul>
+<li>由单引号括起的字符，<code>&#39;a&#39;</code>；</li>
+<li>不能用双引号</li>
+<li>常量只能是单个字符，区分字符串</li>
+<li>可以是字符集中任意字符，但<code>&#39;1&#39;</code>和<code>1</code>不一样</li>
+<li>占用一个字节，实质为<code>ASCⅡ</code>码，所以可以像整数那样去计算</li>
+</ul>
+<h3 id="字符变量（逃逸字符）"><a href="#字符变量（逃逸字符）" class="headerlink" title="字符变量（逃逸字符）"></a>字符变量（逃逸字符）</h3><ul>
+<li><p>转义字符变量</p>
+<ul>
+<li>是一种特殊的变量，不同于字符原有的意义，所以称转义</li>
+<li>如<code>\n</code>代表换行</li>
+</ul>
+</li>
+<li><p>特别是所有<code>ASCⅡ</code>码（<code>0-255</code>）都可以用<code>\ddd</code>(1-3位的八进制)和<code>\xhh</code>(1-2位的十六进制)表示</p>
+</li>
+<li><p>字符变量</p>
+<ul>
+<li>类型说明符为<code>char</code>（占1byte）</li>
+<li>因为只有一个字节，所以只能存放一个字符（<code>ASCⅡ</code>）</li>
+</ul>
+</li>
+<li><p>C语言允许把整型值（2/4/8）赋给字符变量，字符变量赋给整型值，因为整型值字节多，转为字符值时按低8位处理</p>
+</li>
+</ul>
+<h3 id="字符串常量"><a href="#字符串常量" class="headerlink" title="字符串常量"></a>字符串常量</h3><ul>
+<li><p>由双引号括起的字符序列，<code>“china”</code></p>
+</li>
+<li><p>可以含一个或多个字符</p>
+</li>
+<li><p>不能把字符串常量赋给字符变量</p>
+</li>
+<li><p>通常以<code>\0</code>结尾，系统自动加上，所占字节为所有字节数+1</p>
+</li>
+<li><p>C语言会自动把两个<code>“”“”</code>的内容连接起来</p>
+</li>
+<li><p>C没有字符串变量，要用字符数组来存放字符串变量</p>
+</li>
+</ul>
+<h2 id="基本输入与输出"><a href="#基本输入与输出" class="headerlink" title="基本输入与输出"></a>基本输入与输出</h2><p>因为<code>C</code>本身没有输入输出语句，这是由C函数库提供的，函数库有大量具有独立功能的函数程序块，<code>printf</code>和<code>scanf</code>存储在<code>stdio.h</code>头文件中，使用时要在源程序中加上<code>#include</code></p>
+<h3 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h3><p><code>printf</code>（格式控制，输出序列）</p>
+<ul>
+<li>格式控制为双引号括着的字符串，包含格式说明<code>%</code>和普通字符；<br><code>int %d</code><br><code>long %ld</code><br><code>float %f</code><br><code>double %lf</code><br><code>char %c</code></li>
+<li>输出序列则是若干的数据变量，也可以是表达式</li>
+<li><code>printf(“%3.2f”,)</code>数据占3位（超过不限制），向右对齐，左边补空格，小数点可以有2位，<code>-3</code>表示向左对齐</li>
+</ul>
+<p>字符输出<code>putchar</code></p>
+<ul>
+<li>只处理一个字符</li>
+</ul>
+<h3 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h3><p><code>scanf</code>（格式控制，地址表列）</p>
+<ul>
+<li><p>赋值给地址表列（以&amp;开头）</p>
+</li>
+<li><p>&amp;右边必须是明确的变量</p>
+</li>
+</ul>
+<p>字符输入<code>getchar</code></p>
+<ul>
+<li>只处理一个字符</li>
+</ul>
+<h2 id="格式化的输入输出"><a href="#格式化的输入输出" class="headerlink" title="格式化的输入输出"></a>格式化的输入输出</h2><ul>
+<li><code>printf</code><ul>
+<li><code>% [flags][width][.prec][hIL]type</code></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">Flag</th>
+<th align="center">含义</th>
+<th align="center">width 或 prec</th>
+<th align="center">含义</th>
+<th align="center">hIL（类型修饰）</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">-</td>
+<td align="center">左对齐</td>
+<td align="center">number</td>
+<td align="center">最小字符数</td>
+<td align="center">hh</td>
+<td align="center">单个字节</td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td align="center">在前面放+或-</td>
+<td align="center">*</td>
+<td align="center">下一个参数是字符数</td>
+<td align="center">h</td>
+<td align="center">short</td>
+</tr>
+<tr>
+<td align="center">(space)</td>
+<td align="center">正数留空</td>
+<td align="center">.number</td>
+<td align="center">小数点后面的位数</td>
+<td align="center">l</td>
+<td align="center">long</td>
+</tr>
+<tr>
+<td align="center">0</td>
+<td align="center">0填充</td>
+<td align="center">.*</td>
+<td align="center">下一个参数是小数点后面的位数</td>
+<td align="center">ll</td>
+<td align="center">long long</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">L</td>
+<td align="center">long double</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">type</th>
+<th align="center">用于</th>
+<th align="center">type</th>
+<th align="center">用于</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">i 或 d</td>
+<td align="center">int</td>
+<td align="center">g</td>
+<td align="center">float</td>
+</tr>
+<tr>
+<td align="center">u</td>
+<td align="center">unsigned int</td>
+<td align="center">G</td>
+<td align="center">float</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td align="center">八进制</td>
+<td align="center">a 或 A</td>
+<td align="center">十六进制浮点</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center">十六进制</td>
+<td align="center">c</td>
+<td align="center">char</td>
+</tr>
+<tr>
+<td align="center">X</td>
+<td align="center">字母大写的十六进制</td>
+<td align="center">s</td>
+<td align="center">字符串</td>
+</tr>
+<tr>
+<td align="center">f 或 F</td>
+<td align="center">float,6</td>
+<td align="center">p</td>
+<td align="center">指针</td>
+</tr>
+<tr>
+<td align="center">e 或 E</td>
+<td align="center">指数</td>
+<td align="center">n</td>
+<td align="center">读入/写出的个数</td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>scanf</code><ul>
+<li><code>%[flag]typpe</code></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">flag</th>
+<th align="center">含义</th>
+<th align="center">flag</th>
+<th align="center">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">*</td>
+<td align="center">跳过</td>
+<td align="center">l</td>
+<td align="center">long,double</td>
+</tr>
+<tr>
+<td align="center">数字</td>
+<td align="center">最大字符数</td>
+<td align="center">ll</td>
+<td align="center">long long</td>
+</tr>
+<tr>
+<td align="center">hh</td>
+<td align="center">char</td>
+<td align="center">L</td>
+<td align="center">long doble</td>
+</tr>
+<tr>
+<td align="center">h</td>
+<td align="center">short</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">type</th>
+<th align="center">用于</th>
+<th align="center">type</th>
+<th align="center">用于</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">d</td>
+<td align="center">int</td>
+<td align="center">a,e,f,g</td>
+<td align="center">float</td>
+</tr>
+<tr>
+<td align="center">i</td>
+<td align="center">整数，可能是8进制或16进制</td>
+<td align="center">c</td>
+<td align="center">char</td>
+</tr>
+<tr>
+<td align="center">u</td>
+<td align="center">unsigned int</td>
+<td align="center">s</td>
+<td align="center">字符串</td>
+</tr>
+<tr>
+<td align="center">o</td>
+<td align="center">八进制</td>
+<td align="center">[…]</td>
+<td align="center">所允许的字符</td>
+</tr>
+<tr>
+<td align="center">x</td>
+<td align="center">十六进制</td>
+<td align="center">p</td>
+<td align="center">指针</td>
+</tr>
+</tbody></table>
+<p><code>printf &amp;scanf</code>是由返回值的</p>
+<ul>
+<li>读入的项目数</li>
+<li>输出的字符数</li>
+</ul>
+<h2 id="赋值运算"><a href="#赋值运算" class="headerlink" title="赋值运算"></a>赋值运算</h2><h3 id="运算法则"><a href="#运算法则" class="headerlink" title="运算法则"></a>运算法则</h3><ul>
+<li><code>()</code>→<code>-</code>→<code>%*/</code>→<code>+-</code></li>
+<li>复合赋值</li>
+<li>类型最好为<code>double</code></li>
+<li>表示简化赋值操作的代码<br>例如<code>x=x+10</code>表示为<code>x+=10</code></li>
+<li><code>+=</code>告诉编译程序：<code>x</code>被赋值为<code>x+10</code></li>
+<li>同<code>*=/=;-=;%=</code></li>
+<li>根式<code>sqrt()</code></li>
+<li>指针运算<code>pow(2,4)</code>表示2的4次方;可以用来表示多次根式;</li>
+<li><code>exp(3)</code>表示e的三次方</li>
+<li>对数<code>log()</code></li>
+</ul>
+<h3 id="自增和自减-只适用于变量"><a href="#自增和自减-只适用于变量" class="headerlink" title="自增和自减(只适用于变量)"></a>自增和自减(只适用于变量)</h3><p><code>x=x+1</code>可写成<code>x++</code>或者<code>++x</code></p>
+<p>当是一个单独的程序语句时,符号在前面后面都没关系;but下面的情况特殊</p>
+<p><code>y=x++</code>表示现将x的值给y，x再加1</p>
+<p><code>y=++x</code>表示x先加1再赋给y</p>
+<p><code>++--</code>优先级最高吧</p>
+<p><code>x++</code><strong>表示的值</strong>是<code>x</code>的值<strong>,运算</strong>表示<code>x=x+1</code></p>
+<p><code>++x</code><strong>表示的值</strong>是<code>x+1</code>的值,<strong>运算</strong>表示<code>x=x+1</code></p>
+<h2 id="关系运算"><a href="#关系运算" class="headerlink" title="关系运算"></a>关系运算</h2><p>关系运算有两种结果，<strong>是1否0</strong></p>
+<p><code>&lt;</code> <code>&lt;</code> <code>&lt;=</code> <code>=</code><br>1.这四组优先级相同</p>
+<p>2.比下两个优先级高</p>
+<p><code>==</code>  比较等于<br> <code>=</code> 不等于</p>
+<ol>
+<li>关系运算符的优先级低于算数运算符</li>
+<li>但他高于赋值运算符</li>
+<li>有括号还是算括号</li>
+</ol>
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><p>结果同样只有0和1<br><code>||</code>或<br><code>&amp;&amp;</code>与<br><code>!</code>非<br>1.优先级从上到下逐渐升<br>2.但<code>||&amp;&amp;</code>低于关系运算符,高于赋值运算符<code>!</code>；高于算数运算符;实测比增减量符低</p>
+<ul>
+<li>计算同物理电路</li>
+<li>逻辑表达式对比是否非0值</li>
+</ul>
+<p><strong>重要!!!</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line">main()&#123;</span><br><span class="line">    <span class="keyword">int</span> a=<span class="number">1</span>,b=<span class="number">2</span>,c=<span class="number">3</span>,d=<span class="number">4</span>,m=<span class="number">2</span>,n=<span class="number">2</span>;</span><br><span class="line">    (m=a&gt;b)&amp;&amp;(n=c&gt;d);<span class="comment">//m=0,因为是与运算,所以后面不看了,n=2</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,n);</span><br><span class="line">    system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="逗号运算符及逗号表达式"><a href="#逗号运算符及逗号表达式" class="headerlink" title="逗号运算符及逗号表达式"></a>逗号运算符及逗号表达式</h2><ul>
+<li>可以连接多个表达式</li>
+<li>表达式1,表达式2</li>
+<li>从左到右依次计算</li>
+<li>优先级最低</li>
+<li>以右边的表达式作为结果</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">i = <span class="number">3</span>, <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, i);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果是3</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">i = (<span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, i);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果是4</p>
+<blockquote>
+<p>注意：调用函数时圆括号的逗号是标点符号</p>
+</blockquote>
+<h2 id="条件运算符和条件关系式"><a href="#条件运算符和条件关系式" class="headerlink" title="条件运算符和条件关系式"></a>条件运算符和条件关系式</h2><ul>
+<li><p>是C语言唯一的三目运算符(需要3个数据和表达式构成的条件表达式)</p>
+<p><strong>一般形式</strong></p>
+<p><code>表达式1 ? 表达式2 : 表达式3</code></p>
+<ul>
+<li><p>意为如果表达式1成立,则为表达式2的值,否则是表达式3的值</p>
+</li>
+<li><p>结合方向从右向左</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="自动类型转换机制和强制类型转换"><a href="#自动类型转换机制和强制类型转换" class="headerlink" title="自动类型转换机制和强制类型转换"></a>自动类型转换机制和强制类型转换</h2><ul>
+<li><p><strong>自动</strong><br>在运算中若有多个类型则计算机会自动转化为范围最宽的,但如果有<code>float</code>会自动转化为<code>double</code></p>
+</li>
+<li><p><strong>强制</strong><br>格式<br><code>(类型)表达式</code></p>
+</li>
+</ul>
+<p>1.优先级和<code>+--</code>相同,因为它是<strong>单目运算符</strong>(只有一个变量的运算符)</p>
+<p>2.对于<code>printf</code>，任何小于<code>int</code>的类型都会转换成<code>int</code>，<code>float</code>会转换成<code>double</code></p>
+<p>3.但<code>scanf</code>不会</p>
+<h2 id="产生随机数列"><a href="#产生随机数列" class="headerlink" title="产生随机数列"></a>产生随机数列</h2><p>用到<code>srand,rand</code>函数<br>在<code>#include &lt;stdlib&gt;</code>函数库里<br>使用<code>rand</code>创建种子,<code>rand</code>根据种子产生随机数;</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">srand(time(<span class="number">0</span>));</span><br><span class="line">rand()<span class="number">1000</span><span class="comment">//产生1000以内的随机数;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="选择结构程序设计"><a href="#选择结构程序设计" class="headerlink" title="选择结构程序设计"></a>选择结构程序设计</h2><p><strong>表达式里只要<code>=0</code>出现就会退出循环体!!!</strong><br><code>emmm表达式使用 &lt;= 会给自己贴标签</code></p>
+<h3 id="顺序结构"><a href="#顺序结构" class="headerlink" title="顺序结构"></a>顺序结构</h3><h3 id="选择结构"><a href="#选择结构" class="headerlink" title="选择结构"></a>选择结构</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//if-else结构格式:</span></span><br><span class="line"><span class="keyword">if</span>(表达式)</span><br><span class="line">        &#123; &#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">        &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>退化形式<br>无<code>else</code>直接结束</li>
+<li>可以嵌套使用,<code>else</code>配对原则:与之前最近的<code>if</code>配对;包含多个语句分支时,用{}括起语句不容易出错<br><strong>多分支结构</strong></li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>()</span><br><span class="line">    &#123; &#125;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>()</span><br><span class="line">    &#123; &#125;</span><br><span class="line">.....</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    &#123; &#125;</span><br></pre></td></tr></table></figure>
+
+
+<p><code>switch</code>实现<strong>多分支结构</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> 常量表达式<span class="number">1</span>:语句块<span class="number">1</span>;<span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span></span><br><span class="line">.....</span><br><span class="line">    <span class="keyword">default</span>:语句块;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>若没有<code>break</code>,则一直执行到<code>default</code></li>
+</ul>
+<blockquote>
+<p>个人理解<code>if-else</code>和<code>switch</code>条件分支语句</p>
+<p>当输入的范围广时用<code>if-else</code>,反之都行</p>
+</blockquote>
+<h3 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h3><h4 id="当型循环"><a href="#当型循环" class="headerlink" title="当型循环"></a><strong>当型循环</strong></h4><p>表达式在循环体上面,不满足条件会直接跳出循环;</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(表达式)</span><br><span class="line">&#123;</span><br><span class="line">    循环体;</span><br><span class="line">&#125;   </span><br></pre></td></tr></table></figure>
+
+
+<h4 id="直到型循环"><a href="#直到型循环" class="headerlink" title="直到型循环;"></a>直到型循环;</h4><p>表达式在循环体下面,不满足条件也会先执行一次循环体</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    循环体;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">while</span>(表达式);</span><br></pre></td></tr></table></figure>
+
+<h4 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(表达式<span class="number">1</span>,表达式<span class="number">2</span>,表达式<span class="number">3</span>)</span><br><span class="line">&#123;</span><br><span class="line">     循环体;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>表达式2没有默认是<code>1</code></p>
+<p>运行步骤:</p>
+<ul>
+<li><p>先运行表达式1,然后对表达式2求解,为真则进入循环体,再执行表达式3,退回上一步;</p>
+</li>
+<li><p>表达式可以缺失,但<code>;</code>不能少.</p>
+</li>
+</ul>
+<h4 id="break-continue"><a href="#break-continue" class="headerlink" title="break continue"></a><code>break continue</code></h4><p><code>break</code>出现在循环体中会直接跳出循环</p>
+<p><code>continue</code>则会回到原来的循环体</p>
+<p>针对内层循环</p>
+<h4 id="离开多重循环"><a href="#离开多重循环" class="headerlink" title="离开多重循环"></a>离开多重循环</h4><p>1.接力<code>break</code>:</p>
+<p>内层循环定义一个变量<code>exit == 1</code></p>
+<p>外面每层循环加上<code>if ( exit ==1 )  break</code></p>
+<p>2.<code>goto out</code></p>
+<p><code>out:</code></p>
+<p>会直接跳到<code>out:</code>之后的地方</p>
+<p>表达式里只要<code>=0</code>出现就会退出循环体!!!</p>
+<p>循环结构的选择:</p>
+<p>1.固定次数用<code>for</code></p>
+<p>2.无论如何都要运行一次用<code>do while</code></p>
+<p>3.其他用<code>while</code></p>
+<p>​                         </p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>C语言基础</p><p><a href="http://yangchaohe.github.io/Programming/C/C.html">http://yangchaohe.github.io/Programming/C/C.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><a href="http://yangchaohe.github.io"><p>manu</p></a></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2019-11-01</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-01-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="recommend-area"><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 相关文章</span><br><span>  1.<a class="is-size-6" href="/Programming/C/%E6%8C%89%E4%BD%8D%E4%B8%8E%E7%A7%BB%E4%BD%8D.html" target="_blank">按位运算与移位运算</a><br></span><span>  2.<a class="is-size-6" href="/Programming/C/%E9%93%BE%E8%A1%A8.html" target="_blank">链表</a><br></span><span>  3.<a class="is-size-6" href="/Programming/C/%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E5%87%BD%E6%95%B0.html" target="_blank">简单理解函数</a><br></span><span>  4.<a class="is-size-6" href="/Programming/C/%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E7%BB%93%E6%9E%84.html" target="_blank">简单理解结构</a><br></span><span>  5.<a class="is-size-6" href="/Programming/C/%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E6%8C%87%E9%92%88.html" target="_blank">简单理解指针</a><br></span><span>  6.<a class="is-size-6" href="/Programming/C/%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E6%95%B0%E7%BB%84.html" target="_blank">简单理解数组</a><br></span></div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 推荐文章</span><br><span>  1.<a class="is-size-6" href="/Database/ALTER.html" target="_blank">ALTER</a><br></span><span>  2.<a class="is-size-6" href="/Database/note.html" target="_blank">数据库笔记</a><br></span><span>  3.<a class="is-size-6" href="/Front-end/wechat-app.html" target="_blank">微信小程序笔记</a><br></span><span>  4.<a class="is-size-6" href="/Reverse/OD.html" target="_blank">动态调试-OD</a><br></span><span>  5.<a class="is-size-6" href="/Reverse/winPE.html" target="_blank">winPE结构</a><br></span><span>  6.<a class="is-size-6" href="/devTool/git.html" target="_blank">git指令</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Programming/C/%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E6%95%B0%E7%BB%84.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">简单理解数组</span></a></div></nav><!--!--><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">通知</h3><ul><li><span><span>2021.6.28 公告测试</span></span></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex is-mobile" href="#基础"><span class="mr-2">1</span><span>基础</span></a></li><li><a class="is-flex is-mobile" href="#标识符"><span class="mr-2">2</span><span>标识符</span></a></li><li><a class="is-flex is-mobile" href="#变量"><span class="mr-2">3</span><span>变量</span></a></li><li><a class="is-flex is-mobile" href="#常量"><span class="mr-2">4</span><span>常量</span></a></li><li><a class="is-flex is-mobile" href="#整型数据"><span class="mr-2">5</span><span>整型数据</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#整型常量"><span class="mr-2">5.1</span><span>整型常量</span></a></li><li><a class="is-flex is-mobile" href="#整型变量"><span class="mr-2">5.2</span><span>整型变量</span></a></li><li><a class="is-flex is-mobile" href="#整形存储的二进制"><span class="mr-2">5.3</span><span>整形存储的二进制</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#实型数据（浮点型）"><span class="mr-2">6</span><span>实型数据（浮点型）</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#实型常量"><span class="mr-2">6.1</span><span>实型常量</span></a></li><li><a class="is-flex is-mobile" href="#实型变量"><span class="mr-2">6.2</span><span>实型变量</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#float"><span class="mr-2">6.2.1</span><span>float</span></a></li><li><a class="is-flex is-mobile" href="#double"><span class="mr-2">6.2.2</span><span>double</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#浮点数的精度"><span class="mr-2">6.3</span><span>浮点数的精度</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#字符型数据"><span class="mr-2">7</span><span>字符型数据</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#字符常量"><span class="mr-2">7.1</span><span>字符常量</span></a></li><li><a class="is-flex is-mobile" href="#字符变量（逃逸字符）"><span class="mr-2">7.2</span><span>字符变量（逃逸字符）</span></a></li><li><a class="is-flex is-mobile" href="#字符串常量"><span class="mr-2">7.3</span><span>字符串常量</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#基本输入与输出"><span class="mr-2">8</span><span>基本输入与输出</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#输出"><span class="mr-2">8.1</span><span>输出</span></a></li><li><a class="is-flex is-mobile" href="#输入"><span class="mr-2">8.2</span><span>输入</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#格式化的输入输出"><span class="mr-2">9</span><span>格式化的输入输出</span></a></li><li><a class="is-flex is-mobile" href="#赋值运算"><span class="mr-2">10</span><span>赋值运算</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#运算法则"><span class="mr-2">10.1</span><span>运算法则</span></a></li><li><a class="is-flex is-mobile" href="#自增和自减-只适用于变量"><span class="mr-2">10.2</span><span>自增和自减(只适用于变量)</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#关系运算"><span class="mr-2">11</span><span>关系运算</span></a></li><li><a class="is-flex is-mobile" href="#逻辑运算符"><span class="mr-2">12</span><span>逻辑运算符</span></a></li><li><a class="is-flex is-mobile" href="#逗号运算符及逗号表达式"><span class="mr-2">13</span><span>逗号运算符及逗号表达式</span></a></li><li><a class="is-flex is-mobile" href="#条件运算符和条件关系式"><span class="mr-2">14</span><span>条件运算符和条件关系式</span></a></li><li><a class="is-flex is-mobile" href="#自动类型转换机制和强制类型转换"><span class="mr-2">15</span><span>自动类型转换机制和强制类型转换</span></a></li><li><a class="is-flex is-mobile" href="#产生随机数列"><span class="mr-2">16</span><span>产生随机数列</span></a></li><li><a class="is-flex is-mobile" href="#选择结构程序设计"><span class="mr-2">17</span><span>选择结构程序设计</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#顺序结构"><span class="mr-2">17.1</span><span>顺序结构</span></a></li><li><a class="is-flex is-mobile" href="#选择结构"><span class="mr-2">17.2</span><span>选择结构</span></a></li><li><a class="is-flex is-mobile" href="#循环结构"><span class="mr-2">17.3</span><span>循环结构</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#当型循环"><span class="mr-2">17.3.1</span><span>当型循环</span></a></li><li><a class="is-flex is-mobile" href="#直到型循环"><span class="mr-2">17.3.2</span><span>直到型循环;</span></a></li><li><a class="is-flex is-mobile" href="#for循环"><span class="mr-2">17.3.3</span><span>for循环</span></a></li><li><a class="is-flex is-mobile" href="#break-continue"><span class="mr-2">17.3.4</span><span>break continue</span></a></li><li><a class="is-flex is-mobile" href="#离开多重循环"><span class="mr-2">17.3.5</span><span>离开多重循环</span></a></li></ul></li></ul></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="码奴"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">码奴</p><p class="is-size-6 is-block">待人友善是修养，独来独往是性格</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>中国贵州</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">157</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">39</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">161</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/yangchaohe" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/yangchaohe"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:manu2x@.com"><i class="fa fa-envelope"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"来源《"+data.from+"》</p><p>提供者-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-17T14:05:40.000Z">2021-11-17</time></p><p class="title"><a href="/English/G/G002.html">G002</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-15T15:40:52.000Z">2021-11-15</time></p><p class="title"><a href="/English/G/G001.html">G001</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-14T02:44:54.000Z">2021-11-14</time></p><p class="title"><a href="/English/M/How-to-learn-English.html">How to learn English?</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T07:01:45.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/ctf-linux-cmd.html">ctf-linux-cmd.md</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T06:59:53.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/fastcgi.html">Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag is-grey-lightest">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag is-grey-lightest">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"><span class="tag">技能大赛-信息安全</span><span class="tag is-grey-lightest">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CS6200-28X-EI/"><span class="tag">CS6200-28X-EI</span><span class="tag is-grey-lightest">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/manjaro/"><span class="tag">manjaro</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DCFW-1800E-N3002/"><span class="tag">DCFW-1800E-N3002</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="tag">数据库</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><span class="tag">正则表达式</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/"><span class="tag">系统优化</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CPU/"><span class="tag">CPU</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DHCP/"><span class="tag">DHCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/bash/"><span class="tag">bash</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%87%BD%E6%95%B0/"><span class="tag">函数</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%AA%E8%BE%91/"><span class="tag">剪辑</span><span class="tag is-grey-lightest">2</span></a></div></div><div class="field is-grouped is-grouped-multiline"><a class="tags has-addons" href="/tags/"><span class="tag">查看全部&gt;&gt;</span></a></div></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a><p class="size-small"><span>&copy; 2023 manu</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请给我发<a href="mailto:manu2x@qq.com">邮件</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
+            var n = new Date(time);
+            now.setTime(now.getTime() + 250),
+                days = (now - n) / 1e3 / 60 / 60 / 24,
+                dnum = Math.floor(days),
+                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
+                hnum = Math.floor(hours),
+            1 == String(hnum).length && (hnum = "0" + hnum),
+                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
+                mnum = Math.floor(minutes),
+            1 == String(mnum).length && (mnum = "0" + mnum),
+                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
+                snum = Math.round(seconds),
+            1 == String(snum).length && (snum = "0" + snum),
+                document.getElementById("statistic-times").innerHTML = "❤️本站自 <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> 已运行 <strong>" + dnum + "</strong> 天 <strong>" + hnum + "</strong> 小时 <strong>" + mnum + "</strong> 分 <strong>" + snum + "</strong> 秒！❤️";
+        }var now = new Date();setInterval("createTime('2019/12/19 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️感谢 <strong><span id="busuanzi_value_site_uv">99+</span></strong> 小伙伴的 <strong><span id="busuanzi_value_site_pv">99+</span></strong> 次光临！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="4967313247" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        function loadMathJax() { //加载mathjax
+            $.getScript("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", function () {
+                MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$'], ['\(', '\)']] } });
+                var math = document.getElementsByClassName("entry-content")[0];
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+            });
+        };
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(false){
+                $.getScript('/js/comment-issue-data.js',function(){loadIssueData('undefined','undefined','undefined','undefined',undefined);});
+            }
+            if(false){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script></body></html>

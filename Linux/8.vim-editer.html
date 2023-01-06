@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>(八)vim editer - 码奴的博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="码奴的博客"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="码奴的博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="简单来说就是一个文本编辑器，如同前面的nano，但vi有更多功能，vim则是vi的的升级版 学习vim的主要条件是因为  所有UNIX-like都有vi，而其他的文本编辑器未必有 很多软件的编辑接口都有vi vim具有程序编程的能力，比如语法高亮 编辑迅速"><meta property="og:type" content="note"><meta property="og:title" content="码奴"><meta property="og:url" content="https://yangchaohe.github.io/"><meta property="og:site_name" content="MANU"><meta property="og:description" content="简单来说就是一个文本编辑器，如同前面的nano，但vi有更多功能，vim则是vi的的升级版 学习vim的主要条件是因为  所有UNIX-like都有vi，而其他的文本编辑器未必有 很多软件的编辑接口都有vi vim具有程序编程的能力，比如语法高亮 编辑迅速"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://yangchaohe.github.io/img/avatar.png"><meta property="article:published_time" content="2020-01-19T16:00:00.000Z"><meta property="article:modified_time" content="2023-01-06T10:37:32.764Z"><meta property="article:author" content="manu"><meta property="article:tag" content="vi"><meta property="article:tag" content="vim"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="/img/avatar.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://yangchaohe.github.io/Linux/8.vim-editer.html"},"headline":"码奴的博客","image":["https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/vim-commands.jpg","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/vim-sp.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/vim-buqi.png","https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/dos&unix-q.png"],"datePublished":"2020-01-19T16:00:00.000Z","dateModified":"2023-01-06T10:37:32.764Z","author":{"@type":"Person","name":"manu"},"description":"简单来说就是一个文本编辑器，如同前面的nano，但vi有更多功能，vim则是vi的的升级版 学习vim的主要条件是因为  所有UNIX-like都有vi，而其他的文本编辑器未必有 很多软件的编辑接口都有vi vim具有程序编程的能力，比如语法高亮 编辑迅速"}</script><link rel="canonical" href="http://yangchaohe.github.io/Linux/8.vim-editer.html"><link rel="icon" href="/img/favicon.png"><meta name="referrer" content="no-referrer-when-downgrade"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="码奴的博客" type="application/atom+xml">
+</head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">主页</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/mindmap">思维导图</a><a class="navbar-item" href="/read">书籍</a><a class="navbar-item" href="/life">日志</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><!--!--><div class="card"><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2020-01-20  <span class="level-item"> manu </span><a class="commentCountImg" href="/Linux/8.vim-editer.html#comment-container"><span class="display-none-class">/Linux/8.vim-editer.html</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="34230e4cae49385485c205ee0ea5988e">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>32 分钟  <i class="fas fa-pencil-alt"> </i>4.7 k</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">(八)vim editer</h1><div class="content"><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2020/vim-commands.jpg"  />
+
+<p>简单来说就是一个文本编辑器，如同前面的nano，但vi有更多功能，vim则是vi的的升级版</p>
+<p>学习vim的主要条件是因为</p>
+<ol>
+<li>所有UNIX-like都有vi，而其他的文本编辑器未必有</li>
+<li>很多软件的编辑接口都有vi</li>
+<li>vim具有程序编程的能力，比如语法高亮</li>
+<li>编辑迅速</li>
+</ol>
+<span id="more"></span>
+
+<h2 id="使用vi"><a href="#使用vi" class="headerlink" title="使用vi"></a>使用vi</h2><h3 id="三种模式"><a href="#三种模式" class="headerlink" title="三种模式"></a>三种模式</h3><ul>
+<li><p><strong>command mode</strong></p>
+<ul>
+<li>命令<code>vi filename</code>就会进入<code>command mode</code>(一般命令模式)，不管文件名存不存在（存在就打开，不存在就新建）</li>
+<li>可以进行复制粘贴、删除、搜索、替换等操作</li>
+</ul>
+</li>
+<li><p><strong>insert mode</strong></p>
+<ul>
+<li>在一般模式下使用<code>i、I、o、O</code>等就可以进入<code>insert mode</code>(编辑模式)</li>
+<li>可以编辑字符</li>
+<li><code>esc</code>退出编辑模式</li>
+</ul>
+</li>
+<li><p><strong>command-line mode</strong>(命令行模式)</p>
+<ul>
+<li>一般模式下输入<code>:、/、?</code>都可以进入命令行模式</li>
+<li>可以读取、存储文件</li>
+<li><code>esc</code>退出</li>
+</ul>
+</li>
+</ul>
+<p>三者的关系如下图</p>
+<ul>
+<li>注意编辑模式和命令行模式不能互相转换</li>
+</ul>
+<h3 id="vi按键说明"><a href="#vi按键说明" class="headerlink" title="vi按键说明"></a>vi按键说明</h3><h4 id="一般命令模式"><a href="#一般命令模式" class="headerlink" title="一般命令模式"></a>一般命令模式</h4><p><strong>1.移动光标</strong></p>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th align="left">含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>h或者←</td>
+<td align="left">光标向左移动一个字符</td>
+</tr>
+<tr>
+<td>j或↓</td>
+<td align="left">向下移动</td>
+</tr>
+<tr>
+<td>k或↑</td>
+<td align="left">向上移动</td>
+</tr>
+<tr>
+<td>l或→</td>
+<td align="left">向右移动（特殊用法：10j/↓代表向下移动10行）</td>
+</tr>
+<tr>
+<td>ctrl+f</td>
+<td align="left">向下移动一页，相当于PD</td>
+</tr>
+<tr>
+<td>ctrl+b</td>
+<td align="left">向上移动一页，相当于PU</td>
+</tr>
+<tr>
+<td>ctrl+d</td>
+<td align="left">向下移动半页</td>
+</tr>
+<tr>
+<td>ctrl+u</td>
+<td align="left">向上移动半页</td>
+</tr>
+<tr>
+<td>+</td>
+<td align="left">移动到非空格符的下一行</td>
+</tr>
+<tr>
+<td>-</td>
+<td align="left">非空格符的上一行</td>
+</tr>
+<tr>
+<td>n<code>space</code></td>
+<td align="left">n代表数字，数字接<code>space</code>代表移动多少个字符</td>
+</tr>
+<tr>
+<td>0或<code>home</code></td>
+<td align="left">移动到行首</td>
+</tr>
+<tr>
+<td>$或<code>end</code></td>
+<td align="left">移动到行末</td>
+</tr>
+<tr>
+<td>H</td>
+<td align="left">移动屏幕首行字符</td>
+</tr>
+<tr>
+<td>M</td>
+<td align="left">移动屏幕中央行首字符</td>
+</tr>
+<tr>
+<td>L</td>
+<td align="left">移动屏幕末行首字符</td>
+</tr>
+<tr>
+<td>G</td>
+<td align="left">移动到文件最后一行</td>
+</tr>
+<tr>
+<td>nG</td>
+<td align="left">表示移动到第n行</td>
+</tr>
+<tr>
+<td>n<code>enter</code></td>
+<td align="left">表示向下移动n行</td>
+</tr>
+</tbody></table>
+<p><strong>2.查找替换</strong></p>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/word</td>
+<td>向下寻找word</td>
+</tr>
+<tr>
+<td>?word</td>
+<td>向上寻找word</td>
+</tr>
+<tr>
+<td>n</td>
+<td>继续上一个寻找动作</td>
+</tr>
+<tr>
+<td>N</td>
+<td>反向n</td>
+</tr>
+<tr>
+<td>:n1,n2s/word1/word2/g</td>
+<td>从n1行到n2行将word1替换成word2</td>
+</tr>
+<tr>
+<td>:1,$s/word1/word2/g</td>
+<td>全文替换</td>
+</tr>
+<tr>
+<td>:1,$s/word1/word2/gc</td>
+<td>替换时提醒用户</td>
+</tr>
+</tbody></table>
+<p><strong>3.删除、复制粘贴</strong></p>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>x、X</td>
+<td>x相当于<code>del</code>，X相当于<code>backspace</code></td>
+</tr>
+<tr>
+<td>nx</td>
+<td>表示向后删除n个字符</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>剪切光标所在的一行</td>
+</tr>
+<tr>
+<td>ndd</td>
+<td>剪切光标所在的向下n行</td>
+</tr>
+<tr>
+<td>d1G</td>
+<td>剪切光标到第一行</td>
+</tr>
+<tr>
+<td>dG</td>
+<td>剪切光标到最后</td>
+</tr>
+<tr>
+<td>d$</td>
+<td>剪切光标到本行末字符</td>
+</tr>
+<tr>
+<td>d0</td>
+<td>剪切光标到本行首字符</td>
+</tr>
+<tr>
+<td>yy</td>
+<td>复制光标在的一行</td>
+</tr>
+<tr>
+<td>nyy</td>
+<td>复制光标所在的向下n行</td>
+</tr>
+<tr>
+<td>y1G</td>
+<td>复制光标到第一行</td>
+</tr>
+<tr>
+<td>yG</td>
+<td>复制光标到最后一行</td>
+</tr>
+<tr>
+<td>y0</td>
+<td>复制光标到行首字符</td>
+</tr>
+<tr>
+<td>y$</td>
+<td>复制光标到行末字符</td>
+</tr>
+<tr>
+<td>p&amp;P</td>
+<td>如果复制的是一串字符，p会粘贴到光标后面，P粘贴到光标前面；如果复制几行，p粘贴到光标下一行，P粘贴到光标上一行</td>
+</tr>
+<tr>
+<td>J</td>
+<td>将光标所在下一行结合成一行，前面可以接n</td>
+</tr>
+<tr>
+<td>c</td>
+<td>重复删除多个数据，删除10行，10cj</td>
+</tr>
+<tr>
+<td>u</td>
+<td>恢复一个操作</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+r</td>
+<td>撤销一个操作</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>复制前一个操作</td>
+</tr>
+</tbody></table>
+<h4 id="编辑模式"><a href="#编辑模式" class="headerlink" title="编辑模式"></a>编辑模式</h4><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>i&amp;I</td>
+<td>i从当前光标插入，I从光标所在行的第一个非空格字符处插入</td>
+</tr>
+<tr>
+<td>a&amp;A</td>
+<td>a从光标下一个字符插入，A从所在行最后一个字符插入</td>
+</tr>
+<tr>
+<td>o&amp;O</td>
+<td>o从光标下一行插入<strong>新</strong>的一行，O从光标上插入</td>
+</tr>
+<tr>
+<td>r&amp;R</td>
+<td>进入replace mode（替换模式），r会替换光标的那个字符，R则是一直处于替换模式，直到<code>esc</code></td>
+</tr>
+</tbody></table>
+<h4 id="命令行模式"><a href="#命令行模式" class="headerlink" title="命令行模式"></a>命令行模式</h4><table>
+<thead>
+<tr>
+<th>按键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:w</td>
+<td>写入硬盘</td>
+</tr>
+<tr>
+<td>:w！</td>
+<td>文件为只读时，强制写入，还是要看用户的权限</td>
+</tr>
+<tr>
+<td>:q</td>
+<td>退出vi</td>
+</tr>
+<tr>
+<td>:q！</td>
+<td>强制退出，比如做了修改不想保存时</td>
+</tr>
+<tr>
+<td>:wq</td>
+<td>保存退出，可接！</td>
+</tr>
+<tr>
+<td>ZZ</td>
+<td>没修改时，则直接退出，修改了后，则保存退出</td>
+</tr>
+<tr>
+<td>:w [path/filename]</td>
+<td>另存文件，后面接路径和文件名</td>
+</tr>
+<tr>
+<td>:r [path/filename]</td>
+<td>读取文件，在现有文件中读取另一个文件到这个文件中</td>
+</tr>
+<tr>
+<td>:n1,n2 w [path/filename]</td>
+<td>将n1-n2行的数据保存到另一个文件</td>
+</tr>
+<tr>
+<td>:！comman</td>
+<td>暂时退出vi执行command指令</td>
+</tr>
+<tr>
+<td>:set nu</td>
+<td>显示行号</td>
+</tr>
+<tr>
+<td>:set nonu</td>
+<td>不显示行号</td>
+</tr>
+</tbody></table>
+<h3 id="vim缓存"><a href="#vim缓存" class="headerlink" title="vim缓存"></a>vim缓存</h3><p>进行vim编辑时，会临时有一个缓存文件<code>.filename.swp</code></p>
+<ul>
+<li>当文件正常保存时，缓存文件会自动删除</li>
+<li>当电脑突然宕机时，缓存文件不会消失，可使用缓存来恢复工作</li>
+</ul>
+<p><code>ctrl+z</code>可暂时将编辑工作放入后台，可以看到缓存文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[1]+  已停止               vim /tmp/my_vim/services</span><br><span class="line">[root@study ~]<span class="comment"># cd /tmp/my_vim/</span></span><br><span class="line">[root@study my_vim]<span class="comment"># ls -al</span></span><br><span class="line">总用量 720</span><br><span class="line">drwxr-xr-x.   2 root root     62 1月  16 03:38 .</span><br><span class="line">drwxrwxrwt. 141 root root  12288 1月  16 03:47 ..</span><br><span class="line">-rw-r--r--.   1 root root   4847 1月  15 21:47 man_db.conf</span><br><span class="line">-rw-r--r--.   1 root root 670293 1月  15 21:45 services</span><br><span class="line">-rw-r--r--.   1 root root  40960 1月  16 03:40 .services.swp</span><br></pre></td></tr></table></figure>
+
+<p><code>kill -9 %1</code>可以杀死刚才的后台，模拟非正常保存</p>
+<p>此时我再打开文件，会出现警告（汉化万岁！！！！）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">E325: 注意</span><br><span class="line">发现交换文件 <span class="string">&quot;/tmp/my_vim/.services.swp&quot;</span></span><br><span class="line">            所有者: root    日期: Thu Jan 16 03:40:56 2020</span><br><span class="line">            文件名: /tmp/my_vim/services</span><br><span class="line">            修改过: 是</span><br><span class="line">            用户名: root      主机名: study.centos.vbird</span><br><span class="line">           进程 ID: 11776</span><br><span class="line">正在打开文件 <span class="string">&quot;/tmp/my_vim/services&quot;</span></span><br><span class="line">              日期: Wed Jan 15 21:45:18 2020</span><br><span class="line"></span><br><span class="line">(1) Another program may be editing the same file.  If this is the <span class="keyword">case</span>,</span><br><span class="line">    be careful not to end up with two different instances of the same</span><br><span class="line">    file when making changes.  Quit, or <span class="built_in">continue</span> with caution.</span><br><span class="line">(2) An edit session <span class="keyword">for</span> this file crashed.</span><br><span class="line">    如果是这样，请用 <span class="string">&quot;:recover&quot;</span> 或 <span class="string">&quot;vim -r /tmp/my_vim/services&quot;</span></span><br><span class="line">    恢复修改的内容 (请见 <span class="string">&quot;:help recovery&quot;</span>)。</span><br><span class="line">    如果你已经进行了恢复，请删除交换文件 <span class="string">&quot;/tmp/my_vim/.services.swp&quot;</span></span><br><span class="line">    以避免再看到此消息。</span><br><span class="line"></span><br><span class="line">交换文件 <span class="string">&quot;/tmp/my_vim/.services.swp&quot;</span> 已存在！</span><br><span class="line">以只读方式打开([O]), 直接编辑((E)), 恢复((R)), 删除交换文件((D)), 退出((Q)), 中止((A)):</span><br></pre></td></tr></table></figure>
+
+<h3 id="vim"><a href="#vim" class="headerlink" title="vim"></a>vim</h3><p>vim与vi的比较</p>
+<ol>
+<li>有语法高亮</li>
+<li>更多的程序语法</li>
+<li>可以debug</li>
+</ol>
+<h3 id="可视区块（Visual-block）"><a href="#可视区块（Visual-block）" class="headerlink" title="可视区块（Visual block）"></a>可视区块（Visual block）</h3><p>在这个模式下，我们可以对文本镜进入行选择，列选择</p>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>v</td>
+<td>字符选择，将光标经过的地方选择</td>
+</tr>
+<tr>
+<td>V</td>
+<td>行选择，将光标经过的行选择</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+v</td>
+<td>列选择，将光标经过的列选择</td>
+</tr>
+<tr>
+<td>y</td>
+<td>将选择的地方复制</td>
+</tr>
+<tr>
+<td>p</td>
+<td>在光标处粘贴复制的区块</td>
+</tr>
+<tr>
+<td>d</td>
+<td>删除选择的地方</td>
+</tr>
+</tbody></table>
+<h3 id="多文件编辑"><a href="#多文件编辑" class="headerlink" title="多文件编辑"></a>多文件编辑</h3><p>我们有时候会编辑多个文件，有着不同的编辑方式</p>
+<table>
+<thead>
+<tr>
+<th>按键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:n</td>
+<td>下一个文件</td>
+</tr>
+<tr>
+<td>:N</td>
+<td>上一个文件</td>
+</tr>
+<tr>
+<td>:files</td>
+<td>列出这个vim打开的文件</td>
+</tr>
+</tbody></table>
+<h4 id="1-在多个vim窗口编辑"><a href="#1-在多个vim窗口编辑" class="headerlink" title="1.在多个vim窗口编辑"></a>1.在多个vim窗口编辑</h4><p>操作很简单，但如果想将A文件的内容复制到B去，需要用鼠标选中复制粘贴，这样有一个缺点，那就是A文件<code>tab</code>会被鼠标转换成空格，导致内容无法对齐，可以采用另一种编辑方式</p>
+<h4 id="2-使用一个vim窗口编辑"><a href="#2-使用一个vim窗口编辑" class="headerlink" title="2.使用一个vim窗口编辑"></a>2.使用一个vim窗口编辑</h4><ul>
+<li><code>vim file1 file2</code>打开两个文件</li>
+<li>在命令模式下使用 <code>:e file</code>打开文件</li>
+<li>使用:files可以查看打开了多少个文件</li>
+</ul>
+<h3 id="多窗口功能"><a href="#多窗口功能" class="headerlink" title="多窗口功能"></a>多窗口功能</h3><p>当有一个非常的文本文件时，我想在首行和末行操作时，需不需要来回费劲的G和翻页呢？</p>
+<p>我们可以使用<code>:sp</code>来再次打开这个文件，这时出现的则是同一个文件在两个窗口中</p>
+<p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/vim-sp.png" alt="vim-sp"></p>
+<table>
+<thead>
+<tr>
+<th>组合按键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:sp [filename]</td>
+<td>水平新建窗口，默认打开同一文件，有其他文件则打开其他文件</td>
+</tr>
+<tr>
+<td>:vsplit filename</td>
+<td>垂直</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+w+j/↓</td>
+<td>按住ctrl，按下w再按j，将光标移动到下一个窗口</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+w+k/↑</td>
+<td>移动到上一个窗口</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+w+q</td>
+<td>退出这个窗口，也可以在这个窗口输入:q，或者:close</td>
+</tr>
+</tbody></table>
+<h3 id="vim关键字补全"><a href="#vim关键字补全" class="headerlink" title="vim关键字补全"></a>vim关键字补全</h3><p>类似Hbuild、sublime的关键字补全功能，识别语法补全关键字，vim也是可以的</p>
+<table>
+<thead>
+<tr>
+<th>组合按键</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ctrl</code>+x <code>-&gt;</code> <code>ctrl</code>+o</td>
+<td>通过正在编辑的文件的内容作为关键字，进行补齐</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+x <code>-&gt;</code> <code>ctrl</code>+f</td>
+<td>以当前目录内的文件名作为关键词，进行补齐</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+x <code>-&gt;</code> <code>ctrl</code>+n</td>
+<td>以扩展名作为语法补充，通过vim内置关键字补齐</td>
+</tr>
+</tbody></table>
+<p> <img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/vim-buqi.png" alt="补齐"></p>
+<h3 id="vim环境设置与记录"><a href="#vim环境设置与记录" class="headerlink" title="vim环境设置与记录"></a>vim环境设置与记录</h3><ul>
+<li>vim有一个主动记录操作的文件<code>~/.viminfo</code>，这样你每次重新打开文件都会回到上次的工作状态</li>
+<li>vim的环境设置参数也有很多</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:set nu/nonu</td>
+<td>设置/取消行号</td>
+</tr>
+<tr>
+<td>:set hlsearch/nohlsearch</td>
+<td>high light search，高亮查找</td>
+</tr>
+<tr>
+<td>:set autoindent/noautoindent</td>
+<td>自动缩进</td>
+</tr>
+<tr>
+<td>:set backup/nobackup</td>
+<td>自动备份文件，例如，在编辑host时，会有一个host~的文件记录源文件</td>
+</tr>
+<tr>
+<td>:set ruler</td>
+<td>显示右下角的状态</td>
+</tr>
+<tr>
+<td>:set showmode</td>
+<td>显示各种模式</td>
+</tr>
+<tr>
+<td>:set backspace=(012)</td>
+<td>2代表可以删除任何字符，0和1代表只能删除输入的字符</td>
+</tr>
+<tr>
+<td>:set all</td>
+<td>显示设置的所有环境参数</td>
+</tr>
+<tr>
+<td>:set</td>
+<td>显示与系统默认的参数不同的参数</td>
+</tr>
+<tr>
+<td>:syntax on/off</td>
+<td>程序语法，开启会有高亮debug</td>
+</tr>
+<tr>
+<td>:set bg=light/dark</td>
+<td>背景色调</td>
+</tr>
+</tbody></table>
+<p>不可能每次进入文件都要设置，需要一个配置文件</p>
+<p>整体的vim设置值在/etc/vimrc中，这个文件不建议修改，可以自行建立一个文件~/.vimrc</p>
+<p><strong>格式</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@study my_vim]<span class="comment"># vim ~/.vimrc</span></span><br><span class="line"><span class="string">&quot;代表注释</span></span><br><span class="line"><span class="string">set hlsearch   &quot;</span>high light</span><br></pre></td></tr></table></figure>
+
+<h2 id="vim使用的问题"><a href="#vim使用的问题" class="headerlink" title="vim使用的问题"></a>vim使用的问题</h2><p><img src="https://cdn.jsdelivr.net/gh/yangchaohe/yangchaohe.github.io@static/img/article/2019/dos&unix-q.png" alt="DOS和Linux换行符"></p>
+<p>test是我在windows上编辑的，test2是我在Linux上编辑的</p>
+<p>可以看到dos使用的换行符是^M$(CRLF)，Linux使用的换行符是$(LF)</p>
+<p>一般没什么问题，但当文件是一个shell脚本程序时，Linux会误判，导致程序无法运行，需要将CR去掉才行（批量替换？）</p>
+<p>有一个简单的命令<code>dos2unix</code>可以直接将格式转换</p>
+<p>但是这个指令默认没有安装，安装方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@study my_vim]<span class="comment"># mount /dev/sr0 /mnt</span></span><br><span class="line">mount: /dev/sr0 写保护，将以只读方式挂载</span><br><span class="line">[root@study my_vim]<span class="comment"># rpm -ivh /mnt/Packages/dos2unix-*</span></span><br><span class="line">警告：/mnt/Packages/dos2unix-6.0.3-7.el7.x86_64.rpm: 头V3 RSA/SHA256 Signatrue, 密钥 ID f4a80eb5: NOKEY</span><br><span class="line">准备中...                          <span class="comment">################################# [100%]</span></span><br><span class="line">正在升级/安装...</span><br><span class="line">   1:dos2unix-6.0.3-7.el7             <span class="comment">################################# [100%]</span></span><br></pre></td></tr></table></figure>
+
+<p>命令语法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dos2unix [-kn] file [newfile]</span><br><span class="line">unix2dos [-kn] file [newfile]</span><br><span class="line">-k:保留原本的mtime格式</span><br><span class="line">-n:保留旧文件，后面接旧文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="语系编码转换指令iconv"><a href="#语系编码转换指令iconv" class="headerlink" title="语系编码转换指令iconv"></a>语系编码转换指令iconv</h3><p>语法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">iconv --list</span><br><span class="line">iconv -f 原本编码 -t 新编码 filename [-o newfile]</span><br><span class="line">--list:列出支持的编码</span><br><span class="line">-f:from</span><br><span class="line">-t:to</span><br><span class="line">-o file:保留旧文件，得到新文件</span><br></pre></td></tr></table></figure>
+
+<p>将utf-8繁体转换utf-8简体的指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iconv -f utf8 -t big5 file | iconv -f big5 -t gb2312 | iconv -f gb2312 -t utf8 -o file.utf8</span><br></pre></td></tr></table></figure>
+
+<h2 id="实战技巧"><a href="#实战技巧" class="headerlink" title="实战技巧"></a>实战技巧</h2><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>w 或 W</td>
+<td>光标移动至下一个单词的单词首</td>
+</tr>
+<tr>
+<td>b 或 B</td>
+<td>光标移动至上一个单词的单词首</td>
+</tr>
+<tr>
+<td>e 或 E</td>
+<td>光标移动至下一个单词的单词尾</td>
+</tr>
+<tr>
+<td>nw 或 nW</td>
+<td>n 为数字，表示光标向右移动 n 个单词</td>
+</tr>
+<tr>
+<td>nb 或 nB</td>
+<td>n 为数字，表示光标向左移动 n 个单词</td>
+</tr>
+</tbody></table>
+<h3 id="Vim光标移动到匹配的括号处"><a href="#Vim光标移动到匹配的括号处" class="headerlink" title="Vim光标移动到匹配的括号处"></a>Vim光标移动到匹配的括号处</h3><p>程序员在编辑程序时，经常会为将光标移动到与一个 “(“ 匹配的 “)” （对于 [] 和 {} 也是一样的）处而感到头疼。Vim 里面提供了一个非常方便地査找匹配括号的命令，这就是 “%”。</p>
+<h3 id="多行注释"><a href="#多行注释" class="headerlink" title="多行注释"></a>多行注释</h3><ol>
+<li><p>首先按<code>esc</code>进入命令行模式下，按下<code>Ctrl + v</code>，进入列（也叫区块）模式;</p>
+</li>
+<li><p>在行首使用上下键选择需要注释的多行;</p>
+</li>
+<li><p>按下键盘（大写）<code>“I”</code>键，进入插入模式；</p>
+</li>
+<li><p>然后输入注释符（<code>“//”、“#”</code>等）;</p>
+</li>
+<li><p>最后按下<code>“Esc”</code>键</p>
+</li>
+</ol>
+<ul>
+<li>注：在按下 <code>esc</code>键后，会稍等一会才会出现注释，不要着急~时间很短的</li>
+</ul>
+<blockquote>
+<p>使用<code>&gt;</code>配合ctrl+v可进行整体缩进</p>
+</blockquote>
+<h3 id="代码折叠"><a href="#代码折叠" class="headerlink" title="代码折叠"></a>代码折叠</h3><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/16e0b822b682">https://www.jianshu.com/p/16e0b822b682</a></p>
+<h3 id="打开多个文件、同时显示多个文件、在文件之间切换"><a href="#打开多个文件、同时显示多个文件、在文件之间切换" class="headerlink" title="打开多个文件、同时显示多个文件、在文件之间切换"></a><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pengdonglin137/p/3525297.html">打开多个文件、同时显示多个文件、在文件之间切换</a></h3><p><strong>打开多个文件</strong></p>
+<p><code>vim file1 file2 ... file</code></p>
+<p><code>:open file</code></p>
+<p><code>:e file</code></p>
+<p><strong>在文件之间切换</strong></p>
+<p><code>Ctrl+6</code>—下一个文件</p>
+<p><code>:bn</code>—下一个文件</p>
+<p><code>:bp</code>—上一个文件</p>
+<p><code>:bd [num1,num2]/[filename]</code>-关闭buffer</p>
+<p><strong>多文档编辑的命令</strong></p>
+<p><code>:n</code>     编辑下一个文档。</p>
+<p><code>:2n</code>    编辑下两个文档。</p>
+<p><code>:N</code>     编辑上一个文档。注意，该方法只能用于同时打开多个文档。</p>
+<p><code>:e</code> 文档名    这是在进入vim后，不离开 vim 的情形下打开其他文档。</p>
+<p><code>:e# 或 Ctrl+ˆ</code>   编辑上一个文档,用于两个文档相互交换编辑时使用。?# 代表的是编辑前一次编辑的文档</p>
+<p><code>:files 或 :buffers 或 :ls</code>   可以列出目前 缓冲区 中的所有文档。加号 + 表示 缓冲区已经被修改过了。＃代表上一次编辑的文档，%是目前正在编辑中的文档</p>
+<p><code>:b 文档名或编号</code>   移至该文档。</p>
+<p><code>:f 或 Ctrl+g</code>   显示当前正在编辑的文档名称。</p>
+<p><code>:f filename</code>     改变编辑中的文档名。(file)</p>
+<p><strong>多文件切换</strong></p>
+<ol>
+<li>通过vim打开多个文件（可以通过ctags或者cscope）</li>
+<li>“:ls”查看当前打开的buffer（文件）</li>
+<li>“:b num”切换文件（其中num为buffer list中的编号）</li>
+</ol>
+<p><strong>其他快捷键</strong></p>
+<p>表示范围的命令：</p>
+<p>l： 表示一个字符，可以于操作符组合使用；</p>
+<p>aw ：表示单词+空格，前面可以加数字的</p>
+<p>iw：  选中单词/空格； 前面可以加数字；</p>
+<p>ap： 表示一个段落，与操作符组合使用；</p>
+<p>跳转的指令：</p>
+<p>G键是跳转命令。默认跳到最后一行；前面可以加数字的；表示跳到第几行；</p>
+<p>gg键为跳转命令，默认跳到第一行，前面可以加数字，表示跳到第几行；</p>
+<p>0： 跳转命令，跳到行首 ；</p>
+<p>$:  表示跳到行尾；</p>
+<p>w:  表示跳转到下一个单词的头部；</p>
+<p>e:  表示跳转到下一个单词的尾部；</p>
+<p>b：   表示跳转到上一个单词的头部；</p>
+<p>ge：表示跳转到上一位单词的尾差部；</p>
+<p>A： 跳转到行尾，并进行插入模式；</p>
+<p>I： 跳转到行首，并进行插入模式；</p>
+<p>H: 当前页的页首；</p>
+<p>M：当前页的页中间；</p>
+<p>L：当前页的页尾；</p>
+<p>zz：让光标所在的行居于屏幕中央；</p>
+<p>操作功能符：</p>
+<p><code>&gt;</code>: 表示向右缩进的动作；</p>
+<p><code>&lt;</code>: 表示减少缩进；</p>
+<p><code>gu</code>: 转换为小写的动作；</p>
+<p><code>gU</code>: 转换为大写的动作；</p>
+<p><code>u/U</code>：在可视模式下，可以用来转换选中的字符；</p>
+<p><code>g~</code>：用于转换——小写变大写，大写变小写；</p>
+<p><code>x</code>：删除光标下的字符；</p>
+<p><code>s</code>：删除光标下的字符并进入插入模式；</p>
+<p><code>X</code>：用于删除光标之前的字符；</p>
+<p><code>c</code>：为一个动作，删除并进入插入模式，可以组合使用，如cw， cG等；</p>
+<p><code>cc</code>：表示删除本行并进行插入模式；</p>
+<p><code>J</code>： 把当前行与下一行连接在一起；</p>
+<p><code>K</code>: 用于查看处于光标之下的那个单词的手册页；</p>
+<p><code>r</code>: 用于替换单个字符；</p>
+<p><code>R</code>：用于连续替换多个字符；</p>
+<p>查找操作：</p>
+<p><code>f&#123;word&#125;</code>表示：在行内查找下一个指定的字符，前面可以加数字，表示第几个字符； （用；与，进行前进与退回）</p>
+<p><code>F&#123;word&#125;</code>表示：在行内查找上一个指定的字符，前面可以加数字，表示第几个字符； （用；与，进行前进与退回）</p>
+<p><code>/&#123;pattern&#125;</code>表示：在文档内查找下一处匹配的项(用 n 和 N 进行前进与返回,  gn与gN会进行面对字符的可视模式， 下同；）</p>
+<p><code>?&#123;pattern&#125;</code>表示：在文档内查找上一处匹配的项(用 n 和 N 进行前进与返回）</p>
+<p><code>*</code> 表示：向下查找光标下的单词，前面可以加数字(用 n 和 N 进行前进与返回）</p>
+<p><code>#</code> 表示：向止查找光标下的单词，前面可以加数字(用 n 和 N 进行前进与返回）</p>
+<p>与 ctrl 相关的快捷键：</p>
+<p>ctrl-g 表示显示文件信息；</p>
+<p>ctrl-f 向下翻一页；</p>
+<p>ctrl-b 向上翻一页；</p>
+<p>ctrl-d 向下翻半页；</p>
+<p>ctrl-u 向下翻半页；</p>
+<p><strong>精准跳转和修改</strong></p>
+<p>我个人感觉 vim 快最重要的原因就是精准选择。而实现精准选择的必要途径就是搜索。<br>搜索是 vim 的核心。比如说你需要跳到下个函数，那直接/def。再比如需要跳到括号末，直接f)。终端中，刚输入完python eval.py device cuda data.batch_size 256，发现这行指令中的python要改成python3，可以 直接Fna3。又发现前面要加sudo，直接^isudo。总之一切精确修改都是通过搜索来完成的，这与我们不使用vim编程时搜索只用来查找代码有本质区别</p>
+<p>结合v V ctrl+v 这三种可视化模式进行精确选择，配合cdyrp等指令，可以完成极其灵活的代码增删改查。到这一步你会发现vim对你编程速度的提高已经是革命性的了</p>
+<p><strong>数字增减</strong></p>
+<p>normal模式下</p>
+<p>ctrl-a<br>ctrl-x</p>
+<p><strong>删减词</strong></p>
+<p>normal:</p>
+<p>daw<br>dw<br>cw<br>ctrl+w</p>
+<p>insert mode: ctrl+w</p>
+<p><strong>区块选择</strong></p>
+<ul>
+<li>vi” → 会选择 foo.</li>
+<li>va” → 会选择 “foo”.</li>
+<li>vi) → 会选择 “foo”.</li>
+<li>va) → 会选择(“foo”).</li>
+<li>v2i) → 会选择 map (+) (“foo”)</li>
+<li>v2a) → 会选择 (map (+) (“foo”))</li>
+</ul>
+<p><strong>与系统剪贴板交互</strong></p>
+<p>输入 <code>vim --version</code> 查看是否支持 clipboard</p>
+<p>支持则使用 <code>&quot;y+</code> 将vim选区复制进系统剪贴板<br>同理，使用 <code>&quot;p+</code> 粘贴系统剪贴板</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>(八)vim editer</p><p><a href="http://yangchaohe.github.io/Linux/8.vim-editer.html">http://yangchaohe.github.io/Linux/8.vim-editer.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><a href="http://yangchaohe.github.io"><p>manu</p></a></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-01-20</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-01-06</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="recommend-area"><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 相关文章</span><br><span>  1.<a class="is-size-6" href="/Linux/10.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.html" target="_blank">（十）正则表达式</a><br></span></div><div class="recommend-post"><span class="is-size-6 has-text-grey has-mr-7"># 推荐文章</span><br><span>  1.<a class="is-size-6" href="/Database/ALTER.html" target="_blank">ALTER</a><br></span><span>  2.<a class="is-size-6" href="/Database/note.html" target="_blank">数据库笔记</a><br></span><span>  3.<a class="is-size-6" href="/Front-end/wechat-app.html" target="_blank">微信小程序笔记</a><br></span><span>  4.<a class="is-size-6" href="/Reverse/OD.html" target="_blank">动态调试-OD</a><br></span><span>  5.<a class="is-size-6" href="/Reverse/winPE.html" target="_blank">winPE结构</a><br></span><span>  6.<a class="is-size-6" href="/devTool/git.html" target="_blank">git指令</a><br></span></div></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="/" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="/" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/Linux/9.bash-shell.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">（九）Bash shell</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/Linux/7.%E5%8E%8B%E7%BC%A9%E4%B8%8E%E5%A4%87%E4%BB%BD.html"><span class="level-item">（七）压缩与备份</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--><!--!--></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">通知</h3><ul><li><span><span>2021.6.28 公告测试</span></span></li></ul></div></div></div><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex is-mobile" href="#使用vi"><span class="mr-2">1</span><span>使用vi</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#三种模式"><span class="mr-2">1.1</span><span>三种模式</span></a></li><li><a class="is-flex is-mobile" href="#vi按键说明"><span class="mr-2">1.2</span><span>vi按键说明</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#一般命令模式"><span class="mr-2">1.2.1</span><span>一般命令模式</span></a></li><li><a class="is-flex is-mobile" href="#编辑模式"><span class="mr-2">1.2.2</span><span>编辑模式</span></a></li><li><a class="is-flex is-mobile" href="#命令行模式"><span class="mr-2">1.2.3</span><span>命令行模式</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#vim缓存"><span class="mr-2">1.3</span><span>vim缓存</span></a></li><li><a class="is-flex is-mobile" href="#vim"><span class="mr-2">1.4</span><span>vim</span></a></li><li><a class="is-flex is-mobile" href="#可视区块（Visual-block）"><span class="mr-2">1.5</span><span>可视区块（Visual block）</span></a></li><li><a class="is-flex is-mobile" href="#多文件编辑"><span class="mr-2">1.6</span><span>多文件编辑</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#1-在多个vim窗口编辑"><span class="mr-2">1.6.1</span><span>1.在多个vim窗口编辑</span></a></li><li><a class="is-flex is-mobile" href="#2-使用一个vim窗口编辑"><span class="mr-2">1.6.2</span><span>2.使用一个vim窗口编辑</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#多窗口功能"><span class="mr-2">1.7</span><span>多窗口功能</span></a></li><li><a class="is-flex is-mobile" href="#vim关键字补全"><span class="mr-2">1.8</span><span>vim关键字补全</span></a></li><li><a class="is-flex is-mobile" href="#vim环境设置与记录"><span class="mr-2">1.9</span><span>vim环境设置与记录</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#vim使用的问题"><span class="mr-2">2</span><span>vim使用的问题</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#语系编码转换指令iconv"><span class="mr-2">2.1</span><span>语系编码转换指令iconv</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#实战技巧"><span class="mr-2">3</span><span>实战技巧</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#Vim光标移动到匹配的括号处"><span class="mr-2">3.1</span><span>Vim光标移动到匹配的括号处</span></a></li><li><a class="is-flex is-mobile" href="#多行注释"><span class="mr-2">3.2</span><span>多行注释</span></a></li><li><a class="is-flex is-mobile" href="#代码折叠"><span class="mr-2">3.3</span><span>代码折叠</span></a></li><li><a class="is-flex is-mobile" href="#打开多个文件、同时显示多个文件、在文件之间切换"><span class="mr-2">3.4</span><span>打开多个文件、同时显示多个文件、在文件之间切换</span></a></li></ul></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="/img/avatar.png" alt="码奴"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">码奴</p><p class="is-size-6 is-block">待人友善是修养，独来独往是性格</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>中国贵州</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">157</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">39</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">161</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/yangchaohe" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/yangchaohe"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:manu2x@.com"><i class="fa fa-envelope"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"来源《"+data.from+"》</p><p>提供者-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><!--!--><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-17T14:05:40.000Z">2021-11-17</time></p><p class="title"><a href="/English/G/G002.html">G002</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-15T15:40:52.000Z">2021-11-15</time></p><p class="title"><a href="/English/G/G001.html">G001</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-14T02:44:54.000Z">2021-11-14</time></p><p class="title"><a href="/English/M/How-to-learn-English.html">How to learn English?</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T07:01:45.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/ctf-linux-cmd.html">ctf-linux-cmd.md</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2021-11-09T06:59:53.000Z">2021-11-09</time></p><p class="title"><a href="/TechnicalExperience/Penetration/fastcgi.html">Fastcgi协议分析 &amp;&amp; PHP-FPM未授权访问漏洞 &amp;&amp; Exp编写</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag is-grey-lightest">15</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%AF%AD%E6%B3%95/"><span class="tag">语法</span><span class="tag is-grey-lightest">12</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%8A%80%E8%83%BD%E5%A4%A7%E8%B5%9B-%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"><span class="tag">技能大赛-信息安全</span><span class="tag is-grey-lightest">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CS6200-28X-EI/"><span class="tag">CS6200-28X-EI</span><span class="tag is-grey-lightest">8</span></a></div><div class="control"><a class="tags has-addons" href="/tags/manjaro/"><span class="tag">manjaro</span><span class="tag is-grey-lightest">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DCFW-1800E-N3002/"><span class="tag">DCFW-1800E-N3002</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="tag">数据库</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"><span class="tag">正则表达式</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96/"><span class="tag">系统优化</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CPU/"><span class="tag">CPU</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/DHCP/"><span class="tag">DHCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Linux/"><span class="tag">Linux</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/PHP/"><span class="tag">PHP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/bash/"><span class="tag">bash</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%86%85%E5%AD%98/"><span class="tag">内存</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%87%BD%E6%95%B0/"><span class="tag">函数</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%89%AA%E8%BE%91/"><span class="tag">剪辑</span><span class="tag is-grey-lightest">2</span></a></div></div><div class="field is-grouped is-grouped-multiline"><a class="tags has-addons" href="/tags/"><span class="tag">查看全部&gt;&gt;</span></a></div></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="码奴的博客" height="28"></a><p class="size-small"><span>&copy; 2023 manu</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br><span>© 版权说明：[本网站所有内容均收集于互联网或自己创作,<br />&nbsp;&nbsp;&nbsp;&nbsp;方便于网友与自己学习交流，如有侵权，请给我发<a href="mailto:manu2x@qq.com">邮件</a>，立即处理]<br /></span><span><span id="statistic-times">loading...</span><script>function createTime(time) {
+            var n = new Date(time);
+            now.setTime(now.getTime() + 250),
+                days = (now - n) / 1e3 / 60 / 60 / 24,
+                dnum = Math.floor(days),
+                hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum,
+                hnum = Math.floor(hours),
+            1 == String(hnum).length && (hnum = "0" + hnum),
+                minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum,
+                mnum = Math.floor(minutes),
+            1 == String(mnum).length && (mnum = "0" + mnum),
+                seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum,
+                snum = Math.round(seconds),
+            1 == String(snum).length && (snum = "0" + snum),
+                document.getElementById("statistic-times").innerHTML = "❤️本站自 <strong>"+time.split(" ")[0].replace(/\//g,".")+"</strong> 已运行 <strong>" + dnum + "</strong> 天 <strong>" + hnum + "</strong> 小时 <strong>" + mnum + "</strong> 分 <strong>" + snum + "</strong> 秒！❤️";
+        }var now = new Date();setInterval("createTime('2019/12/19 00:00:00')", 250,"");</script><br></span><div class="size-small"><span>❤️感谢 <strong><span id="busuanzi_value_site_uv">99+</span></strong> 小伙伴的 <strong><span id="busuanzi_value_site_pv">99+</span></strong> 次光临！❤️</span></div></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/yangchaohe/yangchaohe.github.io"><i class="fab fa-github"></i></a></p></div><div class="sideMusic"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"><script src="/js/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script><meting-js style="width: auto;height: 2000px;" server="netease" type="playlist" id="4967313247" theme="#2980b9" loop="all" autoplay="false" order="list" storageName="aplayer-setting" lrctype="0" list-max-height="400px" fixed="true"></meting-js></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        function loadMathJax() { //加载mathjax
+            $.getScript("//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML", function () {
+                MathJax.Hub.Config({ tex2jax: { inlineMath: [['$', '$'], ['\(', '\)']] } });
+                var math = document.getElementsByClassName("entry-content")[0];
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, math]);
+            });
+        };
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(false){
+                $.getScript('/js/comment-issue-data.js',function(){loadIssueData('undefined','undefined','undefined','undefined',undefined);});
+            }
+            if(false){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script></body></html>
